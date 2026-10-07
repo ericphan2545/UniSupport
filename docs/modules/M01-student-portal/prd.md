@@ -1,4 +1,4 @@
-# M1. Cổng Sinh viên (2.1.2) – Functional Requirement Specification
+# M1. Cổng Sinh viên – Functional Requirement Specification
 
 ## Quy ước chung (áp dụng cho mọi FR trong module)
 
@@ -67,42 +67,49 @@ Sinh viên đã đăng nhập (vai trò `STUDENT`).
 **Preconditions**
 - Sinh viên đã đăng nhập.
 - Danh mục loại yêu cầu đã được cấu hình (CORE-05).
+- Mỗi loại yêu cầu đã có SLA (FR-MGT-07).
 
 **Luồng chính**
 1. Sinh viên mở màn hình Tạo yêu cầu.
 2. Hệ thống tải danh sách loại yêu cầu.
 3. Sinh viên chọn loại yêu cầu, nhập mô tả và đính kèm tệp nếu có (FR-STU-04).
 4. Sinh viên bấm Gửi.
-5. Hệ thống kiểm tra dữ liệu, tạo hồ sơ ở trạng thái `NEW`, gán phòng ban (FR-STU-03), sinh mã hồ sơ (FR-STU-05) và bắt đầu tính SLA (CORE-03).
-6. Hệ thống hiển thị màn hình xác nhận (FR-STU-05).
+5. Hệ thống kiểm tra dữ liệu.
+6. Hệ thống tạo hồ sơ ở trạng thái `NEW`, gán phòng ban (FR-STU-03) và sinh mã hồ sơ (FR-STU-05).
+7. Hệ thống lưu snapshot thông tin sinh viên lấy từ SSO tại thời điểm gửi (họ tên, MSSV, khoa/lớp, email, SĐT).
+8. Hệ thống chốt hạn xử lý `due_at` theo SLA hiện tại của loại yêu cầu (FR-CORE-03).
+9. Hệ thống hiển thị màn hình xác nhận (FR-STU-05).
 
 **Business Rules**
 - `request_type_id`: bắt buộc, phải thuộc danh mục.
 - `description`: bắt buộc, dài 20–2000 ký tự sau khi trim.
-- Hồ sơ mới có `status = NEW` và `priority = Trung bình` (CORE-04).
+- Hồ sơ mới có `status = NEW` và `priority = MEDIUM` (CORE-04).
+- Snapshot thông tin sinh viên được dùng cho nhân viên xem ở FR-STF-02 và không bị cập nhật khi dữ liệu SSO thay đổi sau này. Trường SSO không trả về được lưu là `null` (theo quy tắc FR-STU-01).
+- `due_at = created_at + sla_hours` của loại yêu cầu tại thời điểm tạo. Đổi SLA về sau không ảnh hưởng tới hồ sơ này.
 - Client phải gửi header `Idempotency-Key`. Key được lưu 24 giờ. Request trùng key trả về hồ sơ đã tạo.
 - Rate limit: tối đa 10 hồ sơ mỗi giờ cho mỗi sinh viên.
-- Tạo hồ sơ, lưu tệp và sinh mã nằm trong một transaction.
+- Tạo hồ sơ, lưu snapshot, chốt hạn xử lý, lưu tệp và sinh mã nằm trong một transaction.
 
 **Alternative / Error Flows**
 - Nếu thiếu loại yêu cầu hoặc mô tả sai độ dài, hệ thống trả 400 kèm danh sách trường lỗi.
-- Nếu `request_type_id` không tồn tại trong danh mục, hệ thống trả 422.
+- Nếu `request_type_id` không tồn tại, hoặc loại yêu cầu chưa có SLA, hệ thống trả 422.
 - Nếu thiếu `Idempotency-Key`, hệ thống trả 400.
+- Nếu không lấy được thông tin sinh viên từ SSO để lưu snapshot, hệ thống trả 504 và không tạo hồ sơ (theo FR-STU-01).
 - Nếu vượt rate limit, hệ thống trả 429.
 - Nếu lỗi cơ sở dữ liệu, hệ thống rollback toàn bộ và trả 500. UI giữ nguyên nội dung form để sinh viên gửi lại.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Chọn một loại yêu cầu hợp lệ, mô tả 50 ký tự -> 201; hồ sơ ở trạng thái `NEW`, ưu tiên Trung bình, có mã hồ sơ.
+- **AC-01 [Happy Path]:** Chọn loại yêu cầu có SLA 48 giờ, mô tả 50 ký tự, gửi lúc 08:00 ngày 01/10 -> 201; hồ sơ `NEW`, ưu tiên `MEDIUM`, có mã, có snapshot thông tin sinh viên, `due_at` = 08:00 ngày 03/10.
 - **AC-02 [Validation/Boundary]:** Mô tả 19 ký tự, 2001 ký tự hoặc toàn khoảng trắng -> 400, không tạo hồ sơ. Mô tả đúng 20 hoặc 2000 ký tự -> 201.
-- **AC-03 [Security]:** Body chứa `student_id` của sinh viên khác -> hệ thống bỏ qua, hồ sơ gắn với sinh viên trong token. Token vai trò `STAFF` -> 403.
+- **AC-03 [Security]:** Body chứa `student_id`, `priority` hoặc `due_at` -> hệ thống bỏ qua tất cả, dùng giá trị do hệ thống xác định. Token vai trò `STAFF` -> 403.
 - **AC-04 [Idempotency]:** Gửi 2 lần cùng `Idempotency-Key` trong 24 giờ -> chỉ tạo 1 hồ sơ, lần thứ hai trả về đúng mã hồ sơ đã tạo.
 - **AC-05 [Rate Limit]:** Gửi hồ sơ thứ 11 trong cùng 1 giờ -> 429 kèm `Retry-After`.
-- **AC-06 [Resilience & Audit]:** Lỗi cơ sở dữ liệu giữa chừng -> 500, không còn hồ sơ hay tệp dở dang. Tạo thành công -> nhật ký có bản ghi `CREATE_TICKET` (người tạo, thời gian, mã hồ sơ).
+- **AC-06 [Resilience & Audit]:** SSO không phản hồi khi lấy snapshot -> 504, không có hồ sơ nào được tạo. Lỗi cơ sở dữ liệu giữa chừng -> 500, không còn hồ sơ hay tệp dở dang. Tạo thành công -> nhật ký có bản ghi `CREATE_TICKET`.
 
 **Ví dụ Edge Case**
 Sinh viên bấm Gửi rồi mất mạng, không nhận được phản hồi, sau đó bấm Gửi lại. Client giữ nguyên `Idempotency-Key` cho đến khi nhận được phản hồi, nên hệ thống trả về hồ sơ đã tạo ở lần đầu và không tạo hồ sơ trùng.
 
-**Expected Result:** Mỗi lần gửi hợp lệ tạo đúng một hồ sơ `NEW`, gắn đúng sinh viên trong token.
+**Expected Result:** Mỗi lần gửi hợp lệ tạo đúng một hồ sơ `NEW`, gắn đúng sinh viên trong token, có snapshot thông tin sinh viên và hạn xử lý được chốt.
 
 ---
 
@@ -282,7 +289,7 @@ Hồ sơ vừa được nhân viên chuyển sang phòng ban khác. Khi tải l�
 ### [FR-STU-07] Xem trạng thái và tiến độ của từng yêu cầu
 
 **Mô tả**
-Sinh viên xem chi tiết một hồ sơ, gồm trạng thái hiện tại và các mốc cập nhật, để biết yêu cầu đang ở đâu và khi nào cần bổ sung thông tin.
+Sinh viên xem chi tiết một hồ sơ, gồm trạng thái hiện tại, các mốc cập nhật và kết quả xử lý, để biết yêu cầu đang ở đâu và khi nào cần bổ sung thông tin.
 
 **Actor**
 Sinh viên chủ hồ sơ.
@@ -294,12 +301,14 @@ Sinh viên chủ hồ sơ.
 1. Sinh viên chọn một hồ sơ từ danh sách hoặc nhập mã hồ sơ.
 2. Hệ thống trả về thông tin hồ sơ và dòng thời gian cập nhật.
 3. Nếu hồ sơ có yêu cầu bổ sung đang mở, UI hiển thị thông báo nổi bật "Cần bổ sung thông tin" kèm nút Bổ sung (FR-STU-09).
-4. Trang tự cập nhật định kỳ trong lúc đang mở.
+4. Nếu hồ sơ đã `CLOSED`, UI hiển thị kết quả xử lý và form đánh giá (FR-STU-10).
+5. Trang tự cập nhật định kỳ trong lúc đang mở.
 
 **Business Rules**
 - Thông tin hiển thị: mã hồ sơ, loại yêu cầu, phòng ban hiện tại, trạng thái, ngày gửi, mô tả, tệp đính kèm.
-- Dòng thời gian gồm: các lần đổi trạng thái, các lần chuyển phòng ban, các yêu cầu bổ sung và nội dung sinh viên đã bổ sung.
-- Không hiển thị nhật ký xử lý nội bộ (STF-04) và tên nhân viên phụ trách.
+- Khi hồ sơ `CLOSED`: hiển thị thêm kết quả xử lý (`resolution`, nhập ở FR-STF-06) và thời điểm đóng.
+- Dòng thời gian chỉ gồm các mốc công khai theo FR-CORE-06.
+- Không hiển thị: nhật ký xử lý nội bộ, tên nhân viên phụ trách, mức ưu tiên, hạn xử lý, lý do chuyển phòng ban.
 - Trang tự cập nhật bằng polling mỗi 30 giây.
 - Thông báo "Cần bổ sung thông tin" hiển thị theo yêu cầu bổ sung đang mở, kể cả khi hồ sơ ở trạng thái `OVERDUE`.
 - Rate limit: 60 request mỗi phút cho mỗi sinh viên.
@@ -310,17 +319,17 @@ Sinh viên chủ hồ sơ.
 - Nếu không tải được dòng thời gian, hệ thống vẫn hiển thị thông tin chính và báo "Chưa tải được lịch sử cập nhật".
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Hồ sơ `IN_PROGRESS` đã qua 2 lần đổi trạng thái -> dòng thời gian hiển thị đủ 2 mốc theo thứ tự thời gian.
+- **AC-01 [Happy Path]:** Hồ sơ `CLOSED` -> hiển thị trạng thái "Đã đóng", kết quả xử lý, thời điểm đóng, dòng thời gian và form đánh giá.
 - **AC-02 [Validation]:** Nhập mã `USP-26-1` -> 400 "Mã hồ sơ không đúng định dạng".
-- **AC-03 [Security]:** Mở hồ sơ của sinh viên khác -> 404. Response của hồ sơ hợp lệ không chứa ghi chú nội bộ và thông tin nhân viên.
+- **AC-03 [Security]:** Mở hồ sơ của sinh viên khác -> 404. Response của hồ sơ hợp lệ không chứa ghi chú nội bộ, thông tin nhân viên, mức ưu tiên, `due_at` hay lý do chuyển phòng ban.
 - **AC-04 [Concurrency]:** Trang đang mở và nhân viên đổi trạng thái -> trạng thái mới hiển thị trong vòng 30 giây mà không cần tải lại trang.
 - **AC-05 [Boundary]:** Hồ sơ `OVERDUE` có yêu cầu bổ sung đang mở -> trạng thái hiển thị "Quá hạn", đồng thời có thông báo "Cần bổ sung thông tin" và nút Bổ sung.
 - **AC-06 [Resilience & Audit]:** API lịch sử lỗi -> thông tin chính vẫn hiển thị, không trắng trang. Sinh viên tải tệp từ trang chi tiết -> nhật ký có bản ghi `DOWNLOAD_FILE`.
 
 **Ví dụ Edge Case**
-Sinh viên mở hồ sơ trên điện thoại, để màn hình khóa 10 phút rồi mở lại. Polling chạy lại ngay khi trang được hiển thị trở lại, và trạng thái mới nhất xuất hiện mà sinh viên không cần thao tác gì.
+Sinh viên đang mở trang chi tiết thì nhân viên đóng hồ sơ. Trong vòng 30 giây, trang tự cập nhật: trạng thái đổi thành "Đã đóng", kết quả xử lý và form đánh giá xuất hiện mà sinh viên không cần tải lại.
 
-**Expected Result:** Sinh viên luôn thấy trạng thái đúng và biết rõ khi nào mình cần làm gì, mà không thấy thông tin nội bộ.
+**Expected Result:** Sinh viên luôn thấy trạng thái đúng, biết rõ khi nào cần làm gì, nhận được kết quả xử lý khi hồ sơ đóng, và không thấy thông tin nội bộ.
 
 ---
 
