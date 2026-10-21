@@ -1,29 +1,29 @@
-# M3. Cổng Quản lý – Functional Requirement Specification
+# M3. Cổng Admin – Functional Requirement Specification
 
 > Cập nhật: 09/10/2026. Giữ nguyên 42 chức năng của 5 module trong repo; bổ sung và thống nhất đặc tả trực tiếp tại module. Các giả định chưa được trường xác nhận được ghi tại phần đầu module.
 
 **Mục đích module:** Báo cáo toàn hệ thống, quản lý quyền và SLA.
 
-**Actor chính:** MANAGER. Actor là người dùng/hệ thống, không phải tên người lập trình.
+**Actor chính:** ADMIN. Actor là người dùng/hệ thống, không phải tên người lập trình.
 
 **Phụ thuộc:** M4 xác thực/phạm vi; dữ liệu hồ sơ, đánh giá và danh mục từ M1, M2, M5.
 
 ## Luồng quản lý và liên kết module
 
-Manager đăng nhập M4 → dashboard số lượng hiện tại/trung bình CLOSED → danh sách tóm tắt nếu chọn chỉ số → báo cáo loại/khối lượng/hài lòng từ dữ liệu M1/M2 → cấp quyền tài khoản và thiết lập SLA. Manager không xử lý ticket hoặc xem chi tiết/tệp sinh viên.
+Admin đăng nhập M4 → dashboard số lượng hiện tại/trung bình CLOSED → danh sách tóm tắt nếu chọn chỉ số → báo cáo loại/khối lượng/hài lòng từ dữ liệu M1/M2 → cấp quyền tài khoản và thiết lập SLA. Admin không xử lý ticket hoặc xem chi tiết/tệp sinh viên.
 
-**Input module:** phiên MANAGER, bộ lọc kỳ/phòng/loại/sao, định danh/quyền/phòng/active và SLA/version cấu hình.
+**Input module:** phiên ADMIN, bộ lọc kỳ/phòng/loại/sao, định danh/quyền/phòng/active và SLA/version cấu hình.
 **Output module:** số liệu/tables/charts cùng dữ liệu, danh sách tóm tắt không thông tin cá nhân, quyền và SLA đã cập nhật.
 
 **Kỳ báo cáo:** count dashboard dùng hiện tại; loại phổ biến dùng created_at/phòng hiện tại; trung bình/hài lòng dùng closed_at/phòng lúc đóng. Cột khối lượng gọi đúng “Hồ sơ tạo trong kỳ, hiện thuộc phòng ban”, không gọi lượt tiếp nhận thực tế.
 
-**Cần xác nhận:** chỉ số/nhãn báo cáo với người quản lý khách; danh mục/SLA đầu; email MANAGER bootstrap và định danh SSO. Các giá trị lọc mặc định/ngưỡng là phương án đặc tả chưa có biên bản xác nhận.
+**Cần xác nhận:** chỉ số/nhãn báo cáo với người quản lý khách; danh mục/SLA đầu; email ADMIN bootstrap và định danh SSO. Các giá trị lọc mặc định/ngưỡng là phương án đặc tả chưa có biên bản xác nhận.
 
 ## Quy ước chung (áp dụng cho mọi FR trong module)
 
-- **Xác thực:** Mọi API yêu cầu phiên ứng dụng hợp lệ theo SEC-01 và vai trò MANAGER. Sai hoặc thiếu token trả 401. Sai vai trò trả 403.
+- **Xác thực:** Mọi API yêu cầu phiên ứng dụng hợp lệ theo SEC-01 và vai trò ADMIN. Sai hoặc thiếu token trả 401. Sai vai trò trả 403.
 - **Kiểm tra quyền:** Vai trò và phòng ban được đọc từ cơ sở dữ liệu ở mỗi request, không đọc từ claim trong JWT. Nhờ vậy thay đổi phân quyền (FR-MGT-06) có hiệu lực ngay ở request kế tiếp.
-- **Phạm vi dữ liệu:** Ban quản lý xem số liệu của toàn bộ phòng ban.
+- **Phạm vi dữ liệu:** Admin xem số liệu của toàn bộ phòng ban.
 - **Khoảng thời gian báo cáo:**
   - Tính theo giờ Việt Nam (UTC+7), bao gồm cả ngày bắt đầu và ngày kết thúc.
   - Mặc định 30 ngày gần nhất. Tối đa 365 ngày.
@@ -38,24 +38,24 @@ Manager đăng nhập M4 → dashboard số lượng hiện tại/trung bình CL
 ### [FR-MGT-01] Dashboard: số hồ sơ mới, đang xử lý, quá hạn
 
 **Mô tả**
-Hiển thị số lượng hồ sơ theo trạng thái tại thời điểm hiện tại, giúp Ban quản lý biết ngay khối lượng đang chờ và số hồ sơ đang trễ hạn.
+Hiển thị số lượng hồ sơ theo trạng thái tại thời điểm hiện tại, giúp Admin biết ngay khối lượng đang chờ và số hồ sơ đang trễ hạn.
 
 **Actor**
-Ban quản lý đã đăng nhập.
+Admin đã đăng nhập.
 
 **Preconditions**
-- Người dùng có vai trò `MANAGER`.
+- Người dùng có vai trò `ADMIN`.
 
 **Luồng chính**
-1. Ban quản lý mở Dashboard.
+1. Admin mở Dashboard.
 2. Hệ thống đếm số hồ sơ theo từng nhóm trạng thái tại thời điểm hiện tại.
 3. Hệ thống hiển thị 3 chỉ số: Mới, Đang xử lý, Quá hạn.
-4. Ban quản lý lọc theo phòng ban nếu cần.
+4. Admin lọc theo phòng ban nếu cần.
 5. Dashboard tự cập nhật định kỳ.
 
 **Input**
 - **Người dùng/request:** department_id tùy chọn; drill-down thêm group=new/in_progress/overdue, page=1, page_size=20 (1–100).
-- **Hệ thống:** MANAGER active; trạng thái hiện tại theo phòng hiện tại.
+- **Hệ thống:** ADMIN active; trạng thái hiện tại theo phòng hiện tại.
 - Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
@@ -97,23 +97,23 @@ Một hồ sơ vừa được chuyển từ phòng ban A sang B. Khi lọc theo 
 ### [FR-MGT-02] Dashboard: thời gian xử lý trung bình
 
 **Mô tả**
-Hiển thị thời gian xử lý trung bình của các hồ sơ đã đóng, giúp Ban quản lý đánh giá tốc độ phục vụ của từng phòng ban.
+Hiển thị thời gian xử lý trung bình của các hồ sơ đã đóng, giúp Admin đánh giá tốc độ phục vụ của từng phòng ban.
 
 **Actor**
-Ban quản lý đã đăng nhập.
+Admin đã đăng nhập.
 
 **Preconditions**
-- Người dùng có vai trò `MANAGER`.
+- Người dùng có vai trò `ADMIN`.
 
 **Luồng chính**
-1. Ban quản lý mở Dashboard hoặc chọn khoảng thời gian.
+1. Admin mở Dashboard hoặc chọn khoảng thời gian.
 2. Hệ thống lấy các hồ sơ có thời điểm đóng nằm trong khoảng thời gian.
 3. Hệ thống tính thời gian xử lý của từng hồ sơ rồi lấy trung bình.
 4. Hệ thống hiển thị kết quả, kèm số hồ sơ được dùng để tính.
 
 **Input**
 - **Người dùng/request:** from/to, department_id, request_type_id tùy chọn.
-- **Hệ thống:** MANAGER; ticket CLOSED trong kỳ closed_at, phòng lúc đóng, tổng pause PENDING_INFO.
+- **Hệ thống:** ADMIN; ticket CLOSED trong kỳ closed_at, phòng lúc đóng, tổng pause PENDING_INFO.
 - Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
@@ -152,23 +152,23 @@ Một hồ sơ được gửi trong tháng 9 nhưng đến tháng 10 mới đón
 ### [FR-MGT-03] Báo cáo loại yêu cầu phổ biến
 
 **Mô tả**
-Thống kê số hồ sơ theo từng loại yêu cầu, giúp Ban quản lý biết sinh viên thường gặp vấn đề gì để cải thiện quy trình.
+Thống kê số hồ sơ theo từng loại yêu cầu, giúp Admin biết sinh viên thường gặp vấn đề gì để cải thiện quy trình.
 
 **Actor**
-Ban quản lý đã đăng nhập.
+Admin đã đăng nhập.
 
 **Preconditions**
-- Người dùng có vai trò `MANAGER`.
+- Người dùng có vai trò `ADMIN`.
 
 **Luồng chính**
-1. Ban quản lý mở báo cáo Loại yêu cầu.
-2. Ban quản lý chọn khoảng thời gian và phòng ban (nếu cần).
+1. Admin mở báo cáo Loại yêu cầu.
+2. Admin chọn khoảng thời gian và phòng ban (nếu cần).
 3. Hệ thống đếm số hồ sơ theo từng loại yêu cầu.
 4. Hệ thống hiển thị bảng và biểu đồ cột, sắp xếp giảm dần theo số lượng.
 
 **Input**
 - **Người dùng/request:** from/to và department_id tùy chọn.
-- **Hệ thống:** MANAGER; ticket created_at trong kỳ; phòng hiện tại; toàn bộ loại yêu cầu.
+- **Hệ thống:** ADMIN; ticket created_at trong kỳ; phòng hiện tại; toàn bộ loại yêu cầu.
 - Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
@@ -208,23 +208,23 @@ Một hồ sơ loại "Học phí" bị chuyển sang phòng ban khác với ph�
 ### [FR-MGT-04] Báo cáo khối lượng công việc theo phòng ban
 
 **Mô tả**
-Thống kê khối lượng hồ sơ của từng phòng ban, giúp Ban quản lý phát hiện phòng ban quá tải để điều phối nhân sự.
+Thống kê khối lượng hồ sơ của từng phòng ban, giúp Admin phát hiện phòng ban quá tải để điều phối nhân sự.
 
 **Actor**
-Ban quản lý đã đăng nhập.
+Admin đã đăng nhập.
 
 **Preconditions**
-- Người dùng có vai trò `MANAGER`.
+- Người dùng có vai trò `ADMIN`.
 
 **Luồng chính**
-1. Ban quản lý mở báo cáo Khối lượng theo phòng ban.
-2. Ban quản lý chọn khoảng thời gian.
+1. Admin mở báo cáo Khối lượng theo phòng ban.
+2. Admin chọn khoảng thời gian.
 3. Hệ thống tính các chỉ số cho từng phòng ban.
 4. Hệ thống hiển thị bảng, sắp xếp giảm dần theo số hồ sơ đang mở.
 
 **Input**
 - **Người dùng/request:** from/to.
-- **Hệ thống:** MANAGER; hồ sơ/phòng hiện tại, closed_at/phòng lúc đóng, staff active.
+- **Hệ thống:** ADMIN; hồ sơ/phòng hiện tại, closed_at/phòng lúc đóng, staff active.
 - Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
@@ -265,23 +265,23 @@ Một hồ sơ được phòng A tiếp nhận rồi chuyển sang phòng B, và
 ### [FR-MGT-05] Báo cáo mức độ hài lòng của sinh viên
 
 **Mô tả**
-Thống kê điểm đánh giá và nhận xét của sinh viên, giúp Ban quản lý đánh giá chất lượng dịch vụ hỗ trợ.
+Thống kê điểm đánh giá và nhận xét của sinh viên, giúp Admin đánh giá chất lượng dịch vụ hỗ trợ.
 
 **Actor**
-Ban quản lý đã đăng nhập.
+Admin đã đăng nhập.
 
 **Preconditions**
-- Người dùng có vai trò `MANAGER`.
+- Người dùng có vai trò `ADMIN`.
 
 **Luồng chính**
-1. Ban quản lý mở báo cáo Mức độ hài lòng.
-2. Ban quản lý chọn khoảng thời gian, phòng ban, loại yêu cầu (nếu cần).
+1. Admin mở báo cáo Mức độ hài lòng.
+2. Admin chọn khoảng thời gian, phòng ban, loại yêu cầu (nếu cần).
 3. Hệ thống tính các chỉ số đánh giá.
 4. Hệ thống hiển thị chỉ số tổng hợp và danh sách nhận xét.
 
 **Input**
 - **Người dùng/request:** from/to, department_id, request_type_id; danh sách nhận xét thêm rating 1–5, page=1, page_size=20 (1–100).
-- **Hệ thống:** MANAGER; ticket CLOSED trong kỳ closed_at; rating hiện có; phòng lúc đóng.
+- **Hệ thống:** ADMIN; ticket CLOSED trong kỳ closed_at; rating hiện có; phòng lúc đóng.
 - Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
@@ -326,24 +326,24 @@ Một hồ sơ được đóng ngày 30/9 nhưng đến ngày 05/10 sinh viên m
 ### [FR-MGT-06] Quản lý phân quyền
 
 **Mô tả**
-Ban quản lý gán vai trò và phòng ban cho từng tài khoản, để hệ thống biết ai là nhân viên phòng nào và ai thuộc Ban quản lý.
+Admin gán vai trò và phòng ban cho từng tài khoản, để hệ thống biết ai là nhân viên phòng nào và ai thuộc Admin.
 
 **Actor**
-Ban quản lý đã đăng nhập.
+Admin đã đăng nhập.
 
 **Preconditions**
-- Người dùng có vai trò `MANAGER`.
+- Người dùng có vai trò `ADMIN`.
 
 **Luồng chính**
-1. Ban quản lý mở màn hình Phân quyền.
-2. Hệ thống hiển thị STAFF/MANAGER và ô tìm email trường chính xác để cấp quyền cho tài khoản STUDENT đã có; không liệt kê hàng loạt sinh viên.
-3. Ban quản lý thực hiện một trong các thao tác: thêm định danh chưa có, cấp quyền cho tài khoản có sẵn tìm theo email, đổi vai trò/phòng ban, vô hiệu hóa hoặc kích hoạt lại tài khoản.
+1. Admin mở màn hình Phân quyền.
+2. Hệ thống hiển thị STAFF/ADMIN và ô tìm email trường chính xác để cấp quyền cho tài khoản STUDENT đã có; không liệt kê hàng loạt sinh viên.
+3. Admin thực hiện một trong các thao tác: thêm định danh chưa có, cấp quyền cho tài khoản có sẵn tìm theo email, đổi vai trò/phòng ban, vô hiệu hóa hoặc kích hoạt lại tài khoản.
 4. Hệ thống kiểm tra quy tắc rồi lưu.
 5. Thay đổi có hiệu lực ngay từ request kế tiếp của tài khoản đó.
 
 **Input**
-- **Người dùng/request:** List STAFF/MANAGER; tìm cấp quyền: email trường chính xác; thêm/cấp quyền: email, role, department_id nếu STAFF; sửa/kích hoạt: account_id, version, giá trị mới.
-- **Hệ thống:** MANAGER active; tài khoản SSO đã có hoặc danh sách cấp quyền trước; ràng buộc người nhận hồ sơ.
+- **Người dùng/request:** List STAFF/ADMIN; tìm cấp quyền: email trường chính xác; thêm/cấp quyền: email, role, department_id nếu STAFF; sửa/kích hoạt: account_id, version, giá trị mới.
+- **Hệ thống:** ADMIN active; tài khoản SSO đã có hoặc danh sách cấp quyền trước; ràng buộc người nhận hồ sơ.
 - Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
@@ -352,15 +352,15 @@ Ban quản lý đã đăng nhập.
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- MANAGER đầu được nạp khi triển khai từ định danh do trường xác nhận (SEC-01); không tạo tài khoản quản trị bằng email ví dụ.
+- ADMIN đầu được nạp khi triển khai từ định danh do trường xác nhận (SEC-01); không tạo tài khoản Admin bằng email ví dụ.
 - Tìm chính xác email đã chuẩn hóa có thể trả tài khoản STUDENT với id/email/tên/role/active/version tối thiểu để cấp quyền. Không trả MSSV, khoa/lớp, SĐT hoặc hồ sơ của sinh viên. Tài khoản có sẵn được cập nhật theo account_id/version, không tạo bản sao.
 - Chuẩn hóa định danh theo hợp đồng SSO được xác nhận; trim email, so sánh miền không phân biệt hoa/thường, quy tắc phần local theo nhà cung cấp. Không tự gộp hai tài khoản khi chưa xác nhận định danh.
 - Việc kiểm tra hồ sơ mở và cập nhật quyền/phòng/active phải nguyên tử với phân công (STF-07). Version tài khoản riêng không thay thế ràng buộc này. ROLE_CHANGE có subtype ACCOUNT_ADD/ROLE_SET/DEPARTMENT_SET/ACTIVATE/DEACTIVATE.
-- **Thêm tài khoản:** Ban quản lý nhập định danh SSO (email trường) của người dùng, chọn vai trò `STAFF` hoặc `MANAGER`, và chọn phòng ban nếu là `STAFF`. Người dùng đăng nhập SSO lần đầu mà không có trong danh sách này sẽ mặc định là `STUDENT`.
-- **Quy tắc vai trò và phòng ban:** `STAFF` phải có đúng một phòng ban. `MANAGER` và `STUDENT` không có phòng ban.
+- **Thêm tài khoản:** Admin nhập định danh SSO (email trường) của người dùng, chọn vai trò `STAFF` hoặc `ADMIN`, và chọn phòng ban nếu là `STAFF`. Người dùng đăng nhập SSO lần đầu mà không có trong danh sách này sẽ mặc định là `STUDENT`.
+- **Quy tắc vai trò và phòng ban:** `STAFF` phải có đúng một phòng ban. `ADMIN` và `STUDENT` không có phòng ban.
 - **Tài khoản bị vô hiệu hóa:** không đăng nhập được và không được phân công hồ sơ.
 - **Đổi phòng ban, đổi vai trò hoặc vô hiệu hóa một `STAFF`:** chỉ được làm khi nhân viên đó không còn phụ trách hồ sơ nào chưa đóng.
-- **Chống khóa hệ thống:** Không được tự hạ vai trò hoặc tự vô hiệu hóa chính mình. Hệ thống luôn phải còn ít nhất một `MANAGER` đang hoạt động.
+- **Chống khóa hệ thống:** Không được tự hạ vai trò hoặc tự vô hiệu hóa chính mình. Hệ thống luôn phải còn ít nhất một `ADMIN` đang hoạt động.
 - Định danh SSO là duy nhất.
 - Bắt buộc gửi `version` của tài khoản khi sửa.
 - Rate limit: 30 thao tác ghi mỗi phút cho mỗi người dùng.
@@ -369,45 +369,45 @@ Ban quản lý đã đăng nhập.
 - Nếu định danh SSO sai định dạng, hoặc vai trò `STAFF` thiếu phòng ban, hệ thống trả 400.
 - Nếu thao tác tạo mới dùng định danh đã tồn tại, trả 409 và hướng dẫn dùng chức năng tìm/cấp quyền tài khoản có sẵn; thao tác cấp quyền đúng account_id/version trả 200.
 - Nếu nhân viên còn phụ trách hồ sơ chưa đóng, hệ thống trả 409 kèm danh sách mã hồ sơ cần phân công lại.
-- Nếu thao tác khiến hệ thống không còn `MANAGER` nào đang hoạt động, hoặc người dùng tự hạ quyền chính mình, hệ thống trả 409.
+- Nếu thao tác khiến hệ thống không còn `ADMIN` nào đang hoạt động, hoặc người dùng tự hạ quyền chính mình, hệ thống trả 409.
 - Nếu lệch `version`, hệ thống trả 409.
 
 **Acceptance Criteria**
 - **AC-01 [Happy Path]:** Thêm tài khoản `nva@aurora.edu.vn` (ví dụ) với vai trò `STAFF` thuộc Phòng Đào tạo -> 201. Khi người này đăng nhập SSO, họ vào Cổng Nhân viên và thấy hàng đợi của Phòng Đào tạo.
 - **AC-02 [Validation]:** Tạo tài khoản `STAFF` không có phòng ban -> 400. Thêm mới định danh đã có -> 409; tìm email STUDENT có sẵn rồi cấp STAFF/phòng bằng account_id/version -> 200, không tạo duplicate account.
 - **AC-03 [Business Logic]:** Đổi phòng ban của nhân viên đang phụ trách 2 hồ sơ chưa đóng -> 409 kèm 2 mã hồ sơ. Sau khi 2 hồ sơ được phân công lại cho người khác, đổi phòng ban -> 200.
-- **AC-04 [Security]:** Tài khoản `STAFF` gọi API phân quyền -> 403. Ban quản lý tự hạ vai trò của chính mình -> 409. Nhân viên bị hạ về `STUDENT` -> request kế tiếp vào Cổng Nhân viên bị 403.
-- **AC-05 [Concurrency]:** Hai người trong Ban quản lý cùng sửa một tài khoản -> người lưu sau nhận 409. Hai người cạnh tranh thao tác khiến không còn MANAGER active -> chỉ thao tác giữ invariant được commit; tự deactivate/hạ quyền luôn 409. Phân công staff cạnh tranh deactivate/đổi phòng không để assignee ticket mở mất quyền.
+- **AC-04 [Security]:** Tài khoản `STAFF` gọi API phân quyền -> 403. Admin tự hạ vai trò của chính mình -> 409. Nhân viên bị hạ về `STUDENT` -> request kế tiếp vào Cổng Nhân viên bị 403.
+- **AC-05 [Concurrency]:** Hai người trong Admin cùng sửa một tài khoản -> người lưu sau nhận 409. Hai người cạnh tranh thao tác khiến không còn ADMIN active -> chỉ thao tác giữ invariant được commit; tự deactivate/hạ quyền luôn 409. Phân công staff cạnh tranh deactivate/đổi phòng không để assignee ticket mở mất quyền.
 - **AC-06 [Resilience & Audit]:** Lưu lỗi -> rollback, phân quyền giữ nguyên. Thành công -> có bản ghi nhật ký `ROLE_CHANGE` (người thực hiện, tài khoản bị đổi, giá trị cũ, giá trị mới).
 
 **Ví dụ Edge Case**
-Một nhân viên chuyển công tác từ Phòng Đào tạo sang Phòng Tài chính nhưng còn 3 hồ sơ đang xử lý. Hệ thống từ chối đổi phòng ban và liệt kê 3 mã hồ sơ đó. Đồng nghiệp ở Phòng Đào tạo phân công lại 3 hồ sơ (FR-STF-07), sau đó Ban quản lý mới đổi phòng ban được.
+Một nhân viên chuyển công tác từ Phòng Đào tạo sang Phòng Tài chính nhưng còn 3 hồ sơ đang xử lý. Hệ thống từ chối đổi phòng ban và liệt kê 3 mã hồ sơ đó. Đồng nghiệp ở Phòng Đào tạo phân công lại 3 hồ sơ (FR-STF-07), sau đó Admin mới đổi phòng ban được.
 
-**Expected Result:** Mỗi tài khoản có đúng vai trò và phòng ban hợp lệ, không có hồ sơ nào bị bỏ lại với người phụ trách không còn quyền, và hệ thống luôn còn người quản trị.
+**Expected Result:** Mỗi tài khoản có đúng vai trò và phòng ban hợp lệ, không có hồ sơ nào bị bỏ lại với người phụ trách không còn quyền, và hệ thống luôn còn Admin.
 
 ---
 
 ### [FR-MGT-07] Thiết lập SLA cho từng loại yêu cầu
 
 **Mô tả**
-Ban quản lý đặt thời hạn xử lý (SLA) cho từng loại yêu cầu, làm căn cứ để hệ thống xác định hồ sơ quá hạn.
+Admin đặt thời hạn xử lý (SLA) cho từng loại yêu cầu, làm căn cứ để hệ thống xác định hồ sơ quá hạn.
 
 **Actor**
-Ban quản lý đã đăng nhập.
+Admin đã đăng nhập.
 
 **Preconditions**
-- Người dùng có vai trò `MANAGER`.
+- Người dùng có vai trò `ADMIN`.
 - Danh mục loại yêu cầu đã được cấu hình (CORE-05).
 
 **Luồng chính**
-1. Ban quản lý mở màn hình Thiết lập SLA.
+1. Admin mở màn hình Thiết lập SLA.
 2. Hệ thống hiển thị danh sách loại yêu cầu kèm SLA hiện tại.
-3. Ban quản lý sửa SLA của một loại yêu cầu và lưu.
+3. Admin sửa SLA của một loại yêu cầu và lưu.
 4. Hệ thống áp dụng SLA mới cho các hồ sơ tạo từ thời điểm này trở đi.
 
 **Input**
 - **Người dùng/request:** List loại yêu cầu/SLA; cập nhật: request_type_id, version cấu hình, sla_hours số nguyên 1–720.
-- **Hệ thống:** MANAGER, cấu hình SLA hiện tại.
+- **Hệ thống:** ADMIN, cấu hình SLA hiện tại.
 - Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
@@ -416,7 +416,7 @@ Ban quản lý đã đăng nhập.
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- List và response lưu luôn có version cấu hình. Đọc SLA để tạo hồ sơ và cập nhật SLA có điểm hiệu lực xác định theo transaction: mỗi hồ sơ lưu đúng một SLA snapshot đã commit, không trộn hai giá trị. Seed danh mục không ghi đè SLA manager đã đổi.
+- List và response lưu luôn có version cấu hình. Đọc SLA để tạo hồ sơ và cập nhật SLA có điểm hiệu lực xác định theo transaction: mỗi hồ sơ lưu đúng một SLA snapshot đã commit, không trộn hai giá trị. Seed danh mục không ghi đè SLA admin đã đổi.
 - SLA tính bằng giờ (giờ lịch, tính cả ngoài giờ hành chính và ngày nghỉ). Là số nguyên từ 1 đến 720.
 - Mỗi loại yêu cầu có đúng một giá trị SLA. Giá trị ban đầu được nạp sẵn khi triển khai.
 - Hạn xử lý của mỗi hồ sơ được chốt tại thời điểm tạo hồ sơ. Đổi SLA không làm thay đổi hạn của hồ sơ đã tạo.
@@ -434,10 +434,10 @@ Ban quản lý đã đăng nhập.
 - **AC-02 [Validation/Boundary]:** SLA = 0, 721 hoặc 2,5 -> 400. SLA = 1 và 720 -> 200.
 - **AC-03 [Business Logic]:** Hồ sơ tạo trước khi đổi SLA -> giữ nguyên hạn cũ (72 giờ).
 - **AC-04 [Security]:** Tài khoản `STAFF` gọi API -> 403.
-- **AC-05 [Concurrency/Idempotency]:** Hai người trong Ban quản lý cùng sửa SLA một loại -> người lưu sau nhận 409. Lưu lại cùng giá trị với version hiện tại -> 200, không thêm audit/tăng version. Seed lại không ghi đè SLA đã sửa; tạo ticket cạnh tranh đổi SLA lưu đúng một snapshot đã commit.
+- **AC-05 [Concurrency/Idempotency]:** Hai người trong Admin cùng sửa SLA một loại -> người lưu sau nhận 409. Lưu lại cùng giá trị với version hiện tại -> 200, không thêm audit/tăng version. Seed lại không ghi đè SLA đã sửa; tạo ticket cạnh tranh đổi SLA lưu đúng một snapshot đã commit.
 - **AC-06 [Resilience & Audit]:** Lưu lỗi -> rollback, SLA giữ nguyên. Thành công -> có bản ghi nhật ký `SLA_CHANGE` (loại yêu cầu, giá trị cũ, giá trị mới, người thực hiện).
 
 **Ví dụ Edge Case**
-Ban quản lý rút SLA của một loại yêu cầu từ 72 giờ xuống 24 giờ. Một hồ sơ cùng loại đã được gửi 30 giờ trước đó. Hồ sơ này không bị chuyển ngay sang `OVERDUE`, vì hạn của nó đã được chốt là 72 giờ lúc tạo.
+Admin rút SLA của một loại yêu cầu từ 72 giờ xuống 24 giờ. Một hồ sơ cùng loại đã được gửi 30 giờ trước đó. Hồ sơ này không bị chuyển ngay sang `OVERDUE`, vì hạn của nó đã được chốt là 72 giờ lúc tạo.
 
 **Expected Result:** Mỗi loại yêu cầu có đúng một SLA hợp lệ, thay đổi SLA chỉ ảnh hưởng hồ sơ mới, và mọi thay đổi đều được ghi lại.

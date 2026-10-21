@@ -30,7 +30,7 @@ Khi M1 tạo ticket, M5 lấy danh mục/SLA snapshot và sinh mã; khi M2/M1 th
 
 - [M1 — Cổng Sinh viên](../M01-student-portal/prd.md)
 - [M2 — Cổng Nhân viên](../M02-staff-portal/prd.md)
-- [M3 — Cổng Quản lý](../M03-management-portal/prd.md)
+- [M3 — Cổng Admin](../M03-management-portal/prd.md)
 - [M4 — Xác thực & Bảo mật](../M04-authentication-security/prd.md)
 
 ## Quy ước sử dụng tài liệu

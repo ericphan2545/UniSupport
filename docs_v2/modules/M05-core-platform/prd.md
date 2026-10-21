@@ -34,7 +34,7 @@ Khi M1 tạo ticket, M5 lấy danh mục/SLA snapshot và sinh mã; khi M2/M1 th
 - Mọi API thay đổi các đối tượng này yêu cầu version hiện tại. Thiếu/sai kiểu trả 400, version cũ trả 409 sau scope. No-op hợp lệ không tăng version/lặp history/audit; vẫn kiểm tra quyền và version.
 - Rating là đối tượng riêng unique theo ticket; notification read là riêng. CLOSED cấm sửa ticket, không cấm rating hoặc đọc thông báo.
 - Cập nhật ticket, các đối tượng DB liên quan, audit, history, notification cùng transaction. Một event dùng cùng event_id; không tạo notification trùng REQUEST_INFO/status change.
-- Account và SLA có version riêng. Kiểm tra manager còn lại và phân công/account active phải nguyên tử trên ràng buộc, không chỉ dựa hai version độc lập.
+- Account và SLA có version riêng. Kiểm tra admin còn lại và phân công/account active phải nguyên tử trên ràng buộc, không chỉ dựa hai version độc lập.
 
 ### Idempotency và retry
 
@@ -336,16 +336,16 @@ Hệ thống. Dữ liệu danh mục do đội phát triển nạp khi triển k
 
 **Output**
 - **Kết quả:** Danh mục hợp lệ cho UI; tên EN thiếu fallback VI kèm cảnh báo; seed lỗi không thay đổi dữ liệu đang dùng.
-- **Thay đổi/sự kiện:** Seed idempotent theo mã; không xóa tham chiếu hoặc ghi đè SLA manager đã cập nhật.
+- **Thay đổi/sự kiện:** Seed idempotent theo mã; không xóa tham chiếu hoặc ghi đè SLA admin đã cập nhật.
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Seed idempotent theo mã ổn định và một transaction; cập nhật danh mục không ghi đè SLA đã tồn tại hoặc version SLA quản lý đã sửa. SLA đầu chỉ dùng khi tạo loại mới. Nạp lỗi giữ nguyên bộ cũ; nếu chưa có bộ hợp lệ ứng dụng không phục vụ nghiệp vụ.
+- Seed idempotent theo mã ổn định và một transaction; cập nhật danh mục không ghi đè SLA đã tồn tại hoặc version SLA Admin đã sửa. SLA đầu chỉ dùng khi tạo loại mới. Nạp lỗi giữ nguyên bộ cũ; nếu chưa có bộ hợp lệ ứng dụng không phục vụ nghiệp vụ.
 - Danh mục thật, mapping và SLA đầu cần trường xác nhận; tên ví dụ trong AC không phải dữ liệu production.
 - Mỗi phòng ban và mỗi loại yêu cầu có mã cố định, tên tiếng Việt và tên tiếng Anh.
 - Mỗi loại yêu cầu ánh xạ tới đúng một phòng ban. Một phòng ban có thể nhận nhiều loại yêu cầu.
 - Không có giao diện thêm, sửa hoặc xóa danh mục. Muốn thay đổi thì đội phát triển cập nhật dữ liệu nạp sẵn và triển khai lại.
-- Riêng SLA của từng loại thì Ban quản lý chỉnh được qua FR-MGT-07.
+- Riêng SLA của từng loại thì Admin chỉnh được qua FR-MGT-07.
 - Không xóa loại yêu cầu hay phòng ban đã có hồ sơ tham chiếu tới.
 - Danh mục được cache phía server và cập nhật lại khi triển khai.
 
@@ -391,7 +391,7 @@ Hệ thống (ghi tự động). Người đọc là sinh viên (FR-STU-07) và 
 - Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
-- **Kết quả:** Public projection cho chủ ticket; public+internal cho staff phòng hiện tại; không có API manager đọc chi tiết history.
+- **Kết quả:** Public projection cho chủ ticket; public+internal cho staff phòng hiện tại; không có API admin đọc chi tiết history.
 - **Thay đổi/sự kiện:** Ghi các mốc theo quy tắc gộp/tách; append-only; không nhúng due_at/assignee/reason nội bộ vào response public.
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 

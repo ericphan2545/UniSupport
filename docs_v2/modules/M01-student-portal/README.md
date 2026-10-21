@@ -30,7 +30,7 @@ Sinh viên đăng nhập qua M4 → xem thông tin → chọn loại yêu cầu 
 ## Module liên quan
 
 - [M2 — Cổng Nhân viên](../M02-staff-portal/prd.md)
-- [M3 — Cổng Quản lý](../M03-management-portal/prd.md)
+- [M3 — Cổng Admin](../M03-management-portal/prd.md)
 - [M4 — Xác thực & Bảo mật](../M04-authentication-security/prd.md)
 - [M5 — Lõi hệ thống & Nền tảng](../M05-core-platform/prd.md)
 

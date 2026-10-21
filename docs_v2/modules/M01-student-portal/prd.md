@@ -546,7 +546,7 @@ Sinh viên mở form bổ sung trên hai tab trình duyệt và gửi ở cả h
 ### [FR-STU-10] Đánh giá chất lượng hỗ trợ
 
 **Mô tả**
-Sau khi hồ sơ đóng, sinh viên chấm 1–5 sao kèm nhận xét, cung cấp dữ liệu hài lòng cho báo cáo của Ban quản lý (MGT-05).
+Sau khi hồ sơ đóng, sinh viên chấm 1–5 sao kèm nhận xét, cung cấp dữ liệu hài lòng cho báo cáo của Admin (MGT-05).
 
 **Actor**
 Sinh viên chủ hồ sơ.

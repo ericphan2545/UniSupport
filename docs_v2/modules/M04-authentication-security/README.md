@@ -1,6 +1,6 @@
 # M4. Xác thực & Bảo mật
 
-Trường/DevOps xác nhận SSO và nạp MANAGER đầu → manager cấp quyền staff → người dùng login → xác minh danh tính trường → tìm account hoặc tạo STUDENT → kiểm tra active → phát cookie phiên ứng dụng → đưa vào M1/M2/M3. Mỗi request đọc quyền hiện tại, kiểm tra phạm vi rồi mới ghi/đọc dữ liệu. Logout thu hồi phiên hiện tại khi server xác nhận thành công.
+Trường/DevOps xác nhận SSO và nạp ADMIN đầu → admin cấp quyền staff → người dùng login → xác minh danh tính trường → tìm account hoặc tạo STUDENT → kiểm tra active → phát cookie phiên ứng dụng → đưa vào M1/M2/M3. Mỗi request đọc quyền hiện tại, kiểm tra phạm vi rồi mới ghi/đọc dữ liệu. Logout thu hồi phiên hiện tại khi server xác nhận thành công.
 
 ## Nội dung module
 
@@ -27,7 +27,7 @@ Trường/DevOps xác nhận SSO và nạp MANAGER đầu → manager cấp quy�
 
 - [M1 — Cổng Sinh viên](../M01-student-portal/prd.md)
 - [M2 — Cổng Nhân viên](../M02-staff-portal/prd.md)
-- [M3 — Cổng Quản lý](../M03-management-portal/prd.md)
+- [M3 — Cổng Admin](../M03-management-portal/prd.md)
 - [M5 — Lõi hệ thống & Nền tảng](../M05-core-platform/prd.md)
 
 ## Quy ước sử dụng tài liệu

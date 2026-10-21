@@ -17,7 +17,7 @@ Nhánh chuyển phòng: mọi staff active cùng phòng chọn đích/reason →
 **Input module:** phiên STAFF/phòng hiện tại, ticket/version, content/note/resolution, assignee, priority, đích chuyển và reason.
 **Output module:** hàng đợi/chi tiết trong phạm vi, tệp, hồ sơ cập nhật, lịch sử nội bộ/công khai và sự kiện audit/thông báo theo quyền.
 
-**Quyền:** mọi staff cùng phòng được điều phối; chỉ assignee xử lý. Không thêm bước manager duyệt chuyển hoặc chỉ cho tự claim. Nếu chưa phụ trách thì có thể chuyển với reason mà không cần ghi note trước.
+**Quyền:** mọi staff cùng phòng được điều phối; chỉ assignee xử lý. Không thêm bước admin duyệt chuyển hoặc chỉ cho tự claim. Nếu chưa phụ trách thì có thể chuyển với reason mà không cần ghi note trước.
 
 **Cần xác nhận:** staff/phòng thực tế; cách tính SLA giờ lịch và không pause OVERDUE; việc chặn pause muộn trước cron. Nhóm xác nhận các quy tắc này trước khi triển khai nghiệp vụ liên quan.
 

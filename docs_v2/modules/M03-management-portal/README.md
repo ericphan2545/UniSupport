@@ -1,6 +1,6 @@
-# M3. Cổng Quản lý
+# M3. Cổng Admin
 
-Manager đăng nhập M4 → dashboard số lượng hiện tại/trung bình CLOSED → danh sách tóm tắt nếu chọn chỉ số → báo cáo loại/khối lượng/hài lòng từ dữ liệu M1/M2 → cấp quyền tài khoản và thiết lập SLA. Manager không xử lý ticket hoặc xem chi tiết/tệp sinh viên.
+Admin đăng nhập M4 → dashboard số lượng hiện tại/trung bình CLOSED → danh sách tóm tắt nếu chọn chỉ số → báo cáo loại/khối lượng/hài lòng từ dữ liệu M1/M2 → cấp quyền tài khoản và thiết lập SLA. Admin không xử lý ticket hoặc xem chi tiết/tệp sinh viên.
 
 ## Nội dung module
 

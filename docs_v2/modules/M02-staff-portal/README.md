@@ -30,7 +30,7 @@ M1 tạo ticket NEW vào phòng → staff mở hàng đợi/chi tiết → phân
 ## Module liên quan
 
 - [M1 — Cổng Sinh viên](../M01-student-portal/prd.md)
-- [M3 — Cổng Quản lý](../M03-management-portal/prd.md)
+- [M3 — Cổng Admin](../M03-management-portal/prd.md)
 - [M4 — Xác thực & Bảo mật](../M04-authentication-security/prd.md)
 - [M5 — Lõi hệ thống & Nền tảng](../M05-core-platform/prd.md)
 
