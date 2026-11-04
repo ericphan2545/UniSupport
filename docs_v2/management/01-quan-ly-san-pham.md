@@ -1,10 +1,8 @@
 # UniSupport – Kế hoạch quản lý sản phẩm
 
-Phiên bản 0.4
+Phiên bản 0.6
 
-**Phạm vi tài liệu:** quản lý UniSupport như một sản phẩm **sau khi đưa vào sử dụng**: phục vụ ai, theo nguyên tắc nào, nhận phản hồi và đo kết quả ra sao, phát triển tiếp theo hướng nào, xét duyệt thay đổi bằng tiêu chí gì, và tiếp thị để người dùng thật sự dùng. Tài liệu không chứa milestone hay lịch của dự án (xem GitHub), tiêu chí chất lượng ([02](02-qmp-quan-ly-chat-luong.md)) hay cách quản trị dự án ([03](03-quan-tri-giam-sat.md)).
-
-Ghi **[GĐ]** là đề xuất của nhóm, cần nhà trường xác nhận.
+**Phạm vi tài liệu:** quản lý UniSupport như một sản phẩm **sau khi đưa vào sử dụng**: phục vụ ai, theo nguyên tắc nào, nhận phản hồi và đo kết quả ra sao, phát triển tiếp theo hướng nào, xét duyệt thay đổi bằng tiêu chí gì, và tiếp thị để người dùng thật sự dùng. Tài liệu không chứa kế hoạch hay lịch của dự án (xem GitHub), tiêu chí chất lượng ([02](02-qmp-quan-ly-chat-luong.md)) hay cách quản trị dự án ([03](03-quan-tri-giam-sat.md)).
 
 ## 1. Mục tiêu sản phẩm và điểm xuất phát
 
@@ -18,7 +16,7 @@ UniSupport hướng đến ba kết quả:
 
 ### 1.2 Điểm xuất phát khi bàn giao
 
-- **Có sẵn:** 42 FR theo PRD; web responsive (điện thoại và máy tính); VN/EN; thông báo trong app; dashboard và 3 báo cáo cho Admin.
+- **Có sẵn:** các chức năng đã thống nhất trong hợp đồng cho 3 vai trò Sinh viên, Nhân viên, Admin; web responsive (điện thoại và máy tính); VN/EN; thông báo trong app; dashboard và 3 báo cáo cho Admin.
 - **Chưa có (ngoài phạm vi hợp đồng):** tích hợp SIS/LMS, thanh toán; ứng dụng di động riêng; thông báo email/SMS/push; trích xuất dữ liệu; Admin xem hoặc xử lý ticket; mở lại hồ sơ đã đóng; màn hình sửa danh mục.
 - **Sau bàn giao:** bên phát triển sửa lỗi trong thời gian bảo hành (Proposal 6.3). Nhà trường tự vận hành hệ thống (Proposal 6.4). Mọi tính năng mới là change request riêng, xét theo mục 7.
 
@@ -29,11 +27,11 @@ Khách hàng ký hợp đồng là **Aurora University**. Nhưng giá trị sả
 | Nhóm | Vai trò với sản phẩm | Cần gì | Lắng nghe qua | Đo bằng |
 |---|---|---|---|---|
 | **Aurora University** (Director of Student Services) | Khách hàng: người mua, quyết định đầu tư tiếp | Một kênh hỗ trợ thống nhất; số liệu để đánh giá và điều phối; chi phí vận hành hợp lý | Họp rà soát sản phẩm (mục 4) | Chỉ số ở mục 6.3; kết quả rà soát |
-| **Sinh viên** (khoảng 3.000, chủ yếu dùng điện thoại) | Người thụ hưởng cuối cùng | Gửi nhanh, biết phòng nào xử lý, theo dõi tiến độ, nhận kết quả, được bảo vệ dữ liệu cá nhân | Đánh giá sau khi đóng hồ sơ (STU-10), khảo sát UI/UX, kênh phản hồi (mục 5) | Mức hài lòng (MGT-05), tỷ lệ hài lòng UI/UX (mục 6.2) |
-| **Nhân viên** các phòng ban | Người dùng hằng ngày, tạo ra kết quả hỗ trợ | Hàng đợi rõ ràng, ít thao tác thừa, phân công và chuyển phòng dễ, không bị quá tải | Phỏng vấn ngắn, khảo sát UI/UX, kênh phản hồi | Thời gian xử lý (MGT-02), khối lượng theo phòng (MGT-04), tỷ lệ hài lòng UI/UX |
-| **Admin** (quản trị phía trường) | Người quản trị hệ thống | Cấp/thu quyền, thiết lập SLA, đọc dashboard và báo cáo đúng. **Không** xem chi tiết hồ sơ hay tệp | Kênh phản hồi, họp rà soát | Số hồ sơ quá hạn (MGT-01), báo cáo dùng được cho điều phối |
+| **Sinh viên** (khoảng 3.000, chủ yếu dùng điện thoại) | Người thụ hưởng cuối cùng | Gửi nhanh, biết phòng nào xử lý, theo dõi tiến độ, nhận kết quả, được bảo vệ dữ liệu cá nhân | Đánh giá kết quả sau khi hồ sơ đóng, khảo sát UI/UX, kênh phản hồi (mục 5) | Mức hài lòng với kết quả hỗ trợ, tỷ lệ hài lòng UI/UX (mục 6.2) |
+| **Nhân viên** các phòng ban | Người dùng hằng ngày, tạo ra kết quả hỗ trợ | Hàng đợi rõ ràng, ít thao tác thừa, phân công và chuyển phòng dễ, không bị quá tải | Phỏng vấn ngắn, khảo sát UI/UX, kênh phản hồi | Thời gian xử lý, khối lượng theo phòng, tỷ lệ hài lòng UI/UX |
+| **Admin** (quản trị phía trường) | Người quản trị hệ thống | Cấp/thu quyền, thiết lập SLA, đọc dashboard và báo cáo đúng. **Không** xem chi tiết hồ sơ hay tệp | Kênh phản hồi, họp rà soát | Số hồ sơ quá hạn, báo cáo dùng được cho điều phối |
 
-**Khi lợi ích các nhóm xung đột**, ưu tiên theo thứ tự **[GĐ]**:
+**Khi lợi ích các nhóm xung đột**, ưu tiên theo thứ tự:
 
 1. An toàn dữ liệu và quyền riêng tư của sinh viên.
 2. Sinh viên hoàn thành được việc cần làm.
@@ -75,7 +73,7 @@ Quản lý sản phẩm là một vòng lặp liên tục, không có ngày kế
 | 6. Đo lại | Đo chỉ số thành công đã đặt ở bước 3, cùng phương pháp như trước | Đầu mối sản phẩm | Kết luận giữ, điều chỉnh hay quay lại |
 | 7. Truyền thông | Báo người gửi phản hồi và người dùng bị ảnh hưởng về thay đổi (mục 9) | Đầu mối tiếp nhận phản hồi | Thông báo, hướng dẫn cập nhật |
 
-**Nhịp rà soát:** hằng tháng trong giai đoạn Ổn định sử dụng; hằng quý khi đã sang các giai đoạn sau **[GĐ]**. Mỗi lần rà soát dùng phản hồi, số liệu vận hành và năng lực thực tế để điều chỉnh ưu tiên.
+**Nhịp rà soát:** hằng tháng trong giai đoạn Ổn định sử dụng; hằng quý khi đã sang các giai đoạn sau. Mỗi lần rà soát dùng phản hồi, số liệu vận hành và năng lực thực tế để điều chỉnh ưu tiên.
 
 ## 5. Quản lý phản hồi và khiếu nại
 
@@ -124,17 +122,17 @@ Câu hỏi thành phần: giao diện rõ ràng, dễ tìm thông tin, thao tác
 
 **Tỷ lệ hài lòng UI/UX = số người chọn 4 hoặc 5 ở câu tổng thể / tổng số người trả lời hợp lệ × 100%.**
 
-Kết quả phải kèm số người trả lời, nhóm người dùng và phiên bản được đánh giá. Hài lòng về giao diện báo cáo riêng với hài lòng về kết quả hỗ trợ (MGT-05). Mục tiêu ban đầu đề xuất: **≥ 80%** cho từng nhóm người dùng.
+Kết quả phải kèm số người trả lời, nhóm người dùng và phiên bản được đánh giá. Hài lòng về giao diện báo cáo riêng với hài lòng về kết quả hỗ trợ. Mục tiêu ban đầu đề xuất: **≥ 80%** cho từng nhóm người dùng.
 
 ### 6.3 Chỉ số vận hành sản phẩm
 
 | Chỉ số | Cho thấy | Nguồn dữ liệu |
 |---|---|---|
-| Số hồ sơ mới / đang xử lý / quá hạn | Tải và điểm nghẽn | Dashboard Admin (MGT-01) |
-| Thời gian xử lý trung bình | Tốc độ phục vụ | Dashboard Admin (MGT-02) |
-| Loại yêu cầu phổ biến | Nhu cầu chính của sinh viên | Dashboard Admin (MGT-03) |
-| Khối lượng theo phòng ban | Phân bổ công việc của nhân viên | Dashboard Admin (MGT-04) |
-| Mức hài lòng của sinh viên với kết quả | Giá trị hỗ trợ nhận được | Dashboard Admin (MGT-05) |
+| Số hồ sơ mới / đang xử lý / quá hạn | Tải và điểm nghẽn | Dashboard Admin |
+| Thời gian xử lý trung bình | Tốc độ phục vụ | Dashboard Admin |
+| Loại yêu cầu phổ biến | Nhu cầu chính của sinh viên | Dashboard Admin |
+| Khối lượng theo phòng ban | Phân bổ công việc của nhân viên | Dashboard Admin |
+| Mức hài lòng của sinh viên với kết quả | Giá trị hỗ trợ nhận được | Dashboard Admin |
 | Tỷ lệ phản hồi xử lý trong hạn 48 giờ | Chất lượng lắng nghe | Hồ sơ phản hồi (mục 5) |
 | Tỷ lệ khiếu nại lặp lại cùng nguyên nhân | Vấn đề chưa được giải quyết tận gốc | Hồ sơ phản hồi (mục 5) |
 | Tỷ lệ người bắt đầu gửi và gửi thành công; trung vị và phân vị 90 của thời gian xử lý; tuổi của hồ sơ chưa hoàn thành | Chỗ người dùng bỏ dở; các trường hợp chờ lâu | **Chưa có trong hệ thống bàn giao.** Muốn đo phải qua change request (mục 7) |
@@ -170,7 +168,7 @@ Mọi yêu cầu thay đổi sản phẩm, dù từ nhà trường, sinh viên, 
 | Chi phí – rủi ro | Chất lượng và an toàn | Ảnh hưởng đến độ ổn định, quyền truy cập (3 = ảnh hưởng ít) |
 | Chi phí – rủi ro | Chi phí toàn vòng đời | Chi phí xây dựng, vận hành, bảo trì cho trường (3 = chi phí thấp) |
 
-**Quy tắc quyết định [GĐ]:**
+**Quy tắc quyết định:**
 
 - Trượt một cổng ở mục 7.1: từ chối, hoặc hoãn cho đến khi bổ sung đủ.
 - Qua hết cổng: xếp ưu tiên theo tổng điểm nhóm Giá trị; nếu bằng nhau, chọn yêu cầu có tổng điểm nhóm Chi phí – rủi ro cao hơn.
@@ -194,7 +192,7 @@ Lộ trình theo **giá trị cần đạt**, không theo ngày. Chuyển sang g
 | Giai đoạn | Trọng tâm | Việc chính | Điều kiện chuyển giai đoạn sau |
 |---|---|---|---|
 | 1. Ổn định sử dụng | Người dùng làm được việc chính | Hỗ trợ người dùng, xử lý khó khăn ban đầu, sửa lỗi bảo hành, theo dõi độ tin cậy | Lỗi nghiêm trọng đã xử lý; phản hồi xử lý trong hạn 48 giờ ổn định; nhân viên các phòng dùng hằng ngày |
-| 2. Mở rộng sử dụng | Đưa mọi yêu cầu về một kênh | Truyền thông, hướng dẫn, mở rộng nhóm người dùng và phòng ban | Số hồ sơ qua hệ thống tăng đều; khiếu nại "không biết gửi ở đâu" giảm **[GĐ]** |
+| 2. Mở rộng sử dụng | Đưa mọi yêu cầu về một kênh | Truyền thông, hướng dẫn, mở rộng nhóm người dùng và phòng ban | Số hồ sơ qua hệ thống tăng đều; khiếu nại "không biết gửi ở đâu" giảm |
 | 3. Tối ưu trải nghiệm | Làm cái đang có tốt hơn | Sửa các bước gây bỏ dở, nhầm lẫn, phải liên hệ lại; chỉnh theo khảo sát UI/UX | Tỷ lệ hài lòng UI/UX ≥ 80% ở cả ba nhóm người dùng |
 | 4. Phát triển dài hạn | Đầu tư mới có giá trị và duy trì được | Đánh giá nhu cầu mới và khả năng mở rộng theo mục 7 | Mỗi đầu tư mới qua đủ cổng 7.1 |
 
@@ -222,7 +220,7 @@ Nhà trường là bên chủ trì truyền thông qua kênh của trường. B�
 |---|---|
 | Trước khi mở cho người dùng | Hướng dẫn nhân viên trước để khi sinh viên gửi đã có người nhận; chuẩn bị hướng dẫn ngắn |
 | Khi mở cho sinh viên | Giới thiệu qua kênh chính thức; hướng dẫn tại điểm tiếp nhận và các đợt sinh hoạt; nhân viên hướng sinh viên gửi qua hệ thống thay vì kênh cũ |
-| Duy trì | Nhắc lại vào thời điểm nhiều yêu cầu trong học kỳ **[GĐ]**; chia sẻ kết quả cải thiện (ví dụ thời gian xử lý giảm) |
+| Duy trì | Nhắc lại vào thời điểm nhiều yêu cầu trong học kỳ; chia sẻ kết quả cải thiện (ví dụ thời gian xử lý giảm) |
 | Khi có cải tiến quan trọng | Truyền thông lại cho đúng nhóm bị ảnh hưởng; cập nhật hướng dẫn |
 
 ### 9.3 Đo hiệu quả
@@ -241,4 +239,6 @@ Trong thời gian dự án, sửa tài liệu này theo [03](03-quan-tri-giam-sa
 |---|---|
 | 0.2 | Bản trước |
 | 0.3 | Tách khỏi QMP và Quản trị: bỏ ngày, người phụ trách, rủi ro, quy trình thay đổi |
-| 0.4 | Viết lại theo hướng sau khi đưa vào sử dụng: bỏ milestone; thêm khách hàng của khách hàng, nguyên tắc, quy trình vòng lặp, cổng và tiêu chí change request, lộ trình theo giá trị, tiếp thị |
+| 0.4 | Viết lại theo hướng sau khi đưa vào sử dụng: bỏ kế hoạch dự án; thêm khách hàng của khách hàng, nguyên tắc, quy trình vòng lặp, cổng và tiêu chí change request, lộ trình theo giá trị, tiếp thị |
+| 0.5 | Bỏ các mã chức năng |
+| 0.6 | Hoàn thiện câu chữ |
