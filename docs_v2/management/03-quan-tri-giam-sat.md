@@ -127,24 +127,11 @@ Tại buổi họp tuần, nhóm bổ sung rủi ro mới, cập nhật mức đ
 
 | Rủi ro | Mức | Cách xử lý | Phụ trách |
 |---|---|---|---|
-| Effort vượt 870 giờ vì mỗi milestone rất ngắn | Cao | Theo dõi giờ hằng tuần; báo cảnh báo khi dự báo vượt | PM / Senior |
-| Trường dùng SAML thay vì OIDC | Cao | Xác nhận với trường sớm; nếu đúng là SAML thì tạo change-request | BE Dev / Senior |
 | Chưa có danh sách loại yêu cầu và phòng ban thật | Trung bình | Dùng dữ liệu seed; phải có danh sách thật trước khi triển khai | PM / Senior |
 | Các yêu cầu đã loại quay lại (Admin xử lý ticket, email/SMS, trích xuất dữ liệu) | Trung bình | Xử lý như change-request | PM / Senior |
 | Usability test diễn ra sau feature freeze | Trung bình | Chỉ sửa Critical/Major; phần còn lại ghi vào danh sách lỗi tồn | QA / Senior |
 | Hạ tầng của trường khác Staging | Trung bình | Test hiệu năng trên hạ tầng trường trước Go-live | DevOps / Mid |
 | Chưa định nghĩa thời gian lưu trữ dữ liệu | Thấp | Trường xác nhận trước khi lên production | PM / Senior |
-
-### 3.3 Chỉ số giá trị đạt được (EVM)
-
-Cuối mỗi milestone, PM tính hai chỉ số theo phương pháp giá trị đạt được (Earned Value Management) để đánh giá cùng lúc tiến độ và giờ công, đơn vị là giờ công. **PV** là số giờ kế hoạch của phần việc lẽ ra phải xong; **EV** là số giờ kế hoạch của phần việc thực tế đã xong đúng DoD (QMP mục 5); **AC** (Actual Cost) là số giờ thực tế đã dùng. Giờ kế hoạch lấy từ masterplan và issue.
-
-| Chỉ số | Công thức | Ý nghĩa |
-|---|---|---|
-| SPI | EV ÷ PV | Từ 1 trở lên: đúng hoặc nhanh hơn kế hoạch. Dưới 1: chậm so với kế hoạch |
-| CPI | EV ÷ AC | Từ 1 trở lên: không vượt số giờ kế hoạch. Dưới 1: tốn nhiều giờ hơn kế hoạch |
-
-Khi SPI hoặc CPI dưới 1, PM nêu nguyên nhân và hướng khắc phục trong báo cáo milestone.
 
 ## 4. Chuyển cấp vấn đề và quyền quyết định
 
