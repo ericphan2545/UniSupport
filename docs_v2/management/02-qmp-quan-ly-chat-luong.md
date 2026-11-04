@@ -134,13 +134,4 @@ Quy tắc khi báo cáo:
 
 ## 8. Thay đổi chất lượng
 
-Thay đổi mục tiêu, ngưỡng metrics hoặc phạm vi kiểm thử (ví dụ bỏ test hiệu năng, hạ tỷ lệ test case đạt) đi theo quy trình ở [03](03-quan-tri-giam-sat.md) mục 5. QA / Senior đánh giá tác động chất lượng. Cập nhật phiên bản QMP và ghi lịch sử.
-
-## Lịch sử thay đổi
-
-| Phiên bản | Nội dung |
-|---|---|
-| 1.0 | Bản đầu |
-| 1.1 | Tách khỏi Quản trị và Team Charter: bỏ chỉ số tiến độ/giờ công, thêm quy tắc "đóng không mở lại" vào mục 6, thêm 6 quy tắc trung thực số liệu (mục 2.1, 2.2, 6, 7) |
-| 1.2 | Bỏ các mã chức năng; chuẩn đạt dẫn về tiêu chí chấp nhận trong Proposal 6.2 |
-| 1.3 | Hoàn thiện câu chữ |
+Thay đổi mục tiêu, ngưỡng metrics hoặc phạm vi kiểm thử (ví dụ bỏ test hiệu năng, hạ tỷ lệ test case đạt) đi theo quy trình ở [03](03-quan-tri-giam-sat.md) mục 5. QA / Senior đánh giá tác động chất lượng. Cập nhật phiên bản QMP.

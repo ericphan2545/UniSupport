@@ -230,15 +230,3 @@ Theo dõi mức tiếp cận, lượt sử dụng có nhu cầu thực tế, t�
 ### 9.4 Điều chỉnh
 
 Tại mỗi lần rà soát (mục 4), quyết định duy trì, thay đổi hoặc dừng hoạt động truyền thông dựa trên hiệu quả và chi phí.
-
-## Lịch sử thay đổi
-
-Trong thời gian dự án, sửa tài liệu này theo [03](03-quan-tri-giam-sat.md) mục 5. Sau bàn giao, đầu mối sản phẩm của trường duyệt.
-
-| Phiên bản | Nội dung |
-|---|---|
-| 0.2 | Bản trước |
-| 0.3 | Tách khỏi QMP và Quản trị: bỏ ngày, người phụ trách, rủi ro, quy trình thay đổi |
-| 0.4 | Viết lại theo hướng sau khi đưa vào sử dụng: bỏ kế hoạch dự án; thêm khách hàng của khách hàng, nguyên tắc, quy trình vòng lặp, cổng và tiêu chí change request, lộ trình theo giá trị, tiếp thị |
-| 0.5 | Bỏ các mã chức năng |
-| 0.6 | Hoàn thiện câu chữ |

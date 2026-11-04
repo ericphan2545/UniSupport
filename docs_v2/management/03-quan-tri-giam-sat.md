@@ -206,13 +206,3 @@ Báo cáo tình hình dự án tuần lập theo mẫu dưới đây. Cột Ví 
 | Rủi ro và vấn đề | Rủi ro mức Cao; vấn đề mới hoặc chưa xử lý xong, người phụ trách, thời hạn | Rủi ro "chưa có danh sách phòng ban thật" (Trung bình): đã gửi câu hỏi cho trường. Chậm sinh mã hồ sơ: BE Dev / Senior hỗ trợ BE Dev / Mid, hạn mới 11/11 |
 | Cần quyết định | Nội dung cần PM, nhóm hoặc Aurora University quyết định | Không có |
 | Kế hoạch tuần tới | Các việc chính và mục tiêu tuần tiếp theo | Chạy test trọn luồng và đóng milestone ngày 16/11; mở milestone Phân công, xử lý, chuyển phòng ban |
-
-## Lịch sử thay đổi
-
-| Phiên bản | Ngày | Nội dung |
-|---|---|---|
-| 0.1 | 31/10/2026 | Bản đầu |
-| 0.2 | 04/11/2026 | Bỏ ma trận RACI, mục tiêu dự án, baseline, chi phí/thanh toán, tiêu chí đóng dự án |
-| 0.3 | 04/11/2026 | Đổi khung: tuyến báo cáo, quy trình báo cáo, ngưỡng Xanh/Vàng/Đỏ, EVM, nhật ký và mẫu báo cáo |
-| 0.4 | 04/11/2026 | Bỏ các mã chức năng |
-| 0.5 | 04/11/2026 | Hoàn thiện câu chữ |
