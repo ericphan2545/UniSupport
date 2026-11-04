@@ -6,13 +6,13 @@ Phiên bản 1.3
 
 ## 1. Mục tiêu chất lượng
 
-| # | Mục tiêu | Đo bằng | Nguồn |
-|---|---|---|---|
-| 1 | Mọi chức năng đã thống nhất có test case và đạt | 100% chức năng có test case; ≥95% test case đạt | Team Charter; nhóm chốt |
-| 2 | Không còn lỗi Critical và Major khi Go-live | Critical = 0, Major = 0 | Team Charter; nhóm chốt |
-| 3 | Chạy ổn với 100–200 người dùng đồng thời | p95 ≤ 3 giây, tỷ lệ lỗi ≤ 5% | Số người: Proposal; ngưỡng: nhóm chốt |
-| 4 | Đúng quyền cho 3 vai trò | 0 lỗi lộ dữ liệu ngoài quyền | Nhóm chốt |
-| 5 | Dùng được trên điện thoại và máy tính, có VN/EN | Đổi VN/EN đầy đủ; ở màn hình 360px không có thanh cuộn ngang | Proposal |
+| # | Mục tiêu | Đo bằng |
+|---|---|---|
+| 1 | Mọi chức năng đã thống nhất có test case và đạt | 100% chức năng có test case; ≥95% test case đạt |
+| 2 | Không còn lỗi Critical và Major khi Go-live | Critical = 0, Major = 0 |
+| 3 | Chạy ổn với 100–200 người dùng đồng thời | p95 ≤ 3 giây, tỷ lệ lỗi ≤ 5% |
+| 4 | Đúng quyền cho 3 vai trò | 0 lỗi lộ dữ liệu ngoài quyền |
+| 5 | Dùng được trên điện thoại và máy tính, có VN/EN | Đổi VN/EN đầy đủ; ở màn hình 360px không có thanh cuộn ngang |
 
 ## 2. Tiêu chí nghiệm thu
 
@@ -113,18 +113,18 @@ Lỗi trùng, không tái hiện được hoặc thực chất là yêu cầu th
 
 Đo cuối mỗi milestone, và mỗi tuần trong giai đoạn test. Chỉ số tiến độ và giờ công nằm ở [03](03-quan-tri-giam-sat.md) mục 3.
 
-| Chỉ số | Cách tính | Ngưỡng | Nguồn |
-|---|---|---|---|
-| Test case đạt | Đạt / đã chạy | ≥95% | Team Charter |
-| Critical đang mở | Đếm | 0 khi đóng milestone và Go-live | Team Charter |
-| Major đang mở | Đếm | 0 khi đóng milestone và Go-live | Nhóm chốt |
-| Độ phủ tiêu chí chấp nhận | Số tiêu chí có test case / tổng tiêu chí của milestone | 100% | Nhóm chốt |
-| Tỷ lệ lỗi mở lại | Lỗi bị mở lại / lỗi đã đóng | ≤10% | Nhóm chốt |
-| Thời gian xác nhận lỗi | Từ lúc tạo issue đến lúc QA xác nhận | ≤1 ngày làm việc | Nhóm chốt |
-| Thời gian sửa lỗi | Từ lúc xác nhận đến lúc đóng | Theo bảng mục 6 | Nhóm chốt |
-| Lỗi lọt qua milestone đã đóng | Số issue trong milestone Hotfix | 0 Critical | Nhóm chốt |
-| Hiệu năng | p95 và tỷ lệ lỗi ở 100–200 người dùng | p95 ≤ 3s, lỗi ≤ 5% | Nhóm chốt |
-| Usability | Tỷ lệ người tham gia hoàn thành các tác vụ chính | ≥80%, hoặc theo Usability Test Report | Nhóm chốt |
+| Chỉ số | Cách tính | Ngưỡng |
+|---|---|---|
+| Test case đạt | Đạt / đã chạy | ≥95% |
+| Critical đang mở | Đếm | 0 khi đóng milestone và Go-live |
+| Major đang mở | Đếm | 0 khi đóng milestone và Go-live |
+| Độ phủ tiêu chí chấp nhận | Số tiêu chí có test case / tổng tiêu chí của milestone | 100% |
+| Tỷ lệ lỗi mở lại | Lỗi bị mở lại / lỗi đã đóng | ≤10% |
+| Thời gian xác nhận lỗi | Từ lúc tạo issue đến lúc QA xác nhận | ≤1 ngày làm việc |
+| Thời gian sửa lỗi | Từ lúc xác nhận đến lúc đóng | Theo bảng mục 6 |
+| Lỗi lọt qua milestone đã đóng | Số issue trong milestone Hotfix | 0 Critical |
+| Hiệu năng | p95 và tỷ lệ lỗi ở 100–200 người dùng | p95 ≤ 3s, lỗi ≤ 5% |
+| Usability | Tỷ lệ người tham gia hoàn thành các tác vụ chính | ≥80%, hoặc theo Usability Test Report |
 
 Quy tắc khi báo cáo:
 

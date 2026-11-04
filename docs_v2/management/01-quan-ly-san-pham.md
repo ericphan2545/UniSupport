@@ -126,16 +126,16 @@ Kết quả phải kèm số người trả lời, nhóm người dùng và phi�
 
 ### 6.3 Chỉ số vận hành sản phẩm
 
-| Chỉ số | Cho thấy | Nguồn dữ liệu |
-|---|---|---|
-| Số hồ sơ mới / đang xử lý / quá hạn | Tải và điểm nghẽn | Dashboard Admin |
-| Thời gian xử lý trung bình | Tốc độ phục vụ | Dashboard Admin |
-| Loại yêu cầu phổ biến | Nhu cầu chính của sinh viên | Dashboard Admin |
-| Khối lượng theo phòng ban | Phân bổ công việc của nhân viên | Dashboard Admin |
-| Mức hài lòng của sinh viên với kết quả | Giá trị hỗ trợ nhận được | Dashboard Admin |
-| Tỷ lệ phản hồi xử lý trong hạn 48 giờ | Chất lượng lắng nghe | Hồ sơ phản hồi (mục 5) |
-| Tỷ lệ khiếu nại lặp lại cùng nguyên nhân | Vấn đề chưa được giải quyết tận gốc | Hồ sơ phản hồi (mục 5) |
-| Tỷ lệ người bắt đầu gửi và gửi thành công; trung vị và phân vị 90 của thời gian xử lý; tuổi của hồ sơ chưa hoàn thành | Chỗ người dùng bỏ dở; các trường hợp chờ lâu | **Chưa có trong hệ thống bàn giao.** Muốn đo phải qua change request (mục 7) |
+| Chỉ số | Cho thấy |
+|---|---|
+| Số hồ sơ mới / đang xử lý / quá hạn | Tải và điểm nghẽn |
+| Thời gian xử lý trung bình | Tốc độ phục vụ |
+| Loại yêu cầu phổ biến | Nhu cầu chính của sinh viên |
+| Khối lượng theo phòng ban | Phân bổ công việc của nhân viên |
+| Mức hài lòng của sinh viên với kết quả | Giá trị hỗ trợ nhận được |
+| Tỷ lệ phản hồi xử lý trong hạn 48 giờ | Chất lượng lắng nghe |
+| Tỷ lệ khiếu nại lặp lại cùng nguyên nhân | Vấn đề chưa được giải quyết tận gốc |
+| Tỷ lệ người bắt đầu gửi và gửi thành công; trung vị và phân vị 90 của thời gian xử lý; tuổi của hồ sơ chưa hoàn thành | Chỗ người dùng bỏ dở; các trường hợp chờ lâu |
 
 ### 6.4 Hành động từ kết quả đo
 
