@@ -97,6 +97,9 @@ Người dùng đăng nhập bằng tài khoản trường cấp thông qua SSO,
 **Actor**
 Người dùng chưa đăng nhập (sinh viên, nhân viên, Admin).
 
+**Priority**
+`Must`: Mọi chức năng cần đăng nhập bằng tài khoản trường.
+
 **Preconditions**
 - Hệ thống đã được cấu hình kết nối với SSO của trường. Ở môi trường dev và test thì dùng SSO giả lập.
 - Người dùng có tài khoản SSO đang hoạt động.
@@ -164,6 +167,9 @@ Người dùng kết thúc phiên làm việc để người khác dùng chung t
 **Actor**
 Người dùng đã đăng nhập (mọi vai trò).
 
+**Priority**
+`Must`: Bảo vệ dữ liệu sinh viên trên máy dùng chung.
+
 **Preconditions**
 - Người dùng có phiên làm việc (có thể đã hết hạn).
 
@@ -216,6 +222,9 @@ Hệ thống giới hạn chức năng mà mỗi người dùng được dùng t
 
 **Actor**
 Hệ thống (áp dụng cho mọi request của mọi người dùng).
+
+**Priority**
+`Must`: Mỗi vai trò chỉ dùng đúng cổng của mình.
 
 **Preconditions**
 - Request có phiên làm việc hợp lệ.
@@ -279,6 +288,9 @@ Ngoài việc được dùng chức năng nào, mỗi người dùng chỉ truy 
 **Actor**
 Hệ thống (áp dụng cho mọi request đọc hoặc ghi hồ sơ, tệp và thông báo).
 
+**Priority**
+`Must`: Bảo vệ dữ liệu sinh viên là cam kết trong Proposal mục 2.1.4; lỗi ở đây là lỗi Critical.
+
 **Preconditions**
 - Request đã qua kiểm tra vai trò (FR-SEC-03).
 
@@ -337,6 +349,9 @@ Tệp minh chứng của sinh viên chỉ người có quyền mới mở đư�
 
 **Actor**
 Hệ thống (áp dụng cho mọi thao tác lưu và tải tệp).
+
+**Priority**
+`Must`: Tệp minh chứng chứa dữ liệu cá nhân, phải được bảo vệ ngay khi có chức năng đính kèm.
 
 **Preconditions**
 - Tệp đã được tải lên hợp lệ (FR-STU-04, FR-STU-09).
@@ -399,6 +414,9 @@ Hệ thống ghi lại các thao tác quan trọng trên hồ sơ, tệp, đăng
 
 **Actor**
 Hệ thống (tự động ghi khi các thao tác được thực hiện).
+
+**Priority**
+`Should`: Cam kết trong Proposal mục 2.1.4 nhưng không chặn luồng chính; không đề xuất bỏ, chỉ có thể làm muộn hơn trong kế hoạch.
 
 **Preconditions**
 - Có một thao tác thuộc danh sách cần ghi nhật ký.

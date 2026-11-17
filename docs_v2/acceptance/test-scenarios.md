@@ -1,14 +1,47 @@
 # Kịch bản kiểm thử
 
-Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai trò. Kịch bản chéo (X) kiểm tra quy tắc áp dụng cho mọi chức năng. Test case chi tiết từng tiêu chí chấp nhận xem [traceability-matrix.md](traceability-matrix.md).
+Nơi gốc của mã kịch bản test `TS-xx`. Mỗi kịch bản ghi mã AC hoặc NFR mà nó kiểm; PRD không ghi ngược lại mã test. Có ba nhóm:
+
+- `TS-01` đến `TS-08`: kịch bản trọn luồng, một hồ sơ đi qua nhiều vai trò; client dùng các kịch bản này khi demo từng milestone.
+- `TS-09` đến `TS-20`: kịch bản chéo, kiểm quy tắc áp dụng cho nhiều chức năng (quyền, đồng thời, gửi lại, lỗi, giao diện, rate limit, hiệu năng, usability).
+- `TS-21` đến `TS-62`: kịch bản chức năng, mỗi FR một kịch bản chạy lần lượt mọi AC của FR đó theo đúng điều kiện, dữ liệu và kết quả mong đợi ghi trong AC.
+
+Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗi lần bàn giao (dòng WBS "Test trọn luồng và regression"), để phần mới không làm hỏng phần đã giao. Bảng tổng hợp theo từng AC: [traceability-matrix.md](traceability-matrix.md).
+
+## Danh sách kịch bản trọn luồng và kịch bản chéo
+
+| Mã | Kịch bản | Số AC được kiểm | NFR | Milestone chạy lần đầu | Regression |
+|---|---|---|---|---|---|
+| `TS-01` | Đăng nhập, phân quyền và cấp quyền nhân viên | 6 | — | MS-01 | có |
+| `TS-02` | Sinh viên gửi yêu cầu kèm tệp đến đúng phòng | 16 | — | MS-02 | có |
+| `TS-03` | Thông báo và trạng thái cho sinh viên | 5 | — | MS-02 | có |
+| `TS-04` | Phân công, ghi nhật ký, yêu cầu bổ sung và bổ sung | 7 | — | MS-03 | có |
+| `TS-05` | Ưu tiên, escalate và chuyển phòng | 5 | — | MS-03 | có |
+| `TS-06` | Quá hạn tự động | 6 | NFR-PERF-09, NFR-REL-07 | MS-03 | có |
+| `TS-07` | Đóng hồ sơ, trả kết quả và đánh giá | 4 | — | MS-04 | có |
+| `TS-08` | Báo cáo của Admin khớp dữ liệu | 7 | NFR-SEC-12 | MS-05 | có |
+| `TS-09` | Phạm vi dữ liệu và truy cập chéo | 3 | NFR-SEC-03, NFR-SEC-06 | MS-01 đến MS-05 | có |
+| `TS-10` | Thao tác đồng thời | 8 | NFR-REL-04 | MS-01 đến MS-04 | có |
+| `TS-11` | Mất phản hồi và gửi lại | 6 | NFR-REL-03 | MS-02 đến MS-04 | có |
+| `TS-12` | Lỗi tệp, kho tệp và CSDL | 4 | NFR-REL-01, NFR-REL-06, NFR-PERF-14 | MS-02 | có |
+| `TS-13` | Lịch sử hồ sơ và nhật ký hệ thống | 12 | NFR-REL-02, NFR-SEC-09, NFR-OBS-04 | MS-01 đến MS-04 | có |
+| `TS-14` | Phiên, đăng xuất và cache | 6 | NFR-SEC-02, NFR-SEC-07 | MS-01 | có |
+| `TS-15` | VN/EN, responsive và trình duyệt | 12 | NFR-USE-02, NFR-USE-03, NFR-USE-04 | MS-01 đến MS-05 | có |
+| `TS-16` | Danh mục và SLA khi triển khai lại | 12 | NFR-DEP-01, NFR-DEP-02 | MS-02 | có |
+| `TS-17` | Múi giờ và biên ngày | 6 | — | MS-02, MS-05 | có |
+| `TS-18` | Rate limit | 11 | NFR-SEC-13 | MS-01 đến MS-05 | có |
+| `TS-19` | Hiệu năng | 0 | NFR-PERF-01, NFR-PERF-02, NFR-PERF-03 | MS-06 | không |
+| `TS-20` | Usability | 0 | NFR-USE-01 | MS-06 | không |
 
 **Dữ liệu dùng chung:** phòng A và phòng B; nhân viên A1, A2 thuộc phòng A, B1 thuộc phòng B; sinh viên SV1, SV2; một Admin; loại yêu cầu X ánh xạ phòng A với SLA 48 giờ; loại yêu cầu Y có SLA 1 giờ để test quá hạn.
 
-## Kịch bản trọn luồng
+## Kịch bản trọn luồng (TS-01 đến TS-08)
 
-### E2E-01. Đăng nhập, phân quyền và cấp quyền nhân viên
+### TS-01. Đăng nhập, phân quyền và cấp quyền nhân viên
 
-**Milestone:** 1 · **Chức năng:** SEC-01, SEC-02, SEC-03, MGT-06, STU-01
+**Kiểm AC:** `FR-SEC-01/AC-01`, `FR-SEC-02/AC-01`, `FR-SEC-03/AC-01`, `FR-MGT-06/AC-01`, `FR-MGT-06/AC-03`, `FR-STU-01/AC-01`
+
+**Milestone chạy lần đầu:** MS-01 · **Regression:** có
 
 | # | Bước | Kết quả mong đợi |
 |---|---|---|
@@ -21,9 +54,11 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 | 7 | Admin tự hạ vai trò hoặc tự vô hiệu hóa chính mình | Bị từ chối; hệ thống luôn còn ít nhất một Admin hoạt động |
 | 8 | A1 đăng xuất rồi gửi lại cookie cũ | 401 |
 
-### E2E-02. Sinh viên gửi yêu cầu kèm tệp đến đúng phòng
+### TS-02. Sinh viên gửi yêu cầu kèm tệp đến đúng phòng
 
-**Milestone:** 2 · **Chức năng:** STU-02, STU-03, STU-04, STU-05, STU-06, CORE-01, CORE-03, CORE-04, CORE-05, CORE-07, STF-01, STF-02, STF-03, MGT-07
+**Kiểm AC:** `FR-STU-02/AC-01`, `FR-STU-03/AC-01`, `FR-STU-04/AC-01`, `FR-STU-05/AC-01`, `FR-STU-06/AC-01`, `FR-CORE-01/AC-01`, `FR-CORE-03/AC-01`, `FR-CORE-03/AC-02`, `FR-CORE-04/AC-01`, `FR-CORE-05/AC-01`, `FR-CORE-07/AC-01`, `FR-STF-01/AC-01`, `FR-STF-02/AC-01`, `FR-STF-03/AC-01`, `FR-MGT-07/AC-01`, `FR-MGT-07/AC-03`
+
+**Milestone chạy lần đầu:** MS-02 · **Regression:** có
 
 | # | Bước | Kết quả mong đợi |
 |---|---|---|
@@ -35,9 +70,11 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 | 6 | Admin đổi SLA loại X thành 24 giờ | Hồ sơ đã tạo giữ hạn cũ; hồ sơ tạo sau đó dùng 24 giờ |
 | 7 | SV1 gửi mô tả 19 ký tự; tệp `.docx`; tệp 10 MiB + 1 byte; 6 tệp | Lần lượt 400; 415; 413; 400; không tạo hồ sơ nào |
 
-### E2E-03. Thông báo và trạng thái cho sinh viên
+### TS-03. Thông báo và trạng thái cho sinh viên
 
-**Milestone:** 2–4 · **Chức năng:** STU-07, STU-08, CORE-02, CORE-06, CORE-08
+**Kiểm AC:** `FR-STU-07/AC-01`, `FR-STU-08/AC-01`, `FR-CORE-02/AC-01`, `FR-CORE-06/AC-01`, `FR-CORE-08/AC-01`
+
+**Milestone chạy lần đầu:** MS-02 · **Regression:** có
 
 | # | Bước | Kết quả mong đợi |
 |---|---|---|
@@ -48,9 +85,11 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 | 5 | SV1 đổi giao diện sang EN | Thông báo cũ hiển thị bằng tiếng Anh |
 | 6 | SV1 đánh dấu tất cả đã đọc | Số chưa đọc về 0; thông báo đến sau mốc `read_before` vẫn chưa đọc |
 
-### E2E-04. Phân công, ghi nhật ký, yêu cầu bổ sung và bổ sung
+### TS-04. Phân công, ghi nhật ký, yêu cầu bổ sung và bổ sung
 
-**Milestone:** 3 · **Chức năng:** STF-04, STF-05, STF-07, STU-09, CORE-03
+**Kiểm AC:** `FR-STF-04/AC-01`, `FR-STF-04/AC-05`, `FR-STF-05/AC-01`, `FR-STF-07/AC-01`, `FR-STU-09/AC-01`, `FR-CORE-03/AC-01`, `FR-CORE-03/AC-02`
+
+**Milestone chạy lần đầu:** MS-03 · **Regression:** có
 
 | # | Bước | Kết quả mong đợi |
 |---|---|---|
@@ -62,9 +101,11 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 | 6 | Sau 6 giờ, SV1 bổ sung (nội dung 10–2000 ký tự, tối đa 5 tệp) | `IN_PROGRESS`; hạn xử lý lùi đúng 6 giờ; có mốc nội bộ thay đổi hạn |
 | 7 | SV1 bổ sung lần hai cho cùng yêu cầu | Bị từ chối; mỗi yêu cầu chỉ được trả lời một lần |
 
-### E2E-05. Ưu tiên, escalate và chuyển phòng
+### TS-05. Ưu tiên, escalate và chuyển phòng
 
-**Milestone:** 3 · **Chức năng:** STF-08, STF-09, STF-10, CORE-04, SEC-04
+**Kiểm AC:** `FR-STF-08/AC-01`, `FR-STF-09/AC-01`, `FR-STF-10/AC-01`, `FR-CORE-04/AC-01`, `FR-SEC-04/AC-01`
+
+**Milestone chạy lần đầu:** MS-03 · **Regression:** có
 
 | # | Bước | Kết quả mong đợi |
 |---|---|---|
@@ -76,9 +117,13 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 | 6 | SV1 mở chi tiết | Thấy hồ sơ đã chuyển đến phòng B, không thấy lý do |
 | 7 | B1 chuyển hồ sơ sang chính phòng B | Bị từ chối; phòng đích phải khác phòng hiện tại |
 
-### E2E-06. Quá hạn tự động
+### TS-06. Quá hạn tự động
 
-**Milestone:** 2–3 · **Chức năng:** CORE-02, CORE-03, STU-08, STF-07, MGT-01
+**Kiểm AC:** `FR-CORE-02/AC-01`, `FR-CORE-03/AC-01`, `FR-CORE-03/AC-02`, `FR-STU-08/AC-01`, `FR-STF-07/AC-01`, `FR-MGT-01/AC-01`
+
+**Kiểm NFR:** `NFR-PERF-09`, `NFR-REL-07`
+
+**Milestone chạy lần đầu:** MS-03 · **Regression:** có
 
 | # | Bước | Kết quả mong đợi |
 |---|---|---|
@@ -88,9 +133,11 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 | 4 | Người phụ trách yêu cầu bổ sung cho hồ sơ `OVERDUE`, sinh viên bổ sung | Trạng thái giữ `OVERDUE` suốt quá trình; sinh viên vẫn nhận thông báo yêu cầu bổ sung |
 | 5 | Dừng tác vụ quá hạn giữa chừng rồi chạy lại | Hồ sơ còn lại được xử lý tiếp; không tạo trùng lịch sử hay thông báo |
 
-### E2E-07. Đóng hồ sơ, trả kết quả và đánh giá
+### TS-07. Đóng hồ sơ, trả kết quả và đánh giá
 
-**Milestone:** 4 · **Chức năng:** STF-06, STU-07, STU-10
+**Kiểm AC:** `FR-STF-06/AC-01`, `FR-STU-07/AC-01`, `FR-STU-10/AC-01`, `FR-STU-10/AC-04`
+
+**Milestone chạy lần đầu:** MS-04 · **Regression:** có
 
 | # | Bước | Kết quả mong đợi |
 |---|---|---|
@@ -102,9 +149,13 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 | 6 | Gọi bất kỳ thao tác sửa nào trên hồ sơ `CLOSED` | 409; không có chức năng mở lại |
 | 7 | Đóng một hồ sơ đang `PENDING_INFO` | Yêu cầu bổ sung đang mở được đóng; khoảng tạm dừng cuối tính đến lúc đóng |
 
-### E2E-08. Báo cáo của Admin khớp dữ liệu
+### TS-08. Báo cáo của Admin khớp dữ liệu
 
-**Milestone:** 5 · **Chức năng:** MGT-01, MGT-02, MGT-03, MGT-04, MGT-05, SEC-04
+**Kiểm AC:** `FR-MGT-01/AC-01`, `FR-MGT-02/AC-01`, `FR-MGT-02/AC-02`, `FR-MGT-03/AC-01`, `FR-MGT-04/AC-01`, `FR-MGT-05/AC-01`, `FR-SEC-04/AC-01`
+
+**Kiểm NFR:** `NFR-SEC-12`
+
+**Milestone chạy lần đầu:** MS-05 · **Regression:** có
 
 **Tiền điều kiện:** đã nạp bộ 200 ticket mẫu và có bảng kết quả tính sẵn cho từng chỉ số.
 
@@ -118,11 +169,15 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 | 6 | Chọn khoảng không có dữ liệu | Hiện 0 hoặc trống, không lỗi |
 | 7 | Admin gọi API chi tiết hồ sơ hoặc tải tệp | 403 |
 
-## Kịch bản chéo
+## Kịch bản chéo (TS-09 đến TS-20)
 
-### X-01. Phạm vi dữ liệu và truy cập chéo
+### TS-09. Phạm vi dữ liệu và truy cập chéo
 
-**Chức năng:** SEC-03, SEC-04, SEC-05
+**Kiểm AC:** `FR-SEC-03/AC-04`, `FR-SEC-04/AC-04`, `FR-SEC-05/AC-03`
+
+**Kiểm NFR:** `NFR-SEC-03`, `NFR-SEC-06`
+
+**Milestone chạy lần đầu:** MS-01 đến MS-05 · **Regression:** có
 
 - SV1 đổi mã hồ sơ trên URL thành hồ sơ của SV2 → 404, giống hệt hồ sơ không tồn tại.
 - A1 mở hồ sơ của phòng B → 404.
@@ -131,9 +186,13 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 - Truy cập thẳng đường dẫn lưu tệp trên server → không truy cập được.
 - Sửa giao diện để hiện nút của vai trò khác rồi gọi API → 403.
 
-### X-02. Thao tác đồng thời
+### TS-10. Thao tác đồng thời
 
-**Chức năng:** STF-06, STF-07, STF-09, STU-09, MGT-06, MGT-07, CORE-01, CORE-02
+**Kiểm AC:** `FR-STF-06/AC-05`, `FR-STF-07/AC-05`, `FR-STF-09/AC-04`, `FR-STU-09/AC-05`, `FR-MGT-06/AC-05`, `FR-MGT-07/AC-05`, `FR-CORE-01/AC-05`, `FR-CORE-02/AC-05`
+
+**Kiểm NFR:** `NFR-REL-04`
+
+**Milestone chạy lần đầu:** MS-01 đến MS-04 · **Regression:** có
 
 - A1 và A2 phân công cùng một hồ sơ với cùng version → một người thành công, người kia nhận 409.
 - SV1 bổ sung và A1 đóng hồ sơ với cùng version → chỉ một thao tác thành công.
@@ -143,9 +202,13 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 - Tác vụ quá hạn và thao tác đóng cùng lúc → chỉ một thay đổi commit; hồ sơ đã `CLOSED` không bị đổi lại.
 - 100 hồ sơ tạo đồng thời → 100 mã khác nhau.
 
-### X-03. Mất phản hồi và gửi lại
+### TS-11. Mất phản hồi và gửi lại
 
-**Chức năng:** STU-02, STU-09, STU-10, STF-04, STF-05, STF-06
+**Kiểm AC:** `FR-STU-02/AC-04`, `FR-STU-09/AC-05`, `FR-STU-10/AC-05`, `FR-STF-04/AC-04`, `FR-STF-05/AC-05`, `FR-STF-06/AC-01`
+
+**Kiểm NFR:** `NFR-REL-03`
+
+**Milestone chạy lần đầu:** MS-02 đến MS-04 · **Regression:** có
 
 - Tạo hồ sơ, mất mạng sau khi server đã commit, gửi lại cùng `Idempotency-Key` → nhận lại đúng mã cũ; không có hồ sơ, tệp, nhật ký hay thông báo thứ hai.
 - Gửi lại cùng key nhưng khác nội dung → 409 `IDEMPOTENCY_PAYLOAD_MISMATCH`.
@@ -154,9 +217,13 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 - Lặp lại các ca trên cho bổ sung thông tin, ghi nhật ký, yêu cầu bổ sung, đóng hồ sơ.
 - Gửi lại đánh giá sau khi mất phản hồi → 409; giao diện tải lại đánh giá đã lưu thay vì báo lỗi chung.
 
-### X-04. Lỗi tệp, kho tệp và CSDL
+### TS-12. Lỗi tệp, kho tệp và CSDL
 
-**Chức năng:** STU-04, STF-03, CORE-07, SEC-05
+**Kiểm AC:** `FR-STU-04/AC-06`, `FR-STF-03/AC-06`, `FR-CORE-07/AC-06`, `FR-SEC-05/AC-06`
+
+**Kiểm NFR:** `NFR-REL-01`, `NFR-REL-06`, `NFR-PERF-14`
+
+**Milestone chạy lần đầu:** MS-02 · **Regression:** có
 
 - Tệp PNG đổi đuôi thành `.pdf` → chấp nhận và lưu với định dạng PNG.
 - Tên tệp `../../etc/passwd.pdf` → bỏ ký tự đường dẫn; tệp lưu với tên ngẫu nhiên.
@@ -165,9 +232,13 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 - Kho tệp không phản hồi khi tải → 503. Tệp đã mất trên kho → 404 và có ghi lỗi.
 - Ghi nhật ký khởi tạo tải bị lỗi → 503, không trả tệp.
 
-### X-05. Lịch sử hồ sơ và nhật ký hệ thống
+### TS-13. Lịch sử hồ sơ và nhật ký hệ thống
 
-**Chức năng:** CORE-06, SEC-06
+**Kiểm AC:** `FR-CORE-06/AC-01`, `FR-CORE-06/AC-02`, `FR-CORE-06/AC-03`, `FR-CORE-06/AC-04`, `FR-CORE-06/AC-05`, `FR-CORE-06/AC-06`, `FR-SEC-06/AC-01`, `FR-SEC-06/AC-02`, `FR-SEC-06/AC-03`, `FR-SEC-06/AC-04`, `FR-SEC-06/AC-05`, `FR-SEC-06/AC-06`
+
+**Kiểm NFR:** `NFR-REL-02`, `NFR-SEC-09`, `NFR-OBS-04`
+
+**Milestone chạy lần đầu:** MS-01 đến MS-04 · **Regression:** có
 
 - Hồ sơ đi đủ luồng tạo → phân công → yêu cầu bổ sung → bổ sung → đóng: lịch sử công khai có đúng 5 mốc; nhân viên thấy thêm mốc phân công và thay đổi hạn.
 - Lịch sử công khai không chứa hạn xử lý, mức ưu tiên, tên nhân viên hay lý do chuyển phòng.
@@ -175,9 +246,13 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 - Ứng dụng thử sửa hoặc xóa bảng nhật ký → CSDL từ chối.
 - Bảng nhật ký không ghi được → thao tác nghiệp vụ bị rollback, hồ sơ không đổi.
 
-### X-06. Phiên, đăng xuất và cache
+### TS-14. Phiên, đăng xuất và cache
 
-**Chức năng:** SEC-01, SEC-02, SEC-03
+**Kiểm AC:** `FR-SEC-01/AC-04`, `FR-SEC-01/AC-06`, `FR-SEC-02/AC-03`, `FR-SEC-02/AC-06`, `FR-SEC-03/AC-04`, `FR-SEC-03/AC-06`
+
+**Kiểm NFR:** `NFR-SEC-02`, `NFR-SEC-07`
+
+**Milestone chạy lần đầu:** MS-01 · **Regression:** có
 
 - Phiên tạo lúc 08:00 → request lúc 15:59 thành công; lúc 16:01 nhận 401 và về trang đăng nhập.
 - Đăng nhập trên 2 thiết bị, đăng xuất ở thiết bị A → thiết bị B vẫn dùng bình thường; cookie cũ của thiết bị A nhận 401.
@@ -185,9 +260,13 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 - Sau khi đăng xuất bấm Back → trang chứa dữ liệu cá nhân không hiện lại từ cache.
 - Kho phiên không đọc được → API trả 503, không cho request đi tiếp.
 
-### X-07. VN/EN, responsive và trình duyệt
+### TS-15. VN/EN, responsive và trình duyệt
 
-**Chức năng:** CORE-08, CORE-09
+**Kiểm AC:** `FR-CORE-08/AC-01`, `FR-CORE-08/AC-02`, `FR-CORE-08/AC-03`, `FR-CORE-08/AC-04`, `FR-CORE-08/AC-05`, `FR-CORE-08/AC-06`, `FR-CORE-09/AC-01`, `FR-CORE-09/AC-02`, `FR-CORE-09/AC-03`, `FR-CORE-09/AC-04`, `FR-CORE-09/AC-05`, `FR-CORE-09/AC-06`
+
+**Kiểm NFR:** `NFR-USE-02`, `NFR-USE-03`, `NFR-USE-04`
+
+**Milestone chạy lần đầu:** MS-01 đến MS-05 · **Regression:** có
 
 - Đổi sang EN → nhãn, trạng thái, tên loại yêu cầu, thông báo và lỗi đều bằng tiếng Anh; nội dung người dùng nhập giữ nguyên; lần đăng nhập sau vẫn là EN.
 - Thiếu bản dịch tiếng Anh của một nhãn → hiện bản tiếng Việt, không hiện mã khóa thô.
@@ -196,9 +275,13 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 - Trên điện thoại: đính kèm ảnh chụp từ camera; xoay màn hình hoặc đổi ngôn ngữ khi đang điền form không mất dữ liệu đã nhập.
 - Chạy luồng chính trên 2 phiên bản mới nhất của Chrome, Safari, Edge và Firefox; ghi lại phiên bản đã test.
 
-### X-08. Danh mục và SLA khi triển khai lại
+### TS-16. Danh mục và SLA khi triển khai lại
 
-**Chức năng:** CORE-05, MGT-07
+**Kiểm AC:** `FR-CORE-05/AC-01`, `FR-CORE-05/AC-02`, `FR-CORE-05/AC-03`, `FR-CORE-05/AC-04`, `FR-CORE-05/AC-05`, `FR-CORE-05/AC-06`, `FR-MGT-07/AC-01`, `FR-MGT-07/AC-02`, `FR-MGT-07/AC-03`, `FR-MGT-07/AC-04`, `FR-MGT-07/AC-05`, `FR-MGT-07/AC-06`
+
+**Kiểm NFR:** `NFR-DEP-01`, `NFR-DEP-02`
+
+**Milestone chạy lần đầu:** MS-02 · **Regression:** có
 
 - Nạp lại danh mục sau khi Admin đã đổi SLA → SLA Admin đã đổi được giữ nguyên.
 - Dữ liệu nạp có loại yêu cầu không ánh xạ phòng ban → ứng dụng không khởi động, log ghi rõ loại bị lỗi.
@@ -207,25 +290,88 @@ Kịch bản trọn luồng (E2E) kiểm tra một hồ sơ đi qua nhiều vai 
 - Gọi API thêm, sửa, xóa danh mục → không tồn tại (404).
 - Admin nhập SLA 0 hoặc 721 giờ → bị từ chối; SLA hợp lệ là số nguyên 1–720.
 
-### X-09. Múi giờ và biên ngày
+### TS-17. Múi giờ và biên ngày
 
-**Chức năng:** CORE-01, CORE-03, MGT-02, MGT-03, MGT-04, MGT-05
+**Kiểm AC:** `FR-CORE-01/AC-03`, `FR-CORE-03/AC-03`, `FR-MGT-02/AC-03`, `FR-MGT-03/AC-03`, `FR-MGT-04/AC-03`, `FR-MGT-05/AC-03`
+
+**Milestone chạy lần đầu:** MS-02, MS-05 · **Regression:** có
 
 - Hồ sơ tạo lúc 06:59 ngày 01/01 giờ Việt Nam (23:59 ngày 31/12 UTC) → mã mang năm mới.
 - Thời gian hiển thị dạng `dd/MM/yyyy HH:mm` giờ Việt Nam ở cả VN và EN.
 - Báo cáo theo khoảng ngày tính theo ngày Việt Nam: từ đầu ngày `from` đến trước đầu ngày sau `to`.
 
-### X-10. Rate limit
+### TS-18. Rate limit
 
-**Chức năng:** các chức năng có rate limit, xem bảng trong `non-functional-requirements/security.md`
+**Kiểm AC:** `FR-STU-02/AC-05`, `FR-STU-03/AC-04`, `FR-STU-06/AC-05`, `FR-STF-01/AC-05`, `FR-STF-03/AC-04`, `FR-MGT-01/AC-05`, `FR-MGT-02/AC-05`, `FR-MGT-03/AC-05`, `FR-MGT-04/AC-05`, `FR-MGT-05/AC-05`, `FR-SEC-01/AC-05`
+
+**Kiểm NFR:** `NFR-SEC-13`
+
+**Milestone chạy lần đầu:** MS-01 đến MS-05 · **Regression:** có
 
 - Với mỗi dòng trong bảng rate limit: gửi request vượt ngưỡng → 429 kèm `Retry-After`; request trong ngưỡng không bị chặn.
 - Gửi lại thao tác đã thành công cùng `Idempotency-Key` → không tính thêm vào giới hạn 10 hồ sơ mỗi giờ.
 
-### X-11. Hiệu năng
+### TS-19. Hiệu năng
 
-Theo `non-functional-requirements/performance.md`: chạy kịch bản 100–200 người dùng đồng thời trên hạ tầng của trường trước Go-live.
+**Kiểm NFR:** `NFR-PERF-01`, `NFR-PERF-02`, `NFR-PERF-03`
 
-### X-12. Usability
+**Milestone chạy lần đầu:** MS-06 · **Regression:** không
 
-Theo `non-functional-requirements/usability.md`: người dùng thật thực hiện các tác vụ chính của 3 vai trò.
+Theo `non-functional-requirements/performance.md` (`NFR-PERF-01` đến `NFR-PERF-03`): chạy kịch bản 100–200 người dùng đồng thời trên hạ tầng của trường trước Go-live.
+
+### TS-20. Usability
+
+**Kiểm NFR:** `NFR-USE-01`
+
+**Milestone chạy lần đầu:** MS-06 · **Regression:** không
+
+Theo `non-functional-requirements/usability.md` (`NFR-USE-01`): người dùng thật thực hiện các tác vụ chính của 3 vai trò.
+
+## Kịch bản chức năng (TS-21 đến TS-62)
+
+Mỗi kịch bản chạy lần lượt mọi AC của một FR trên Staging, với dữ liệu dùng chung ở đầu tài liệu và dữ liệu riêng ghi trong AC. **Các bước** và **kết quả mong đợi** của từng AC là phần "điều kiện → kết quả" ghi trong AC ở `modules/*/prd.md`. Kịch bản đạt khi mọi AC đạt. Chạy trong milestone của FR; các milestone sau kiểm lại bằng kịch bản trọn luồng và kịch bản chéo có Regression = có.
+
+| Mã | FR | Kiểm AC | Milestone chạy lần đầu | Regression |
+|---|---|---|---|---|
+| `TS-21` | `FR-STU-01` | `FR-STU-01/AC-01` đến `FR-STU-01/AC-06` | MS-01 | không |
+| `TS-22` | `FR-STU-02` | `FR-STU-02/AC-01` đến `FR-STU-02/AC-06` | MS-02 | không |
+| `TS-23` | `FR-STU-03` | `FR-STU-03/AC-01` đến `FR-STU-03/AC-06` | MS-02 | không |
+| `TS-24` | `FR-STU-04` | `FR-STU-04/AC-01` đến `FR-STU-04/AC-06` | MS-02 | không |
+| `TS-25` | `FR-STU-05` | `FR-STU-05/AC-01` đến `FR-STU-05/AC-06` | MS-02 | không |
+| `TS-26` | `FR-STU-06` | `FR-STU-06/AC-01` đến `FR-STU-06/AC-06` | MS-02 | không |
+| `TS-27` | `FR-STU-07` | `FR-STU-07/AC-01` đến `FR-STU-07/AC-06` | MS-04 | không |
+| `TS-28` | `FR-STU-08` | `FR-STU-08/AC-01` đến `FR-STU-08/AC-06` | MS-02 | không |
+| `TS-29` | `FR-STU-09` | `FR-STU-09/AC-01` đến `FR-STU-09/AC-06` | MS-03 | không |
+| `TS-30` | `FR-STU-10` | `FR-STU-10/AC-01` đến `FR-STU-10/AC-06` | MS-04 | không |
+| `TS-31` | `FR-STF-01` | `FR-STF-01/AC-01` đến `FR-STF-01/AC-06` | MS-02 | không |
+| `TS-32` | `FR-STF-02` | `FR-STF-02/AC-01` đến `FR-STF-02/AC-06` | MS-02 | không |
+| `TS-33` | `FR-STF-03` | `FR-STF-03/AC-01` đến `FR-STF-03/AC-06` | MS-02 | không |
+| `TS-34` | `FR-STF-04` | `FR-STF-04/AC-01` đến `FR-STF-04/AC-06` | MS-03 | không |
+| `TS-35` | `FR-STF-05` | `FR-STF-05/AC-01` đến `FR-STF-05/AC-06` | MS-03 | không |
+| `TS-36` | `FR-STF-06` | `FR-STF-06/AC-01` đến `FR-STF-06/AC-06` | MS-04 | không |
+| `TS-37` | `FR-STF-07` | `FR-STF-07/AC-01` đến `FR-STF-07/AC-06` | MS-03 | không |
+| `TS-38` | `FR-STF-08` | `FR-STF-08/AC-01` đến `FR-STF-08/AC-06` | MS-03 | không |
+| `TS-39` | `FR-STF-09` | `FR-STF-09/AC-01` đến `FR-STF-09/AC-06` | MS-03 | không |
+| `TS-40` | `FR-STF-10` | `FR-STF-10/AC-01` đến `FR-STF-10/AC-06` | MS-03 | không |
+| `TS-41` | `FR-MGT-01` | `FR-MGT-01/AC-01` đến `FR-MGT-01/AC-06` | MS-05 | không |
+| `TS-42` | `FR-MGT-02` | `FR-MGT-02/AC-01` đến `FR-MGT-02/AC-06` | MS-05 | không |
+| `TS-43` | `FR-MGT-03` | `FR-MGT-03/AC-01` đến `FR-MGT-03/AC-06` | MS-05 | không |
+| `TS-44` | `FR-MGT-04` | `FR-MGT-04/AC-01` đến `FR-MGT-04/AC-06` | MS-05 | không |
+| `TS-45` | `FR-MGT-05` | `FR-MGT-05/AC-01` đến `FR-MGT-05/AC-06` | MS-05 | không |
+| `TS-46` | `FR-MGT-06` | `FR-MGT-06/AC-01` đến `FR-MGT-06/AC-06` | MS-01 | không |
+| `TS-47` | `FR-MGT-07` | `FR-MGT-07/AC-01` đến `FR-MGT-07/AC-06` | MS-02 | không |
+| `TS-48` | `FR-SEC-01` | `FR-SEC-01/AC-01` đến `FR-SEC-01/AC-06` | MS-01 | không |
+| `TS-49` | `FR-SEC-02` | `FR-SEC-02/AC-01` đến `FR-SEC-02/AC-06` | MS-01 | không |
+| `TS-50` | `FR-SEC-03` | `FR-SEC-03/AC-01` đến `FR-SEC-03/AC-06` | MS-01 | không |
+| `TS-51` | `FR-SEC-04` | `FR-SEC-04/AC-01` đến `FR-SEC-04/AC-06` | MS-01, MS-02, MS-03, MS-04, MS-05 | không |
+| `TS-52` | `FR-SEC-05` | `FR-SEC-05/AC-01` đến `FR-SEC-05/AC-06` | MS-02 | không |
+| `TS-53` | `FR-SEC-06` | `FR-SEC-06/AC-01` đến `FR-SEC-06/AC-06` | MS-01, MS-02, MS-03, MS-04 | không |
+| `TS-54` | `FR-CORE-01` | `FR-CORE-01/AC-01` đến `FR-CORE-01/AC-06` | MS-02 | không |
+| `TS-55` | `FR-CORE-02` | `FR-CORE-02/AC-01` đến `FR-CORE-02/AC-06` | MS-02 | không |
+| `TS-56` | `FR-CORE-03` | `FR-CORE-03/AC-01` đến `FR-CORE-03/AC-06` | MS-02 | không |
+| `TS-57` | `FR-CORE-04` | `FR-CORE-04/AC-01` đến `FR-CORE-04/AC-06` | MS-02 | không |
+| `TS-58` | `FR-CORE-05` | `FR-CORE-05/AC-01` đến `FR-CORE-05/AC-06` | MS-02 | không |
+| `TS-59` | `FR-CORE-06` | `FR-CORE-06/AC-01` đến `FR-CORE-06/AC-06` | MS-02, MS-03, MS-04 | không |
+| `TS-60` | `FR-CORE-07` | `FR-CORE-07/AC-01` đến `FR-CORE-07/AC-06` | MS-02 | không |
+| `TS-61` | `FR-CORE-08` | `FR-CORE-08/AC-01` đến `FR-CORE-08/AC-06` | MS-01, MS-02, MS-03, MS-04, MS-05 | không |
+| `TS-62` | `FR-CORE-09` | `FR-CORE-09/AC-01` đến `FR-CORE-09/AC-06` | MS-01, MS-02, MS-03, MS-04, MS-05 | không |

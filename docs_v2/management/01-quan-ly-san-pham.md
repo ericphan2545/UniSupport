@@ -17,7 +17,7 @@ UniSupport hướng đến ba kết quả:
 ### 1.2 Điểm xuất phát khi bàn giao
 
 - **Có sẵn:** các chức năng đã thống nhất trong hợp đồng cho 3 vai trò Sinh viên, Nhân viên, Admin; web responsive (điện thoại và máy tính); VN/EN; thông báo trong app; dashboard và 3 báo cáo cho Admin.
-- **Chưa có (ngoài phạm vi hợp đồng):** tích hợp SIS/LMS, thanh toán; ứng dụng di động riêng; thông báo email/SMS/push; trích xuất dữ liệu; Admin xem hoặc xử lý ticket; mở lại hồ sơ đã đóng; màn hình sửa danh mục.
+- **Chưa có (ngoài phạm vi hợp đồng):** các mục non-goals `NG-01` đến `NG-11` ở [product/README.md](../product/README.md#non-goals), cùng danh sách với Proposal mục 2.2.
 - **Sau bàn giao:** bên phát triển sửa lỗi trong thời gian bảo hành (Proposal 6.3). Nhà trường tự vận hành hệ thống (Proposal 6.4). Mọi tính năng mới là change request riêng, xét theo mục 7.
 
 ## 2. Khách hàng và khách hàng của khách hàng
@@ -81,7 +81,7 @@ Phản hồi ở đây là phản hồi **về sản phẩm và dịch vụ hỗ
 
 ### 5.1 Đầu vào
 
-Tiếp nhận từ sinh viên, nhân viên, Admin và đại diện nhà trường qua các kênh được công bố. Mỗi trường hợp có mã theo dõi, thời điểm tiếp nhận, người gửi, nhóm người dùng, nội dung, ảnh hưởng, bằng chứng và người phụ trách.
+Tiếp nhận từ sinh viên, nhân viên, Admin và đại diện nhà trường qua các kênh được công bố. Mỗi trường hợp có mã theo dõi, thời điểm tiếp nhận, người gửi, nhóm người dùng, nội dung, ảnh hưởng, bằng chứng và người phụ trách. Trong thời gian dự án và bảo hành, mỗi phản hồi là một issue tạo bằng mẫu Feedback trên GitHub (nhãn `feedback`); số issue là mã theo dõi. Phản hồi ví dụ hoặc mô phỏng ghi rõ `Mô phỏng`.
 
 ### 5.2 Quy trình xử lý
 

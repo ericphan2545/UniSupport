@@ -39,6 +39,9 @@ Cho phép sinh viên xem thông tin cá nhân (họ tên, MSSV, khoa/lớp, emai
 **Actor**
 Sinh viên đã đăng nhập qua SSO.
 
+**Priority**
+`Should`: Hồ sơ vẫn lấy thông tin sinh viên từ SSO khi tạo (FR-STU-02); trang xem riêng làm muộn hơn thì luồng chính vẫn chạy.
+
 **Preconditions**
 - Sinh viên có JWT hợp lệ.
 - Có cache Userinfo hợp lệ của đúng tài khoản hoặc kết nối được SSO/Userinfo để lấy mới.
@@ -93,6 +96,9 @@ Sinh viên tạo yêu cầu hỗ trợ bằng cách chọn loại yêu cầu và
 
 **Actor**
 Sinh viên đã đăng nhập (vai trò `STUDENT`).
+
+**Priority**
+`Must`: Điểm bắt đầu của mọi hồ sơ; thiếu thì không có luồng nào chạy.
 
 **Preconditions**
 - Sinh viên đã đăng nhập.
@@ -161,6 +167,9 @@ Khi sinh viên chọn loại yêu cầu, hệ thống hiển thị phòng ban ti
 **Actor**
 Sinh viên đã đăng nhập.
 
+**Priority**
+`Must`: Đưa yêu cầu đến đúng phòng ngay khi gửi, giải quyết vấn đề gửi nhầm kênh trong G-01.
+
 **Preconditions**
 - Sinh viên đang ở màn hình Tạo yêu cầu.
 - Mỗi loại yêu cầu được ánh xạ tới đúng một phòng ban (CORE-05).
@@ -214,6 +223,9 @@ Cho phép sinh viên đính kèm tệp minh chứng khi tạo yêu cầu, để 
 
 **Actor**
 Sinh viên đã đăng nhập.
+
+**Priority**
+`Must`: Minh chứng là phần bắt buộc của nhiều yêu cầu; Proposal mục 2.1.2 cam kết đính kèm tệp.
 
 **Preconditions**
 - Sinh viên đang ở màn hình Tạo yêu cầu (hoặc Bổ sung thông tin, theo FR-STU-09).
@@ -270,6 +282,9 @@ Sau khi gửi thành công, sinh viên nhận mã hồ sơ duy nhất và màn h
 **Actor**
 Sinh viên vừa gửi yêu cầu thành công.
 
+**Priority**
+`Must`: Mã hồ sơ là cách duy nhất để sinh viên và phòng ban cùng theo dõi một yêu cầu (G-01).
+
 **Preconditions**
 - Hồ sơ được tạo thành công theo FR-STU-02.
 
@@ -321,6 +336,9 @@ Sinh viên xem toàn bộ yêu cầu mình đã gửi cùng trạng thái hiện
 
 **Actor**
 Sinh viên đã đăng nhập.
+
+**Priority**
+`Must`: Sinh viên cần thấy các yêu cầu đã gửi để theo dõi (G-02).
 
 **Preconditions**
 - Sinh viên đã đăng nhập.
@@ -375,6 +393,9 @@ Sinh viên xem chi tiết một hồ sơ, gồm trạng thái hiện tại, các
 
 **Actor**
 Sinh viên chủ hồ sơ.
+
+**Priority**
+`Must`: Trực tiếp giải quyết vấn đề sinh viên không biết yêu cầu đang ở đâu (G-02).
 
 **Preconditions**
 - Hồ sơ thuộc sinh viên đang đăng nhập.
@@ -434,6 +455,9 @@ Hệ thống thông báo trong app cho sinh viên khi trạng thái hồ sơ tha
 **Actor**
 Sinh viên đã đăng nhập (người nhận). Thông báo được tạo tự động bởi hệ thống.
 
+**Priority**
+`Should`: Sinh viên vẫn xem được trạng thái ở FR-STU-07 nếu thông báo làm muộn hơn.
+
 **Preconditions**
 - Sinh viên có ít nhất một hồ sơ.
 
@@ -490,6 +514,9 @@ Sinh viên gửi nội dung và tệp bổ sung khi nhân viên yêu cầu, đ�
 
 **Actor**
 Sinh viên chủ hồ sơ.
+
+**Priority**
+`Must`: Thiếu bước bổ sung thì hồ sơ đang chờ thông tin không đi tiếp được.
 
 **Preconditions**
 - Hồ sơ thuộc sinh viên đang đăng nhập.
@@ -550,6 +577,9 @@ Sau khi hồ sơ đóng, sinh viên chấm 1–5 sao kèm nhận xét, cung cấ
 
 **Actor**
 Sinh viên chủ hồ sơ.
+
+**Priority**
+`Should`: Luồng xử lý chạy đủ khi chưa có đánh giá; cần trước MS-05 để có dữ liệu cho FR-MGT-05.
 
 **Preconditions**
 - Hồ sơ thuộc sinh viên đang đăng nhập.

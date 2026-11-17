@@ -83,6 +83,9 @@ Hệ thống sinh cho mỗi hồ sơ một mã duy nhất, dễ đọc, dùng đ
 **Actor**
 Hệ thống (được gọi khi tạo hồ sơ ở FR-STU-02).
 
+**Priority**
+`Must`: Mã hồ sơ duy nhất là điều kiện của FR-STU-05.
+
 **Preconditions**
 - Hồ sơ đang được tạo trong transaction của FR-STU-02.
 
@@ -137,6 +140,9 @@ Hồ sơ `USP-2026-00057` bị rollback do lỗi lưu tệp. Hồ sơ kế tiế
 
 **Actor**
 Hệ thống (áp dụng mỗi khi có thao tác làm đổi trạng thái).
+
+**Priority**
+`Must`: Quy tắc trạng thái quyết định mọi bước của luồng chính.
 
 **Preconditions**
 - Hồ sơ đã tồn tại (trừ bước tạo mới).
@@ -211,6 +217,9 @@ Hệ thống tính hạn xử lý của từng hồ sơ theo SLA của loại y�
 **Actor**
 Hệ thống.
 
+**Priority**
+`Must`: Hạn xử lý là cách biết hồ sơ trễ (G-01).
+
 **Preconditions**
 - Mỗi loại yêu cầu đã có giá trị SLA (FR-MGT-07).
 
@@ -270,6 +279,9 @@ Hồ sơ còn 1 giờ đến hạn thì nhân viên yêu cầu bổ sung, và si
 **Actor**
 Hệ thống (được dùng bởi FR-STU-02, FR-STF-01, FR-STF-08, FR-STF-10).
 
+**Priority**
+`Should`: Cần cho FR-STF-08 và FR-STF-10; luồng chính chạy với mức mặc định.
+
 **Preconditions**
 - Không có.
 
@@ -321,6 +333,9 @@ Hệ thống có sẵn danh mục loại yêu cầu và phòng ban, trong đó m
 
 **Actor**
 Hệ thống. Dữ liệu danh mục do đội phát triển nạp khi triển khai.
+
+**Priority**
+`Must`: Không có danh mục thì sinh viên không chọn được loại và phòng tiếp nhận.
 
 **Preconditions**
 - Danh sách loại yêu cầu và phòng ban đã được khách hàng xác nhận.
@@ -375,6 +390,9 @@ Hệ thống lưu dòng thời gian các thay đổi của từng hồ sơ, đ�
 
 **Actor**
 Hệ thống (ghi tự động). Người đọc là sinh viên (FR-STU-07) và nhân viên (FR-STF-02).
+
+**Priority**
+`Should`: Giúp sinh viên và nhân viên xem lại diễn biến; trạng thái hiện tại vẫn có ở FR-STU-07 và FR-STF-02.
 
 **Preconditions**
 - Hồ sơ đã tồn tại.
@@ -445,6 +463,9 @@ Hồ sơ bị chuyển từ phòng A sang phòng B với lý do "Sinh viên ch�
 **Actor**
 Hệ thống (được dùng bởi FR-STU-04 và FR-STU-09).
 
+**Priority**
+`Must`: Giới hạn tệp bảo vệ hệ thống ngay khi có chức năng đính kèm.
+
 **Preconditions**
 - Có request tải tệp lên.
 
@@ -500,6 +521,9 @@ Toàn bộ giao diện hỗ trợ tiếng Việt và tiếng Anh, để sinh vi�
 
 **Actor**
 Mọi người dùng.
+
+**Priority**
+`Should`: Giao diện tiếng Việt đã dùng được cho đa số người dùng; tiếng Anh cho sinh viên và nhân viên không nói tiếng Việt.
 
 **Preconditions**
 - Không có.
@@ -557,6 +581,9 @@ Giao diện dùng tốt trên cả điện thoại và máy tính, kể cả v�
 
 **Actor**
 Mọi người dùng.
+
+**Priority**
+`Must`: Nhiều sinh viên chủ yếu dùng điện thoại; Proposal chọn web responsive thay cho ứng dụng di động (NG-02).
 
 **Preconditions**
 - Người dùng dùng trình duyệt nằm trong danh sách hỗ trợ.

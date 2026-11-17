@@ -43,6 +43,9 @@ Hiển thị số lượng hồ sơ theo trạng thái tại thời điểm hi�
 **Actor**
 Admin đã đăng nhập.
 
+**Priority**
+`Must`: Số hồ sơ mới, đang xử lý, quá hạn là thông tin tối thiểu để ban quản lý điều phối (G-03).
+
 **Preconditions**
 - Người dùng có vai trò `ADMIN`.
 
@@ -102,6 +105,9 @@ Hiển thị thời gian xử lý trung bình của các hồ sơ đã đóng, g
 **Actor**
 Admin đã đăng nhập.
 
+**Priority**
+`Should`: Bổ sung cho dashboard; ban quản lý vẫn điều phối được bằng FR-MGT-01 nếu làm muộn hơn.
+
 **Preconditions**
 - Người dùng có vai trò `ADMIN`.
 
@@ -156,6 +162,9 @@ Thống kê số hồ sơ theo từng loại yêu cầu, giúp Admin biết sinh
 
 **Actor**
 Admin đã đăng nhập.
+
+**Priority**
+`Should`: Báo cáo phân tích trong hợp đồng; không chặn luồng xử lý.
 
 **Preconditions**
 - Người dùng có vai trò `ADMIN`.
@@ -213,6 +222,9 @@ Thống kê khối lượng hồ sơ của từng phòng ban, giúp Admin phát 
 **Actor**
 Admin đã đăng nhập.
 
+**Priority**
+`Should`: Báo cáo phân tích trong hợp đồng; không chặn luồng xử lý.
+
 **Preconditions**
 - Người dùng có vai trò `ADMIN`.
 
@@ -269,6 +281,9 @@ Thống kê điểm đánh giá và nhận xét của sinh viên, giúp Admin đ
 
 **Actor**
 Admin đã đăng nhập.
+
+**Priority**
+`Should`: Báo cáo phân tích trong hợp đồng; cần dữ liệu từ FR-STU-10.
 
 **Preconditions**
 - Người dùng có vai trò `ADMIN`.
@@ -330,6 +345,9 @@ Admin gán vai trò và phòng ban cho từng tài khoản, để hệ thống b
 
 **Actor**
 Admin đã đăng nhập.
+
+**Priority**
+`Must`: Không cấp được quyền nhân viên thì phòng ban không dùng được hệ thống.
 
 **Preconditions**
 - Người dùng có vai trò `ADMIN`.
@@ -394,6 +412,9 @@ Admin đặt thời hạn xử lý (SLA) cho từng loại yêu cầu, làm căn
 
 **Actor**
 Admin đã đăng nhập.
+
+**Priority**
+`Must`: Mỗi loại yêu cầu cần SLA để tính hạn xử lý ngay khi tạo hồ sơ (FR-CORE-03).
 
 **Preconditions**
 - Người dùng có vai trò `ADMIN`.

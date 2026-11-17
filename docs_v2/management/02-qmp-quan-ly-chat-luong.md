@@ -2,7 +2,7 @@
 
 Phiên bản 1.3
 
-**Phạm vi:** thế nào là đạt, đo ra sao, xử lý lỗi thế nào. Không chứa phạm vi sản phẩm, tiến độ, giờ công, quyền duyệt, luật làm việc nhóm (xem [00-README](00-README.md)). Các tài liệu khác trỏ vào số mục của tài liệu này, nên đổi số mục thì phải sửa chỗ trỏ.
+**Phạm vi:** thế nào là đạt, đo ra sao, xử lý lỗi thế nào. Không chứa phạm vi sản phẩm, tiến độ, giờ công, quyền duyệt, luật làm việc nhóm (xem [mục lục](../README.md)). Các tài liệu khác trỏ vào số mục của tài liệu này, nên đổi số mục thì phải sửa chỗ trỏ.
 
 ## 1. Mục tiêu chất lượng
 
@@ -72,7 +72,7 @@ Test case được viết và QA / Senior duyệt trước khi chức năng lên
 
 **Quy trình:**
 
-- **Phát hiện:** Tester tạo issue GitHub, gắn label `bug` và milestone đang làm.
+- **Phát hiện:** Tester tạo issue bằng mẫu Bug trên GitHub (`.github/ISSUE_TEMPLATE/2-bug.md`), mẫu tự gắn nhãn `bug`; gắn nhãn mức `sev: Critical`, `sev: Major` hoặc `sev: Minor` và milestone đang làm.
 - **Xác nhận:** QA / Senior xác nhận và xếp mức lỗi trong 1 ngày làm việc.
 - **Sửa:** dev phụ trách mảng tạo PR, có người review, merge, deploy lên Staging.
 - **Kiểm tra lại:** Tester test lại. Đạt thì Đóng, không đạt thì Mở lại.
