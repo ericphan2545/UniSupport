@@ -1,23 +1,23 @@
-# M5. Lõi hệ thống & Nền tảng – Functional Requirement Specification
+# M05. Lõi hệ thống & Nền tảng – Functional Requirement Specification
 
-> Cập nhật: 09/10/2026. Giữ nguyên 42 chức năng của 5 module trong repo; bổ sung và thống nhất đặc tả trực tiếp tại module. Điểm còn chờ trường xác nhận có một nơi gốc là [assumptions.md](../../project/assumptions.md) (mã `A-xx`, cột Trạng thái); phần đầu module chỉ dẫn lại mã.
+> Đặc tả thuộc bộ 42 chức năng của 5 module, chốt cùng khách ở `MS-01` (`A-13`); sau khi chốt, thay đổi đi qua change request ([03-quan-tri-giam-sat.md](../../management/03-quan-tri-giam-sat.md) mục 5). Lịch sử sửa xem trong các PR. Điểm còn chờ trường xác nhận có một nơi gốc là [assumptions.md](../../project/assumptions.md) (mã `A-xx`, cột Trạng thái); phần đầu module chỉ dẫn lại mã.
 
 **Mục đích module:** Mã hồ sơ, trạng thái, SLA, danh mục, lịch sử, giới hạn tệp và quy tắc UI.
 
 **Actor chính:** Hệ thống và mọi vai trò theo chức năng. Actor là người dùng/hệ thống, không phải tên người lập trình.
 
-**Phụ thuộc:** M1–M3 gọi nghiệp vụ; M4 kiểm tra quyền và audit.
+**Phụ thuộc:** M01–M03 gọi nghiệp vụ; M04 kiểm tra quyền và audit.
 
 ## Luồng nền tảng và liên kết module
 
-Khi M1 tạo ticket, M5 lấy danh mục/SLA snapshot và sinh mã; khi M2/M1 thao tác, M5 kiểm tra status/version, cập nhật hạn/pause và history. Tác vụ quá hạn đổi NEW/IN_PROGRESS thành OVERDUE. M3 đọc số liệu từ timestamp và trường đã chốt; M4 bảo đảm scope/audit. VN/EN và responsive áp dụng cho cả ba cổng.
+Khi M01 tạo ticket, M05 lấy danh mục/SLA snapshot và sinh mã; khi M02/M01 thao tác, M05 kiểm tra status/version, cập nhật hạn/pause và history. Tác vụ quá hạn đổi NEW/IN_PROGRESS thành OVERDUE. M03 đọc số liệu từ timestamp và trường đã chốt; M04 bảo đảm scope/audit. VN/EN và responsive áp dụng cho cả ba cổng.
 
 **Input module:** sự kiện nghiệp vụ, version, thời gian server, danh mục/SLA và lựa chọn giao diện.
 **Output module:** mã, trạng thái, hạn nội bộ, lịch sử theo quyền, quy tắc tệp/ngôn ngữ/bố cục. Module này không tạo một portal hoặc vai trò mới.
 
 **Điểm chờ xác nhận:** danh mục, ánh xạ, tên VN/EN và SLA ban đầu (`A-07`, `A-10`); SLA theo giờ lịch và tạm dừng khi `PENDING_INFO` (`A-08`); giới hạn tệp (`A-09`); hạ tầng và kho lưu tệp (`A-11`); thời hạn lưu dữ liệu (rủi ro `R-25`). Quy tắc OVERDUE không tạm dừng, không cho tạm dừng muộn khi hồ sơ đã quá hạn trước tác vụ quá hạn, đơn vị tệp 10 MiB = 10.485.760 byte và giới hạn gateway 55 MiB là đặc tả chốt ở `MS-01` (`A-13`). Tiêu chí chất lượng: QMP. Trạng thái theo dõi ở [assumptions.md](../../project/assumptions.md).
 
-## Quy tắc dữ liệu và cập nhật dùng cho M1–M5
+## Quy tắc dữ liệu và cập nhật dùng cho M01–M05
 
 ### Input văn bản, thời gian và danh mục
 
@@ -67,7 +67,7 @@ Khi M1 tạo ticket, M5 lấy danh mục/SLA snapshot và sinh mã; khi M2/M1 th
 
 ## Quy ước chung (áp dụng cho mọi FR trong module)
 
-- **Tính chất module:** Đây là module dùng chung. Hầu hết chức năng do hệ thống tự thực hiện hoặc được các module M1–M4 gọi tới, nên Actor thường là "Hệ thống".
+- **Tính chất module:** Đây là module dùng chung. Hầu hết chức năng do hệ thống tự thực hiện hoặc được các module M01–M04 gọi tới, nên Actor thường là "Hệ thống".
 - **Thời gian:** Lưu trong cơ sở dữ liệu theo UTC. Hiển thị và tính theo ngày dùng giờ Việt Nam (UTC+7).
 - **Trạng thái hồ sơ:** `NEW` (Mới tiếp nhận), `IN_PROGRESS` (Đang xử lý), `PENDING_INFO` (Chờ bổ sung), `OVERDUE` (Quá hạn), `CLOSED` (Đã đóng).
 - **Mức ưu tiên:** `LOW` (Thấp), `MEDIUM` (Trung bình), `HIGH` (Cao).
@@ -98,7 +98,7 @@ Hệ thống (được gọi khi tạo hồ sơ ở FR-STU-02).
 **Input**
 - **Người dùng/request:** created_at cố định của transaction tạo hồ sơ.
 - **Hệ thống:** Năm Việt Nam và sequence năm trong DB.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** Mã duy nhất USP-YYYY-NNNNN, ít nhất 5 chữ số phần sequence.
@@ -158,7 +158,7 @@ Hệ thống (áp dụng mỗi khi có thao tác làm đổi trạng thái).
 **Input**
 - **Người dùng/request:** Sự kiện nghiệp vụ, ticket_id và version hiện tại; job quá hạn lấy version khi đọc.
 - **Hệ thống:** Status và scope hiện tại; due_at đã chốt; quy tắc transition.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** Trạng thái/version mới hoặc 409 khi transition/version sai; ngoài phạm vi vẫn 404.
@@ -237,7 +237,7 @@ Hệ thống.
 **Input**
 - **Người dùng/request:** Tạo hồ sơ, bắt đầu/kết thúc PENDING_INFO hoặc đóng.
 - **Hệ thống:** created_at, SLA snapshot, due_at, pause_started_at, paused_seconds và thời gian server.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** due_at/remaining_seconds/sla_paused cho staff; processing_duration khi CLOSED phục vụ báo cáo.
@@ -300,7 +300,7 @@ Hệ thống (được dùng bởi FR-STU-02, FR-STF-01, FR-STF-08, FR-STF-10).
 **Input**
 - **Người dùng/request:** Thao tác tạo/đổi ưu tiên/escalate từ FR tương ứng.
 - **Hệ thống:** Ba mức LOW/MEDIUM/HIGH, default MEDIUM, quyền staff.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** Ưu tiên hợp lệ cho staff, tên dịch VN/EN; API student loại bỏ trường này.
@@ -323,7 +323,7 @@ Hệ thống (được dùng bởi FR-STU-02, FR-STF-01, FR-STF-08, FR-STF-10).
 - **AC-02 [Validation]:** Gửi mức `URGENT` -> 400. _(Kiểm cho: E-01)_
 - **AC-03 [Boundary]:** Hàng đợi có hồ sơ ở cả 3 mức -> thứ tự hiển thị là `HIGH`, `MEDIUM`, `LOW`. _(Kiểm cho: BR-01)_
 - **AC-04 [Security]:** Sinh viên gửi `priority = HIGH` khi tạo hồ sơ -> hồ sơ vẫn là `MEDIUM`. API chi tiết hồ sơ của sinh viên không trả về trường mức ưu tiên. _(Kiểm cho: BR-02, BR-04, E-02)_
-- **AC-05 [Concurrency]:** Hai nhân viên đổi mức ưu tiên cùng lúc -> người sau nhận 409 (theo FR-STF-08). _(Kiểm cho: quy ước version ở M5)_
+- **AC-05 [Concurrency]:** Hai nhân viên đổi mức ưu tiên cùng lúc -> người sau nhận 409 (theo FR-STF-08). _(Kiểm cho: quy ước version ở M05)_
 - **AC-06 [Resilience & Audit]:** Đổi mức ưu tiên lỗi -> rollback, mức cũ giữ nguyên. Mỗi lần đổi -> có bản ghi `CHANGE_PRIORITY` hoặc `ESCALATE`. _(Kiểm cho: quy ước chung của module)_
 - **AC-07 [Business Logic]:** Đổi mức ưu tiên của hồ sơ từ `MEDIUM` sang `HIGH` -> `due_at` không đổi. Giao diện VN hiển thị Thấp / Trung bình / Cao; giao diện EN hiển thị Low / Medium / High. _(Kiểm cho: BR-03, BR-05)_
 
@@ -355,7 +355,7 @@ Hệ thống. Dữ liệu danh mục do đội phát triển nạp khi triển k
 **Input**
 - **Người dùng/request:** Seed có version dữ liệu được trường xác nhận; request đọc danh mục.
 - **Hệ thống:** Mã/tên VI/EN, mapping phòng, SLA đầu hoặc SLA đã có trong DB.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** Danh mục hợp lệ cho UI; tên EN thiếu fallback VI kèm cảnh báo; seed lỗi không thay đổi dữ liệu đang dùng.
@@ -416,7 +416,7 @@ Hệ thống (ghi tự động). Người đọc là sinh viên (FR-STU-07) và 
 **Input**
 - **Người dùng/request:** event_id của hành động, ticket_id, actor và dữ liệu thay đổi.
 - **Hệ thống:** Vai trò người đọc, phòng hiện tại và phòng ở thời điểm sự kiện.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** Public projection cho chủ ticket; public+internal cho staff phòng hiện tại; không có API admin đọc chi tiết history.
@@ -489,7 +489,7 @@ Hệ thống (được dùng bởi FR-STU-04 và FR-STU-09).
 **Input**
 - **Người dùng/request:** Files của tạo hồ sơ hoặc bổ sung.
 - **Hệ thống:** Whitelist PDF/JPG/PNG, 5 tệp/lần, 10.485.760 byte/tệp và quy tắc tên.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** Metadata chuẩn hóa hoặc 400/413/415; file rỗng bị 400.
@@ -498,7 +498,7 @@ Hệ thống (được dùng bởi FR-STU-04 và FR-STU-09).
 
 **Business Rules**
 - **BR-01:** 10MB trong tài liệu này = 10 MiB = 10.485.760 byte. File rỗng không hợp lệ (400). Giới hạn tổng request multipart ở gateway là 55 MiB, đủ 5 tệp tối đa và phần metadata; vượt tổng trả 413. UI dùng cùng giới hạn byte.
-- **BR-02:** Lưu tạm/commit/xóa bù theo quy tắc chung tại M4/M5; nếu dọn tệp thất bại thì log mã tham chiếu và job dọn tạm xử lý lại, không báo hồ sơ thành công khi DB chưa commit.
+- **BR-02:** Lưu tạm/commit/xóa bù theo quy tắc chung tại M04/M05; nếu dọn tệp thất bại thì log mã tham chiếu và job dọn tạm xử lý lại, không báo hồ sơ thành công khi DB chưa commit.
 - **BR-03:** Định dạng cho phép: PDF, JPG, PNG. Xác minh bằng nội dung tệp (magic bytes), không chỉ dựa vào đuôi tệp hay `Content-Type` do client gửi.
 - **BR-04:** Mỗi tệp tối đa 10MB. Mỗi lần gửi tối đa 5 tệp. Không đính kèm tệp nào cũng hợp lệ.
 - **BR-05:** Tên gốc của tệp tối đa 255 ký tự. Ký tự đường dẫn (`/`, `\`, `..`) bị loại bỏ trước khi lưu tên gốc.
@@ -551,7 +551,7 @@ Mọi người dùng.
 **Input**
 - **Người dùng/request:** Chọn vi hoặc en; lưu lựa chọn có phiên; header ngôn ngữ trước login.
 - **Hệ thống:** Sở thích tài khoản hoặc sở thích phiên trình duyệt trước login; bản dịch.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** UI/error messages/thông báo đúng ngôn ngữ; API lỗi luôn có error_code cố định; nội dung người dùng không dịch.
@@ -612,7 +612,7 @@ Mọi người dùng.
 **Input**
 - **Người dùng/request:** Kích thước màn hình, trình duyệt, thao tác của vai trò.
 - **Hệ thống:** Breakpoints 360/768/1280 và danh sách trình duyệt kiểm thử đã ghi phiên bản.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** Giao diện có đủ chức năng, không cuộn ngang toàn trang ở 360px; touch targets ≥44×44px.

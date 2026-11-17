@@ -1,6 +1,6 @@
-# M3. Cổng Admin
+# M03. Cổng Admin
 
-Admin đăng nhập M4 → dashboard số lượng hiện tại/trung bình CLOSED → danh sách tóm tắt nếu chọn chỉ số → báo cáo loại/khối lượng/hài lòng từ dữ liệu M1/M2 → cấp quyền tài khoản và thiết lập SLA. Admin không xử lý ticket hoặc xem chi tiết/tệp sinh viên.
+Admin đăng nhập M04 → dashboard số lượng hiện tại/trung bình CLOSED → danh sách tóm tắt nếu chọn chỉ số → báo cáo loại/khối lượng/hài lòng từ dữ liệu M01/M02 → cấp quyền tài khoản và thiết lập SLA. Admin không xử lý ticket hoặc xem chi tiết/tệp sinh viên.
 
 ## Nội dung module
 
@@ -10,7 +10,7 @@ Admin đăng nhập M4 → dashboard số lượng hiện tại/trung bình CLOS
 
 ## Cách đọc
 
-Đọc luồng và quy ước đầu PRD trước, sau đó xem từng FR. Các quy tắc nghiệp vụ liên module nằm trong [M5](../M05-core-platform/prd.md); phiên, quyền, bảo mật, audit và mã lỗi nằm trong [M4](../M04-authentication-security/prd.md). Các thông tin chưa được trường xác nhận không được coi là đã phê duyệt chỉ vì được viết trong tài liệu.
+Đọc luồng và quy ước đầu PRD trước, sau đó xem từng FR. Các quy tắc nghiệp vụ liên module nằm trong [M05](../M05-core-platform/prd.md); phiên, quyền, bảo mật, audit và mã lỗi nằm trong [M04](../M04-authentication-security/prd.md). Các thông tin chưa được trường xác nhận không được coi là đã phê duyệt chỉ vì được viết trong tài liệu.
 
 ## Danh sách chức năng
 
@@ -26,10 +26,10 @@ Admin đăng nhập M4 → dashboard số lượng hiện tại/trung bình CLOS
 
 ## Module liên quan
 
-- [M1 — Cổng Sinh viên](../M01-student-portal/prd.md)
-- [M2 — Cổng Nhân viên](../M02-staff-portal/prd.md)
-- [M4 — Xác thực & Bảo mật](../M04-authentication-security/prd.md)
-- [M5 — Lõi hệ thống & Nền tảng](../M05-core-platform/prd.md)
+- [M01 — Cổng Sinh viên](../M01-student-portal/prd.md)
+- [M02 — Cổng Nhân viên](../M02-staff-portal/prd.md)
+- [M04 — Xác thực & Bảo mật](../M04-authentication-security/prd.md)
+- [M05 — Lõi hệ thống & Nền tảng](../M05-core-platform/prd.md)
 
 ## Quy ước sử dụng tài liệu
 

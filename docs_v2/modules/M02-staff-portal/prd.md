@@ -1,18 +1,18 @@
-# M2. Cổng Nhân viên – Functional Requirement Specification
+# M02. Cổng Nhân viên – Functional Requirement Specification
 
-> Cập nhật: 09/10/2026. Giữ nguyên 42 chức năng của 5 module trong repo; bổ sung và thống nhất đặc tả trực tiếp tại module. Điểm còn chờ trường xác nhận có một nơi gốc là [assumptions.md](../../project/assumptions.md) (mã `A-xx`, cột Trạng thái); phần đầu module chỉ dẫn lại mã.
+> Đặc tả thuộc bộ 42 chức năng của 5 module, chốt cùng khách ở `MS-01` (`A-13`); sau khi chốt, thay đổi đi qua change request ([03-quan-tri-giam-sat.md](../../management/03-quan-tri-giam-sat.md) mục 5). Lịch sử sửa xem trong các PR. Điểm còn chờ trường xác nhận có một nơi gốc là [assumptions.md](../../project/assumptions.md) (mã `A-xx`, cột Trạng thái); phần đầu module chỉ dẫn lại mã.
 
 **Mục đích module:** Hàng đợi và xử lý/điều phối hồ sơ trong phòng ban hiện tại.
 
 **Actor chính:** STAFF. Actor là người dùng/hệ thống, không phải tên người lập trình.
 
-**Phụ thuộc:** M4 xác thực/phạm vi; M5 trạng thái, SLA và lịch sử; M1 phản hồi sinh viên.
+**Phụ thuộc:** M04 xác thực/phạm vi; M05 trạng thái, SLA và lịch sử; M01 phản hồi sinh viên.
 
 ## Luồng xử lý và liên kết module
 
-M1 tạo ticket NEW vào phòng → staff mở hàng đợi/chi tiết → phân công người nhận active cùng phòng → IN_PROGRESS → người phụ trách xem tệp/ghi note/xử lý → yêu cầu bổ sung nếu thiếu → student trả lời → xử lý tiếp → nhập resolution và đóng CLOSED. Sau đóng, student đánh giá và M3 tính báo cáo.
+M01 tạo ticket NEW vào phòng → staff mở hàng đợi/chi tiết → phân công người nhận active cùng phòng → IN_PROGRESS → người phụ trách xem tệp/ghi note/xử lý → yêu cầu bổ sung nếu thiếu → student trả lời → xử lý tiếp → nhập resolution và đóng CLOSED. Sau đóng, student đánh giá và M03 tính báo cáo.
 
-Nhánh chuyển phòng: mọi staff active cùng phòng chọn đích/reason → xóa assignee, giữ loại/status/SLA/info request → phòng cũ mất quyền, phòng mới phân công. Nhánh quá hạn do M5 chuyển OVERDUE; ticket vẫn xử lý/bổ sung được và giữ OVERDUE đến đóng.
+Nhánh chuyển phòng: mọi staff active cùng phòng chọn đích/reason → xóa assignee, giữ loại/status/SLA/info request → phòng cũ mất quyền, phòng mới phân công. Nhánh quá hạn do M05 chuyển OVERDUE; ticket vẫn xử lý/bổ sung được và giữ OVERDUE đến đóng.
 
 **Input module:** phiên STAFF/phòng hiện tại, ticket/version, content/note/resolution, assignee, priority, đích chuyển và reason.
 **Output module:** hàng đợi/chi tiết trong phạm vi, tệp, hồ sơ cập nhật, lịch sử nội bộ/công khai và sự kiện audit/thông báo theo quyền.
@@ -59,7 +59,7 @@ Nhân viên đã đăng nhập, đã được gán phòng ban.
 **Input**
 - **Người dùng/request:** page=1; page_size=20, 1–100; statuses, priority, assignee_filter=my/unassigned/all; code chính xác.
 - **Hệ thống:** STAFF active và phòng ban từ DB.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: items, total_items, total_pages, page, page_size, updated_at; item có code, loại, trạng thái, ưu tiên, người nhận, ngày gửi, due_at, sla_paused, remaining_seconds, needs_info.
@@ -124,7 +124,7 @@ Nhân viên thuộc phòng ban đang giữ hồ sơ.
 **Input**
 - **Người dùng/request:** ticket_id hoặc code.
 - **Hệ thống:** Phiên staff, phòng hiện tại; hồ sơ/snapshot/history/notes/files/info requests.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: đầy đủ dữ liệu hồ sơ trong phạm vi, version, allowed_actions; CLOSED có resolution và closed_at. allowed_actions chỉ để hỗ trợ UI.
@@ -182,7 +182,7 @@ Nhân viên thuộc phòng ban đang giữ hồ sơ.
 **Input**
 - **Người dùng/request:** file_id; mode=inline hoặc download.
 - **Hệ thống:** Phiên staff active; quyền phòng hiện tại với hồ sơ chứa file.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: nội dung tệp và header MIME/tên/cache; 404 ngoài phạm vi, 503 storage/audit lỗi.
@@ -241,7 +241,7 @@ Nhân viên phụ trách hồ sơ.
 **Input**
 - **Người dùng/request:** ticket_id, version, content; header Idempotency-Key.
 - **Hệ thống:** STAFF active là người phụ trách; hồ sơ chưa CLOSED.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 201: note_id, content, actor, created_at, ticket_id, version mới cho staff có quyền.
@@ -308,7 +308,7 @@ Nhân viên phụ trách hồ sơ.
 **Input**
 - **Người dùng/request:** ticket_id, version, content; header Idempotency-Key.
 - **Hệ thống:** Người phụ trách, trạng thái IN_PROGRESS/OVERDUE, chưa có info request mở.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 201: info_request_id, content, created_at, status, version mới, sla_paused và due_at theo quyền staff.
@@ -370,7 +370,7 @@ Nhân viên phụ trách hồ sơ.
 **Input**
 - **Người dùng/request:** ticket_id, version, resolution; header Idempotency-Key.
 - **Hệ thống:** Người phụ trách; trạng thái IN_PROGRESS/PENDING_INFO/OVERDUE.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: ticket_id/code, status=CLOSED, resolution, closed_at, version mới.
@@ -430,7 +430,7 @@ Nhân viên thuộc phòng ban đang giữ hồ sơ.
 **Input**
 - **Người dùng/request:** Danh sách người nhận: ticket_id; phân công: ticket_id, assignee_id, version.
 - **Hệ thống:** STAFF active cùng phòng; người nhận phải STAFF active cùng phòng.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** Danh sách 200 gồm id/tên người nhận active; cập nhật 200 có assignee, status và version mới hoặc version hiện tại nếu no-op.
@@ -489,7 +489,7 @@ Nhân viên thuộc phòng ban đang giữ hồ sơ.
 **Input**
 - **Người dùng/request:** ticket_id, version, priority=LOW/MEDIUM/HIGH.
 - **Hệ thống:** Staff active cùng phòng, ticket chưa CLOSED.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: priority, status, version mới; no-op trả version hiện tại.
@@ -547,7 +547,7 @@ Nhân viên thuộc phòng ban đang giữ hồ sơ.
 **Input**
 - **Người dùng/request:** ticket_id, version, target_department_id, reason.
 - **Hệ thống:** Staff active cùng phòng; phòng đích hợp lệ khác phòng hiện tại.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: code, department mới, assignee=null, status và version mới. Sau response này caller phòng cũ không có quyền tải lại chi tiết.
@@ -613,7 +613,7 @@ Nhân viên thuộc phòng ban đang giữ hồ sơ.
 **Input**
 - **Người dùng/request:** ticket_id, version, reason.
 - **Hệ thống:** Staff cùng phòng, priority chưa HIGH, ticket chưa CLOSED.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: priority tăng đúng một bậc, status và version mới.

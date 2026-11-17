@@ -1,16 +1,16 @@
-# M3. Cổng Admin – Functional Requirement Specification
+# M03. Cổng Admin – Functional Requirement Specification
 
-> Cập nhật: 09/10/2026. Giữ nguyên 42 chức năng của 5 module trong repo; bổ sung và thống nhất đặc tả trực tiếp tại module. Điểm còn chờ trường xác nhận có một nơi gốc là [assumptions.md](../../project/assumptions.md) (mã `A-xx`, cột Trạng thái); phần đầu module chỉ dẫn lại mã.
+> Đặc tả thuộc bộ 42 chức năng của 5 module, chốt cùng khách ở `MS-01` (`A-13`); sau khi chốt, thay đổi đi qua change request ([03-quan-tri-giam-sat.md](../../management/03-quan-tri-giam-sat.md) mục 5). Lịch sử sửa xem trong các PR. Điểm còn chờ trường xác nhận có một nơi gốc là [assumptions.md](../../project/assumptions.md) (mã `A-xx`, cột Trạng thái); phần đầu module chỉ dẫn lại mã.
 
 **Mục đích module:** Báo cáo toàn hệ thống, quản lý quyền và SLA.
 
 **Actor chính:** ADMIN. Actor là người dùng/hệ thống, không phải tên người lập trình.
 
-**Phụ thuộc:** M4 xác thực/phạm vi; dữ liệu hồ sơ, đánh giá và danh mục từ M1, M2, M5.
+**Phụ thuộc:** M04 xác thực/phạm vi; dữ liệu hồ sơ, đánh giá và danh mục từ M01, M02, M05.
 
 ## Luồng quản lý và liên kết module
 
-Admin đăng nhập M4 → dashboard số lượng hiện tại/trung bình CLOSED → danh sách tóm tắt nếu chọn chỉ số → báo cáo loại/khối lượng/hài lòng từ dữ liệu M1/M2 → cấp quyền tài khoản và thiết lập SLA. Admin không xử lý ticket hoặc xem chi tiết/tệp sinh viên.
+Admin đăng nhập M04 → dashboard số lượng hiện tại/trung bình CLOSED → danh sách tóm tắt nếu chọn chỉ số → báo cáo loại/khối lượng/hài lòng từ dữ liệu M01/M02 → cấp quyền tài khoản và thiết lập SLA. Admin không xử lý ticket hoặc xem chi tiết/tệp sinh viên.
 
 **Input module:** phiên ADMIN, bộ lọc kỳ/phòng/loại/sao, định danh/quyền/phòng/active và SLA/version cấu hình.
 **Output module:** số liệu/tables/charts cùng dữ liệu, danh sách tóm tắt không thông tin cá nhân, quyền và SLA đã cập nhật.
@@ -59,7 +59,7 @@ Admin đã đăng nhập.
 **Input**
 - **Người dùng/request:** department_id tùy chọn; drill-down thêm group=new/in_progress/overdue, page=1, page_size=20 (1–100).
 - **Hệ thống:** ADMIN active; trạng thái hiện tại theo phòng hiện tại.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: new_count, in_progress_count, overdue_count, updated_at; drill-down có items/total/page và chỉ code, loại, phòng, trạng thái, ngày gửi.
@@ -122,7 +122,7 @@ Admin đã đăng nhập.
 **Input**
 - **Người dùng/request:** from/to, department_id, request_type_id tùy chọn.
 - **Hệ thống:** ADMIN; ticket CLOSED trong kỳ closed_at, phòng lúc đóng, tổng pause PENDING_INFO.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: average_hours hoặc null, closed_count, updated_at; ≥48 giờ có average_days. Số ngày làm tròn một chữ số.
@@ -182,7 +182,7 @@ Admin đã đăng nhập.
 **Input**
 - **Người dùng/request:** from/to và department_id tùy chọn.
 - **Hệ thống:** ADMIN; ticket created_at trong kỳ; phòng hiện tại; toàn bộ loại yêu cầu.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: rows gồm type_id/name, ticket_count, percentage hoặc null; total_count và updated_at.
@@ -243,7 +243,7 @@ Admin đã đăng nhập.
 **Input**
 - **Người dùng/request:** from/to.
 - **Hệ thống:** ADMIN; hồ sơ/phòng hiện tại, closed_at/phòng lúc đóng, staff active.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: rows theo phòng gồm open_count, overdue_count, created_in_period_current_department_count, closed_in_period_count, active_staff_count; updated_at.
@@ -304,7 +304,7 @@ Admin đã đăng nhập.
 **Input**
 - **Người dùng/request:** from/to, department_id, request_type_id; danh sách nhận xét thêm rating 1–5, page=1, page_size=20 (1–100).
 - **Hệ thống:** ADMIN; ticket CLOSED trong kỳ closed_at; rating hiện có; phòng lúc đóng.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: average_rating hoặc null, distribution_1_to_5, rating_count, closed_count, rating_percentage hoặc null; comments phân trang không có trường định danh sinh viên.
@@ -371,7 +371,7 @@ Admin đã đăng nhập.
 **Input**
 - **Người dùng/request:** List STAFF/ADMIN; tìm cấp quyền: email trường chính xác; thêm/cấp quyền: email, role, department_id nếu STAFF; sửa/kích hoạt: account_id, version, giá trị mới.
 - **Hệ thống:** ADMIN active; tài khoản SSO đã có hoặc danh sách cấp quyền trước; ràng buộc người nhận hồ sơ.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200 list/search: id, email, tên nếu có, role, department, active, version; tìm STUDENT chỉ bằng email chính xác. Thêm mới 201, sửa/cấp quyền tài khoản có sẵn 200 với version mới.
@@ -441,7 +441,7 @@ Admin đã đăng nhập.
 **Input**
 - **Người dùng/request:** List loại yêu cầu/SLA; cập nhật: request_type_id, version cấu hình, sla_hours số nguyên 1–720.
 - **Hệ thống:** ADMIN, cấu hình SLA hiện tại.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: request_type_id/name, sla_hours, version; thay đổi trả version mới, no-op giữ version.

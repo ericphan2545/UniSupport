@@ -1,6 +1,6 @@
-# M5. Lõi hệ thống & Nền tảng
+# M05. Lõi hệ thống & Nền tảng
 
-Khi M1 tạo ticket, M5 lấy danh mục/SLA snapshot và sinh mã; khi M2/M1 thao tác, M5 kiểm tra status/version, cập nhật hạn/pause và history. Tác vụ quá hạn đổi NEW/IN_PROGRESS thành OVERDUE. M3 đọc số liệu từ timestamp và trường đã chốt; M4 bảo đảm scope/audit. VN/EN và responsive áp dụng cho cả ba cổng.
+Khi M01 tạo ticket, M05 lấy danh mục/SLA snapshot và sinh mã; khi M02/M01 thao tác, M05 kiểm tra status/version, cập nhật hạn/pause và history. Tác vụ quá hạn đổi NEW/IN_PROGRESS thành OVERDUE. M03 đọc số liệu từ timestamp và trường đã chốt; M04 bảo đảm scope/audit. VN/EN và responsive áp dụng cho cả ba cổng.
 
 ## Nội dung module
 
@@ -10,7 +10,7 @@ Khi M1 tạo ticket, M5 lấy danh mục/SLA snapshot và sinh mã; khi M2/M1 th
 
 ## Cách đọc
 
-Đọc luồng và quy ước đầu PRD trước, sau đó xem từng FR. Các quy tắc nghiệp vụ liên module nằm trong [M5](../M05-core-platform/prd.md); phiên, quyền, bảo mật, audit và mã lỗi nằm trong [M4](../M04-authentication-security/prd.md). Các thông tin chưa được trường xác nhận không được coi là đã phê duyệt chỉ vì được viết trong tài liệu.
+Đọc luồng và quy ước đầu PRD trước, sau đó xem từng FR. Các quy tắc nghiệp vụ liên module nằm trong [M05](../M05-core-platform/prd.md); phiên, quyền, bảo mật, audit và mã lỗi nằm trong [M04](../M04-authentication-security/prd.md). Các thông tin chưa được trường xác nhận không được coi là đã phê duyệt chỉ vì được viết trong tài liệu.
 
 ## Danh sách chức năng
 
@@ -28,10 +28,10 @@ Khi M1 tạo ticket, M5 lấy danh mục/SLA snapshot và sinh mã; khi M2/M1 th
 
 ## Module liên quan
 
-- [M1 — Cổng Sinh viên](../M01-student-portal/prd.md)
-- [M2 — Cổng Nhân viên](../M02-staff-portal/prd.md)
-- [M3 — Cổng Admin](../M03-management-portal/prd.md)
-- [M4 — Xác thực & Bảo mật](../M04-authentication-security/prd.md)
+- [M01 — Cổng Sinh viên](../M01-student-portal/prd.md)
+- [M02 — Cổng Nhân viên](../M02-staff-portal/prd.md)
+- [M03 — Cổng Admin](../M03-management-portal/prd.md)
+- [M04 — Xác thực & Bảo mật](../M04-authentication-security/prd.md)
 
 ## Quy ước sử dụng tài liệu
 
