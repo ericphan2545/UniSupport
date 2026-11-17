@@ -1,6 +1,6 @@
 # UniSupport – Kế hoạch quản lý chất lượng (QMP)
 
-Phiên bản 1.3
+Phiên bản 1.4
 
 **Phạm vi:** thế nào là đạt, đo ra sao, xử lý lỗi thế nào. Không chứa phạm vi sản phẩm, tiến độ, giờ công, quyền duyệt, luật làm việc nhóm (xem [mục lục](../README.md)). Các tài liệu khác trỏ vào số mục của tài liệu này, nên đổi số mục thì phải sửa chỗ trỏ.
 
@@ -8,7 +8,7 @@ Phiên bản 1.3
 
 | # | Mục tiêu | Đo bằng |
 |---|---|---|
-| 1 | Mọi chức năng đã thống nhất có test case và đạt | 100% chức năng có test case; ≥95% test case đạt |
+| 1 | Mọi tiêu chí chấp nhận (AC) của 42 FR đã chốt có test case và đạt | 100% AC có test case; 100% AC đạt khi Go-live (mục 2.2) |
 | 2 | Không còn lỗi Critical và Major khi Go-live | Critical = 0, Major = 0 |
 | 3 | Chạy ổn với 100–200 người dùng đồng thời | p95 ≤ 3 giây, tỷ lệ lỗi ≤ 5% |
 | 4 | Đúng quyền cho 3 vai trò | 0 lỗi lộ dữ liệu ngoài quyền |
@@ -21,7 +21,7 @@ Phiên bản 1.3
 Cần đủ cả 5 điều:
 
 - Mọi issue của milestone đạt DoD (mục 5).
-- 100% test case của milestone đã chạy; đã test trọn luồng qua các vai trò trên Staging.
+- 100% test case của milestone đã chạy và mọi AC của các FR thuộc milestone đạt; đã test trọn luồng qua các vai trò trên Staging.
 - Không còn lỗi Critical hoặc Major đang mở.
 - Regression của các milestone đã đóng đều đạt.
 - QA / Senior xác nhận, PM / Senior đóng milestone trên GitHub. Sau đó áp dụng mục 6.
@@ -33,10 +33,12 @@ Lưu ý khi đánh giá:
 
 ### 2.2 Go-live
 
+Mục này là nơi gốc phía đội của điều kiện Go-live. Điều kiện nghiệm thu với khách là Proposal mục 6.2; mục này không đặt ngưỡng lỏng hơn Proposal. Team Charter và `project/constraints.md` chỉ dẫn lại mục này.
+
+- Mọi AC của 42 FR trong bộ đặc tả đã chốt ở `MS-01` được kiểm bằng kịch bản test và đạt.
 - Critical = 0 và Major = 0.
-- Minor được còn, nhưng phải nằm trong danh sách lỗi còn tồn (QA đề xuất, PM duyệt).
-- ≥95% test case đạt; không có lỗi chặn khi chạy 100–200 người dùng đồng thời.
-- Mức 95% không cho phép bỏ qua lỗi phân quyền, lộ dữ liệu hoặc lỗi chặn luồng chính. Những lỗi này xử lý theo mức độ ảnh hưởng thực tế.
+- Lỗi Minor chỉ được còn khi không làm AC nào không đạt, và phải nằm trong danh sách lỗi còn tồn (QA đề xuất, PM duyệt).
+- Đạt mục tiêu `G-01` đến `G-05` ([product/README.md](../product/README.md)); riêng `G-05`: đạt `NFR-PERF-01` đến `NFR-PERF-03`, không có lỗi chặn khi chạy 100–200 người dùng đồng thời trên hạ tầng trường.
 - Có Báo cáo kiểm thử và Usability Test Report.
 - Các hạng mục bàn giao còn lại đủ theo Proposal 6.1 (PM kiểm).
 
@@ -115,7 +117,7 @@ Lỗi trùng, không tái hiện được hoặc thực chất là yêu cầu th
 
 | Chỉ số | Cách tính | Ngưỡng |
 |---|---|---|
-| Test case đạt | Đạt / đã chạy | ≥95% |
+| Test case đạt | Đạt / đã chạy | Theo dõi hằng tuần; khi đóng milestone và Go-live mọi AC phải đạt (mục 2) |
 | Critical đang mở | Đếm | 0 khi đóng milestone và Go-live |
 | Major đang mở | Đếm | 0 khi đóng milestone và Go-live |
 | Độ phủ tiêu chí chấp nhận | Số tiêu chí có test case / tổng tiêu chí của milestone | 100% |

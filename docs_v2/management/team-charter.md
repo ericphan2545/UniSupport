@@ -10,7 +10,7 @@ Ngày cập nhật: 17/11/2026
 ## 2. Mục tiêu chung
 
 - Bàn giao đúng phạm vi đã chốt trong 15 tuần và 870 giờ công; thời gian chờ khách phản hồi không tính vào 15 tuần.
-- Chỉ tiêu nội bộ: ít nhất 95% ca kiểm thử đạt, không còn lỗi Critical và không có lỗi chặn khi chạy 100–200 người dùng đồng thời trên hạ tầng trường.
+- Chất lượng bàn giao: đạt điều kiện Go-live ở [QMP](02-qmp-quan-ly-chat-luong.md) mục 2.2, khớp điều kiện nghiệm thu với khách ở Proposal mục 6.2.
 - Phạm vi theo PRD ([product/README.md](../product/README.md) và `modules/`). Tiêu chí nghiệm thu chính thức chốt với khách bằng văn bản ở cuối tuần 2 của `MS-01`.
 
 ## 3. Vai trò và trách nhiệm

@@ -18,7 +18,7 @@ Tài liệu này mô tả cách kiểm thử UniSupport trong từng milestone. 
 | Hiệu năng | 100–200 người dùng đồng thời trên hạ tầng của trường | `TS-19` (`NFR-PERF-01` đến `NFR-PERF-03`) |
 | Usability | Tác vụ chính của 3 vai trò với người dùng thật | `TS-20` (`NFR-USE-01`) |
 
-Mỗi AC trong `modules/` có nhãn nhóm (Happy Path, Validation, Boundary, Security, Concurrency, Resilience, Rate Limit, Business Logic, Idempotency…). Kịch bản chéo chọn AC theo nhãn này.
+Mỗi AC trong `modules/` có nhãn nhóm (Happy Path, Validation, Boundary, Security, Concurrency, Resilience, Rate Limit, Business Logic, Idempotency…) và ghi ở cuối dòng các business rule (`BR-xx`), error flow (`E-xx`) mà nó kiểm ("Kiểm cho"). Mỗi `BR-xx`, `E-xx` của 42 FR có ít nhất một AC. Kịch bản chéo chọn AC theo nhãn này.
 
 ## Môi trường và dữ liệu
 

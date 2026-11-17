@@ -59,7 +59,8 @@ Liên kết chỉ ghi ở một phía: phía ghi là cột "Liên kết phải g
 |---|---|---|---|
 | Module | `M01` | `modules/` | |
 | Yêu cầu chức năng | `FR-STU-02` | `prd.md` của module | |
-| Tiêu chí nghiệm thu | `FR-STU-02/AC-04` (trong PRD viết `AC-04` dưới FR) | `prd.md` của module | |
+| Business rule, error flow | `BR-01`, `E-01` (mã cục bộ trong một FR; gọi đầy đủ `FR-STU-02/BR-01`) | `prd.md` của module, trong FR | |
+| Tiêu chí nghiệm thu | `FR-STU-02/AC-04` (trong PRD viết `AC-04` dưới FR) | `prd.md` của module | Mã `BR-xx`, `E-xx` mà AC kiểm (cuối dòng AC: "Kiểm cho") |
 | Goal, non-goal | `G-01`, `NG-01` | `product/README.md` | |
 | Yêu cầu phi chức năng | `NFR-PERF-01` | `non-functional-requirements/` | Cách đo (`TS-xx` hoặc mã AC) |
 | Kịch bản test | `TS-01` | `acceptance/test-scenarios.md` | Mã AC hoặc NFR được test |

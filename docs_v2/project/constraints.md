@@ -20,7 +20,7 @@ Những điều cố định mà dự án phải tuân theo.
 | # | Ràng buộc |
 |---|---|
 | C9 | Tổng 870 giờ công |
-| C10 | Ít nhất 95% test case đạt, không còn lỗi Critical, không có lỗi chặn khi chạy 100–200 người dùng đồng thời trên hạ tầng trường |
+| C10 | Chỉ Go-live khi đạt điều kiện ở [QMP](../management/02-qmp-quan-ly-chat-luong.md) mục 2.2 (khớp điều kiện nghiệm thu Proposal mục 6.2) |
 | C11 | Mỗi người tối đa 2 task cùng lúc; code chỉ merge sau khi có người khác review |
 
 ## Kỹ thuật
