@@ -1,6 +1,6 @@
 # Giả định
 
-Đây là nơi gốc của giả định. Proposal (mục 1) và báo giá ([quotation.xlsx](../management/quotation.xlsx) sheet Giả định) chỉ dẫn lại mã `A-xx`. Giả định nào được trường xác nhận khác đi thì xử lý như một thay đổi theo [Kế hoạch quản trị và giám sát](../management/03-quan-tri-giam-sat.md) mục 5: đánh giá lại effort, giá và mốc, rồi báo giá bổ sung nếu cần.
+Đây là nơi gốc của giả định. Proposal (mục 1) và báo giá ([quotation.xlsx](../management/quotation.xlsx) sheet Giả định) chỉ dẫn lại mã `A-xx`. Phần đầu mỗi PRD trong `modules/` cũng chỉ dẫn lại mã; điểm chờ xác nhận không ghi riêng ở nơi khác. Giả định nào được trường xác nhận khác đi thì xử lý như một thay đổi theo [Kế hoạch quản trị và giám sát](../management/03-quan-tri-giam-sat.md) mục 5: đánh giá lại effort, giá và mốc, rồi báo giá bổ sung nếu cần.
 
 | Mã | Giả định | Nếu sai thì ảnh hưởng tới giá hoặc kế hoạch | Trạng thái |
 |---|---|---|---|
@@ -13,7 +13,7 @@
 | `A-07` | Mỗi loại yêu cầu do đúng một phòng ban tiếp nhận | Phải đổi mô hình danh mục và luồng gán phòng | Chờ trường xác nhận ở `MS-01` |
 | `A-08` | SLA tính theo giờ lịch (cả ngoài giờ hành chính và ngày nghỉ); thời gian chờ sinh viên bổ sung không tính vào SLA | Phải đổi cách tính hạn và báo cáo thời gian xử lý | Chờ trường xác nhận ở `MS-01` |
 | `A-09` | Giới hạn tệp: PDF/JPG/PNG, tối đa 5 tệp mỗi lần, 10 MiB mỗi tệp | Phải đổi cấu hình tệp và kiểm thử | Chờ trường xác nhận ở `MS-01` |
-| `A-10` | Danh mục loại yêu cầu, phòng ban và SLA ban đầu do đội phát triển nạp khi triển khai; không có màn hình sửa danh mục | Phải thêm chức năng quản lý danh mục, là phạm vi mới | Chờ trường xác nhận ở `MS-01` |
+| `A-10` | Danh mục loại yêu cầu, phòng ban, SLA ban đầu và tài khoản Admin đầu tiên do đội phát triển nạp khi triển khai theo danh sách trường cung cấp; không có màn hình sửa danh mục | Phải thêm chức năng quản lý danh mục, là phạm vi mới | Chờ trường xác nhận ở `MS-01` |
 | `A-11` | Trường cung cấp server chạy được Docker Compose, kho lưu tệp và chứng chỉ SSL | Phải đổi cách đóng gói và triển khai | Chờ trường xác nhận trước `MS-06` |
 | `A-12` | Không cần đọc nhật ký hệ thống qua giao diện; người vận hành truy vấn CSDL | Phải thêm màn hình nhật ký và phân quyền đọc, là phạm vi mới | Chờ trường xác nhận ở `MS-01` |
-| `A-13` | Phạm vi chốt ở `MS-01` gồm 42 FR trong `modules/`; sau đó chỉ có các lần sửa nhỏ theo Proposal mục 4 | Thêm hoặc đổi FR sau khi chốt là change request, báo giá và lên lịch riêng | Từ Proposal |
+| `A-13` | Phạm vi chốt ở `MS-01` gồm 42 FR trong `modules/`, kể cả các ngưỡng, nhãn và giá trị mặc định ghi trong đặc tả; sau đó chỉ có các lần sửa nhỏ theo Proposal mục 4 | Thêm hoặc đổi FR sau khi chốt là change request, báo giá và lên lịch riêng | Từ Proposal; ngưỡng, nhãn, giá trị mặc định chờ trường xác nhận khi chốt bộ đặc tả ở `MS-01` |

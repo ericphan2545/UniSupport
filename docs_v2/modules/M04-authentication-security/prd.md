@@ -1,6 +1,6 @@
 # M4. Xác thực & Bảo mật – Functional Requirement Specification
 
-> Cập nhật: 09/10/2026. Giữ nguyên 42 chức năng của 5 module trong repo; bổ sung và thống nhất đặc tả trực tiếp tại module. Các giả định chưa được trường xác nhận được ghi tại phần đầu module.
+> Cập nhật: 09/10/2026. Giữ nguyên 42 chức năng của 5 module trong repo; bổ sung và thống nhất đặc tả trực tiếp tại module. Điểm còn chờ trường xác nhận có một nơi gốc là [assumptions.md](../../project/assumptions.md) (mã `A-xx`, cột Trạng thái); phần đầu module chỉ dẫn lại mã.
 
 **Mục đích module:** SSO, phiên ứng dụng, phân quyền, bảo vệ tệp và audit.
 
@@ -15,9 +15,9 @@ Trường/DevOps xác nhận SSO và nạp ADMIN đầu → admin cấp quyền 
 **Input module:** callback SSO, cookie phiên, đối tượng/hành động và policy endpoint.
 **Output module:** phiên ứng dụng hoặc lỗi, quyết định quyền/phạm vi, stream tệp có quyền và audit. Token SSO không trả browser.
 
-**Cần xác nhận trước tích hợp:** giao thức thật OIDC/SAML, issuer/tenant/domain/client/redirect, định danh/email đã xác minh, Userinfo, sandbox/logout và tài khoản Admin đầu tiên (bootstrap). Luồng authorization code hiện tại là giả định thiết kế; nếu trường dùng giao thức khác phải sửa SEC-01. Không dùng email ví dụ hoặc bật mock production.
+**Điểm chờ xác nhận trước tích hợp:** giao thức SSO thật và thông số kết nối (issuer, tenant/domain, client, redirect, Userinfo, logout), định danh và email đã xác minh (`A-05`, `A-06`); tài khoản Admin đầu tiên (`A-10`). Luồng authorization code hiện tại dựa trên `A-05`; nếu trường dùng giao thức khác thì sửa FR-SEC-01 theo quy trình thay đổi. Không dùng email ví dụ hoặc bật SSO giả lập ở production (C15). Trạng thái theo dõi ở [assumptions.md](../../project/assumptions.md).
 
-**Thông tin vận hành cần chốt:** quyền truy vấn audit, thời gian lưu/backup và người tiếp nhận. Không tự thêm màn hình audit hoặc tính năng xóa dữ liệu.
+**Thông tin vận hành:** quyền truy vấn nhật ký, thời gian lưu và sao lưu, người tiếp nhận do trường quyết định khi vận hành (Proposal 6.4, `A-12`, `NG-11`; rủi ro `R-25`). Không tự thêm màn hình nhật ký hoặc tính năng xóa dữ liệu (`NG-09`).
 
 ## Quy tắc quyền, bảo mật và mã lỗi dùng cho M1–M5
 
@@ -58,7 +58,7 @@ Response lỗi có error_code cố định, message VN/EN, field_errors nếu c�
 | 503 | Dịch vụ/storage/quyền tạm lỗi hoặc timeout query theo FR |
 | 504 | Userinfo vượt timeout 3 giây theo STU-01 |
 
-Tạo lỗi giữ form/files còn trong browser để thử lại; không giữ nội dung nhạy cảm lâu dài ở localStorage. Đọc lỗi hiện retry/stale; không trắng trang. Rate limit theo người dùng và endpoint/group được tài liệu hóa; callback SSO 10/phút/IP chỉ là ngưỡng đề xuất cần kiểm chứng mạng trường dùng NAT (ngưỡng cần kiểm chứng với hạ tầng trường), không tùy ý đổi mà không ghi lại.
+Tạo lỗi giữ form/files còn trong browser để thử lại; không giữ nội dung nhạy cảm lâu dài ở localStorage. Đọc lỗi hiện retry/stale; không trắng trang. Rate limit theo người dùng và endpoint/group được tài liệu hóa; callback SSO 10/phút/IP là ngưỡng trong đặc tả, chốt cùng bộ đặc tả ở `MS-01` (`A-13`); thử lại với mạng NAT của trường trước Go-live (`R-19`), không tùy ý đổi mà không ghi lại.
 
 ### Thuật ngữ nhanh
 
@@ -127,30 +127,33 @@ Người dùng chưa đăng nhập (sinh viên, nhân viên, Admin).
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Phương án hiện tại là SSO theo luồng authorization code; giả định OIDC cần xác nhận với trường. Trước tích hợp thật phải chốt issuer, client/redirect, khóa xác minh, audience, định danh ổn định, email đã được nhà cung cấp xác thực và domain/tenant được phép. Nếu không đủ định danh thì từ chối tạo tài khoản/phiên và log mã lý do, không ghi token. Các kiểm tra PKCE/nonce theo đặc tả giao thức nằm trong thiết kế tích hợp.
-- Khi triển khai, DevOps nạp một định danh ADMIN đã được trường xác nhận; thao tác idempotent, không ghi đè quyền người dùng đã có. Mock luôn tắt ở production.
-- Định danh SSO (email trường) là khóa nhận diện tài khoản. Tài khoản `STAFF` và `ADMIN` phải được Admin thêm trước (FR-MGT-06).
-- Tham số `state` dùng một lần, hết hạn sau 10 phút.
-- Phiên làm việc hết hạn sau 8 giờ, không gia hạn. Hết phiên thì người dùng phải đăng nhập lại.
-- SSO giả lập chỉ bật được ở môi trường dev và test. Nếu cấu hình bật SSO giả lập ở môi trường production, ứng dụng từ chối khởi động.
-- Rate limit callback đăng nhập: 10 lần mỗi phút cho mỗi IP.
-- Tài khoản `STAFF` chưa có phòng ban vẫn đăng nhập được, nhưng Cổng Nhân viên hiển thị thông báo "Tài khoản chưa được gán phòng ban" (theo quy ước của M2).
+- **BR-01:** Phương án hiện tại là SSO theo luồng authorization code (OIDC), theo giả định `A-05`. Trước tích hợp thật phải chốt issuer, client/redirect, khóa xác minh, audience, định danh ổn định, email đã được nhà cung cấp xác thực và domain/tenant được phép. Nếu không đủ định danh thì từ chối tạo tài khoản/phiên và log mã lý do, không ghi token. Các kiểm tra PKCE/nonce theo đặc tả giao thức nằm trong thiết kế tích hợp.
+- **BR-02:** Khi triển khai, DevOps nạp một định danh ADMIN đã được trường xác nhận; thao tác idempotent, không ghi đè quyền người dùng đã có. Mock luôn tắt ở production.
+- **BR-03:** Định danh SSO (email trường) là khóa nhận diện tài khoản. Tài khoản `STAFF` và `ADMIN` phải được Admin thêm trước (FR-MGT-06).
+- **BR-04:** Tham số `state` dùng một lần, hết hạn sau 10 phút.
+- **BR-05:** Phiên làm việc hết hạn sau 8 giờ, không gia hạn. Hết phiên thì người dùng phải đăng nhập lại.
+- **BR-06:** SSO giả lập chỉ bật được ở môi trường dev và test. Nếu cấu hình bật SSO giả lập ở môi trường production, ứng dụng từ chối khởi động.
+- **BR-07:** Rate limit callback đăng nhập: 10 lần mỗi phút cho mỗi IP.
+- **BR-08:** Tài khoản `STAFF` chưa có phòng ban vẫn đăng nhập được, nhưng Cổng Nhân viên hiển thị thông báo "Tài khoản chưa được gán phòng ban" (theo quy ước của M2).
 
 **Alternative / Error Flows**
-- Nếu người dùng hủy đăng nhập trên trang SSO, hệ thống quay về trang đăng nhập với thông báo "Bạn đã hủy đăng nhập".
-- Nếu `state` không khớp, đã dùng hoặc đã hết hạn, hệ thống trả 400 và không tạo phiên.
-- Nếu token từ SSO không hợp lệ (sai chữ ký, sai issuer, hết hạn), hệ thống trả 401.
-- Nếu tài khoản bị vô hiệu hóa, hệ thống trả 403 "Tài khoản đã bị vô hiệu hóa, vui lòng liên hệ nhà trường".
-- Nếu SSO không phản hồi trong 5 giây, hệ thống trả 503 "Hệ thống đăng nhập của trường đang gián đoạn".
-- Nếu vượt rate limit, hệ thống trả 429.
+- **E-01:** Nếu người dùng hủy đăng nhập trên trang SSO, hệ thống quay về trang đăng nhập với thông báo "Bạn đã hủy đăng nhập".
+- **E-02:** Nếu `state` không khớp, đã dùng hoặc đã hết hạn, hệ thống trả 400 và không tạo phiên.
+- **E-03:** Nếu token từ SSO không hợp lệ (sai chữ ký, sai issuer, hết hạn), hệ thống trả 401.
+- **E-04:** Nếu tài khoản bị vô hiệu hóa, hệ thống trả 403 "Tài khoản đã bị vô hiệu hóa, vui lòng liên hệ nhà trường".
+- **E-05:** Nếu SSO không phản hồi trong 5 giây, hệ thống trả 503 "Hệ thống đăng nhập của trường đang gián đoạn".
+- **E-06:** Nếu vượt rate limit, hệ thống trả 429.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Sinh viên đăng nhập SSO lần đầu -> tài khoản `STUDENT` được tạo, người dùng vào Cổng Sinh viên. Nhân viên đã được thêm ở FR-MGT-06 đăng nhập -> vào Cổng Nhân viên.
-- **AC-02 [Validation]:** Callback có `state` đã được dùng trước đó -> 400, không có phiên mới. Token SSO sai chữ ký -> 401.
-- **AC-03 [Boundary]:** Phiên được tạo lúc 08:00 -> request lúc 15:59 thành công; request lúc 16:01 nhận 401 và người dùng được chuyển về trang đăng nhập.
-- **AC-04 [Security]:** Tài khoản bị vô hiệu hóa đăng nhập -> 403, không tạo phiên. Cookie phiên có đủ các cờ `HttpOnly`, `Secure`, `SameSite=Lax`. Response trả về trình duyệt không chứa access token của SSO.
-- **AC-05 [Rate Limit]:** Lần gọi callback thứ 11 trong 1 phút từ cùng một IP -> 429.
-- **AC-06 [Resilience & Audit]:** SSO không phản hồi trong 5 giây -> 503 với thông báo thân thiện, ứng dụng không treo. Đăng nhập thành công -> có bản ghi `LOGIN_SUCCESS`. Đăng nhập thất bại -> có bản ghi `LOGIN_FAILED` kèm lý do.
+- **AC-01 [Happy Path]:** Sinh viên đăng nhập SSO lần đầu -> tài khoản `STUDENT` được tạo, người dùng vào Cổng Sinh viên. Nhân viên đã được thêm ở FR-MGT-06 đăng nhập -> vào Cổng Nhân viên. _(Kiểm cho: luồng chính, BR-03)_
+- **AC-02 [Validation]:** Callback có `state` đã được dùng trước đó -> 400, không có phiên mới. Token SSO sai chữ ký -> 401. _(Kiểm cho: BR-04, E-02, E-03)_
+- **AC-03 [Boundary]:** Phiên được tạo lúc 08:00 -> request lúc 15:59 thành công; request lúc 16:01 nhận 401 và người dùng được chuyển về trang đăng nhập. _(Kiểm cho: BR-05)_
+- **AC-04 [Security]:** Tài khoản bị vô hiệu hóa đăng nhập -> 403, không tạo phiên. Cookie phiên có đủ các cờ `HttpOnly`, `Secure`, `SameSite=Lax`. Response trả về trình duyệt không chứa access token của SSO. _(Kiểm cho: E-04)_
+- **AC-05 [Rate Limit]:** Lần gọi callback thứ 11 trong 1 phút từ cùng một IP -> 429. _(Kiểm cho: BR-07, E-06)_
+- **AC-06 [Resilience & Audit]:** SSO không phản hồi trong 5 giây -> 503 với thông báo thân thiện, ứng dụng không treo. Đăng nhập thành công -> có bản ghi `LOGIN_SUCCESS`. Đăng nhập thất bại -> có bản ghi `LOGIN_FAILED` kèm lý do. _(Kiểm cho: E-05)_
+- **AC-07 [Validation]:** Callback có `state` không khớp, hoặc `state` đã tạo quá 10 phút -> 400, không tạo phiên. Người dùng bấm hủy trên trang SSO -> về trang đăng nhập với thông báo "Bạn đã hủy đăng nhập". _(Kiểm cho: BR-04, E-01, E-02)_
+- **AC-08 [Security]:** SSO trả token không có email đã được xác thực -> không tạo tài khoản và phiên; log có mã lý do, không chứa token. Cấu hình bật SSO giả lập ở production -> ứng dụng không khởi động. Chạy lại bước nạp tài khoản Admin đầu tiên -> không tạo bản trùng, không đổi quyền của tài khoản đã có. _(Kiểm cho: BR-01, BR-02, BR-06)_
+- **AC-09 [Business Logic]:** Tài khoản `STAFF` chưa có phòng ban đăng nhập -> đăng nhập thành công; Cổng Nhân viên hiển thị "Tài khoản chưa được gán phòng ban". _(Kiểm cho: BR-08)_
 
 **Ví dụ Edge Case**
 Một nhân viên mới đăng nhập trước khi Admin kịp thêm tài khoản của họ, nên hệ thống tạo tài khoản với vai trò `STUDENT`. Sau đó Admin đổi vai trò tài khoản này thành `STAFF` và gán phòng ban (FR-MGT-06). Ở request kế tiếp, người này truy cập được Cổng Nhân viên mà không cần đăng nhập lại, vì vai trò được đọc từ cơ sở dữ liệu ở mỗi request.
@@ -190,23 +193,24 @@ Người dùng đã đăng nhập (mọi vai trò).
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Trang/API chứa dữ liệu cá nhân và tệp trả Cache-Control: private, no-store; frontend xóa cache dữ liệu khi logout, kiểm tra lại phiên khi khôi phục trang từ Back/bfcache. Không thể thu hồi bản tệp người có quyền đã tải về trước đó.
-- Nếu kho phiên không đọc được, API bảo vệ trả 503 (mặc định từ chối). Khi kho khôi phục, phiên chỉ bị coi là thu hồi nếu trạng thái thu hồi đã commit; không hứa lỗi logout tự vô hiệu hóa JWT.
-- Phiên bị thu hồi ngay lập tức. Mọi request sau đó dùng JWT cũ đều bị từ chối, kể cả khi JWT chưa hết hạn (thu hồi bằng danh sách phiên phía server).
-- Đăng xuất chỉ thu hồi phiên hiện tại, không ảnh hưởng phiên trên thiết bị khác.
-- Đăng xuất là idempotent: gọi khi không có phiên hoặc phiên đã hết hạn vẫn trả thành công và chuyển về trang đăng nhập.
+- **BR-01:** Trang/API chứa dữ liệu cá nhân và tệp trả Cache-Control: private, no-store; frontend xóa cache dữ liệu khi logout, kiểm tra lại phiên khi khôi phục trang từ Back/bfcache. Không thể thu hồi bản tệp người có quyền đã tải về trước đó.
+- **BR-02:** Nếu kho phiên không đọc được, API bảo vệ trả 503 (mặc định từ chối). Khi kho khôi phục, phiên chỉ bị coi là thu hồi nếu trạng thái thu hồi đã commit; không hứa lỗi logout tự vô hiệu hóa JWT.
+- **BR-03:** Phiên bị thu hồi ngay lập tức. Mọi request sau đó dùng JWT cũ đều bị từ chối, kể cả khi JWT chưa hết hạn (thu hồi bằng danh sách phiên phía server).
+- **BR-04:** Đăng xuất chỉ thu hồi phiên hiện tại, không ảnh hưởng phiên trên thiết bị khác.
+- **BR-05:** Đăng xuất là idempotent: gọi khi không có phiên hoặc phiên đã hết hạn vẫn trả thành công và chuyển về trang đăng nhập.
 
 **Alternative / Error Flows**
-- Nếu không gọi được trang kết thúc phiên của SSO, hệ thống vẫn hoàn tất đăng xuất phía ứng dụng và chuyển về trang đăng nhập.
-- Nếu lưu thu hồi phiên lỗi, hệ thống xóa cookie của trình duyệt và dữ liệu UI/token SSO của phiên nếu có thể, trả 500 và ghi log kỹ thuật. Không tuyên bố JWT cũ đã bị thu hồi; chỉ 200 sau khi thu hồi xác nhận thành công. Người dùng được hướng dẫn thử lại/liên hệ hỗ trợ.
+- **E-01:** Nếu không gọi được trang kết thúc phiên của SSO, hệ thống vẫn hoàn tất đăng xuất phía ứng dụng và chuyển về trang đăng nhập.
+- **E-02:** Nếu lưu thu hồi phiên lỗi, hệ thống xóa cookie của trình duyệt và dữ liệu UI/token SSO của phiên nếu có thể, trả 500 và ghi log kỹ thuật. Không tuyên bố JWT cũ đã bị thu hồi; chỉ 200 sau khi thu hồi xác nhận thành công. Người dùng được hướng dẫn thử lại/liên hệ hỗ trợ.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Người dùng bấm Đăng xuất -> cookie bị xóa, người dùng về trang đăng nhập.
-- **AC-02 [Validation]:** Gọi đăng xuất khi không có cookie phiên -> vẫn trả 200 và chuyển về trang đăng nhập.
-- **AC-03 [Security]:** Sau khi đăng xuất, gửi lại JWT cũ (chưa hết hạn) -> 401.
-- **AC-04 [Idempotency]:** Bấm Đăng xuất 2 lần liên tiếp -> cả hai đều thành công, không lỗi.
-- **AC-05 [Boundary]:** Người dùng đăng nhập trên 2 thiết bị, đăng xuất ở thiết bị A -> thiết bị B vẫn dùng được bình thường.
-- **AC-06 [Resilience & Audit]:** SSO logout endpoint lỗi nhưng thu hồi ứng dụng thành công -> logout app vẫn 200 và có LOGOUT. Kho thu hồi lỗi -> 500, cookie bị xóa nhưng không claim JWT đã vô hiệu; API không đọc được kho phiên -> 503 mặc định từ chối.
+- **AC-01 [Happy Path]:** Người dùng bấm Đăng xuất -> cookie bị xóa, người dùng về trang đăng nhập. _(Kiểm cho: luồng chính)_
+- **AC-02 [Validation]:** Gọi đăng xuất khi không có cookie phiên -> vẫn trả 200 và chuyển về trang đăng nhập. _(Kiểm cho: BR-05)_
+- **AC-03 [Security]:** Sau khi đăng xuất, gửi lại JWT cũ (chưa hết hạn) -> 401. _(Kiểm cho: BR-03)_
+- **AC-04 [Idempotency]:** Bấm Đăng xuất 2 lần liên tiếp -> cả hai đều thành công, không lỗi. _(Kiểm cho: BR-05)_
+- **AC-05 [Boundary]:** Người dùng đăng nhập trên 2 thiết bị, đăng xuất ở thiết bị A -> thiết bị B vẫn dùng được bình thường. _(Kiểm cho: BR-04)_
+- **AC-06 [Resilience & Audit]:** SSO logout endpoint lỗi nhưng thu hồi ứng dụng thành công -> logout app vẫn 200 và có LOGOUT. Kho thu hồi lỗi -> 500, cookie bị xóa nhưng không claim JWT đã vô hiệu; API không đọc được kho phiên -> 503 mặc định từ chối. _(Kiểm cho: BR-02, E-01, E-02)_
+- **AC-07 [Security]:** Response của API chi tiết hồ sơ và API tải tệp có header `Cache-Control: private, no-store`. Sau khi đăng xuất, bấm Back trên trình duyệt -> trang không hiện lại dữ liệu cũ, hệ thống kiểm tra lại phiên và chuyển về trang đăng nhập. _(Kiểm cho: BR-01)_
 
 **Ví dụ Edge Case**
 Sinh viên logout được server xác nhận thành công trên máy chung. Frontend xóa cache, các trang nhạy cảm no-store và kiểm tra phiên khi Back/bfcache; JWT cũ trả 401, UI về login. Nếu thu hồi lỗi 500 thì UI không báo hoàn tất logout server và phải xử lý thử lại theo luồng lỗi.
@@ -247,31 +251,33 @@ Hệ thống (áp dụng cho mọi request của mọi người dùng).
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Login, callback và tài nguyên trang đăng nhập được khai báo public tường minh; logout cho phép xóa cookie ngay cả khi phiên hết hạn theo SEC-02. Các API nghiệp vụ còn lại mặc định từ chối nếu không có policy.
-- Request ghi dùng cookie phải kiểm tra CSRF token gắn phiên và Origin theo danh sách ứng dụng; sai kiểm tra trả 403, không cập nhật. Callback SSO dùng state một lần và kiểm tra giao thức, không áp cùng CSRF token của phiên chưa có. Nội dung nhập là văn bản thuần và được encode khi render theo quy ước chung.
-- Ma trận quyền theo cổng:
+- **BR-01:** Login, callback và tài nguyên trang đăng nhập được khai báo public tường minh; logout cho phép xóa cookie ngay cả khi phiên hết hạn theo SEC-02. Các API nghiệp vụ còn lại mặc định từ chối nếu không có policy.
+- **BR-02:** Request ghi dùng cookie phải kiểm tra CSRF token gắn phiên và Origin theo danh sách ứng dụng; sai kiểm tra trả 403, không cập nhật. Callback SSO dùng state một lần và kiểm tra giao thức, không áp cùng CSRF token của phiên chưa có. Nội dung nhập là văn bản thuần và được encode khi render theo quy ước chung.
+- **BR-03:** Ma trận quyền theo cổng:
   - `STUDENT`: chỉ dùng Cổng Sinh viên (M1).
   - `STAFF`: chỉ dùng Cổng Nhân viên (M2).
   - `ADMIN`: chỉ dùng Cổng Admin (M3).
-- Vai trò và phòng ban được gán qua FR-MGT-06. Tài khoản tạo lần đầu qua SSO mặc định là `STUDENT`.
-- Mỗi tài khoản có đúng một vai trò.
-- Thay đổi vai trò có hiệu lực ngay ở request kế tiếp.
-- Tài khoản bị vô hiệu hóa thì mọi request đều bị từ chối, kể cả khi phiên chưa hết hạn.
-- Giao diện chỉ hiển thị menu và nút thuộc vai trò hiện tại. Tuy vậy, việc chặn quyền luôn được thực hiện ở backend, không dựa vào giao diện.
+- **BR-04:** Vai trò và phòng ban được gán qua FR-MGT-06. Tài khoản tạo lần đầu qua SSO mặc định là `STUDENT`.
+- **BR-05:** Mỗi tài khoản có đúng một vai trò.
+- **BR-06:** Thay đổi vai trò có hiệu lực ngay ở request kế tiếp.
+- **BR-07:** Tài khoản bị vô hiệu hóa thì mọi request đều bị từ chối, kể cả khi phiên chưa hết hạn.
+- **BR-08:** Giao diện chỉ hiển thị menu và nút thuộc vai trò hiện tại. Tuy vậy, việc chặn quyền luôn được thực hiện ở backend, không dựa vào giao diện.
 
 **Alternative / Error Flows**
-- Nếu không có phiên hoặc phiên không hợp lệ, hệ thống trả 401.
-- Nếu vai trò không được phép dùng API, hệ thống trả 403.
-- Nếu tài khoản bị vô hiệu hóa trong lúc phiên còn hiệu lực, hệ thống trả 403 và thu hồi phiên.
-- Nếu không đọc được thông tin phân quyền từ cơ sở dữ liệu, hệ thống trả 503 và không cho request đi tiếp.
+- **E-01:** Nếu không có phiên hoặc phiên không hợp lệ, hệ thống trả 401.
+- **E-02:** Nếu vai trò không được phép dùng API, hệ thống trả 403.
+- **E-03:** Nếu tài khoản bị vô hiệu hóa trong lúc phiên còn hiệu lực, hệ thống trả 403 và thu hồi phiên.
+- **E-04:** Nếu không đọc được thông tin phân quyền từ cơ sở dữ liệu, hệ thống trả 503 và không cho request đi tiếp.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Sinh viên gọi API tạo yêu cầu -> được phép. Nhân viên gọi API hàng đợi -> được phép. Admin gọi API dashboard -> được phép.
-- **AC-02 [Validation]:** Sinh viên gọi API hàng đợi của Cổng Nhân viên -> 403. Nhân viên gọi API phân quyền -> 403.
-- **AC-03 [Boundary]:** Một API mới được thêm mà quên khai báo vai trò -> mọi vai trò đều nhận 403.
-- **AC-04 [Security]:** Client tự sửa giao diện để hiện nút của vai trò khác rồi gọi API -> backend vẫn trả 403.
-- **AC-05 [Concurrency]:** Admin hạ một nhân viên về `STUDENT` trong lúc người đó đang mở Cổng Nhân viên -> request kế tiếp của họ nhận 403.
-- **AC-06 [Resilience & Audit]:** Cơ sở dữ liệu phân quyền không phản hồi -> 503, request không được xử lý tiếp (không mặc định cho phép). Mỗi lần thay đổi vai trò -> có bản ghi `ROLE_CHANGE` (theo FR-MGT-06).
+- **AC-01 [Happy Path]:** Sinh viên gọi API tạo yêu cầu -> được phép. Nhân viên gọi API hàng đợi -> được phép. Admin gọi API dashboard -> được phép. _(Kiểm cho: luồng chính, BR-03)_
+- **AC-02 [Validation]:** Sinh viên gọi API hàng đợi của Cổng Nhân viên -> 403. Nhân viên gọi API phân quyền -> 403. _(Kiểm cho: BR-03, E-02)_
+- **AC-03 [Boundary]:** Một API mới được thêm mà quên khai báo vai trò -> mọi vai trò đều nhận 403. _(Kiểm cho: BR-01)_
+- **AC-04 [Security]:** Client tự sửa giao diện để hiện nút của vai trò khác rồi gọi API -> backend vẫn trả 403. _(Kiểm cho: BR-08)_
+- **AC-05 [Concurrency]:** Admin hạ một nhân viên về `STUDENT` trong lúc người đó đang mở Cổng Nhân viên -> request kế tiếp của họ nhận 403. _(Kiểm cho: BR-05, BR-06)_
+- **AC-06 [Resilience & Audit]:** Cơ sở dữ liệu phân quyền không phản hồi -> 503, request không được xử lý tiếp (không mặc định cho phép). Mỗi lần thay đổi vai trò -> có bản ghi `ROLE_CHANGE` (theo FR-MGT-06). _(Kiểm cho: E-04)_
+- **AC-07 [Security]:** Request ghi dùng cookie nhưng thiếu CSRF token, hoặc `Origin` không thuộc ứng dụng -> 403, dữ liệu không đổi. Gọi API nghiệp vụ không có phiên -> 401. _(Kiểm cho: BR-02, E-01)_
+- **AC-08 [Business Logic]:** Admin vô hiệu hóa một tài khoản đang có phiên còn hạn -> request kế tiếp của tài khoản đó nhận 403 và phiên bị thu hồi. Người dùng đăng nhập SSO lần đầu -> vai trò `STUDENT`, giao diện chỉ có menu của Cổng Sinh viên. _(Kiểm cho: BR-04, BR-07, BR-08, E-03)_
 
 **Ví dụ Edge Case**
 Staff không còn phụ trách ticket mở được admin vô hiệu hóa khi còn phiên 5 giờ và đang xem một ticket cùng phòng. Request tiếp theo đọc chi tiết trả 403, thu hồi phiên và UI về login. Không dùng ví dụ vô hiệu hóa staff còn assignee ticket mở vì MGT-06 phải chặn thao tác đó.
@@ -311,29 +317,31 @@ Hệ thống (áp dụng cho mọi request đọc hoặc ghi hồ sơ, tệp và
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Thứ tự kiểm tra theo quy tắc chung tại M4/M5: phiên → vai trò/active → phạm vi → quyền ghi → idempotency → version/trạng thái. Đối tượng chuyển khỏi phòng trả 404 trước khi xét version.
-- department_id filter ở MGT báo cáo hoặc target_department_id/assignee_id của thao tác điều phối là input nghiệp vụ hợp lệ và phải validate; không dùng chúng để xác định phòng của người gọi. MGT-06 tìm email chính xác là ngoại lệ dữ liệu tài khoản tối thiểu phục vụ cấp quyền, không cấp quyền xem hồ sơ sinh viên.
-- Phạm vi theo vai trò:
+- **BR-01:** Thứ tự kiểm tra theo quy tắc chung tại M4/M5: phiên → vai trò/active → phạm vi → quyền ghi → idempotency → version/trạng thái. Đối tượng chuyển khỏi phòng trả 404 trước khi xét version.
+- **BR-02:** department_id filter ở MGT báo cáo hoặc target_department_id/assignee_id của thao tác điều phối là input nghiệp vụ hợp lệ và phải validate; không dùng chúng để xác định phòng của người gọi. MGT-06 tìm email chính xác là ngoại lệ dữ liệu tài khoản tối thiểu phục vụ cấp quyền, không cấp quyền xem hồ sơ sinh viên.
+- **BR-03:** Phạm vi theo vai trò:
   - `STUDENT`: chỉ hồ sơ, tệp và thông báo của chính mình.
   - `STAFF`: xem hồ sơ của phòng ban mình. Chỉ người phụ trách được xử lý (ghi nhật ký, yêu cầu bổ sung, đóng hồ sơ). Mọi nhân viên trong phòng ban được điều phối (phân công, đặt ưu tiên, chuyển phòng ban, escalate).
   - `ADMIN`: chỉ dữ liệu của Cổng Admin, gồm số liệu tổng hợp, danh sách tóm tắt hồ sơ ở FR-MGT-01 (mã, loại, phòng ban, trạng thái, ngày gửi), đánh giá và nhận xét ở FR-MGT-05, dữ liệu phân quyền và SLA. Không xem chi tiết hồ sơ, không xem thông tin cá nhân của sinh viên, không xem hoặc tải tệp, không thao tác trên hồ sơ.
-- Phạm vi được áp dụng ngay trong truy vấn (điều kiện theo `student_id` hoặc `department_id`), không lọc sau khi đã lấy dữ liệu và không dựa vào giao diện.
-- Định danh và phòng ban của người dùng chỉ lấy từ phiên và cơ sở dữ liệu. Mọi `student_id` hoặc `department_id` do client gửi lên đều bị bỏ qua khi xác định phạm vi.
-- Đối tượng ngoài phạm vi trả 404. Đối tượng trong phạm vi xem nhưng không có quyền ghi trả 403.
-- Phạm vi được đánh giá lại ở mỗi request. Hồ sơ vừa chuyển phòng ban thì phòng ban cũ mất quyền ngay lập tức.
+- **BR-04:** Phạm vi được áp dụng ngay trong truy vấn (điều kiện theo `student_id` hoặc `department_id`), không lọc sau khi đã lấy dữ liệu và không dựa vào giao diện.
+- **BR-05:** Định danh và phòng ban của người dùng chỉ lấy từ phiên và cơ sở dữ liệu. Mọi `student_id` hoặc `department_id` do client gửi lên đều bị bỏ qua khi xác định phạm vi.
+- **BR-06:** Đối tượng ngoài phạm vi trả 404. Đối tượng trong phạm vi xem nhưng không có quyền ghi trả 403.
+- **BR-07:** Phạm vi được đánh giá lại ở mỗi request. Hồ sơ vừa chuyển phòng ban thì phòng ban cũ mất quyền ngay lập tức.
 
 **Alternative / Error Flows**
-- Nếu đối tượng không tồn tại hoặc nằm ngoài phạm vi, hệ thống trả 404.
-- Nếu người dùng nằm trong phạm vi xem nhưng không có quyền ghi, hệ thống trả 403.
-- Nếu không xác định được phòng ban của `STAFF`, hệ thống trả 403.
+- **E-01:** Nếu đối tượng không tồn tại hoặc nằm ngoài phạm vi, hệ thống trả 404.
+- **E-02:** Nếu người dùng nằm trong phạm vi xem nhưng không có quyền ghi, hệ thống trả 403.
+- **E-03:** Nếu không xác định được phòng ban của `STAFF`, hệ thống trả 403.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Sinh viên A mở hồ sơ của mình -> 200. Nhân viên phòng Đào tạo mở hồ sơ của phòng Đào tạo -> 200. Admin mở danh sách tóm tắt ở dashboard -> 200.
-- **AC-02 [Validation]:** Sinh viên A đổi mã hồ sơ trên URL thành mã hồ sơ của sinh viên B -> 404. Nhân viên đổi mã thành hồ sơ của phòng ban khác -> 404.
-- **AC-03 [Boundary]:** Nhân viên cùng phòng ban nhưng không phụ trách gọi API đóng hồ sơ -> 403. Cùng nhân viên đó gọi API phân công -> 200.
-- **AC-04 [Security]:** Gửi `department_id` của phòng ban khác trong body hoặc query -> hệ thống bỏ qua. Admin gọi API chi tiết hồ sơ, API tải tệp hoặc API đóng hồ sơ -> 403. Danh sách tóm tắt và báo cáo trả cho Admin không chứa tên, MSSV, email hay SĐT của sinh viên.
-- **AC-05 [Concurrency]:** Hồ sơ được chuyển từ phòng A sang phòng B -> request kế tiếp của nhân viên phòng A tới hồ sơ đó nhận 404.
-- **AC-06 [Resilience & Audit]:** Mọi request bị chặn vì ngoài phạm vi -> trả 404 với cùng nội dung như khi đối tượng không tồn tại. Request ghi bị từ chối không tạo bản ghi nhật ký nghiệp vụ.
+- **AC-01 [Happy Path]:** Sinh viên A mở hồ sơ của mình -> 200. Nhân viên phòng Đào tạo mở hồ sơ của phòng Đào tạo -> 200. Admin mở danh sách tóm tắt ở dashboard -> 200. _(Kiểm cho: luồng chính, BR-03)_
+- **AC-02 [Validation]:** Sinh viên A đổi mã hồ sơ trên URL thành mã hồ sơ của sinh viên B -> 404. Nhân viên đổi mã thành hồ sơ của phòng ban khác -> 404. _(Kiểm cho: BR-04, BR-06, E-01)_
+- **AC-03 [Boundary]:** Nhân viên cùng phòng ban nhưng không phụ trách gọi API đóng hồ sơ -> 403. Cùng nhân viên đó gọi API phân công -> 200. _(Kiểm cho: BR-03, BR-06, E-02)_
+- **AC-04 [Security]:** Gửi `department_id` của phòng ban khác trong body hoặc query -> hệ thống bỏ qua. Admin gọi API chi tiết hồ sơ, API tải tệp hoặc API đóng hồ sơ -> 403. Danh sách tóm tắt và báo cáo trả cho Admin không chứa tên, MSSV, email hay SĐT của sinh viên. _(Kiểm cho: BR-02, BR-03, BR-05)_
+- **AC-05 [Concurrency]:** Hồ sơ được chuyển từ phòng A sang phòng B -> request kế tiếp của nhân viên phòng A tới hồ sơ đó nhận 404. _(Kiểm cho: BR-07)_
+- **AC-06 [Resilience & Audit]:** Mọi request bị chặn vì ngoài phạm vi -> trả 404 với cùng nội dung như khi đối tượng không tồn tại. Request ghi bị từ chối không tạo bản ghi nhật ký nghiệp vụ. _(Kiểm cho: E-01)_
+- **AC-07 [Business Logic]:** Sinh viên A có 12 hồ sơ trong hệ thống có 100 hồ sơ -> danh sách của A có `total_items` = 12. Admin lọc báo cáo theo một `department_id` hợp lệ -> 200, chỉ có số liệu của phòng đó. Hồ sơ đã chuyển khỏi phòng A, nhân viên phòng A gửi thao tác ghi kèm version cũ -> 404, không phải 409. _(Kiểm cho: BR-01, BR-02, BR-04)_
+- **AC-08 [Security]:** Tài khoản `STAFF` không xác định được phòng ban gọi API hồ sơ -> 403. _(Kiểm cho: E-03)_
 
 **Ví dụ Edge Case**
 Một sinh viên thử đoán mã hồ sơ bằng cách tăng dần số thứ tự (USP-2026-00001, 00002, ...). Mọi hồ sơ không thuộc sinh viên đó đều trả 404 giống hệt hồ sơ không tồn tại. Đồng thời rate limit của FR-STU-07 giới hạn số lần thử.
@@ -373,33 +381,34 @@ Hệ thống (áp dụng cho mọi thao tác lưu và tải tệp).
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Content-Disposition dùng inline khi xem, attachment khi tải; filename được sanitize/encode header. Cache-Control private, no-store cho tệp nhạy cảm. Kiểm tra quyền tại lúc bắt đầu stream; dữ liệu đã tải trên máy người có quyền không thể thu hồi bằng đổi phòng.
-- Chỉ hai nhóm được xem và tải tệp:
+- **BR-01:** Content-Disposition dùng inline khi xem, attachment khi tải; filename được sanitize/encode header. Cache-Control private, no-store cho tệp nhạy cảm. Kiểm tra quyền tại lúc bắt đầu stream; dữ liệu đã tải trên máy người có quyền không thể thu hồi bằng đổi phòng.
+- **BR-02:** Chỉ hai nhóm được xem và tải tệp:
   - Sinh viên chủ hồ sơ.
   - Nhân viên thuộc phòng ban hiện đang giữ hồ sơ.
-- Admin không có quyền với tệp.
-- Tệp lưu ngoài thư mục web công khai, với tên ngẫu nhiên. Không tồn tại đường dẫn trực tiếp nào tới tệp.
-- Tệp chỉ được trả qua API có kiểm tra quyền. Response có:
+- **BR-03:** Admin không có quyền với tệp.
+- **BR-04:** Tệp lưu ngoài thư mục web công khai, với tên ngẫu nhiên. Không tồn tại đường dẫn trực tiếp nào tới tệp.
+- **BR-05:** Tệp chỉ được trả qua API có kiểm tra quyền. Response có:
   - `Content-Type` theo định dạng đã xác minh lúc tải lên.
   - `Content-Disposition` với tên gốc.
   - `X-Content-Type-Options: nosniff`.
-- Tệp đã tải lên không được sửa hoặc xóa qua giao diện.
-- Ghi DOWNLOAD_FILE trước khi đọc/stream theo nghĩa đã cấp quyền và khởi tạo tải, result=AUTHORIZED. Nếu audit khởi tạo lỗi thì không trả tệp. Ghi FILE_READ_RESULT riêng với result=STREAM_STARTED/STORAGE_FAILED gắn download_event_id; không cam kết log chứng minh client đã nhận đủ byte. Mất kết nối client không hoàn tác audit khởi tạo.
+- **BR-06:** Tệp đã tải lên không được sửa hoặc xóa qua giao diện.
+- **BR-07:** Ghi DOWNLOAD_FILE trước khi đọc/stream theo nghĩa đã cấp quyền và khởi tạo tải, result=AUTHORIZED. Nếu audit khởi tạo lỗi thì không trả tệp. Ghi FILE_READ_RESULT riêng với result=STREAM_STARTED/STORAGE_FAILED gắn download_event_id; không cam kết log chứng minh client đã nhận đủ byte. Mất kết nối client không hoàn tác audit khởi tạo.
 
 **Alternative / Error Flows**
-- Nếu không có phiên, hệ thống trả 401.
-- Nếu tài khoản `ADMIN` gọi API tải tệp, hệ thống trả 403.
-- Nếu tệp nằm ngoài phạm vi của người dùng, hệ thống trả 404.
-- Nếu tệp không còn trên kho lưu trữ, hệ thống trả 404 và ghi log lỗi hệ thống.
-- Nếu kho lưu trữ không phản hồi, hoặc ghi nhật ký lỗi, hệ thống trả 503.
+- **E-01:** Nếu không có phiên, hệ thống trả 401.
+- **E-02:** Nếu tài khoản `ADMIN` gọi API tải tệp, hệ thống trả 403.
+- **E-03:** Nếu tệp nằm ngoài phạm vi của người dùng, hệ thống trả 404.
+- **E-04:** Nếu tệp không còn trên kho lưu trữ, hệ thống trả 404 và ghi log lỗi hệ thống.
+- **E-05:** Nếu kho lưu trữ không phản hồi, hoặc ghi nhật ký lỗi, hệ thống trả 503.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Sinh viên chủ hồ sơ tải tệp -> 200, đúng tên gốc và đúng nội dung.
-- **AC-02 [Validation]:** Gọi API với `file_id` không tồn tại -> 404.
-- **AC-03 [Security]:** Truy cập thẳng đường dẫn lưu trữ thật của tệp trên server -> không truy cập được. Nhân viên phòng ban khác tải tệp -> 404. Tài khoản `ADMIN` tải tệp -> 403. Response có header `X-Content-Type-Options: nosniff`.
-- **AC-04 [Boundary]:** Hồ sơ vừa được chuyển sang phòng ban khác -> nhân viên phòng ban mới tải tệp được, nhân viên phòng ban cũ nhận 404.
-- **AC-05 [Concurrency]:** Nhiều người có quyền tải cùng một tệp cùng lúc -> tất cả nhận đúng nội dung, mỗi lượt tải có một bản ghi nhật ký riêng.
-- **AC-06 [Resilience & Audit]:** Audit khởi tạo lỗi -> 503, không stream. Đọc kho thành công -> DOWNLOAD_FILE=AUTHORIZED và FILE_READ_RESULT=STREAM_STARTED; object mất/storage lỗi -> 404/503, có result lỗi theo cùng event, không claim client nhận đủ tệp.
+- **AC-01 [Happy Path]:** Sinh viên chủ hồ sơ tải tệp -> 200, đúng tên gốc và đúng nội dung. _(Kiểm cho: luồng chính, BR-02, BR-05)_
+- **AC-02 [Validation]:** Gọi API với `file_id` không tồn tại -> 404. _(Kiểm cho: E-03)_
+- **AC-03 [Security]:** Truy cập thẳng đường dẫn lưu trữ thật của tệp trên server -> không truy cập được. Nhân viên phòng ban khác tải tệp -> 404. Tài khoản `ADMIN` tải tệp -> 403. Response có header `X-Content-Type-Options: nosniff`. _(Kiểm cho: BR-03, BR-04, BR-05, E-02, E-03)_
+- **AC-04 [Boundary]:** Hồ sơ vừa được chuyển sang phòng ban khác -> nhân viên phòng ban mới tải tệp được, nhân viên phòng ban cũ nhận 404. _(Kiểm cho: BR-02, E-03)_
+- **AC-05 [Concurrency]:** Nhiều người có quyền tải cùng một tệp cùng lúc -> tất cả nhận đúng nội dung, mỗi lượt tải có một bản ghi nhật ký riêng. _(Kiểm cho: BR-07)_
+- **AC-06 [Resilience & Audit]:** Audit khởi tạo lỗi -> 503, không stream. Đọc kho thành công -> DOWNLOAD_FILE=AUTHORIZED và FILE_READ_RESULT=STREAM_STARTED; object mất/storage lỗi -> 404/503, có result lỗi theo cùng event, không claim client nhận đủ tệp. _(Kiểm cho: BR-07, E-04, E-05)_
+- **AC-07 [Security]:** Xem tệp -> `Content-Disposition: inline`; tải tệp -> `Content-Disposition: attachment`; tên gốc có ký tự đặc biệt (ví dụ dấu ngoặc kép) được mã hóa an toàn trong header; response có `Cache-Control: private, no-store`. Gọi API tải tệp không có phiên -> 401. Giao diện không có nút sửa hoặc xóa tệp đã tải lên. _(Kiểm cho: BR-01, BR-06, E-01)_
 
 **Ví dụ Edge Case**
 Nhân viên sao chép đường dẫn tải tệp rồi gửi qua tin nhắn cho một người ngoài phòng ban. Người nhận mở đường dẫn: nếu chưa đăng nhập thì nhận 401, nếu đã đăng nhập nhưng không có quyền thì nhận 404 (hoặc 403 nếu là Admin). Đường dẫn tải tệp không mang quyền truy cập theo nó.
@@ -437,31 +446,34 @@ Hệ thống (tự động ghi khi các thao tác được thực hiện).
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Audit của ghi DB nghiệp vụ cùng transaction; LOGIN_FAILED dùng transaction audit riêng vì không có thao tác đăng nhập thành công. Audit tải tệp theo SEC-05 dùng transaction riêng, không áp lời hứa atomic DB lên mạng/kho tệp.
-- Mỗi event nghiệp vụ có tối đa một bản ghi cho mỗi action; một hành động có thể có thêm UPLOAD_FILE cho từng file và DUE_DATE_CHANGE nếu cộng bù. event_id+action+object_id dùng chống trùng. Một lần REQUEST_INFO không ghi thêm STATUS_CHANGE audit giống hệt; STATUS_CHANGE dùng cho đổi do hệ thống. Cấu hình ROLE_CHANGE có subtype như MGT-06.
-- Các thao tác được ghi:
+- **BR-01:** Audit của ghi DB nghiệp vụ cùng transaction; LOGIN_FAILED dùng transaction audit riêng vì không có thao tác đăng nhập thành công. Audit tải tệp theo SEC-05 dùng transaction riêng, không áp lời hứa atomic DB lên mạng/kho tệp.
+- **BR-02:** Mỗi event nghiệp vụ có tối đa một bản ghi cho mỗi action; một hành động có thể có thêm UPLOAD_FILE cho từng file và DUE_DATE_CHANGE nếu cộng bù. event_id+action+object_id dùng chống trùng. Một lần REQUEST_INFO không ghi thêm STATUS_CHANGE audit giống hệt; STATUS_CHANGE dùng cho đổi do hệ thống. Cấu hình ROLE_CHANGE có subtype như MGT-06.
+- **BR-03:** Các thao tác được ghi:
   - Đăng nhập và đăng xuất: `LOGIN_SUCCESS`, `LOGIN_FAILED`, `LOGOUT`.
   - Hồ sơ: `CREATE_TICKET`, `SUPPLEMENT_SUBMITTED`, `RATE_TICKET`, `ADD_NOTE`, `REQUEST_INFO`, `CLOSE_TICKET`, `ASSIGN`, `CHANGE_PRIORITY`, `ESCALATE`, `TRANSFER`.
   - Trạng thái do hệ thống tự đổi: `STATUS_CHANGE` (ví dụ hồ sơ chuyển sang `OVERDUE`), với người thực hiện là `SYSTEM`.
   - Hạn xử lý: `DUE_DATE_CHANGE`, khi `due_at` được cộng bù lúc hồ sơ rời `PENDING_INFO` (FR-CORE-03). Người thực hiện là người gây ra sự kiện, ví dụ sinh viên bổ sung hoặc nhân viên đóng hồ sơ.
   - Tệp: UPLOAD_FILE, DOWNLOAD_FILE (khởi tạo tải có quyền), FILE_READ_RESULT (kết quả đọc kho theo download_event_id).
   - Cấu hình: `ROLE_CHANGE`, `SLA_CHANGE`.
-- Mỗi bản ghi gồm: thời điểm lưu UTC, khi đọc hiển thị UTC+7, người thực hiện, vai trò, mã thao tác, loại và mã đối tượng, giá trị cũ và mới (nếu có), địa chỉ IP, kết quả.
-- Nhật ký không lưu nội dung nhạy cảm như mô tả yêu cầu, nội dung ghi chú, nhận xét hay nội dung tệp. Nhật ký chỉ lưu mã tham chiếu tới các đối tượng đó; lý do chuyển/escalate cũng lưu ở lịch sử nghiệp vụ nội bộ, audit không nhúng reason. Mã subtype cấu hình thuộc whitelist, không nhúng input tùy ý.
-- Nhật ký chỉ được thêm mới. Không có API sửa hoặc xóa. Tài khoản cơ sở dữ liệu của ứng dụng chỉ có quyền thêm và đọc trên bảng nhật ký.
-- Không có màn hình xem nhật ký. Khi cần tra cứu, người vận hành truy vấn trực tiếp cơ sở dữ liệu.
+- **BR-04:** Mỗi bản ghi gồm: thời điểm lưu UTC, khi đọc hiển thị UTC+7, người thực hiện, vai trò, mã thao tác, loại và mã đối tượng, giá trị cũ và mới (nếu có), địa chỉ IP, kết quả.
+- **BR-05:** Nhật ký không lưu nội dung nhạy cảm như mô tả yêu cầu, nội dung ghi chú, nhận xét hay nội dung tệp. Nhật ký chỉ lưu mã tham chiếu tới các đối tượng đó; lý do chuyển/escalate cũng lưu ở lịch sử nghiệp vụ nội bộ, audit không nhúng reason. Mã subtype cấu hình thuộc whitelist, không nhúng input tùy ý.
+- **BR-06:** Nhật ký chỉ được thêm mới. Không có API sửa hoặc xóa. Tài khoản cơ sở dữ liệu của ứng dụng chỉ có quyền thêm và đọc trên bảng nhật ký.
+- **BR-07:** Không có màn hình xem nhật ký. Khi cần tra cứu, người vận hành truy vấn trực tiếp cơ sở dữ liệu.
 
 **Alternative / Error Flows**
-- Nếu audit DB nghiệp vụ lỗi, rollback cả thao tác và trả 500. Audit khởi tạo tải lỗi: 503, không stream. FILE_READ_RESULT ghi lỗi sau stream đã bắt đầu: ghi cảnh báo vận hành/retry audit gắn cùng event, không hứa rollback bytes đã trả; login thất bại vẫn bị từ chối và log kỹ thuật nếu audit không ghi được.
-- Nếu thao tác bị từ chối do lỗi dữ liệu hoặc lỗi phân quyền, hệ thống không ghi bản ghi nghiệp vụ. Riêng đăng nhập thất bại vẫn được ghi `LOGIN_FAILED`.
+- **E-01:** Nếu audit DB nghiệp vụ lỗi, rollback cả thao tác và trả 500. Audit khởi tạo tải lỗi: 503, không stream. FILE_READ_RESULT ghi lỗi sau stream đã bắt đầu: ghi cảnh báo vận hành/retry audit gắn cùng event, không hứa rollback bytes đã trả; login thất bại vẫn bị từ chối và log kỹ thuật nếu audit không ghi được.
+- **E-02:** Nếu thao tác bị từ chối do lỗi dữ liệu hoặc lỗi phân quyền, hệ thống không ghi bản ghi nghiệp vụ. Riêng đăng nhập thất bại vẫn được ghi `LOGIN_FAILED`.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Nhân viên chuyển phòng ban cho một hồ sơ -> có đúng 1 bản ghi `TRANSFER` với phòng ban cũ, phòng ban mới, người thực hiện và thời điểm.
-- **AC-02 [Validation]:** Sinh viên tạo yêu cầu -> bản ghi `CREATE_TICKET` chỉ chứa mã hồ sơ, không chứa nội dung mô tả.
-- **AC-03 [Boundary]:** Hồ sơ tự chuyển sang `OVERDUE` khi vượt SLA -> có bản ghi `STATUS_CHANGE` với người thực hiện là `SYSTEM`. Sinh viên bổ sung xong cho hồ sơ đang `PENDING_INFO` -> có bản ghi `SUPPLEMENT_SUBMITTED` và bản ghi `DUE_DATE_CHANGE` với `due_at` cũ và mới.
-- **AC-04 [Security]:** Ứng dụng thử chạy câu lệnh sửa hoặc xóa trên bảng nhật ký -> cơ sở dữ liệu từ chối do không có quyền.
-- **AC-05 [Concurrency]:** 50 thao tác đổi ưu tiên hợp lệ, không no-op, trên 50 ticket khác nhau -> 50 CHANGE_PRIORITY. Nếu thao tác có nhiều file/cộng bù thì có thêm audit action tương ứng, mỗi event/action/object không trùng.
-- **AC-06 [Resilience]:** Bảng nhật ký không ghi được -> thao tác nghiệp vụ bị rollback, dữ liệu hồ sơ không đổi.
+- **AC-01 [Happy Path]:** Nhân viên chuyển phòng ban cho một hồ sơ -> có đúng 1 bản ghi `TRANSFER` với phòng ban cũ, phòng ban mới, người thực hiện và thời điểm. _(Kiểm cho: luồng chính, BR-03, BR-04)_
+- **AC-02 [Validation]:** Sinh viên tạo yêu cầu -> bản ghi `CREATE_TICKET` chỉ chứa mã hồ sơ, không chứa nội dung mô tả. _(Kiểm cho: BR-03, BR-05)_
+- **AC-03 [Boundary]:** Hồ sơ tự chuyển sang `OVERDUE` khi vượt SLA -> có bản ghi `STATUS_CHANGE` với người thực hiện là `SYSTEM`. Sinh viên bổ sung xong cho hồ sơ đang `PENDING_INFO` -> có bản ghi `SUPPLEMENT_SUBMITTED` và bản ghi `DUE_DATE_CHANGE` với `due_at` cũ và mới. _(Kiểm cho: BR-03)_
+- **AC-04 [Security]:** Ứng dụng thử chạy câu lệnh sửa hoặc xóa trên bảng nhật ký -> cơ sở dữ liệu từ chối do không có quyền. _(Kiểm cho: BR-06)_
+- **AC-05 [Concurrency]:** 50 thao tác đổi ưu tiên hợp lệ, không no-op, trên 50 ticket khác nhau -> 50 CHANGE_PRIORITY. Nếu thao tác có nhiều file/cộng bù thì có thêm audit action tương ứng, mỗi event/action/object không trùng. _(Kiểm cho: BR-02)_
+- **AC-06 [Resilience]:** Bảng nhật ký không ghi được -> thao tác nghiệp vụ bị rollback, dữ liệu hồ sơ không đổi. _(Kiểm cho: BR-01, E-01)_
+- **AC-07 [Validation]:** Một bản ghi nhật ký có thời điểm lưu UTC (truy vấn hiển thị UTC+7), người thực hiện, vai trò, mã thao tác, loại và mã đối tượng, giá trị cũ và mới nếu có, địa chỉ IP, kết quả. Nhân viên tạo yêu cầu bổ sung làm hồ sơ chuyển `PENDING_INFO` -> có 1 bản ghi `REQUEST_INFO`, không có thêm `STATUS_CHANGE` cho cùng sự kiện. _(Kiểm cho: BR-02, BR-04)_
+- **AC-08 [Business Logic]:** Thao tác bị từ chối vì dữ liệu sai (400) hoặc thiếu quyền (403/404) -> không có bản ghi nghiệp vụ. Đăng nhập thất bại -> vẫn có bản ghi `LOGIN_FAILED`. Cả 3 cổng không có màn hình xem nhật ký. _(Kiểm cho: BR-01, BR-07, E-02)_
+- **AC-09 [Resilience]:** Bảng nhật ký không ghi được khi lưu một thao tác trên hồ sơ -> 500, dữ liệu hồ sơ không đổi. _(Kiểm cho: E-01)_
 
 **Ví dụ Edge Case**
 Sinh viên khiếu nại rằng hồ sơ bị chuyển `OVERDUE` dù mình đã bổ sung đúng hạn. Người vận hành truy vấn nhật ký theo mã hồ sơ và thấy các bản ghi `REQUEST_INFO`, `SUPPLEMENT_SUBMITTED`, `DUE_DATE_CHANGE` và `STATUS_CHANGE`, với thời điểm cụ thể của từng bước. Từ đó xác định được hạn đã được cộng bù đúng hay chưa.

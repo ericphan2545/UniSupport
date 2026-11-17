@@ -5,7 +5,7 @@ Admin đăng nhập M4 → dashboard số lượng hiện tại/trung bình CLOS
 ## Nội dung module
 
 - [PRD chi tiết của module](prd.md): 7 chức năng, mỗi chức năng có mô tả, actor, priority (thang ở [product/README.md](../../product/README.md#thang-ưu-tiên-fr)), điều kiện, luồng, Input/Output, business rules, lỗi, acceptance criteria và edge case.
-- Phần đầu PRD mô tả luồng, đầu vào/đầu ra module, phụ thuộc và những giả định cần xác nhận.
+- Phần đầu PRD mô tả luồng, đầu vào/đầu ra module, phụ thuộc và dẫn mã các điểm còn chờ trường xác nhận (nơi gốc: [assumptions.md](../../project/assumptions.md)).
 - Actor là người sử dụng/hệ thống. Người lập trình và task thuộc kế hoạch của nhóm, không được suy từ Actor.
 
 ## Cách đọc

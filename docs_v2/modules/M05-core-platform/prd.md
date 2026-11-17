@@ -1,6 +1,6 @@
 # M5. Lõi hệ thống & Nền tảng – Functional Requirement Specification
 
-> Cập nhật: 09/10/2026. Giữ nguyên 42 chức năng của 5 module trong repo; bổ sung và thống nhất đặc tả trực tiếp tại module. Các giả định chưa được trường xác nhận được ghi tại phần đầu module.
+> Cập nhật: 09/10/2026. Giữ nguyên 42 chức năng của 5 module trong repo; bổ sung và thống nhất đặc tả trực tiếp tại module. Điểm còn chờ trường xác nhận có một nơi gốc là [assumptions.md](../../project/assumptions.md) (mã `A-xx`, cột Trạng thái); phần đầu module chỉ dẫn lại mã.
 
 **Mục đích module:** Mã hồ sơ, trạng thái, SLA, danh mục, lịch sử, giới hạn tệp và quy tắc UI.
 
@@ -15,7 +15,7 @@ Khi M1 tạo ticket, M5 lấy danh mục/SLA snapshot và sinh mã; khi M2/M1 th
 **Input module:** sự kiện nghiệp vụ, version, thời gian server, danh mục/SLA và lựa chọn giao diện.
 **Output module:** mã, trạng thái, hạn nội bộ, lịch sử theo quyền, quy tắc tệp/ngôn ngữ/bố cục. Module này không tạo một portal hoặc vai trò mới.
 
-**Cần xác nhận:** danh mục/mapping/tên VI-EN/SLA đầu, hạ tầng/storage, thời hạn lưu dữ liệu và tiêu chí chất lượng. Giờ lịch/pause PENDING_INFO là phương án giữ từ GitHub. OVERDUE chờ bổ sung không pause; đã quá hạn trước cron thì không cho IN_PROGRESS tạo pause muộn. Đơn vị file dùng 10 MiB = 10.485.760 byte, gateway 55 MiB; nhóm xác nhận trong thiết kế triển khai.
+**Điểm chờ xác nhận:** danh mục, ánh xạ, tên VN/EN và SLA ban đầu (`A-07`, `A-10`); SLA theo giờ lịch và tạm dừng khi `PENDING_INFO` (`A-08`); giới hạn tệp (`A-09`); hạ tầng và kho lưu tệp (`A-11`); thời hạn lưu dữ liệu (rủi ro `R-25`). Quy tắc OVERDUE không tạm dừng, không cho tạm dừng muộn khi hồ sơ đã quá hạn trước tác vụ quá hạn, đơn vị tệp 10 MiB = 10.485.760 byte và giới hạn gateway 55 MiB là đặc tả chốt ở `MS-01` (`A-13`). Tiêu chí chất lượng: QMP. Trạng thái theo dõi ở [assumptions.md](../../project/assumptions.md).
 
 ## Quy tắc dữ liệu và cập nhật dùng cho M1–M5
 
@@ -60,10 +60,10 @@ Khi M1 tạo ticket, M5 lấy danh mục/SLA snapshot và sinh mã; khi M2/M1 th
 - PRD mô tả điều kiện cần kiểm chứng, không khẳng định đã triển khai/pass. Kiểm tra đủ các AC từng module và luồng liên module: tạo → phân công → bổ sung → chuyển/quá hạn → đóng → rating → report.
 - Kiểm tra race bổ sung/đóng cùng version; phân công/đổi quyền; chuyển phòng và request cũ; đổi SLA/tạo ticket; retry/key trùng và mất phản hồi; public history không lộ due_at.
 - Kiểm tra upload/storage/DB lỗi và dọn bù, seed không ghi đè SLA; timezone theo ngày Việt Nam; báo cáo null/zero; logout/thu hồi/cache; VN/EN/mobile/browser.
-- Quy mô tham chiếu proposal: 3.000 sinh viên và 100–200 người dùng đồng thời. Bài test phải nêu hạ tầng, dataset, số user, kịch bản/rate, p95 và tỷ lệ lỗi. Timeout 5/10 giây không phải cam kết hiệu năng. Mục tiêu hiệu năng/usability phải được nhóm/khách chốt ở prototype, không tự lấy số từ bản nháp cũ.
+- Quy mô tham chiếu proposal: 3.000 sinh viên và 100–200 người dùng đồng thời. Bài test phải nêu hạ tầng, dataset, số user, kịch bản/rate, p95 và tỷ lệ lỗi. Timeout 5/10 giây không phải cam kết hiệu năng. Mục tiêu hiệu năng và usability: `NFR-PERF-01` đến `NFR-PERF-03`, `NFR-USE-01`.
 - Bộ 200 ticket giả phục vụ kiểm thử/bàn giao cần phủ 5 trạng thái, phòng/loại, file, info request, transfer, rating và biên thời gian. Không dùng dữ liệu sinh viên thật; số phân bổ được QA chốt theo test plan.
 - Docker/env, source, OpenAPI/mã lỗi, 3 hướng dẫn, test/usability report, triển khai và nghiệm thu/bảo hành là đầu ra dự án theo proposal; không tự biến mỗi đầu ra thành FR mới hoặc đưa lịch/nhân sự vào FRS.
-- Thời hạn ticket/tệp/history/audit, backup và người vận hành phải được trường xác nhận trước production; không tự chạy xóa dữ liệu. Trường chịu vận hành sau bàn giao theo proposal.
+- Thời hạn ticket/tệp/history/audit, backup và người vận hành phải được trường xác nhận trước production (`R-25`); không tự chạy xóa dữ liệu (`NG-09`). Trường chịu vận hành sau bàn giao theo proposal.
 
 ## Quy ước chung (áp dụng cho mọi FR trong module)
 
@@ -106,25 +106,27 @@ Hệ thống (được gọi khi tạo hồ sơ ở FR-STU-02).
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Định dạng mã: `USP-YYYY-NNNNN`.
+- **BR-01:** Định dạng mã: `USP-YYYY-NNNNN`.
   - `YYYY`: năm tạo hồ sơ theo giờ Việt Nam.
   - `NNNNN`: số thứ tự 5 chữ số, thêm số 0 ở đầu nếu thiếu. Bắt đầu lại từ `00001` mỗi năm.
-- Số thứ tự lấy từ sequence của cơ sở dữ liệu, mỗi năm một sequence. Cột mã có unique constraint.
-- Nếu một năm có hơn 99999 hồ sơ thì phần số tự mở rộng thêm chữ số, không báo lỗi.
-- Nếu transaction tạo hồ sơ bị rollback thì số thứ tự đã lấy bị bỏ qua. Mã có thể bị nhảy số, nhưng không bao giờ trùng.
-- Mã không thay đổi trong suốt vòng đời hồ sơ và không chứa thông tin cá nhân.
+- **BR-02:** Số thứ tự lấy từ sequence của cơ sở dữ liệu, mỗi năm một sequence. Cột mã có unique constraint.
+- **BR-03:** Nếu một năm có hơn 99999 hồ sơ thì phần số tự mở rộng thêm chữ số, không báo lỗi.
+- **BR-04:** Nếu transaction tạo hồ sơ bị rollback thì số thứ tự đã lấy bị bỏ qua. Mã có thể bị nhảy số, nhưng không bao giờ trùng.
+- **BR-05:** Mã không thay đổi trong suốt vòng đời hồ sơ và không chứa thông tin cá nhân.
 
 **Alternative / Error Flows**
-- Nếu không lấy được số thứ tự, hệ thống rollback việc tạo hồ sơ và trả 500.
-- Nếu vi phạm unique constraint (lỗi bất thường), hệ thống rollback, trả 500 và ghi log lỗi hệ thống.
+- **E-01:** Nếu không lấy được số thứ tự, hệ thống rollback việc tạo hồ sơ và trả 500.
+- **E-02:** Nếu vi phạm unique constraint (lỗi bất thường), hệ thống rollback, trả 500 và ghi log lỗi hệ thống.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Hồ sơ đầu tiên tạo trong năm 2027 -> mã `USP-2027-00001`. Hồ sơ kế tiếp -> `USP-2027-00002`.
-- **AC-02 [Validation]:** Mọi mã sinh ra đều khớp mẫu `^USP-\d{4}-\d{5,}$`.
-- **AC-03 [Boundary]:** Hồ sơ tạo lúc 06:59 ngày 01/01/2027 giờ Việt Nam (tức 23:59 ngày 31/12/2026 theo UTC) -> mã năm 2027.
-- **AC-04 [Security]:** Mã không chứa MSSV, tên sinh viên hay thông tin cá nhân nào khác.
-- **AC-05 [Concurrency]:** 100 hồ sơ được tạo đồng thời -> 100 mã khác nhau, không trùng.
-- **AC-06 [Resilience]:** Transaction tạo hồ sơ bị rollback sau khi đã lấy số thứ tự -> không có hồ sơ nào mang mã đó; hồ sơ tiếp theo dùng số kế tiếp.
+- **AC-01 [Happy Path]:** Hồ sơ đầu tiên tạo trong năm 2027 -> mã `USP-2027-00001`. Hồ sơ kế tiếp -> `USP-2027-00002`. _(Kiểm cho: luồng chính, BR-01)_
+- **AC-02 [Validation]:** Mọi mã sinh ra đều khớp mẫu `^USP-\d{4}-\d{5,}$`. _(Kiểm cho: BR-01)_
+- **AC-03 [Boundary]:** Hồ sơ tạo lúc 06:59 ngày 01/01/2027 giờ Việt Nam (tức 23:59 ngày 31/12/2026 theo UTC) -> mã năm 2027. _(Kiểm cho: BR-01)_
+- **AC-04 [Security]:** Mã không chứa MSSV, tên sinh viên hay thông tin cá nhân nào khác. _(Kiểm cho: BR-05)_
+- **AC-05 [Concurrency]:** 100 hồ sơ được tạo đồng thời -> 100 mã khác nhau, không trùng. _(Kiểm cho: BR-02)_
+- **AC-06 [Resilience]:** Transaction tạo hồ sơ bị rollback sau khi đã lấy số thứ tự -> không có hồ sơ nào mang mã đó; hồ sơ tiếp theo dùng số kế tiếp. _(Kiểm cho: BR-04)_
+- **AC-07 [Boundary]:** Năm đã có 99.999 hồ sơ, tạo hồ sơ tiếp theo -> mã `USP-YYYY-100000`, vẫn khớp mẫu ở AC-02. Mã của một hồ sơ giữ nguyên sau khi phân công, chuyển phòng và đóng. _(Kiểm cho: BR-03, BR-05)_
+- **AC-08 [Resilience]:** Không lấy được số thứ tự từ sequence -> 500, không tạo hồ sơ. Vi phạm unique constraint của cột mã -> 500, rollback, log lỗi hệ thống. _(Kiểm cho: E-01, E-02)_
 
 **Ví dụ Edge Case**
 Hồ sơ `USP-2026-00057` bị rollback do lỗi lưu tệp. Hồ sơ kế tiếp nhận mã `USP-2026-00058`, nên trong hệ thống không có mã 00057. Đây là hành vi đúng: mã hồ sơ được bảo đảm duy nhất, không bảo đảm liên tục.
@@ -164,10 +166,10 @@ Hệ thống (áp dụng mỗi khi có thao tác làm đổi trạng thái).
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Quy tắc version áp dụng cả thay đổi không đổi status: note, phân công, priority, transfer, request/supplement/close và job quá hạn. Mỗi thao tác làm thay đổi ticket tăng version một lần; no-op không tăng; đọc/rating/notification không tăng version ticket.
-- NOW dùng thời gian server. Trong khoảng due_at đã qua nhưng job chưa chạy, không cho yêu cầu bổ sung chuyển IN_PROGRESS thành PENDING_INFO (409); phân công/đóng vẫn được xử lý theo version và timestamp. Nếu đóng thắng trước job, ticket CLOSED giữ nguyên, thời lượng xử lý vẫn phản ánh thời gian thực; không tự tạo một status quá hạn sau CLOSED.
-- Tác vụ quá hạn khóa mỗi ticket theo version và bỏ qua bản đã đổi; scheduler có một tiến trình hiệu lực. Ranh giới quá hạn là now > due_at, lần chạy kế tiếp đổi trong tối đa 60 giây khi job khỏe.
-- Bảng chuyển trạng thái hợp lệ:
+- **BR-01:** Quy tắc version áp dụng cả thay đổi không đổi status: note, phân công, priority, transfer, request/supplement/close và job quá hạn. Mỗi thao tác làm thay đổi ticket tăng version một lần; no-op không tăng; đọc/rating/notification không tăng version ticket.
+- **BR-02:** NOW dùng thời gian server. Trong khoảng due_at đã qua nhưng job chưa chạy, không cho yêu cầu bổ sung chuyển IN_PROGRESS thành PENDING_INFO (409); phân công/đóng vẫn được xử lý theo version và timestamp. Nếu đóng thắng trước job, ticket CLOSED giữ nguyên, thời lượng xử lý vẫn phản ánh thời gian thực; không tự tạo một status quá hạn sau CLOSED.
+- **BR-03:** Tác vụ quá hạn khóa mỗi ticket theo version và bỏ qua bản đã đổi; scheduler có một tiến trình hiệu lực. Ranh giới quá hạn là now > due_at, lần chạy kế tiếp đổi trong tối đa 60 giây khi job khỏe.
+- **BR-04:** Bảng chuyển trạng thái hợp lệ:
 
 | Trạng thái hiện tại | Sự kiện | Trạng thái mới | Do ai |
 |---|---|---|---|
@@ -179,28 +181,30 @@ Hệ thống (áp dụng mỗi khi có thao tác làm đổi trạng thái).
 | `PENDING_INFO` | Sinh viên bổ sung xong | `IN_PROGRESS` | FR-STU-09 |
 | `IN_PROGRESS`, `PENDING_INFO`, `OVERDUE` | Đóng hồ sơ | `CLOSED` | FR-STF-06 |
 
-- Hồ sơ `OVERDUE` giữ nguyên trạng thái này khi được phân công, phân công lại, yêu cầu bổ sung hoặc nhận bổ sung từ sinh viên. Trạng thái chỉ đổi khi hồ sơ được đóng.
-- `PENDING_INFO` không chuyển sang `OVERDUE`, vì SLA đang tạm dừng (FR-CORE-03).
-- `CLOSED` là trạng thái cuối, không chuyển đi đâu được nữa.
-- Các thao tác không làm đổi trạng thái: phân công lại, đặt mức ưu tiên, escalate, chuyển phòng ban, ghi nhật ký xử lý.
-- **Tác vụ kiểm tra quá hạn:**
+- **BR-05:** Hồ sơ `OVERDUE` giữ nguyên trạng thái này khi được phân công, phân công lại, yêu cầu bổ sung hoặc nhận bổ sung từ sinh viên. Trạng thái chỉ đổi khi hồ sơ được đóng.
+- **BR-06:** `PENDING_INFO` không chuyển sang `OVERDUE`, vì SLA đang tạm dừng (FR-CORE-03).
+- **BR-07:** `CLOSED` là trạng thái cuối, không chuyển đi đâu được nữa.
+- **BR-08:** Các thao tác không làm đổi trạng thái: phân công lại, đặt mức ưu tiên, escalate, chuyển phòng ban, ghi nhật ký xử lý.
+- **BR-09:** **Tác vụ kiểm tra quá hạn:**
   - Chạy mỗi 1 phút.
   - Chuyển sang `OVERDUE` mọi hồ sơ đang `NEW` hoặc `IN_PROGRESS` có hạn xử lý đã qua.
   - Tại một thời điểm chỉ có một tiến trình chạy tác vụ này.
-- Mọi lần đổi trạng thái đều dùng khóa theo `version` (optimistic locking).
+- **BR-10:** Mọi lần đổi trạng thái đều dùng khóa theo `version` (optimistic locking).
 
 **Alternative / Error Flows**
-- Nếu cặp (trạng thái, sự kiện) không hợp lệ, hệ thống trả 409 "Thao tác không hợp lệ với trạng thái hiện tại của hồ sơ".
-- Nếu lệch `version`, hệ thống trả 409.
-- Nếu tác vụ kiểm tra quá hạn bị lỗi giữa chừng, các hồ sơ đã xử lý được giữ nguyên, các hồ sơ còn lại được xử lý ở lần chạy sau.
+- **E-01:** Nếu cặp (trạng thái, sự kiện) không hợp lệ, hệ thống trả 409 "Thao tác không hợp lệ với trạng thái hiện tại của hồ sơ".
+- **E-02:** Nếu lệch `version`, hệ thống trả 409.
+- **E-03:** Nếu tác vụ kiểm tra quá hạn bị lỗi giữa chừng, các hồ sơ đã xử lý được giữ nguyên, các hồ sơ còn lại được xử lý ở lần chạy sau.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Một hồ sơ đi đủ luồng `NEW` -> `IN_PROGRESS` -> `PENDING_INFO` -> `IN_PROGRESS` -> `CLOSED` -> mỗi bước hợp lệ có history theo bảng gộp/tách CORE-06; không bắt một hành động chỉ có đúng một mốc khi có public/internal riêng.
-- **AC-02 [Validation]:** Gọi đóng hồ sơ đang `NEW` -> 409. Gọi yêu cầu bổ sung cho hồ sơ đang `PENDING_INFO` -> 409. Mọi thao tác thay đổi ticket CLOSED -> 409; tạo rating STU-10 và đánh dấu notification đã đọc vẫn hợp lệ, vì không sửa ticket.
-- **AC-03 [Boundary]:** Hồ sơ `IN_PROGRESS` có hạn lúc 10:00:00 -> lúc 09:59:59 vẫn `IN_PROGRESS`; muộn nhất 10:01:00 chuyển `OVERDUE`. Hồ sơ `PENDING_INFO` đã qua mốc hạn ban đầu -> vẫn `PENDING_INFO`.
-- **AC-04 [Security]:** Client gửi trực tiếp `status = CLOSED` trong body của một API khác -> hệ thống bỏ qua. Trạng thái chỉ đổi qua các sự kiện trong bảng.
-- **AC-05 [Concurrency/Idempotency]:** Job quá hạn và close dùng cùng version cạnh tranh -> một thay đổi commit, bên kia retry theo trạng thái/version mới; CLOSED không đổi lại. Close dùng version OVERDUE mới vẫn hợp lệ và tạo CLOSED, không coi chuỗi hợp lệ đó là race lỗi. Tác vụ chạy lại trên hồ sơ đã `OVERDUE` -> không đổi gì, không tạo thêm lịch sử hay thông báo.
-- **AC-06 [Resilience & Audit]:** Tác vụ quá hạn bị dừng giữa chừng -> lần chạy sau xử lý tiếp các hồ sơ còn lại. Mỗi lần hệ thống tự chuyển `OVERDUE` -> có bản ghi `STATUS_CHANGE` với người thực hiện là `SYSTEM`, và sinh viên nhận thông báo.
+- **AC-01 [Happy Path]:** Một hồ sơ đi đủ luồng `NEW` -> `IN_PROGRESS` -> `PENDING_INFO` -> `IN_PROGRESS` -> `CLOSED` -> mỗi bước hợp lệ có history theo bảng gộp/tách CORE-06; không bắt một hành động chỉ có đúng một mốc khi có public/internal riêng. _(Kiểm cho: luồng chính, BR-04)_
+- **AC-02 [Validation]:** Gọi đóng hồ sơ đang `NEW` -> 409. Gọi yêu cầu bổ sung cho hồ sơ đang `PENDING_INFO` -> 409. Mọi thao tác thay đổi ticket CLOSED -> 409; tạo rating STU-10 và đánh dấu notification đã đọc vẫn hợp lệ, vì không sửa ticket. _(Kiểm cho: BR-04, BR-07, E-01)_
+- **AC-03 [Boundary]:** Hồ sơ `IN_PROGRESS` có hạn lúc 10:00:00 -> lúc 09:59:59 vẫn `IN_PROGRESS`; muộn nhất 10:01:00 chuyển `OVERDUE`. Hồ sơ `PENDING_INFO` đã qua mốc hạn ban đầu -> vẫn `PENDING_INFO`. _(Kiểm cho: BR-03, BR-06, BR-09)_
+- **AC-04 [Security]:** Client gửi trực tiếp `status = CLOSED` trong body của một API khác -> hệ thống bỏ qua. Trạng thái chỉ đổi qua các sự kiện trong bảng. _(Kiểm cho: BR-04)_
+- **AC-05 [Concurrency/Idempotency]:** Job quá hạn và close dùng cùng version cạnh tranh -> một thay đổi commit, bên kia retry theo trạng thái/version mới; CLOSED không đổi lại. Close dùng version OVERDUE mới vẫn hợp lệ và tạo CLOSED, không coi chuỗi hợp lệ đó là race lỗi. Tác vụ chạy lại trên hồ sơ đã `OVERDUE` -> không đổi gì, không tạo thêm lịch sử hay thông báo. _(Kiểm cho: BR-02, BR-03, BR-07, BR-10)_
+- **AC-06 [Resilience & Audit]:** Tác vụ quá hạn bị dừng giữa chừng -> lần chạy sau xử lý tiếp các hồ sơ còn lại. Mỗi lần hệ thống tự chuyển `OVERDUE` -> có bản ghi `STATUS_CHANGE` với người thực hiện là `SYSTEM`, và sinh viên nhận thông báo. _(Kiểm cho: BR-09, E-03)_
+- **AC-07 [Business Logic]:** Ghi chú (FR-STF-04) trên hồ sơ `IN_PROGRESS` -> `version` tăng 1, trạng thái không đổi. Đặt lại đúng mức ưu tiên hiện tại (no-op) -> `version` không đổi. Sinh viên đánh giá hoặc đọc thông báo -> `version` của hồ sơ không đổi. Thao tác gửi `version` cũ -> 409. Hồ sơ `IN_PROGRESS` đã qua `due_at` nhưng tác vụ quá hạn chưa chạy: yêu cầu bổ sung -> 409; đóng hồ sơ -> 200, hồ sơ `CLOSED` và không bị đổi sang `OVERDUE` sau đó. _(Kiểm cho: BR-01, BR-02, BR-10, E-02)_
+- **AC-08 [Business Logic]:** Hồ sơ `OVERDUE` được phân công lại, được yêu cầu bổ sung, nhận bổ sung của sinh viên -> vẫn `OVERDUE`; đóng hồ sơ -> `CLOSED`. Hồ sơ `IN_PROGRESS` được chuyển phòng, đổi mức ưu tiên, escalate, ghi chú -> trạng thái không đổi. _(Kiểm cho: BR-05, BR-08)_
 
 **Ví dụ Edge Case**
 Hồ sơ `NEW` chưa ai phân công và đã vượt hạn, nên chuyển `OVERDUE`. Sau đó nhân viên phân công người phụ trách. Hồ sơ vẫn ở `OVERDUE` (không quay về `IN_PROGRESS`), và người phụ trách xử lý rồi đóng hồ sơ từ trạng thái này.
@@ -241,28 +245,31 @@ Hệ thống.
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Khi PENDING_INFO, remaining_seconds = due_at - pause_started_at và giữ cố định; khi hoạt động = due_at - now. Khi CLOSED, SLA không có countdown đang chạy.
-- OVERDUE có yêu cầu bổ sung mở vẫn không chuyển PENDING_INFO, không tạo pause và không cộng bù thời gian chờ đó. MGT-02 chỉ trừ các khoảng PENDING_INFO; đây là cách tính hiện hành phương án nghiệp vụ nêu ở đầu module.
-- Thời điểm kết thúc pause được lưu cùng update trạng thái/due_at/paused_seconds; chỉ cộng một lần theo event. Staff thấy pause flag; student không nhận due_at kể cả qua lịch sử.
-- SLA tính bằng giờ lịch (tính cả ngoài giờ hành chính và ngày nghỉ).
-- Giá trị SLA và hạn xử lý được chốt tại thời điểm tạo hồ sơ. Đổi SLA ở FR-MGT-07 không làm thay đổi hạn của hồ sơ đã tạo.
-- Thời gian ở `PENDING_INFO` không bị tính vào SLA. Hồ sơ có thể tạm dừng nhiều lần, và mỗi lần đều được cộng bù vào hạn.
-- Các thao tác chuyển phòng ban, phân công lại, đổi mức ưu tiên, escalate không làm thay đổi `due_at`.
-- Hồ sơ đóng khi đang `PENDING_INFO` thì khoảng tạm dừng cuối được tính đến thời điểm đóng.
-- Thời gian còn lại khi hoạt động = due_at - now; khi PENDING_INFO = due_at - pause_started_at và giữ nguyên đến khi kết thúc pause theo quy tắc trên.
-- Thời gian xử lý thực tế dùng cho FR-MGT-02 = thời điểm đóng trừ thời điểm gửi, trừ tổng thời gian tạm dừng.
+- **BR-01:** Khi PENDING_INFO, remaining_seconds = due_at - pause_started_at và giữ cố định; khi hoạt động = due_at - now. Khi CLOSED, SLA không có countdown đang chạy.
+- **BR-02:** OVERDUE có yêu cầu bổ sung mở vẫn không chuyển PENDING_INFO, không tạo pause và không cộng bù thời gian chờ đó. MGT-02 chỉ trừ các khoảng PENDING_INFO; đây là cách tính hiện hành phương án nghiệp vụ nêu ở đầu module.
+- **BR-03:** Thời điểm kết thúc pause được lưu cùng update trạng thái/due_at/paused_seconds; chỉ cộng một lần theo event. Staff thấy pause flag; student không nhận due_at kể cả qua lịch sử.
+- **BR-04:** SLA tính bằng giờ lịch (tính cả ngoài giờ hành chính và ngày nghỉ).
+- **BR-05:** Giá trị SLA và hạn xử lý được chốt tại thời điểm tạo hồ sơ. Đổi SLA ở FR-MGT-07 không làm thay đổi hạn của hồ sơ đã tạo.
+- **BR-06:** Thời gian ở `PENDING_INFO` không bị tính vào SLA. Hồ sơ có thể tạm dừng nhiều lần, và mỗi lần đều được cộng bù vào hạn.
+- **BR-07:** Các thao tác chuyển phòng ban, phân công lại, đổi mức ưu tiên, escalate không làm thay đổi `due_at`.
+- **BR-08:** Hồ sơ đóng khi đang `PENDING_INFO` thì khoảng tạm dừng cuối được tính đến thời điểm đóng.
+- **BR-09:** Thời gian còn lại khi hoạt động = due_at - now; khi PENDING_INFO = due_at - pause_started_at và giữ nguyên đến khi kết thúc pause theo quy tắc trên.
+- **BR-10:** Thời gian xử lý thực tế dùng cho FR-MGT-02 = thời điểm đóng trừ thời điểm gửi, trừ tổng thời gian tạm dừng.
 
 **Alternative / Error Flows**
-- Nếu loại yêu cầu chưa có SLA tại thời điểm tạo hồ sơ (lỗi cấu hình), hệ thống trả 422 và không tạo hồ sơ.
-- Nếu ghi thời điểm tạm dừng hoặc cộng bù bị lỗi, hệ thống rollback cả thao tác đổi trạng thái.
+- **E-01:** Nếu loại yêu cầu chưa có SLA tại thời điểm tạo hồ sơ (lỗi cấu hình), hệ thống trả 422 và không tạo hồ sơ.
+- **E-02:** Nếu ghi thời điểm tạm dừng hoặc cộng bù bị lỗi, hệ thống rollback cả thao tác đổi trạng thái.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Loại yêu cầu có SLA 48 giờ, hồ sơ tạo lúc 08:00 ngày 01/10 -> `due_at` = 08:00 ngày 03/10.
-- **AC-02 [Business Logic]:** Hồ sơ trên chờ bổ sung từ 10:00 đến 16:00 ngày 01/10 -> `due_at` mới = 14:00 ngày 03/10.
-- **AC-03 [Boundary]:** Hồ sơ tạm dừng 2 lần, mỗi lần 3 giờ -> `due_at` bị lùi tổng cộng 6 giờ. SLA đổi từ 48 thành 24 giờ sau khi hồ sơ đã tạo -> `due_at` của hồ sơ đó không đổi.
-- **AC-04 [Security]:** Client gửi `due_at` trong body bất kỳ API nào -> hệ thống bỏ qua.
-- **AC-05 [Concurrency]:** Sinh viên bổ sung đúng lúc tác vụ quá hạn đang chạy -> hồ sơ không bị chuyển `OVERDUE` dựa trên `due_at` cũ khi chưa được cộng bù.
-- **AC-06 [Resilience & Audit]:** Lỗi khi cộng bù thời gian -> rollback, hồ sơ vẫn ở `PENDING_INFO`, `due_at` giữ nguyên. Hạn xử lý ban đầu và mỗi lần cộng bù đều được lưu trong lịch sử hồ sơ (FR-CORE-06).
+- **AC-01 [Happy Path]:** Loại yêu cầu có SLA 48 giờ, hồ sơ tạo lúc 08:00 ngày 01/10 -> `due_at` = 08:00 ngày 03/10. _(Kiểm cho: luồng chính, BR-04)_
+- **AC-02 [Business Logic]:** Hồ sơ trên chờ bổ sung từ 10:00 đến 16:00 ngày 01/10 -> `due_at` mới = 14:00 ngày 03/10. _(Kiểm cho: BR-06)_
+- **AC-03 [Boundary]:** Hồ sơ tạm dừng 2 lần, mỗi lần 3 giờ -> `due_at` bị lùi tổng cộng 6 giờ. SLA đổi từ 48 thành 24 giờ sau khi hồ sơ đã tạo -> `due_at` của hồ sơ đó không đổi. _(Kiểm cho: BR-05, BR-06)_
+- **AC-04 [Security]:** Client gửi `due_at` trong body bất kỳ API nào -> hệ thống bỏ qua. _(Kiểm cho: BR-05)_
+- **AC-05 [Concurrency]:** Sinh viên bổ sung đúng lúc tác vụ quá hạn đang chạy -> hồ sơ không bị chuyển `OVERDUE` dựa trên `due_at` cũ khi chưa được cộng bù. _(Kiểm cho: BR-03)_
+- **AC-06 [Resilience & Audit]:** Lỗi khi cộng bù thời gian -> rollback, hồ sơ vẫn ở `PENDING_INFO`, `due_at` giữ nguyên. Hạn xử lý ban đầu và mỗi lần cộng bù đều được lưu trong lịch sử hồ sơ (FR-CORE-06). _(Kiểm cho: BR-03, E-02)_
+- **AC-07 [Business Logic]:** Hồ sơ `IN_PROGRESS` có `due_at` = 14:00; lúc 10:00 chuyển `PENDING_INFO` -> thời gian còn lại giữ 4 giờ trong suốt lúc chờ. Hồ sơ `CLOSED` không còn đếm ngược. Nhân viên thấy cờ tạm dừng; response cho sinh viên không có `due_at`. _(Kiểm cho: BR-01, BR-03, BR-09)_
+- **AC-08 [Business Logic]:** Hồ sơ `OVERDUE` có yêu cầu bổ sung mở trong 4 giờ -> không tạm dừng, `due_at` không được cộng bù. Chuyển phòng, phân công lại, đổi mức ưu tiên, escalate -> `due_at` không đổi. _(Kiểm cho: BR-02, BR-07)_
+- **AC-09 [Boundary]:** Hồ sơ gửi lúc 08:00, chờ bổ sung từ 10:00 và được đóng lúc 12:00 khi vẫn đang chờ -> khoảng tạm dừng tính đến 12:00; thời gian xử lý thực tế = 2 giờ. Loại yêu cầu chưa có SLA khi tạo hồ sơ -> 422, không tạo hồ sơ. _(Kiểm cho: BR-08, BR-10, E-01)_
 
 **Ví dụ Edge Case**
 Hồ sơ còn 1 giờ đến hạn thì nhân viên yêu cầu bổ sung, và sinh viên mất 3 ngày mới trả lời. Khi sinh viên bổ sung xong, `due_at` được lùi thêm 3 ngày, nên hồ sơ vẫn còn đúng 1 giờ để xử lý, không bị chuyển `OVERDUE` ngay khi quay lại `IN_PROGRESS`.
@@ -301,23 +308,24 @@ Hệ thống (được dùng bởi FR-STU-02, FR-STF-01, FR-STF-08, FR-STF-10).
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Ba mức, theo thứ tự tăng dần: `LOW` < `MEDIUM` < `HIGH`.
-- Hồ sơ mới mặc định là `MEDIUM`. Sinh viên không chọn được mức ưu tiên.
-- Mức ưu tiên không ảnh hưởng tới SLA hay hạn xử lý.
-- Sinh viên không thấy mức ưu tiên của hồ sơ.
-- Tên hiển thị theo ngôn ngữ: Thấp / Low, Trung bình / Medium, Cao / High.
+- **BR-01:** Ba mức, theo thứ tự tăng dần: `LOW` < `MEDIUM` < `HIGH`.
+- **BR-02:** Hồ sơ mới mặc định là `MEDIUM`. Sinh viên không chọn được mức ưu tiên.
+- **BR-03:** Mức ưu tiên không ảnh hưởng tới SLA hay hạn xử lý.
+- **BR-04:** Sinh viên không thấy mức ưu tiên của hồ sơ.
+- **BR-05:** Tên hiển thị theo ngôn ngữ: Thấp / Low, Trung bình / Medium, Cao / High.
 
 **Alternative / Error Flows**
-- Nếu API nhận giá trị ngoài 3 mức, hệ thống trả 400.
-- Nếu sinh viên gửi kèm mức ưu tiên khi tạo hồ sơ, hệ thống bỏ qua và gán `MEDIUM`.
+- **E-01:** Nếu API nhận giá trị ngoài 3 mức, hệ thống trả 400.
+- **E-02:** Nếu sinh viên gửi kèm mức ưu tiên khi tạo hồ sơ, hệ thống bỏ qua và gán `MEDIUM`.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Sinh viên tạo hồ sơ -> mức ưu tiên là `MEDIUM`.
-- **AC-02 [Validation]:** Gửi mức `URGENT` -> 400.
-- **AC-03 [Boundary]:** Hàng đợi có hồ sơ ở cả 3 mức -> thứ tự hiển thị là `HIGH`, `MEDIUM`, `LOW`.
-- **AC-04 [Security]:** Sinh viên gửi `priority = HIGH` khi tạo hồ sơ -> hồ sơ vẫn là `MEDIUM`. API chi tiết hồ sơ của sinh viên không trả về trường mức ưu tiên.
-- **AC-05 [Concurrency]:** Hai nhân viên đổi mức ưu tiên cùng lúc -> người sau nhận 409 (theo FR-STF-08).
-- **AC-06 [Resilience & Audit]:** Đổi mức ưu tiên lỗi -> rollback, mức cũ giữ nguyên. Mỗi lần đổi -> có bản ghi `CHANGE_PRIORITY` hoặc `ESCALATE`.
+- **AC-01 [Happy Path]:** Sinh viên tạo hồ sơ -> mức ưu tiên là `MEDIUM`. _(Kiểm cho: luồng chính, BR-02)_
+- **AC-02 [Validation]:** Gửi mức `URGENT` -> 400. _(Kiểm cho: E-01)_
+- **AC-03 [Boundary]:** Hàng đợi có hồ sơ ở cả 3 mức -> thứ tự hiển thị là `HIGH`, `MEDIUM`, `LOW`. _(Kiểm cho: BR-01)_
+- **AC-04 [Security]:** Sinh viên gửi `priority = HIGH` khi tạo hồ sơ -> hồ sơ vẫn là `MEDIUM`. API chi tiết hồ sơ của sinh viên không trả về trường mức ưu tiên. _(Kiểm cho: BR-02, BR-04, E-02)_
+- **AC-05 [Concurrency]:** Hai nhân viên đổi mức ưu tiên cùng lúc -> người sau nhận 409 (theo FR-STF-08). _(Kiểm cho: quy ước version ở M5)_
+- **AC-06 [Resilience & Audit]:** Đổi mức ưu tiên lỗi -> rollback, mức cũ giữ nguyên. Mỗi lần đổi -> có bản ghi `CHANGE_PRIORITY` hoặc `ESCALATE`. _(Kiểm cho: quy ước chung của module)_
+- **AC-07 [Business Logic]:** Đổi mức ưu tiên của hồ sơ từ `MEDIUM` sang `HIGH` -> `due_at` không đổi. Giao diện VN hiển thị Thấp / Trung bình / Cao; giao diện EN hiển thị Low / Medium / High. _(Kiểm cho: BR-03, BR-05)_
 
 **Ví dụ Edge Case**
 Hồ sơ `HIGH` và hồ sơ `LOW` có cùng hạn xử lý. Hồ sơ `HIGH` đứng trên trong hàng đợi, nhưng cả hai đều chuyển `OVERDUE` cùng lúc nếu chưa đóng, vì mức ưu tiên không ảnh hưởng SLA.
@@ -355,26 +363,28 @@ Hệ thống. Dữ liệu danh mục do đội phát triển nạp khi triển k
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Seed idempotent theo mã ổn định và một transaction; cập nhật danh mục không ghi đè SLA đã tồn tại hoặc version SLA Admin đã sửa. SLA đầu chỉ dùng khi tạo loại mới. Nạp lỗi giữ nguyên bộ cũ; nếu chưa có bộ hợp lệ ứng dụng không phục vụ nghiệp vụ.
-- Danh mục thật, mapping và SLA đầu cần trường xác nhận; tên ví dụ trong AC không phải dữ liệu production.
-- Mỗi phòng ban và mỗi loại yêu cầu có mã cố định, tên tiếng Việt và tên tiếng Anh.
-- Mỗi loại yêu cầu ánh xạ tới đúng một phòng ban. Một phòng ban có thể nhận nhiều loại yêu cầu.
-- Không có giao diện thêm, sửa hoặc xóa danh mục. Muốn thay đổi thì đội phát triển cập nhật dữ liệu nạp sẵn và triển khai lại.
-- Riêng SLA của từng loại thì Admin chỉnh được qua FR-MGT-07.
-- Không xóa loại yêu cầu hay phòng ban đã có hồ sơ tham chiếu tới.
-- Danh mục được cache phía server và cập nhật lại khi triển khai.
+- **BR-01:** Seed idempotent theo mã ổn định và một transaction; cập nhật danh mục không ghi đè SLA đã tồn tại hoặc version SLA Admin đã sửa. SLA đầu chỉ dùng khi tạo loại mới. Nạp lỗi giữ nguyên bộ cũ; nếu chưa có bộ hợp lệ ứng dụng không phục vụ nghiệp vụ.
+- **BR-02:** Danh mục thật, mapping và SLA đầu cần trường xác nhận; tên ví dụ trong AC không phải dữ liệu production.
+- **BR-03:** Mỗi phòng ban và mỗi loại yêu cầu có mã cố định, tên tiếng Việt và tên tiếng Anh.
+- **BR-04:** Mỗi loại yêu cầu ánh xạ tới đúng một phòng ban. Một phòng ban có thể nhận nhiều loại yêu cầu.
+- **BR-05:** Không có giao diện thêm, sửa hoặc xóa danh mục. Muốn thay đổi thì đội phát triển cập nhật dữ liệu nạp sẵn và triển khai lại.
+- **BR-06:** Riêng SLA của từng loại thì Admin chỉnh được qua FR-MGT-07.
+- **BR-07:** Không xóa loại yêu cầu hay phòng ban đã có hồ sơ tham chiếu tới.
+- **BR-08:** Danh mục được cache phía server và cập nhật lại khi triển khai.
 
 **Alternative / Error Flows**
-- Nếu dữ liệu nạp có loại yêu cầu không ánh xạ phòng ban, hoặc ánh xạ tới phòng ban không tồn tại, quá trình nạp thất bại và ứng dụng không khởi động.
-- Nếu dữ liệu nạp thiếu tên tiếng Anh, hệ thống dùng tên tiếng Việt và ghi log cảnh báo.
+- **E-01:** Nếu dữ liệu nạp có loại yêu cầu không ánh xạ phòng ban, hoặc ánh xạ tới phòng ban không tồn tại, quá trình nạp thất bại và ứng dụng không khởi động.
+- **E-02:** Nếu dữ liệu nạp thiếu tên tiếng Anh, hệ thống dùng tên tiếng Việt và ghi log cảnh báo.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Sau khi triển khai, API danh mục trả về đầy đủ loại yêu cầu kèm phòng ban tiếp nhận và tên theo ngôn ngữ người dùng.
-- **AC-02 [Validation]:** Dữ liệu nạp có một loại yêu cầu không có phòng ban -> nạp thất bại, ứng dụng không khởi động, log ghi rõ loại yêu cầu bị lỗi.
-- **AC-03 [Boundary]:** Một phòng ban nhận 3 loại yêu cầu -> cả 3 loại đều gán đúng về phòng ban đó.
-- **AC-04 [Security]:** Gọi API thêm, sửa hoặc xóa danh mục với bất kỳ vai trò nào -> không tồn tại API này (404).
-- **AC-05 [Concurrency]:** Nhiều người dùng tải danh mục cùng lúc -> dữ liệu được trả từ cache, không truy vấn cơ sở dữ liệu cho mỗi request.
-- **AC-06 [Resilience]:** Seed cố xóa loại có ticket -> lỗi, giữ dữ liệu cũ. Seed lại danh mục hợp lệ không ghi đè SLA đã đổi ở MGT-07; EN thiếu dùng VI có log, không crash.
+- **AC-01 [Happy Path]:** Sau khi triển khai, API danh mục trả về đầy đủ loại yêu cầu kèm phòng ban tiếp nhận và tên theo ngôn ngữ người dùng. _(Kiểm cho: luồng chính, BR-03)_
+- **AC-02 [Validation]:** Dữ liệu nạp có một loại yêu cầu không có phòng ban -> nạp thất bại, ứng dụng không khởi động, log ghi rõ loại yêu cầu bị lỗi. _(Kiểm cho: BR-04, E-01)_
+- **AC-03 [Boundary]:** Một phòng ban nhận 3 loại yêu cầu -> cả 3 loại đều gán đúng về phòng ban đó. _(Kiểm cho: BR-04)_
+- **AC-04 [Security]:** Gọi API thêm, sửa hoặc xóa danh mục với bất kỳ vai trò nào -> không tồn tại API này (404). _(Kiểm cho: BR-05)_
+- **AC-05 [Concurrency]:** Nhiều người dùng tải danh mục cùng lúc -> dữ liệu được trả từ cache, không truy vấn cơ sở dữ liệu cho mỗi request. _(Kiểm cho: BR-08)_
+- **AC-06 [Resilience]:** Seed cố xóa loại có ticket -> lỗi, giữ dữ liệu cũ. Seed lại danh mục hợp lệ không ghi đè SLA đã đổi ở MGT-07; EN thiếu dùng VI có log, không crash. _(Kiểm cho: BR-01, BR-07, E-02)_
+- **AC-07 [Resilience]:** Dữ liệu nạp có loại yêu cầu ánh xạ tới mã phòng ban không tồn tại -> nạp thất bại, ứng dụng không khởi động. Chạy seed hợp lệ 2 lần -> không tạo bản trùng. Lần nạp đầu lỗi và chưa có bộ danh mục hợp lệ -> ứng dụng không phục vụ nghiệp vụ. _(Kiểm cho: BR-01, E-01)_
+- **AC-08 [Business Logic]:** Triển khai lại với danh mục mới -> API danh mục trả bộ mới (cache được làm mới). Admin sửa được SLA qua FR-MGT-07 nhưng không sửa được tên, mã hay ánh xạ phòng ban. Bộ dữ liệu nạp cho production theo danh sách trường xác nhận (`A-10`), không chứa tên ví dụ dùng trong AC. _(Kiểm cho: BR-02, BR-06, BR-08)_
 
 **Ví dụ Edge Case**
 Sau khi go-live, trường muốn tách loại "Học vụ" thành "Đăng ký môn học" và "Xin bảo lưu". Đội phát triển thêm 2 loại mới vào dữ liệu nạp và triển khai lại. Loại "Học vụ" cũ được giữ nguyên, vì đã có hồ sơ tham chiếu.
@@ -414,39 +424,41 @@ Hệ thống (ghi tự động). Người đọc là sinh viên (FR-STU-07) và 
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Gộp/tách mốc: CREATE một mốc public; ASSIGN lần đầu có mốc ASSIGN nội bộ và STATUS_IN_PROGRESS public; phân công lại chỉ ASSIGN nội bộ; REQUEST_INFO một mốc public gộp trạng thái PENDING nếu có; SUPPLEMENT một mốc public gộp IN_PROGRESS nếu có, cộng thêm DUE_DATE_CHANGE nội bộ; CLOSE một mốc public gộp CLOSED/resolution, cộng DUE_DATE_CHANGE nội bộ nếu kết thúc pause; OVERDUE một mốc public; PRIORITY/ESCALATE/NOTE nội bộ. TRANSFER có public tên phòng mới và internal reason cùng event, không phát hai dòng public trùng nhau.
-- Mỗi event giữ actor_id nội bộ và department_at_event; projection public thay actor staff bằng tên phòng tại thời điểm sự kiện, không lấy phòng hiện tại để đổi ngược lịch sử.
-- Public projection chỉ whitelist dữ liệu công khai; loại bỏ due_at, priority, assignee_id/tên staff và reason khỏi cả old/new payload, kể cả event CREATE. Điều kiện phòng hiện tại kiểm tra ở server mỗi request.
-- Các mốc **công khai** (sinh viên thấy được):
+- **BR-01:** Gộp/tách mốc: CREATE một mốc public; ASSIGN lần đầu có mốc ASSIGN nội bộ và STATUS_IN_PROGRESS public; phân công lại chỉ ASSIGN nội bộ; REQUEST_INFO một mốc public gộp trạng thái PENDING nếu có; SUPPLEMENT một mốc public gộp IN_PROGRESS nếu có, cộng thêm DUE_DATE_CHANGE nội bộ; CLOSE một mốc public gộp CLOSED/resolution, cộng DUE_DATE_CHANGE nội bộ nếu kết thúc pause; OVERDUE một mốc public; PRIORITY/ESCALATE/NOTE nội bộ. TRANSFER có public tên phòng mới và internal reason cùng event, không phát hai dòng public trùng nhau.
+- **BR-02:** Mỗi event giữ actor_id nội bộ và department_at_event; projection public thay actor staff bằng tên phòng tại thời điểm sự kiện, không lấy phòng hiện tại để đổi ngược lịch sử.
+- **BR-03:** Public projection chỉ whitelist dữ liệu công khai; loại bỏ due_at, priority, assignee_id/tên staff và reason khỏi cả old/new payload, kể cả event CREATE. Điều kiện phòng hiện tại kiểm tra ở server mỗi request.
+- **BR-04:** Các mốc **công khai** (sinh viên thấy được):
   - Tạo hồ sơ.
   - Đổi trạng thái.
   - Chuyển phòng ban (chỉ hiện tên phòng ban mới, không hiện lý do).
   - Yêu cầu bổ sung (kèm nội dung yêu cầu).
   - Sinh viên bổ sung.
   - Đóng hồ sơ (kèm kết quả xử lý).
-- Các mốc **nội bộ** (chỉ nhân viên phòng ban đang giữ hồ sơ thấy):
+- **BR-05:** Các mốc **nội bộ** (chỉ nhân viên phòng ban đang giữ hồ sơ thấy):
   - Phân công.
   - Đổi mức ưu tiên.
   - Escalate.
   - Lý do chuyển phòng ban.
   - Ghi nhật ký xử lý.
   - Thay đổi hạn xử lý.
-- Mỗi mốc gồm: thời điểm, loại sự kiện, người thực hiện (hoặc `SYSTEM`), giá trị cũ và mới, mức hiển thị.
-- Với mốc công khai, tên người thực hiện là nhân viên được thay bằng tên phòng ban.
-- Lịch sử chỉ được thêm mới, không sửa và không xóa. Sắp xếp theo thời gian tăng dần.
-- **Khác với nhật ký hệ thống (FR-SEC-06):** lịch sử hồ sơ phục vụ hiển thị nghiệp vụ trên giao diện. Nhật ký hệ thống phục vụ truy vết bảo mật và không có màn hình xem.
+- **BR-06:** Mỗi mốc gồm: thời điểm, loại sự kiện, người thực hiện (hoặc `SYSTEM`), giá trị cũ và mới, mức hiển thị.
+- **BR-07:** Với mốc công khai, tên người thực hiện là nhân viên được thay bằng tên phòng ban.
+- **BR-08:** Lịch sử chỉ được thêm mới, không sửa và không xóa. Sắp xếp theo thời gian tăng dần.
+- **BR-09:** **Khác với nhật ký hệ thống (FR-SEC-06):** lịch sử hồ sơ phục vụ hiển thị nghiệp vụ trên giao diện. Nhật ký hệ thống phục vụ truy vết bảo mật và không có màn hình xem.
 
 **Alternative / Error Flows**
-- Nếu ghi lịch sử lỗi, hệ thống rollback thao tác gốc và trả 500.
-- Nếu đọc lịch sử lỗi, màn hình gọi tới vẫn hiển thị thông tin chính của hồ sơ (theo FR-STU-07 và FR-STF-02).
+- **E-01:** Nếu ghi lịch sử lỗi, hệ thống rollback thao tác gốc và trả 500.
+- **E-02:** Nếu đọc lịch sử lỗi, màn hình gọi tới vẫn hiển thị thông tin chính của hồ sơ (theo FR-STU-07 và FR-STF-02).
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Hồ sơ qua tạo, phân công lần đầu, yêu cầu bổ sung, bổ sung và đóng: public timeline có 5 mốc CREATE/STATUS_IN_PROGRESS/REQUEST_INFO/SUPPLEMENT/CLOSE; staff thấy thêm ASSIGN và DUE_DATE_CHANGE nếu có cộng bù. Public mốc đổi IN_PROGRESS không tiết lộ assignee. Mỗi event/action chỉ xuất hiện một lần.
-- **AC-02 [Validation]:** Mốc "Yêu cầu bổ sung" trả về cho sinh viên có nội dung yêu cầu, nhưng không có tên nhân viên.
-- **AC-03 [Boundary]:** Hồ sơ mới tạo -> một event CREATE có public mốc Tạo hồ sơ với phòng ban, mã, ngày gửi; hạn ban đầu chỉ nằm ở dữ liệu nội bộ của event và không trả cho sinh viên.
-- **AC-04 [Security]:** API lịch sử cho sinh viên không trả về mốc nội bộ và không trả về lý do chuyển phòng ban.
-- **AC-05 [Concurrency]:** Hai thao tác trên cùng hồ sơ được xử lý nối tiếp -> các mốc được ghi đúng thứ tự thời gian, không mất mốc nào.
-- **AC-06 [Resilience & Audit]:** Ghi lịch sử lỗi -> thao tác gốc bị rollback, hồ sơ không đổi. Không có API nào sửa hoặc xóa mốc lịch sử.
+- **AC-01 [Happy Path]:** Hồ sơ qua tạo, phân công lần đầu, yêu cầu bổ sung, bổ sung và đóng: public timeline có 5 mốc CREATE/STATUS_IN_PROGRESS/REQUEST_INFO/SUPPLEMENT/CLOSE; staff thấy thêm ASSIGN và DUE_DATE_CHANGE nếu có cộng bù. Public mốc đổi IN_PROGRESS không tiết lộ assignee. Mỗi event/action chỉ xuất hiện một lần. _(Kiểm cho: luồng chính, BR-01, BR-04, BR-05)_
+- **AC-02 [Validation]:** Mốc "Yêu cầu bổ sung" trả về cho sinh viên có nội dung yêu cầu, nhưng không có tên nhân viên. _(Kiểm cho: BR-04, BR-07)_
+- **AC-03 [Boundary]:** Hồ sơ mới tạo -> một event CREATE có public mốc Tạo hồ sơ với phòng ban, mã, ngày gửi; hạn ban đầu chỉ nằm ở dữ liệu nội bộ của event và không trả cho sinh viên. _(Kiểm cho: BR-03)_
+- **AC-04 [Security]:** API lịch sử cho sinh viên không trả về mốc nội bộ và không trả về lý do chuyển phòng ban. _(Kiểm cho: BR-03, BR-05)_
+- **AC-05 [Concurrency]:** Hai thao tác trên cùng hồ sơ được xử lý nối tiếp -> các mốc được ghi đúng thứ tự thời gian, không mất mốc nào. _(Kiểm cho: BR-08)_
+- **AC-06 [Resilience & Audit]:** Ghi lịch sử lỗi -> thao tác gốc bị rollback, hồ sơ không đổi. Không có API nào sửa hoặc xóa mốc lịch sử. _(Kiểm cho: BR-08, E-01)_
+- **AC-07 [Business Logic]:** Nhân viên phòng A phân công hồ sơ lần đầu, sau đó hồ sơ được chuyển sang phòng B -> mốc public "Đang xử lý" vẫn ghi phòng A (phòng tại thời điểm sự kiện); mốc chuyển phòng hiển thị cho sinh viên chỉ có tên phòng B, không có lý do. Mỗi mốc có thời điểm, loại sự kiện, người thực hiện hoặc `SYSTEM`, giá trị cũ và mới, mức hiển thị. _(Kiểm cho: BR-02, BR-04, BR-06)_
+- **AC-08 [Resilience]:** Ghi lịch sử lỗi -> 500. Đọc lịch sử lỗi -> màn hình chi tiết hồ sơ của sinh viên và của nhân viên vẫn hiển thị thông tin chính. Lịch sử hiển thị trên giao diện hồ sơ; nhật ký hệ thống (FR-SEC-06) không hiển thị ở đây. _(Kiểm cho: BR-09, E-01, E-02)_
 
 **Ví dụ Edge Case**
 Hồ sơ bị chuyển từ phòng A sang phòng B với lý do "Sinh viên chọn sai loại yêu cầu". Sinh viên thấy mốc "Hồ sơ được chuyển đến Phòng B". Nhân viên phòng B thấy cả lý do chuyển. Lý do này không bao giờ xuất hiện trong dữ liệu trả về cho sinh viên.
@@ -485,27 +497,29 @@ Hệ thống (được dùng bởi FR-STU-04 và FR-STU-09).
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- 10MB trong tài liệu này = 10 MiB = 10.485.760 byte. File rỗng không hợp lệ (400). Giới hạn tổng request multipart ở gateway là 55 MiB, đủ 5 tệp tối đa và phần metadata; vượt tổng trả 413. UI dùng cùng giới hạn byte.
-- Lưu tạm/commit/xóa bù theo quy tắc chung tại M4/M5; nếu dọn tệp thất bại thì log mã tham chiếu và job dọn tạm xử lý lại, không báo hồ sơ thành công khi DB chưa commit.
-- Định dạng cho phép: PDF, JPG, PNG. Xác minh bằng nội dung tệp (magic bytes), không chỉ dựa vào đuôi tệp hay `Content-Type` do client gửi.
-- Mỗi tệp tối đa 10MB. Mỗi lần gửi tối đa 5 tệp. Không đính kèm tệp nào cũng hợp lệ.
-- Tên gốc của tệp tối đa 255 ký tự. Ký tự đường dẫn (`/`, `\`, `..`) bị loại bỏ trước khi lưu tên gốc.
-- Các giá trị giới hạn được khai báo ở một chỗ duy nhất trong cấu hình và dùng chung cho cả frontend lẫn backend.
-- Kiểm tra ở giao diện chỉ để báo lỗi sớm. Backend luôn kiểm tra lại.
+- **BR-01:** 10MB trong tài liệu này = 10 MiB = 10.485.760 byte. File rỗng không hợp lệ (400). Giới hạn tổng request multipart ở gateway là 55 MiB, đủ 5 tệp tối đa và phần metadata; vượt tổng trả 413. UI dùng cùng giới hạn byte.
+- **BR-02:** Lưu tạm/commit/xóa bù theo quy tắc chung tại M4/M5; nếu dọn tệp thất bại thì log mã tham chiếu và job dọn tạm xử lý lại, không báo hồ sơ thành công khi DB chưa commit.
+- **BR-03:** Định dạng cho phép: PDF, JPG, PNG. Xác minh bằng nội dung tệp (magic bytes), không chỉ dựa vào đuôi tệp hay `Content-Type` do client gửi.
+- **BR-04:** Mỗi tệp tối đa 10MB. Mỗi lần gửi tối đa 5 tệp. Không đính kèm tệp nào cũng hợp lệ.
+- **BR-05:** Tên gốc của tệp tối đa 255 ký tự. Ký tự đường dẫn (`/`, `\`, `..`) bị loại bỏ trước khi lưu tên gốc.
+- **BR-06:** Các giá trị giới hạn được khai báo ở một chỗ duy nhất trong cấu hình và dùng chung cho cả frontend lẫn backend.
+- **BR-07:** Kiểm tra ở giao diện chỉ để báo lỗi sớm. Backend luôn kiểm tra lại.
 
 **Alternative / Error Flows**
-- Nếu tệp vượt 10MB, hệ thống trả 413.
-- Nếu tệp sai định dạng, hệ thống trả 415.
-- Nếu có hơn 5 tệp, hệ thống trả 400.
-- Nếu tên tệp dài hơn 255 ký tự, hệ thống trả 400.
+- **E-01:** Nếu tệp vượt 10MB, hệ thống trả 413.
+- **E-02:** Nếu tệp sai định dạng, hệ thống trả 415.
+- **E-03:** Nếu có hơn 5 tệp, hệ thống trả 400.
+- **E-04:** Nếu tên tệp dài hơn 255 ký tự, hệ thống trả 400.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Gửi 1 PDF, 1 JPG, 1 PNG, mỗi tệp 2MB -> cả 3 được chấp nhận.
-- **AC-02 [Validation]:** Tệp `.docx` -> 415. Tệp PNG đổi đuôi thành `.pdf` -> chấp nhận và lưu với loại PNG đúng theo nội dung.
-- **AC-03 [Boundary]:** Tệp đúng 10MB -> chấp nhận. Tệp 10MB + 1 byte -> 413. Gửi đúng 5 tệp -> chấp nhận. Gửi 6 tệp -> 400.
-- **AC-04 [Security]:** Tên tệp `../../etc/passwd.pdf` -> các ký tự đường dẫn bị loại bỏ; tệp vẫn lưu với tên ngẫu nhiên. Gọi thẳng API bỏ qua bước kiểm tra ở giao diện -> backend vẫn chặn đúng.
-- **AC-05 [Concurrency]:** Nhiều sinh viên tải tệp 10MB cùng lúc -> mỗi request được kiểm tra độc lập, không ảnh hưởng nhau.
-- **AC-06 [Resilience]:** Request ngắt trước commit -> không ticket/bổ sung thành công, tệp tạm không tải được và dọn bù; mất response sau commit -> key trả kết quả cũ. File rỗng 400; 5×10 MiB hợp lệ trong body limit 55 MiB.
+- **AC-01 [Happy Path]:** Gửi 1 PDF, 1 JPG, 1 PNG, mỗi tệp 2MB -> cả 3 được chấp nhận. _(Kiểm cho: luồng chính, BR-03)_
+- **AC-02 [Validation]:** Tệp `.docx` -> 415. Tệp PNG đổi đuôi thành `.pdf` -> chấp nhận và lưu với loại PNG đúng theo nội dung. _(Kiểm cho: BR-03, E-02)_
+- **AC-03 [Boundary]:** Tệp đúng 10MB -> chấp nhận. Tệp 10MB + 1 byte -> 413. Gửi đúng 5 tệp -> chấp nhận. Gửi 6 tệp -> 400. _(Kiểm cho: BR-04, E-01, E-03)_
+- **AC-04 [Security]:** Tên tệp `../../etc/passwd.pdf` -> các ký tự đường dẫn bị loại bỏ; tệp vẫn lưu với tên ngẫu nhiên. Gọi thẳng API bỏ qua bước kiểm tra ở giao diện -> backend vẫn chặn đúng. _(Kiểm cho: BR-05, BR-07)_
+- **AC-05 [Concurrency]:** Nhiều sinh viên tải tệp 10MB cùng lúc -> mỗi request được kiểm tra độc lập, không ảnh hưởng nhau. _(Kiểm cho: BR-04)_
+- **AC-06 [Resilience]:** Request ngắt trước commit -> không ticket/bổ sung thành công, tệp tạm không tải được và dọn bù; mất response sau commit -> key trả kết quả cũ. File rỗng 400; 5×10 MiB hợp lệ trong body limit 55 MiB. _(Kiểm cho: BR-01, BR-02)_
+- **AC-07 [Boundary]:** Tên tệp đúng 255 ký tự -> chấp nhận; 256 ký tự -> 400. Request multipart tổng lớn hơn 55 MiB -> 413. Gửi không kèm tệp -> hợp lệ. _(Kiểm cho: BR-01, BR-04, BR-05, E-04)_
+- **AC-08 [Resilience]:** Xóa bù tệp tạm thất bại -> log có mã tham chiếu, job dọn tạm xử lý lại ở lần chạy sau; hồ sơ không được báo thành công khi DB chưa commit. Frontend báo lỗi sớm với cùng ngưỡng byte và số tệp như backend, vì cả hai đọc từ một chỗ cấu hình. _(Kiểm cho: BR-02, BR-06)_
 
 **Ví dụ Edge Case**
 Sinh viên chọn 5 tệp trên điện thoại, trong đó có một ảnh 12MB. Giao diện báo lỗi ngay tệp vượt dung lượng trước khi gửi, và giữ lại 4 tệp hợp lệ để sinh viên thay tệp lỗi, không phải chọn lại từ đầu.
@@ -545,27 +559,29 @@ Mọi người dùng.
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Trước login, dùng lựa chọn phiên trình duyệt, mặc định vi; không có account để lưu. Sau login ưu tiên lựa chọn tài khoản. API lưu preference chỉ cho sửa tài khoản của phiên, body language=vi/en, lỗi input 400; thao tác UI bỏ qua lang query lạ và dùng mặc định.
-- Nếu lưu lỗi thì giữ lựa chọn cục bộ trong phiên và thông báo nhẹ; lần sau dùng giá trị account đã lưu. Định dạng thời gian UTC+7 dd/MM/yyyy HH:mm ở cả VN/EN.
-- Ngôn ngữ mặc định: tiếng Việt.
-- Những gì được dịch: nhãn giao diện, tên danh mục (loại yêu cầu, phòng ban, trạng thái, mức ưu tiên), nội dung thông báo trong app, thông điệp lỗi.
-- Nội dung do người dùng nhập (mô tả, ghi chú, nhận xét, kết quả xử lý) không được dịch, hiển thị đúng như khi nhập.
-- API trả lỗi gồm `error_code` cố định và `message` theo ngôn ngữ của người dùng.
-- Thông báo lưu dạng `event_type` kèm tham số, nên khi đổi ngôn ngữ thì cả thông báo cũ cũng hiển thị theo ngôn ngữ mới.
-- Định dạng ngày giờ: `dd/MM/yyyy HH:mm` cho cả hai ngôn ngữ.
-- Chuyển ngôn ngữ không làm mất dữ liệu đang nhập trên form.
+- **BR-01:** Trước login, dùng lựa chọn phiên trình duyệt, mặc định vi; không có account để lưu. Sau login ưu tiên lựa chọn tài khoản. API lưu preference chỉ cho sửa tài khoản của phiên, body language=vi/en, lỗi input 400; thao tác UI bỏ qua lang query lạ và dùng mặc định.
+- **BR-02:** Nếu lưu lỗi thì giữ lựa chọn cục bộ trong phiên và thông báo nhẹ; lần sau dùng giá trị account đã lưu. Định dạng thời gian UTC+7 dd/MM/yyyy HH:mm ở cả VN/EN.
+- **BR-03:** Ngôn ngữ mặc định: tiếng Việt.
+- **BR-04:** Những gì được dịch: nhãn giao diện, tên danh mục (loại yêu cầu, phòng ban, trạng thái, mức ưu tiên), nội dung thông báo trong app, thông điệp lỗi.
+- **BR-05:** Nội dung do người dùng nhập (mô tả, ghi chú, nhận xét, kết quả xử lý) không được dịch, hiển thị đúng như khi nhập.
+- **BR-06:** API trả lỗi gồm `error_code` cố định và `message` theo ngôn ngữ của người dùng.
+- **BR-07:** Thông báo lưu dạng `event_type` kèm tham số, nên khi đổi ngôn ngữ thì cả thông báo cũ cũng hiển thị theo ngôn ngữ mới.
+- **BR-08:** Định dạng ngày giờ: `dd/MM/yyyy HH:mm` cho cả hai ngôn ngữ.
+- **BR-09:** Chuyển ngôn ngữ không làm mất dữ liệu đang nhập trên form.
 
 **Alternative / Error Flows**
-- Nếu thiếu bản dịch tiếng Anh của một nhãn, hệ thống hiển thị bản tiếng Việt và ghi log cảnh báo.
-- Nếu lưu lựa chọn ngôn ngữ lỗi, giao diện vẫn đổi ngôn ngữ trong phiên hiện tại.
+- **E-01:** Nếu thiếu bản dịch tiếng Anh của một nhãn, hệ thống hiển thị bản tiếng Việt và ghi log cảnh báo.
+- **E-02:** Nếu lưu lựa chọn ngôn ngữ lỗi, giao diện vẫn đổi ngôn ngữ trong phiên hiện tại.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Người dùng chuyển sang EN -> toàn bộ nhãn, trạng thái, tên loại yêu cầu và thông báo hiển thị tiếng Anh. Lần đăng nhập sau giao diện vẫn là tiếng Anh.
-- **AC-02 [Validation]:** Mô tả yêu cầu nhập bằng tiếng Việt -> vẫn hiển thị tiếng Việt khi giao diện ở EN.
-- **AC-03 [Boundary]:** Thiếu bản dịch tiếng Anh của một nhãn -> hiển thị bản tiếng Việt, không hiển thị mã khóa thô (ví dụ `ticket.status.new`).
-- **AC-04 [Security]:** Tham số ngôn ngữ không hợp lệ (ví dụ `lang=<script>`) -> hệ thống bỏ qua và dùng ngôn ngữ mặc định.
-- **AC-05 [Concurrency]:** Đổi ngôn ngữ khi đang điền form tạo yêu cầu -> nội dung đã nhập và tệp đã chọn được giữ nguyên.
-- **AC-06 [Resilience]:** Lưu lựa chọn ngôn ngữ lỗi -> giao diện vẫn đổi ngôn ngữ cho phiên hiện tại, không báo lỗi chặn người dùng.
+- **AC-01 [Happy Path]:** Người dùng chuyển sang EN -> toàn bộ nhãn, trạng thái, tên loại yêu cầu và thông báo hiển thị tiếng Anh. Lần đăng nhập sau giao diện vẫn là tiếng Anh. _(Kiểm cho: luồng chính, BR-01, BR-04)_
+- **AC-02 [Validation]:** Mô tả yêu cầu nhập bằng tiếng Việt -> vẫn hiển thị tiếng Việt khi giao diện ở EN. _(Kiểm cho: BR-05)_
+- **AC-03 [Boundary]:** Thiếu bản dịch tiếng Anh của một nhãn -> hiển thị bản tiếng Việt, không hiển thị mã khóa thô (ví dụ `ticket.status.new`). _(Kiểm cho: E-01)_
+- **AC-04 [Security]:** Tham số ngôn ngữ không hợp lệ (ví dụ `lang=<script>`) -> hệ thống bỏ qua và dùng ngôn ngữ mặc định. _(Kiểm cho: BR-01)_
+- **AC-05 [Concurrency]:** Đổi ngôn ngữ khi đang điền form tạo yêu cầu -> nội dung đã nhập và tệp đã chọn được giữ nguyên. _(Kiểm cho: BR-09)_
+- **AC-06 [Resilience]:** Lưu lựa chọn ngôn ngữ lỗi -> giao diện vẫn đổi ngôn ngữ cho phiên hiện tại, không báo lỗi chặn người dùng. _(Kiểm cho: BR-02, E-02)_
+- **AC-07 [Validation]:** Người dùng chưa đăng nhập mở trang lần đầu -> tiếng Việt; chọn EN ở trang đăng nhập -> giữ EN trong phiên trình duyệt. Gọi API lưu ngôn ngữ với `language = fr` -> 400. Lỗi API trả cùng `error_code` ở cả VN và EN, chỉ `message` đổi theo ngôn ngữ. _(Kiểm cho: BR-01, BR-03, BR-06)_
+- **AC-08 [Business Logic]:** Thông báo nhận khi giao diện là VN, sau đó đổi sang EN -> thông báo cũ hiển thị tiếng Anh. Mốc lưu lúc 14:05 ngày 01/10/2026 theo UTC -> hiển thị `01/10/2026 21:05` ở cả VN và EN. _(Kiểm cho: BR-02, BR-07, BR-08)_
 
 **Ví dụ Edge Case**
 Một sinh viên quốc tế nhận thông báo "Hồ sơ cần bổ sung thông tin" lúc giao diện đang là tiếng Việt, sau đó chuyển sang EN. Thông báo cũ hiển thị lại là "Your request needs additional information", vì thông báo được dựng lại theo ngôn ngữ hiện tại.
@@ -604,24 +620,26 @@ Mọi người dùng.
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- Độ rộng hỗ trợ: từ 360px (điện thoại) trở lên. Các mốc bố cục: dưới 768px (điện thoại), 768–1279px (máy tính bảng), từ 1280px trở lên (máy tính).
-- Trình duyệt hỗ trợ: 2 phiên bản mới nhất của Chrome, Safari, Edge và Firefox.
-- Ở độ rộng 360px không có thanh cuộn ngang. Bảng dữ liệu chuyển sang dạng thẻ trên điện thoại.
-- Vùng bấm (nút, liên kết) tối thiểu 44×44px.
-- Trên điện thoại, nút đính kèm tệp cho phép chọn ảnh từ thư viện hoặc chụp bằng camera.
-- Mọi chức năng của các vai trò đều dùng được trên điện thoại. Việc tối ưu bố cục ưu tiên Cổng Sinh viên.
+- **BR-01:** Độ rộng hỗ trợ: từ 360px (điện thoại) trở lên. Các mốc bố cục: dưới 768px (điện thoại), 768–1279px (máy tính bảng), từ 1280px trở lên (máy tính).
+- **BR-02:** Trình duyệt hỗ trợ: 2 phiên bản mới nhất của Chrome, Safari, Edge và Firefox.
+- **BR-03:** Ở độ rộng 360px không có thanh cuộn ngang. Bảng dữ liệu chuyển sang dạng thẻ trên điện thoại.
+- **BR-04:** Vùng bấm (nút, liên kết) tối thiểu 44×44px.
+- **BR-05:** Trên điện thoại, nút đính kèm tệp cho phép chọn ảnh từ thư viện hoặc chụp bằng camera.
+- **BR-06:** Mọi chức năng của các vai trò đều dùng được trên điện thoại. Việc tối ưu bố cục ưu tiên Cổng Sinh viên.
 
 **Alternative / Error Flows**
-- Nếu trình duyệt không nằm trong danh sách hỗ trợ, hệ thống vẫn cho dùng nhưng hiển thị thông báo khuyến nghị đổi trình duyệt.
-- Nếu mạng chậm hoặc mất kết nối khi gửi form, giao diện giữ nguyên nội dung đã nhập và hiển thị nút Thử lại.
+- **E-01:** Nếu trình duyệt không nằm trong danh sách hỗ trợ, hệ thống vẫn cho dùng nhưng hiển thị thông báo khuyến nghị đổi trình duyệt.
+- **E-02:** Nếu mạng chậm hoặc mất kết nối khi gửi form, giao diện giữ nguyên nội dung đã nhập và hiển thị nút Thử lại.
 
 **Acceptance Criteria**
-- **AC-01 [Happy Path]:** Sinh viên dùng điện thoại tạo yêu cầu, đính kèm ảnh chụp từ camera và gửi thành công, không cần phóng to màn hình.
-- **AC-02 [Validation]:** Mở mọi màn hình ở độ rộng 360px -> không có thanh cuộn ngang, không có chữ hoặc nút bị cắt.
-- **AC-03 [Boundary]:** Ở độ rộng 767px hiển thị bố cục điện thoại; ở 768px chuyển sang bố cục máy tính bảng. Hàng đợi của nhân viên ở dạng thẻ trên điện thoại, dạng bảng trên máy tính.
-- **AC-04 [Security]:** Trên mọi kích thước màn hình, menu chỉ hiển thị chức năng thuộc vai trò hiện tại.
-- **AC-05 [Concurrency]:** Xoay điện thoại từ dọc sang ngang khi đang điền form -> nội dung đã nhập và tệp đã chọn được giữ nguyên.
-- **AC-06 [Resilience]:** Mất mạng khi bấm Gửi trên điện thoại -> form giữ nguyên dữ liệu, hiển thị thông báo mất kết nối và nút Thử lại; khi gửi lại dùng cùng `Idempotency-Key` nên không tạo hồ sơ trùng.
+- **AC-01 [Happy Path]:** Sinh viên dùng điện thoại tạo yêu cầu, đính kèm ảnh chụp từ camera và gửi thành công, không cần phóng to màn hình. _(Kiểm cho: luồng chính, BR-05)_
+- **AC-02 [Validation]:** Mở mọi màn hình ở độ rộng 360px -> không có thanh cuộn ngang, không có chữ hoặc nút bị cắt. _(Kiểm cho: BR-01, BR-03)_
+- **AC-03 [Boundary]:** Ở độ rộng 767px hiển thị bố cục điện thoại; ở 768px chuyển sang bố cục máy tính bảng. Hàng đợi của nhân viên ở dạng thẻ trên điện thoại, dạng bảng trên máy tính. _(Kiểm cho: BR-01, BR-03)_
+- **AC-04 [Security]:** Trên mọi kích thước màn hình, menu chỉ hiển thị chức năng thuộc vai trò hiện tại. _(Kiểm cho: quy ước phân quyền ở FR-SEC-03)_
+- **AC-05 [Concurrency]:** Xoay điện thoại từ dọc sang ngang khi đang điền form -> nội dung đã nhập và tệp đã chọn được giữ nguyên. _(Kiểm cho: luồng chính)_
+- **AC-06 [Resilience]:** Mất mạng khi bấm Gửi trên điện thoại -> form giữ nguyên dữ liệu, hiển thị thông báo mất kết nối và nút Thử lại; khi gửi lại dùng cùng `Idempotency-Key` nên không tạo hồ sơ trùng. _(Kiểm cho: E-02)_
+- **AC-07 [Validation]:** Chạy các tác vụ chính trên 2 phiên bản mới nhất của Chrome, Safari, Edge, Firefox -> đều đúng. Mở bằng trình duyệt ngoài danh sách -> vẫn dùng được, có thông báo khuyến nghị đổi trình duyệt. Mọi nút và liên kết có vùng bấm tối thiểu 44×44px. _(Kiểm cho: BR-02, BR-04, E-01)_
+- **AC-08 [Happy Path]:** Ở độ rộng 360px, nhân viên xử lý một hồ sơ từ phân công đến đóng và Admin xem dashboard được, không cần máy tính. _(Kiểm cho: BR-06)_
 
 **Ví dụ Edge Case**
 Một sinh viên dùng điện thoại Android cũ với màn hình 360px và chữ hệ thống đặt cỡ lớn. Các nút chính vẫn hiển thị đầy đủ và bấm được, nhãn dài tự xuống dòng thay vì bị cắt chữ.

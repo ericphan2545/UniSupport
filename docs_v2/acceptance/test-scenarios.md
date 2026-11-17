@@ -333,45 +333,45 @@ Mỗi kịch bản chạy lần lượt mọi AC của một FR trên Staging, v
 
 | Mã | FR | Kiểm AC | Milestone chạy lần đầu | Regression |
 |---|---|---|---|---|
-| `TS-21` | `FR-STU-01` | `FR-STU-01/AC-01` đến `FR-STU-01/AC-06` | MS-01 | không |
-| `TS-22` | `FR-STU-02` | `FR-STU-02/AC-01` đến `FR-STU-02/AC-06` | MS-02 | không |
-| `TS-23` | `FR-STU-03` | `FR-STU-03/AC-01` đến `FR-STU-03/AC-06` | MS-02 | không |
-| `TS-24` | `FR-STU-04` | `FR-STU-04/AC-01` đến `FR-STU-04/AC-06` | MS-02 | không |
-| `TS-25` | `FR-STU-05` | `FR-STU-05/AC-01` đến `FR-STU-05/AC-06` | MS-02 | không |
-| `TS-26` | `FR-STU-06` | `FR-STU-06/AC-01` đến `FR-STU-06/AC-06` | MS-02 | không |
-| `TS-27` | `FR-STU-07` | `FR-STU-07/AC-01` đến `FR-STU-07/AC-06` | MS-04 | không |
-| `TS-28` | `FR-STU-08` | `FR-STU-08/AC-01` đến `FR-STU-08/AC-06` | MS-02 | không |
-| `TS-29` | `FR-STU-09` | `FR-STU-09/AC-01` đến `FR-STU-09/AC-06` | MS-03 | không |
-| `TS-30` | `FR-STU-10` | `FR-STU-10/AC-01` đến `FR-STU-10/AC-06` | MS-04 | không |
-| `TS-31` | `FR-STF-01` | `FR-STF-01/AC-01` đến `FR-STF-01/AC-06` | MS-02 | không |
-| `TS-32` | `FR-STF-02` | `FR-STF-02/AC-01` đến `FR-STF-02/AC-06` | MS-02 | không |
-| `TS-33` | `FR-STF-03` | `FR-STF-03/AC-01` đến `FR-STF-03/AC-06` | MS-02 | không |
-| `TS-34` | `FR-STF-04` | `FR-STF-04/AC-01` đến `FR-STF-04/AC-06` | MS-03 | không |
-| `TS-35` | `FR-STF-05` | `FR-STF-05/AC-01` đến `FR-STF-05/AC-06` | MS-03 | không |
-| `TS-36` | `FR-STF-06` | `FR-STF-06/AC-01` đến `FR-STF-06/AC-06` | MS-04 | không |
-| `TS-37` | `FR-STF-07` | `FR-STF-07/AC-01` đến `FR-STF-07/AC-06` | MS-03 | không |
-| `TS-38` | `FR-STF-08` | `FR-STF-08/AC-01` đến `FR-STF-08/AC-06` | MS-03 | không |
-| `TS-39` | `FR-STF-09` | `FR-STF-09/AC-01` đến `FR-STF-09/AC-06` | MS-03 | không |
-| `TS-40` | `FR-STF-10` | `FR-STF-10/AC-01` đến `FR-STF-10/AC-06` | MS-03 | không |
-| `TS-41` | `FR-MGT-01` | `FR-MGT-01/AC-01` đến `FR-MGT-01/AC-06` | MS-05 | không |
-| `TS-42` | `FR-MGT-02` | `FR-MGT-02/AC-01` đến `FR-MGT-02/AC-06` | MS-05 | không |
-| `TS-43` | `FR-MGT-03` | `FR-MGT-03/AC-01` đến `FR-MGT-03/AC-06` | MS-05 | không |
-| `TS-44` | `FR-MGT-04` | `FR-MGT-04/AC-01` đến `FR-MGT-04/AC-06` | MS-05 | không |
-| `TS-45` | `FR-MGT-05` | `FR-MGT-05/AC-01` đến `FR-MGT-05/AC-06` | MS-05 | không |
-| `TS-46` | `FR-MGT-06` | `FR-MGT-06/AC-01` đến `FR-MGT-06/AC-06` | MS-01 | không |
-| `TS-47` | `FR-MGT-07` | `FR-MGT-07/AC-01` đến `FR-MGT-07/AC-06` | MS-02 | không |
-| `TS-48` | `FR-SEC-01` | `FR-SEC-01/AC-01` đến `FR-SEC-01/AC-06` | MS-01 | không |
-| `TS-49` | `FR-SEC-02` | `FR-SEC-02/AC-01` đến `FR-SEC-02/AC-06` | MS-01 | không |
-| `TS-50` | `FR-SEC-03` | `FR-SEC-03/AC-01` đến `FR-SEC-03/AC-06` | MS-01 | không |
-| `TS-51` | `FR-SEC-04` | `FR-SEC-04/AC-01` đến `FR-SEC-04/AC-06` | MS-01, MS-02, MS-03, MS-04, MS-05 | không |
-| `TS-52` | `FR-SEC-05` | `FR-SEC-05/AC-01` đến `FR-SEC-05/AC-06` | MS-02 | không |
-| `TS-53` | `FR-SEC-06` | `FR-SEC-06/AC-01` đến `FR-SEC-06/AC-06` | MS-01, MS-02, MS-03, MS-04 | không |
-| `TS-54` | `FR-CORE-01` | `FR-CORE-01/AC-01` đến `FR-CORE-01/AC-06` | MS-02 | không |
-| `TS-55` | `FR-CORE-02` | `FR-CORE-02/AC-01` đến `FR-CORE-02/AC-06` | MS-02 | không |
-| `TS-56` | `FR-CORE-03` | `FR-CORE-03/AC-01` đến `FR-CORE-03/AC-06` | MS-02 | không |
-| `TS-57` | `FR-CORE-04` | `FR-CORE-04/AC-01` đến `FR-CORE-04/AC-06` | MS-02 | không |
-| `TS-58` | `FR-CORE-05` | `FR-CORE-05/AC-01` đến `FR-CORE-05/AC-06` | MS-02 | không |
-| `TS-59` | `FR-CORE-06` | `FR-CORE-06/AC-01` đến `FR-CORE-06/AC-06` | MS-02, MS-03, MS-04 | không |
-| `TS-60` | `FR-CORE-07` | `FR-CORE-07/AC-01` đến `FR-CORE-07/AC-06` | MS-02 | không |
-| `TS-61` | `FR-CORE-08` | `FR-CORE-08/AC-01` đến `FR-CORE-08/AC-06` | MS-01, MS-02, MS-03, MS-04, MS-05 | không |
-| `TS-62` | `FR-CORE-09` | `FR-CORE-09/AC-01` đến `FR-CORE-09/AC-06` | MS-01, MS-02, MS-03, MS-04, MS-05 | không |
+| `TS-21` | `FR-STU-01` | `FR-STU-01/AC-01` đến `FR-STU-01/AC-07` | MS-01 | không |
+| `TS-22` | `FR-STU-02` | `FR-STU-02/AC-01` đến `FR-STU-02/AC-10` | MS-02 | không |
+| `TS-23` | `FR-STU-03` | `FR-STU-03/AC-01` đến `FR-STU-03/AC-07` | MS-02 | không |
+| `TS-24` | `FR-STU-04` | `FR-STU-04/AC-01` đến `FR-STU-04/AC-09` | MS-02 | không |
+| `TS-25` | `FR-STU-05` | `FR-STU-05/AC-01` đến `FR-STU-05/AC-07` | MS-02 | không |
+| `TS-26` | `FR-STU-06` | `FR-STU-06/AC-01` đến `FR-STU-06/AC-08` | MS-02 | không |
+| `TS-27` | `FR-STU-07` | `FR-STU-07/AC-01` đến `FR-STU-07/AC-08` | MS-04 | không |
+| `TS-28` | `FR-STU-08` | `FR-STU-08/AC-01` đến `FR-STU-08/AC-10` | MS-02 | không |
+| `TS-29` | `FR-STU-09` | `FR-STU-09/AC-01` đến `FR-STU-09/AC-10` | MS-03 | không |
+| `TS-30` | `FR-STU-10` | `FR-STU-10/AC-01` đến `FR-STU-10/AC-08` | MS-04 | không |
+| `TS-31` | `FR-STF-01` | `FR-STF-01/AC-01` đến `FR-STF-01/AC-09` | MS-02 | không |
+| `TS-32` | `FR-STF-02` | `FR-STF-02/AC-01` đến `FR-STF-02/AC-07` | MS-02 | không |
+| `TS-33` | `FR-STF-03` | `FR-STF-03/AC-01` đến `FR-STF-03/AC-08` | MS-02 | không |
+| `TS-34` | `FR-STF-04` | `FR-STF-04/AC-01` đến `FR-STF-04/AC-09` | MS-03 | không |
+| `TS-35` | `FR-STF-05` | `FR-STF-05/AC-01` đến `FR-STF-05/AC-08` | MS-03 | không |
+| `TS-36` | `FR-STF-06` | `FR-STF-06/AC-01` đến `FR-STF-06/AC-08` | MS-04 | không |
+| `TS-37` | `FR-STF-07` | `FR-STF-07/AC-01` đến `FR-STF-07/AC-08` | MS-03 | không |
+| `TS-38` | `FR-STF-08` | `FR-STF-08/AC-01` đến `FR-STF-08/AC-07` | MS-03 | không |
+| `TS-39` | `FR-STF-09` | `FR-STF-09/AC-01` đến `FR-STF-09/AC-08` | MS-03 | không |
+| `TS-40` | `FR-STF-10` | `FR-STF-10/AC-01` đến `FR-STF-10/AC-07` | MS-03 | không |
+| `TS-41` | `FR-MGT-01` | `FR-MGT-01/AC-01` đến `FR-MGT-01/AC-08` | MS-05 | không |
+| `TS-42` | `FR-MGT-02` | `FR-MGT-02/AC-01` đến `FR-MGT-02/AC-08` | MS-05 | không |
+| `TS-43` | `FR-MGT-03` | `FR-MGT-03/AC-01` đến `FR-MGT-03/AC-08` | MS-05 | không |
+| `TS-44` | `FR-MGT-04` | `FR-MGT-04/AC-01` đến `FR-MGT-04/AC-07` | MS-05 | không |
+| `TS-45` | `FR-MGT-05` | `FR-MGT-05/AC-01` đến `FR-MGT-05/AC-08` | MS-05 | không |
+| `TS-46` | `FR-MGT-06` | `FR-MGT-06/AC-01` đến `FR-MGT-06/AC-09` | MS-01 | không |
+| `TS-47` | `FR-MGT-07` | `FR-MGT-07/AC-01` đến `FR-MGT-07/AC-08` | MS-02 | không |
+| `TS-48` | `FR-SEC-01` | `FR-SEC-01/AC-01` đến `FR-SEC-01/AC-09` | MS-01 | không |
+| `TS-49` | `FR-SEC-02` | `FR-SEC-02/AC-01` đến `FR-SEC-02/AC-07` | MS-01 | không |
+| `TS-50` | `FR-SEC-03` | `FR-SEC-03/AC-01` đến `FR-SEC-03/AC-08` | MS-01 | không |
+| `TS-51` | `FR-SEC-04` | `FR-SEC-04/AC-01` đến `FR-SEC-04/AC-08` | MS-01, MS-02, MS-03, MS-04, MS-05 | không |
+| `TS-52` | `FR-SEC-05` | `FR-SEC-05/AC-01` đến `FR-SEC-05/AC-07` | MS-02 | không |
+| `TS-53` | `FR-SEC-06` | `FR-SEC-06/AC-01` đến `FR-SEC-06/AC-09` | MS-01, MS-02, MS-03, MS-04 | không |
+| `TS-54` | `FR-CORE-01` | `FR-CORE-01/AC-01` đến `FR-CORE-01/AC-08` | MS-02 | không |
+| `TS-55` | `FR-CORE-02` | `FR-CORE-02/AC-01` đến `FR-CORE-02/AC-08` | MS-02 | không |
+| `TS-56` | `FR-CORE-03` | `FR-CORE-03/AC-01` đến `FR-CORE-03/AC-09` | MS-02 | không |
+| `TS-57` | `FR-CORE-04` | `FR-CORE-04/AC-01` đến `FR-CORE-04/AC-07` | MS-02 | không |
+| `TS-58` | `FR-CORE-05` | `FR-CORE-05/AC-01` đến `FR-CORE-05/AC-08` | MS-02 | không |
+| `TS-59` | `FR-CORE-06` | `FR-CORE-06/AC-01` đến `FR-CORE-06/AC-08` | MS-02, MS-03, MS-04 | không |
+| `TS-60` | `FR-CORE-07` | `FR-CORE-07/AC-01` đến `FR-CORE-07/AC-08` | MS-02 | không |
+| `TS-61` | `FR-CORE-08` | `FR-CORE-08/AC-01` đến `FR-CORE-08/AC-08` | MS-01, MS-02, MS-03, MS-04, MS-05 | không |
+| `TS-62` | `FR-CORE-09` | `FR-CORE-09/AC-01` đến `FR-CORE-09/AC-08` | MS-01, MS-02, MS-03, MS-04, MS-05 | không |
