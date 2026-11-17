@@ -133,7 +133,7 @@ Tôi đã đọc, hiểu và đồng ý thực hiện Team Charter này.
 
 | STT | Họ tên | Mảng phụ trách | Ngày xác nhận | Xác nhận |
 | --- | --- | --- | --- | --- |
-| 1 | Lê Hoàng Tùng | Trưởng nhóm; Proposal và báo giá; Quản trị và giám sát | | |
-| 2 | Ngô Tấn Đức | PRD | | |
-| 3 | Phan Tiến Thịnh | Kế hoạch và GitHub | | |
-| 4 | Đào Tuấn Bảo | Cách làm việc, chất lượng, sản phẩm | | |
+| 1 | Lê Hoàng Tùng | Trưởng nhóm; Proposal và báo giá; Quản trị và giám sát |18/11/2026 |Tùng |
+| 2 | Ngô Tấn Đức | PRD |18/11/2026 |Đức |
+| 3 | Phan Tiến Thịnh | Kế hoạch và GitHub |18/11/2026|Thịnh |
+| 4 | Đào Tuấn Bảo | Cách làm việc, chất lượng, sản phẩm |18/11/2026 |Bảo |
