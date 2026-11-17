@@ -33,6 +33,8 @@ Effort được bóc tách theo 6 milestone `MS-01` đến `MS-06` và việc qu
 
 **Cơ sở phân bổ:** tổng giờ của từng vị trí ở Phần 1 được chia cho các issue người đó phụ trách, theo tỷ trọng số ngày công ước lượng của issue; mỗi issue tính tối đa 10 ngày; vai trò hỗ trợ/duyệt tính 25%. Lịch thực hiện của từng issue nằm ở sheet WBS; đổi lịch không làm đổi giờ.
 
+**Cách cộng theo milestone:** tổng giờ của mục 2.1 đến 2.6 không gồm việc quản lý dự án `Q-09` (26 giờ, mục 2.7). Sheet WBS của Master Plan chia 26 giờ này vào từng milestone (5, 6, 5, 3, 3, 4 giờ cho `MS-01` đến `MS-06`), nên tổng theo milestone ở WBS là 364, 134, 88, 46, 76, 162 giờ. Tổng chung giống nhau: 870 giờ; tổng theo hạng mục `Q-xx` khớp tuyệt đối.
+
 ### 2.1. MS-01 · CHỐT YÊU CẦU, ĐĂNG NHẬP VÀ PHÂN QUYỀN — TỔNG: 359 GIỜ (44,88 PD)
 
 Milestone gồm hai hạng mục báo giá: `Q-01` (285 giờ) và `Q-02` (74 giờ). Cuối milestone khách đăng nhập thử được trên Staging.
@@ -246,7 +248,8 @@ Giá chào khách hàng nằm ở [quotation.xlsx](quotation.xlsx) sheet Hạng 
 
 **Phân tích số liệu làm tròn:**
 
-- Giá thầu tính toán ban đầu sau thuế VAT là 332.315.921 đồng.
+- Nơi gốc của giá là [quotation.xlsx](quotation.xlsx): tổng các hạng mục trước VAT 302.105.412 đồng, sau VAT 332.315.953 đồng (sheet Hạng mục, ô F15 và F17), làm tròn lên 332.316.000 đồng. Bảng 3.1 dưới đây tính theo chi phí nội bộ nên ra 302.105.383 đồng trước VAT; chênh 29 đồng do đơn giá bán từng vai trò trong báo giá được làm tròn đến đồng. Cả hai cách tính đều làm tròn ra cùng giá chào.
+- Giá thầu tính toán ban đầu (theo Bảng 3.1) sau thuế VAT là 332.315.921 đồng.
 - Khi làm tròn lên mốc thương mại 332.316.000 đồng, giá trị sau thuế tăng thêm 79 đồng.
 - Tương ứng, Doanh thu thuần trước thuế VAT tăng thêm 72 đồng (từ 302.105.383 đ lên thành 302.105.455 đ).
 

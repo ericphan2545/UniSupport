@@ -1,6 +1,6 @@
-# M1. Cổng Sinh viên
+# M01. Cổng Sinh viên
 
-Sinh viên đăng nhập qua M4 → xem thông tin → chọn loại yêu cầu để biết phòng nhận → nhập mô tả/tệp → gửi và nhận mã NEW → theo dõi tiến độ. Staff M2 phân công và xử lý; khi cần bổ sung, sinh viên nhận thông báo và trả lời. Staff đóng với kết quả; sinh viên xem và đánh giá một lần. M3 tổng hợp báo cáo; M5 bảo đảm mã/trạng thái/SLA/tệp/lịch sử thống nhất.
+Sinh viên đăng nhập qua M04 → xem thông tin → chọn loại yêu cầu để biết phòng nhận → nhập mô tả/tệp → gửi và nhận mã NEW → theo dõi tiến độ. Staff M02 phân công và xử lý; khi cần bổ sung, sinh viên nhận thông báo và trả lời. Staff đóng với kết quả; sinh viên xem và đánh giá một lần. M03 tổng hợp báo cáo; M05 bảo đảm mã/trạng thái/SLA/tệp/lịch sử thống nhất.
 
 ## Nội dung module
 
@@ -10,7 +10,7 @@ Sinh viên đăng nhập qua M4 → xem thông tin → chọn loại yêu cầu 
 
 ## Cách đọc
 
-Đọc luồng và quy ước đầu PRD trước, sau đó xem từng FR. Các quy tắc nghiệp vụ liên module nằm trong [M5](../M05-core-platform/prd.md); phiên, quyền, bảo mật, audit và mã lỗi nằm trong [M4](../M04-authentication-security/prd.md). Các thông tin chưa được trường xác nhận không được coi là đã phê duyệt chỉ vì được viết trong tài liệu.
+Đọc luồng và quy ước đầu PRD trước, sau đó xem từng FR. Các quy tắc nghiệp vụ liên module nằm trong [M05](../M05-core-platform/prd.md); phiên, quyền, bảo mật, audit và mã lỗi nằm trong [M04](../M04-authentication-security/prd.md). Các thông tin chưa được trường xác nhận không được coi là đã phê duyệt chỉ vì được viết trong tài liệu.
 
 ## Danh sách chức năng
 
@@ -29,10 +29,10 @@ Sinh viên đăng nhập qua M4 → xem thông tin → chọn loại yêu cầu 
 
 ## Module liên quan
 
-- [M2 — Cổng Nhân viên](../M02-staff-portal/prd.md)
-- [M3 — Cổng Admin](../M03-management-portal/prd.md)
-- [M4 — Xác thực & Bảo mật](../M04-authentication-security/prd.md)
-- [M5 — Lõi hệ thống & Nền tảng](../M05-core-platform/prd.md)
+- [M02 — Cổng Nhân viên](../M02-staff-portal/prd.md)
+- [M03 — Cổng Admin](../M03-management-portal/prd.md)
+- [M04 — Xác thực & Bảo mật](../M04-authentication-security/prd.md)
+- [M05 — Lõi hệ thống & Nền tảng](../M05-core-platform/prd.md)
 
 ## Quy ước sử dụng tài liệu
 

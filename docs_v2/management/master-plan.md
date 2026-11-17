@@ -41,6 +41,7 @@ Kế hoạch có 6 milestone, chia theo luồng nghiệp vụ của một hồ s
 - Mỗi milestone `MS-01` đến `MS-05` có 3 nhóm dòng WBS: "Viết test case từ AC", "Test trọn luồng và regression", "Sửa lỗi sau test". Chúng thuộc hạng mục báo giá của milestone đó (`Q-02` đến `Q-06`), loại effort "Kiểm thử", "Tích hợp và kiểm thử", "Sửa lỗi" ở sheet Chi tiết effort của [quotation.xlsx](quotation.xlsx).
 - "Test trọn luồng và regression" chạy kịch bản của milestone đang làm và chạy lại các kịch bản đánh dấu Regression của các milestone trước ([test-scenarios.md](../acceptance/test-scenarios.md)), trước mỗi lần bàn giao cho khách.
 - `MS-06`: usability test, báo cáo kiểm thử (`Q-07`); sửa lỗi trong bảo hành (`Q-08`).
+- Số AC: bộ đặc tả có 339 AC (mỗi business rule và error flow có ít nhất một AC). Giờ "Viết test case từ AC" và "Test trọn luồng và regression" tính theo milestone, không theo số AC; nếu thực tế vượt giờ kế hoạch thì PM / Senior xếp thêm từ năng lực dư ở sheet Resources, không lấy từ quỹ dự phòng.
 - Tích hợp: dựng Staging và CI deploy (`MS-01`), test trọn luồng trên Staging ở mỗi milestone, nối SSO thật trên server trường (`MS-06`).
 
 ## Dự phòng cho thay đổi và rủi ro

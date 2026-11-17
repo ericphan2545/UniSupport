@@ -1,16 +1,16 @@
-# M1. Cổng Sinh viên – Functional Requirement Specification
+# M01. Cổng Sinh viên – Functional Requirement Specification
 
-> Cập nhật: 09/10/2026. Giữ nguyên 42 chức năng của 5 module trong repo; bổ sung và thống nhất đặc tả trực tiếp tại module. Điểm còn chờ trường xác nhận có một nơi gốc là [assumptions.md](../../project/assumptions.md) (mã `A-xx`, cột Trạng thái); phần đầu module chỉ dẫn lại mã.
+> Đặc tả thuộc bộ 42 chức năng của 5 module, chốt cùng khách ở `MS-01` (`A-13`); sau khi chốt, thay đổi đi qua change request ([03-quan-tri-giam-sat.md](../../management/03-quan-tri-giam-sat.md) mục 5). Lịch sử sửa xem trong các PR. Điểm còn chờ trường xác nhận có một nơi gốc là [assumptions.md](../../project/assumptions.md) (mã `A-xx`, cột Trạng thái); phần đầu module chỉ dẫn lại mã.
 
 **Mục đích module:** Thông tin tài khoản trường, yêu cầu, tệp, phản hồi bổ sung và đánh giá.
 
 **Actor chính:** STUDENT. Actor là người dùng/hệ thống, không phải tên người lập trình.
 
-**Phụ thuộc:** M4 xác thực/phạm vi; M5 danh mục, mã, trạng thái, SLA và tệp.
+**Phụ thuộc:** M04 xác thực/phạm vi; M05 danh mục, mã, trạng thái, SLA và tệp.
 
 ## Luồng sử dụng và liên kết module
 
-Sinh viên đăng nhập qua M4 → xem thông tin → chọn loại yêu cầu để biết phòng nhận → nhập mô tả/tệp → gửi và nhận mã NEW → theo dõi tiến độ. Staff M2 phân công và xử lý; khi cần bổ sung, sinh viên nhận thông báo và trả lời. Staff đóng với kết quả; sinh viên xem và đánh giá một lần. M3 tổng hợp báo cáo; M5 bảo đảm mã/trạng thái/SLA/tệp/lịch sử thống nhất.
+Sinh viên đăng nhập qua M04 → xem thông tin → chọn loại yêu cầu để biết phòng nhận → nhập mô tả/tệp → gửi và nhận mã NEW → theo dõi tiến độ. Staff M02 phân công và xử lý; khi cần bổ sung, sinh viên nhận thông báo và trả lời. Staff đóng với kết quả; sinh viên xem và đánh giá một lần. M03 tổng hợp báo cáo; M05 bảo đảm mã/trạng thái/SLA/tệp/lịch sử thống nhất.
 
 **Input module:** phiên STUDENT, loại yêu cầu, mô tả/tệp, nội dung bổ sung và đánh giá.
 **Output module:** mã/hồ sơ thuộc sinh viên, trạng thái và lịch sử công khai, tệp có quyền, thông báo, kết quả xử lý và đánh giá đã lưu. Không trả dữ liệu xử lý nội bộ.
@@ -55,7 +55,7 @@ Sinh viên đã đăng nhập qua SSO.
 **Input**
 - **Người dùng/request:** Không có input chỉnh sửa thông tin; thao tác mở trang Thông tin cá nhân.
 - **Hệ thống:** Phiên ứng dụng; hồ sơ Userinfo của đúng định danh SSO hoặc cache hợp lệ.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: full_name, student_code, faculty_name, class_name, email, phone_number, fetched_at. Trường tùy chọn thiếu là null.
@@ -120,7 +120,7 @@ Sinh viên đã đăng nhập (vai trò `STUDENT`).
 **Input**
 - **Người dùng/request:** request_type_id, description, 0–5 files; header Idempotency-Key.
 - **Hệ thống:** Sinh viên từ phiên; danh mục/ánh xạ; SLA hiện tại; snapshot thông tin theo STU-01.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 201: ticket_id, code, request_type, department, status, created_at, file_count, version và liên kết chi tiết. Không trả priority, due_at, assignee hay dữ liệu nội bộ.
@@ -188,7 +188,7 @@ Sinh viên đã đăng nhập.
 **Input**
 - **Người dùng/request:** request_type_id đang chọn; không có input department_id để quyết định nơi nhận.
 - **Hệ thống:** Danh mục loại yêu cầu → phòng ban; ngôn ngữ tài khoản.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: danh mục và department_id/name tương ứng; màn hình cập nhật theo lựa chọn cuối.
@@ -245,7 +245,7 @@ Sinh viên đã đăng nhập.
 **Input**
 - **Người dùng/request:** 0–5 files trong multipart STU-02 hoặc STU-09; không phải API tạo hồ sơ riêng.
 - **Hệ thống:** Phiên, quyền với thao tác gốc, magic bytes, giới hạn cấu hình.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** Kết quả dùng HTTP status của thao tác gốc; metadata gồm file_id, original_name, verified_mime, size_bytes. Không trả đường dẫn kho riêng.
@@ -270,7 +270,7 @@ Sinh viên đã đăng nhập.
 - **AC-02 [Boundary]:** Tệp đúng 10MB -> chấp nhận; tệp 10MB + 1 byte -> 413. Gửi 5 tệp -> chấp nhận; gửi 6 tệp -> 400. _(Kiểm cho: BR-02, E-01, E-03)_
 - **AC-03 [Validation]:** Tệp `.exe` đổi đuôi thành `.pdf` -> 415. _(Kiểm cho: BR-01, E-02)_
 - **AC-04 [Security]:** Gọi API tải tệp không có token -> 401. Sinh viên khác gọi API tải tệp -> 404. _(Kiểm cho: BR-04)_
-- **AC-05 [Idempotency]:** Gửi lại request cùng `Idempotency-Key` -> tệp không bị lưu thêm lần nữa. _(Kiểm cho: quy ước Idempotency-Key ở M5)_
+- **AC-05 [Idempotency]:** Gửi lại request cùng `Idempotency-Key` -> tệp không bị lưu thêm lần nữa. _(Kiểm cho: quy ước Idempotency-Key ở M05)_
 - **AC-06 [Resilience & Audit]:** Lưu tệp thứ 3 bị lỗi -> rollback, không có hồ sơ, tệp không tham chiếu không tải được và được dọn theo quy ước chung. Lưu thành công -> nhật ký có bản ghi `UPLOAD_FILE` cho từng tệp. _(Kiểm cho: BR-05, E-04)_
 - **AC-07 [Validation]:** Gửi yêu cầu không kèm tệp -> 201. Gửi 3 tệp, trong đó 1 tệp sai định dạng -> 415, không tạo hồ sơ và không lưu tệp nào. _(Kiểm cho: BR-02, BR-05)_
 - **AC-08 [Security]:** Tệp đã lưu có tên trong kho ngẫu nhiên, khác tên gốc; mở đường dẫn web công khai tới tệp -> không tải được. Giao diện vẫn hiển thị tên gốc. _(Kiểm cho: BR-03, BR-04)_
@@ -305,7 +305,7 @@ Sinh viên vừa gửi yêu cầu thành công.
 **Input**
 - **Người dùng/request:** Không có input mã do sinh viên tự chọn; nhận kết quả tạo hồ sơ.
 - **Hệ thống:** Năm Việt Nam tại created_at và sequence của năm.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** Mã USP-YYYY-NNNNN, loại yêu cầu, phòng ban, trạng thái, ngày gửi và số tệp trên màn hình xác nhận.
@@ -328,7 +328,7 @@ Sinh viên vừa gửi yêu cầu thành công.
 - **AC-02 [Boundary]:** Hồ sơ tạo lúc 23:59:59 ngày 31/12/2026 (giờ VN) -> mã năm 2026. Hồ sơ tạo lúc 00:00:00 ngày 01/01/2027 -> `USP-2027-00001`. _(Kiểm cho: BR-01)_
 - **AC-03 [Security]:** Sinh viên A tra mã hồ sơ của sinh viên B -> 404. _(Kiểm cho: E-02)_
 - **AC-04 [Concurrency]:** 50 hồ sơ gửi đồng thời -> 50 mã khác nhau, không trùng. _(Kiểm cho: BR-02)_
-- **AC-05 [Idempotency]:** Gửi lại cùng `Idempotency-Key` -> trả về mã cũ, không sinh mã mới. _(Kiểm cho: quy ước Idempotency-Key ở M5)_
+- **AC-05 [Idempotency]:** Gửi lại cùng `Idempotency-Key` -> trả về mã cũ, không sinh mã mới. _(Kiểm cho: quy ước Idempotency-Key ở M05)_
 - **AC-06 [Resilience & Audit]:** Sinh mã lỗi -> 500, không có hồ sơ thiếu mã. Tạo thành công -> mã hồ sơ được ghi trong bản ghi nhật ký `CREATE_TICKET`. _(Kiểm cho: E-01)_
 - **AC-07 [Boundary]:** Năm đã có 99.999 hồ sơ, tạo hồ sơ tiếp theo -> mã `USP-YYYY-100000`, không lỗi. Mã hồ sơ giữ nguyên sau khi phân công, chuyển phòng và đóng; mã không chứa MSSV hay họ tên. _(Kiểm cho: BR-03, BR-04)_
 
@@ -362,7 +362,7 @@ Sinh viên đã đăng nhập.
 **Input**
 - **Người dùng/request:** page mặc định 1; page_size mặc định 10, 1–50; statuses; code tìm chính xác.
 - **Hệ thống:** Sinh viên từ phiên; danh mục trạng thái.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: items, page, page_size, total_items, total_pages; mỗi item có mã, loại, phòng hiện tại, trạng thái, created_at, needs_info.
@@ -422,7 +422,7 @@ Sinh viên chủ hồ sơ.
 **Input**
 - **Người dùng/request:** ticket_id hoặc code hợp lệ của hồ sơ.
 - **Hệ thống:** Sinh viên từ phiên; hồ sơ, yêu cầu bổ sung, timeline công khai, đánh giá.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: hồ sơ, version, tệp, yêu cầu bổ sung công khai, public_history; CLOSED có resolution/closed_at và đánh giá đã có hoặc form đánh giá.
@@ -485,7 +485,7 @@ Sinh viên đã đăng nhập (người nhận). Thông báo được tạo tự
 **Input**
 - **Người dùng/request:** Đọc danh sách: page/page_size; đánh dấu một: notification_id; đánh dấu tất cả: read_before là thời điểm chụp danh sách do server cấp.
 - **Hệ thống:** Sinh viên từ phiên; notification event_type và tham số.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200: items, total_items, page, total_pages, unread_count, snapshot_at; đánh dấu đọc trả unread_count và thời điểm xử lý.
@@ -551,7 +551,7 @@ Sinh viên chủ hồ sơ.
 **Input**
 - **Người dùng/request:** ticket_id, info_request_id, version, content, 0–5 files; header Idempotency-Key.
 - **Hệ thống:** Chủ hồ sơ từ phiên; yêu cầu bổ sung mở; trạng thái và khoảng pause hiện tại.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 201: supplement_id, ticket_id/code, info_request_id, created_at, file metadata, status, version mới; không trả due_at.
@@ -618,7 +618,7 @@ Sinh viên chủ hồ sơ.
 **Input**
 - **Người dùng/request:** ticket_id, rating số nguyên 1–5, comment tùy chọn tối đa 1000 ký tự.
 - **Hệ thống:** Sinh viên từ phiên; trạng thái CLOSED; unique đánh giá theo ticket_id.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 201: rating_id, ticket_id, rating, comment, created_at; lần đã có trả 409 và UI tải lại đánh giá.

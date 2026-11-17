@@ -81,7 +81,7 @@ Phản hồi ở đây là phản hồi **về sản phẩm và dịch vụ hỗ
 
 ### 5.1 Đầu vào
 
-Tiếp nhận từ sinh viên, nhân viên, Admin và đại diện nhà trường qua các kênh được công bố. Mỗi trường hợp có mã theo dõi, thời điểm tiếp nhận, người gửi, nhóm người dùng, nội dung, ảnh hưởng, bằng chứng và người phụ trách. Trong thời gian dự án và bảo hành, mỗi phản hồi là một issue tạo bằng mẫu Feedback trên GitHub (nhãn `feedback`); số issue là mã theo dõi. Phản hồi ví dụ hoặc mô phỏng ghi rõ `Mô phỏng`.
+Tiếp nhận từ sinh viên, nhân viên, Admin và đại diện nhà trường qua các kênh được công bố. Mỗi trường hợp có mã theo dõi, thời điểm tiếp nhận, người gửi, nhóm người dùng, nội dung, ảnh hưởng, bằng chứng và người phụ trách. Trong thời gian dự án và bảo hành, mỗi phản hồi là một issue tạo bằng mẫu Feedback trên GitHub (nhãn `feedback`); số issue là mã theo dõi. Sau thời gian bảo hành, phản hồi gửi đầu mối sản phẩm của trường (mục 7.3) qua kênh hỗ trợ nhà trường công bố cho sinh viên, nhân viên và Admin; đầu mối ghi mỗi trường hợp vào sổ theo dõi với các thông tin trên. Phản hồi ví dụ hoặc mô phỏng ghi rõ `Mô phỏng`.
 
 ### 5.2 Quy trình xử lý
 
@@ -126,16 +126,18 @@ Kết quả phải kèm số người trả lời, nhóm người dùng và phi�
 
 ### 6.3 Chỉ số vận hành sản phẩm
 
-| Chỉ số | Cho thấy |
-|---|---|
-| Số hồ sơ mới / đang xử lý / quá hạn | Tải và điểm nghẽn |
-| Thời gian xử lý trung bình | Tốc độ phục vụ |
-| Loại yêu cầu phổ biến | Nhu cầu chính của sinh viên |
-| Khối lượng theo phòng ban | Phân bổ công việc của nhân viên |
-| Mức hài lòng của sinh viên với kết quả | Giá trị hỗ trợ nhận được |
-| Tỷ lệ phản hồi xử lý trong hạn 48 giờ | Chất lượng lắng nghe |
-| Tỷ lệ khiếu nại lặp lại cùng nguyên nhân | Vấn đề chưa được giải quyết tận gốc |
-| Tỷ lệ người bắt đầu gửi và gửi thành công; trung vị và phân vị 90 của thời gian xử lý; tuổi của hồ sơ chưa hoàn thành | Chỗ người dùng bỏ dở; các trường hợp chờ lâu |
+Người theo dõi chung: đầu mối sản phẩm của trường (mục 7.3); trong thời gian dự án và bảo hành là PM / Senior. Ba tháng đầu sau Go-live dùng để lấy mức nền (đề xuất, trường xác nhận); sau đó mục tiêu của từng chỉ số đặt theo mức nền và ghi vào báo cáo định kỳ.
+
+| Chỉ số | Cho thấy | Cách đo | Tần suất | Mục tiêu |
+|---|---|---|---|---|
+| Số hồ sơ mới / đang xử lý / quá hạn | Tải và điểm nghẽn | Dashboard và báo cáo Admin (FR-MGT-01 đến FR-MGT-04) | Hằng tháng | Đặt sau 3 tháng mức nền |
+| Thời gian xử lý trung bình | Tốc độ phục vụ | Dashboard và báo cáo Admin (FR-MGT-01 đến FR-MGT-04) | Hằng tháng | Đặt sau 3 tháng mức nền |
+| Loại yêu cầu phổ biến | Nhu cầu chính của sinh viên | Dashboard và báo cáo Admin (FR-MGT-01 đến FR-MGT-04) | Hằng tháng | Đặt sau 3 tháng mức nền |
+| Khối lượng theo phòng ban | Phân bổ công việc của nhân viên | Dashboard và báo cáo Admin (FR-MGT-01 đến FR-MGT-04) | Hằng tháng | Đặt sau 3 tháng mức nền |
+| Mức hài lòng của sinh viên với kết quả | Giá trị hỗ trợ nhận được | Đánh giá sao của sinh viên (FR-MGT-05) | Hằng tháng | Đặt sau 3 tháng mức nền |
+| Tỷ lệ phản hồi xử lý trong hạn 48 giờ | Chất lượng lắng nghe | Sổ theo dõi phản hồi (mục 5.4) | Hằng tháng | Theo chỉ tiêu mục 5.4 (dưới 48 giờ làm việc) |
+| Tỷ lệ khiếu nại lặp lại cùng nguyên nhân | Vấn đề chưa được giải quyết tận gốc | Sổ theo dõi phản hồi, nhóm theo nguyên nhân | Hằng tháng | Giảm so với mức nền |
+| Tỷ lệ người bắt đầu gửi và gửi thành công; trung vị và phân vị 90 của thời gian xử lý; tuổi của hồ sơ chưa hoàn thành | Chỗ người dùng bỏ dở; các trường hợp chờ lâu | Số liệu sử dụng của hệ thống | Hằng tháng | Đặt sau 3 tháng mức nền |
 
 ### 6.4 Hành động từ kết quả đo
 

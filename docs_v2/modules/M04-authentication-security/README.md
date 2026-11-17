@@ -1,6 +1,6 @@
-# M4. Xác thực & Bảo mật
+# M04. Xác thực & Bảo mật
 
-Trường/DevOps xác nhận SSO và nạp ADMIN đầu → admin cấp quyền staff → người dùng login → xác minh danh tính trường → tìm account hoặc tạo STUDENT → kiểm tra active → phát cookie phiên ứng dụng → đưa vào M1/M2/M3. Mỗi request đọc quyền hiện tại, kiểm tra phạm vi rồi mới ghi/đọc dữ liệu. Logout thu hồi phiên hiện tại khi server xác nhận thành công.
+Trường/DevOps xác nhận SSO và nạp ADMIN đầu → admin cấp quyền staff → người dùng login → xác minh danh tính trường → tìm account hoặc tạo STUDENT → kiểm tra active → phát cookie phiên ứng dụng → đưa vào M01/M02/M03. Mỗi request đọc quyền hiện tại, kiểm tra phạm vi rồi mới ghi/đọc dữ liệu. Logout thu hồi phiên hiện tại khi server xác nhận thành công.
 
 ## Nội dung module
 
@@ -10,7 +10,7 @@ Trường/DevOps xác nhận SSO và nạp ADMIN đầu → admin cấp quyền 
 
 ## Cách đọc
 
-Đọc luồng và quy ước đầu PRD trước, sau đó xem từng FR. Các quy tắc nghiệp vụ liên module nằm trong [M5](../M05-core-platform/prd.md); phiên, quyền, bảo mật, audit và mã lỗi nằm trong [M4](../M04-authentication-security/prd.md). Các thông tin chưa được trường xác nhận không được coi là đã phê duyệt chỉ vì được viết trong tài liệu.
+Đọc luồng và quy ước đầu PRD trước, sau đó xem từng FR. Các quy tắc nghiệp vụ liên module nằm trong [M05](../M05-core-platform/prd.md); phiên, quyền, bảo mật, audit và mã lỗi nằm trong [M04](../M04-authentication-security/prd.md). Các thông tin chưa được trường xác nhận không được coi là đã phê duyệt chỉ vì được viết trong tài liệu.
 
 ## Danh sách chức năng
 
@@ -25,10 +25,10 @@ Trường/DevOps xác nhận SSO và nạp ADMIN đầu → admin cấp quyền 
 
 ## Module liên quan
 
-- [M1 — Cổng Sinh viên](../M01-student-portal/prd.md)
-- [M2 — Cổng Nhân viên](../M02-staff-portal/prd.md)
-- [M3 — Cổng Admin](../M03-management-portal/prd.md)
-- [M5 — Lõi hệ thống & Nền tảng](../M05-core-platform/prd.md)
+- [M01 — Cổng Sinh viên](../M01-student-portal/prd.md)
+- [M02 — Cổng Nhân viên](../M02-staff-portal/prd.md)
+- [M03 — Cổng Admin](../M03-management-portal/prd.md)
+- [M05 — Lõi hệ thống & Nền tảng](../M05-core-platform/prd.md)
 
 ## Quy ước sử dụng tài liệu
 

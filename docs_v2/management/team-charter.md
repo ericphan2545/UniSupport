@@ -111,6 +111,7 @@ Mỗi vai trò 1 người, tổng 10 người. Tên vai trò thống nhất vớ
 - **Pull Request:** dùng mẫu `.github/pull_request_template.md`; ghi `Closes #n` cho từng issue được xử lý; ghi quyết định và lý do; với file Word/Excel ghi rõ sheet hoặc mục đã đổi.
 - **Review:** ít nhất 1 thành viên ban quản lý khác tác giả duyệt. PR sửa file Word/Excel phải được người chịu trách nhiệm file đó duyệt; nếu tác giả chính là người đó thì người dự phòng duyệt. Với code: Senior của mảng review; code của Senior do Senior mảng còn lại review.
 - **Merge:** tác giả merge sau khi có duyệt và không còn góp ý chưa xử lý; dùng squash merge; xóa nhánh sau khi merge.
+- **Ngoại lệ đã ghi nhận:** PR #169 và #170 (sửa theo góp ý vòng 1 và chấm thử) được trưởng nhóm merge khi chưa có review và bằng merge commit, trước khi nhóm thống nhất áp dụng mục này cho PR sửa theo feedback. Từ PR sau, mọi PR áp dụng đúng quy tắc trên, không có ngoại lệ.
 - **Góp ý của giảng viên:** mỗi góp ý một issue, giữ tiêu đề và mã `R1-xx`; sửa bằng PR có `Closes #n`, hoặc đóng issue kèm lý do nếu không đồng ý.
 
 ## 10. Thuật ngữ cần biết

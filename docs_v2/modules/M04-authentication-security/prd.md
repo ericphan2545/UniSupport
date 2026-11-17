@@ -1,6 +1,6 @@
-# M4. Xác thực & Bảo mật – Functional Requirement Specification
+# M04. Xác thực & Bảo mật – Functional Requirement Specification
 
-> Cập nhật: 09/10/2026. Giữ nguyên 42 chức năng của 5 module trong repo; bổ sung và thống nhất đặc tả trực tiếp tại module. Điểm còn chờ trường xác nhận có một nơi gốc là [assumptions.md](../../project/assumptions.md) (mã `A-xx`, cột Trạng thái); phần đầu module chỉ dẫn lại mã.
+> Đặc tả thuộc bộ 42 chức năng của 5 module, chốt cùng khách ở `MS-01` (`A-13`); sau khi chốt, thay đổi đi qua change request ([03-quan-tri-giam-sat.md](../../management/03-quan-tri-giam-sat.md) mục 5). Lịch sử sửa xem trong các PR. Điểm còn chờ trường xác nhận có một nơi gốc là [assumptions.md](../../project/assumptions.md) (mã `A-xx`, cột Trạng thái); phần đầu module chỉ dẫn lại mã.
 
 **Mục đích module:** SSO, phiên ứng dụng, phân quyền, bảo vệ tệp và audit.
 
@@ -10,7 +10,7 @@
 
 ## Luồng xác thực và liên kết module
 
-Trường/DevOps xác nhận SSO và nạp ADMIN đầu → admin cấp quyền staff → người dùng login → xác minh danh tính trường → tìm account hoặc tạo STUDENT → kiểm tra active → phát cookie phiên ứng dụng → đưa vào M1/M2/M3. Mỗi request đọc quyền hiện tại, kiểm tra phạm vi rồi mới ghi/đọc dữ liệu. Logout thu hồi phiên hiện tại khi server xác nhận thành công.
+Trường/DevOps xác nhận SSO và nạp ADMIN đầu → admin cấp quyền staff → người dùng login → xác minh danh tính trường → tìm account hoặc tạo STUDENT → kiểm tra active → phát cookie phiên ứng dụng → đưa vào M01/M02/M03. Mỗi request đọc quyền hiện tại, kiểm tra phạm vi rồi mới ghi/đọc dữ liệu. Logout thu hồi phiên hiện tại khi server xác nhận thành công.
 
 **Input module:** callback SSO, cookie phiên, đối tượng/hành động và policy endpoint.
 **Output module:** phiên ứng dụng hoặc lỗi, quyết định quyền/phạm vi, stream tệp có quyền và audit. Token SSO không trả browser.
@@ -19,7 +19,7 @@ Trường/DevOps xác nhận SSO và nạp ADMIN đầu → admin cấp quyền 
 
 **Thông tin vận hành:** quyền truy vấn nhật ký, thời gian lưu và sao lưu, người tiếp nhận do trường quyết định khi vận hành (Proposal 6.4, `A-12`, `NG-11`; rủi ro `R-25`). Không tự thêm màn hình nhật ký hoặc tính năng xóa dữ liệu (`NG-09`).
 
-## Quy tắc quyền, bảo mật và mã lỗi dùng cho M1–M5
+## Quy tắc quyền, bảo mật và mã lỗi dùng cho M01–M05
 
 ### Phiên và quyền
 
@@ -119,7 +119,7 @@ Người dùng chưa đăng nhập (sinh viên, nhân viên, Admin).
 **Input**
 - **Người dùng/request:** Bấm login; callback code/state theo giao thức SSO đã cấu hình.
 - **Hệ thống:** SSO trường đã xác nhận; định danh xác thực; tài khoản DB và trạng thái active.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** Phiên JWT ứng dụng trong cookie HttpOnly/Secure/SameSite=Lax và redirect đúng cổng; token SSO chỉ server. Lỗi không tạo phiên.
@@ -134,7 +134,7 @@ Người dùng chưa đăng nhập (sinh viên, nhân viên, Admin).
 - **BR-05:** Phiên làm việc hết hạn sau 8 giờ, không gia hạn. Hết phiên thì người dùng phải đăng nhập lại.
 - **BR-06:** SSO giả lập chỉ bật được ở môi trường dev và test. Nếu cấu hình bật SSO giả lập ở môi trường production, ứng dụng từ chối khởi động.
 - **BR-07:** Rate limit callback đăng nhập: 10 lần mỗi phút cho mỗi IP.
-- **BR-08:** Tài khoản `STAFF` chưa có phòng ban vẫn đăng nhập được, nhưng Cổng Nhân viên hiển thị thông báo "Tài khoản chưa được gán phòng ban" (theo quy ước của M2).
+- **BR-08:** Tài khoản `STAFF` chưa có phòng ban vẫn đăng nhập được, nhưng Cổng Nhân viên hiển thị thông báo "Tài khoản chưa được gán phòng ban" (theo quy ước của M02).
 
 **Alternative / Error Flows**
 - **E-01:** Nếu người dùng hủy đăng nhập trên trang SSO, hệ thống quay về trang đăng nhập với thông báo "Bạn đã hủy đăng nhập".
@@ -185,7 +185,7 @@ Người dùng đã đăng nhập (mọi vai trò).
 **Input**
 - **Người dùng/request:** Lệnh logout của phiên hiện tại; không cần phiên còn hạn để xóa cookie.
 - **Hệ thống:** Session ID/danh sách phiên phía server và token SSO của phiên.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200 khi không có phiên hoặc thu hồi thành công; xóa cookie, UI về login. 500 nếu thu hồi thất bại, không tuyên bố logout server đã thành công.
@@ -243,7 +243,7 @@ Hệ thống (áp dụng cho mọi request của mọi người dùng).
 **Input**
 - **Người dùng/request:** Request đến API; policy public/roles của endpoint.
 - **Hệ thống:** Phiên hợp lệ, role/department/active từ DB mỗi request.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** Cho đi tiếp nếu hợp lệ; 401 phiên lỗi, 403 role/active lỗi; 503 không kiểm tra được quyền.
@@ -254,9 +254,9 @@ Hệ thống (áp dụng cho mọi request của mọi người dùng).
 - **BR-01:** Login, callback và tài nguyên trang đăng nhập được khai báo public tường minh; logout cho phép xóa cookie ngay cả khi phiên hết hạn theo SEC-02. Các API nghiệp vụ còn lại mặc định từ chối nếu không có policy.
 - **BR-02:** Request ghi dùng cookie phải kiểm tra CSRF token gắn phiên và Origin theo danh sách ứng dụng; sai kiểm tra trả 403, không cập nhật. Callback SSO dùng state một lần và kiểm tra giao thức, không áp cùng CSRF token của phiên chưa có. Nội dung nhập là văn bản thuần và được encode khi render theo quy ước chung.
 - **BR-03:** Ma trận quyền theo cổng:
-  - `STUDENT`: chỉ dùng Cổng Sinh viên (M1).
-  - `STAFF`: chỉ dùng Cổng Nhân viên (M2).
-  - `ADMIN`: chỉ dùng Cổng Admin (M3).
+  - `STUDENT`: chỉ dùng Cổng Sinh viên (M01).
+  - `STAFF`: chỉ dùng Cổng Nhân viên (M02).
+  - `ADMIN`: chỉ dùng Cổng Admin (M03).
 - **BR-04:** Vai trò và phòng ban được gán qua FR-MGT-06. Tài khoản tạo lần đầu qua SSO mặc định là `STUDENT`.
 - **BR-05:** Mỗi tài khoản có đúng một vai trò.
 - **BR-06:** Thay đổi vai trò có hiệu lực ngay ở request kế tiếp.
@@ -309,7 +309,7 @@ Hệ thống (áp dụng cho mọi request đọc hoặc ghi hồ sơ, tệp và
 **Input**
 - **Người dùng/request:** Định danh đối tượng cần đọc/ghi và hành động.
 - **Hệ thống:** User/role/department từ phiên và DB; phòng/chủ hiện tại của đối tượng.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** Dữ liệu nằm trong phạm vi hoặc 404 không phân biệt ngoài phạm vi/không tồn tại; 403 không có quyền xử lý dù có quyền xem.
@@ -317,7 +317,7 @@ Hệ thống (áp dụng cho mọi request đọc hoặc ghi hồ sơ, tệp và
 - **Khi lỗi:** theo Alternative / Error Flows của FR và mã lỗi chung. Đọc lỗi không thay đổi dữ liệu nghiệp vụ; ghi lỗi không commit nghiệp vụ một phần. Ngoại lệ audit/tệp/đăng xuất được nêu ở SEC-02, SEC-05, SEC-06 và quy ước lưu tệp.
 
 **Business Rules**
-- **BR-01:** Thứ tự kiểm tra theo quy tắc chung tại M4/M5: phiên → vai trò/active → phạm vi → quyền ghi → idempotency → version/trạng thái. Đối tượng chuyển khỏi phòng trả 404 trước khi xét version.
+- **BR-01:** Thứ tự kiểm tra theo quy tắc chung tại M04/M05: phiên → vai trò/active → phạm vi → quyền ghi → idempotency → version/trạng thái. Đối tượng chuyển khỏi phòng trả 404 trước khi xét version.
 - **BR-02:** department_id filter ở MGT báo cáo hoặc target_department_id/assignee_id của thao tác điều phối là input nghiệp vụ hợp lệ và phải validate; không dùng chúng để xác định phòng của người gọi. MGT-06 tìm email chính xác là ngoại lệ dữ liệu tài khoản tối thiểu phục vụ cấp quyền, không cấp quyền xem hồ sơ sinh viên.
 - **BR-03:** Phạm vi theo vai trò:
   - `STUDENT`: chỉ hồ sơ, tệp và thông báo của chính mình.
@@ -373,7 +373,7 @@ Hệ thống (áp dụng cho mọi thao tác lưu và tải tệp).
 **Input**
 - **Người dùng/request:** file_id, mode=inline/download.
 - **Hệ thống:** Phiên, role, phòng/chủ hồ sơ chứa file; metadata MIME/tên xác minh.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** 200 stream tệp; Content-Type, Content-Disposition đúng mode, nosniff, Cache-Control private/no-store; không trả presigned/public URL.
@@ -438,7 +438,7 @@ Hệ thống (tự động ghi khi các thao tác được thực hiện).
 **Input**
 - **Người dùng/request:** Event nghiệp vụ/hệ thống và mã tham chiếu; không có API người dùng tạo/xóa audit.
 - **Hệ thống:** Actor/role/IP/thời gian, loại đối tượng, trước/sau các trường được phép.
-- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M5](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M4](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
+- Phiên, phạm vi dữ liệu, validation, version và idempotency theo [quy tắc nghiệp vụ dùng chung ở M05](../M05-core-platform/prd.md) và [quy tắc quyền/lỗi ở M04](../M04-authentication-security/prd.md). Các FR hệ thống nhận sự kiện nội bộ, không tự tạo API công khai mới.
 
 **Output**
 - **Kết quả:** Audit append-only gắn event_id; lưu timestamp UTC, hiển thị UTC+7. Người vận hành truy vấn DB theo quyền vận hành.

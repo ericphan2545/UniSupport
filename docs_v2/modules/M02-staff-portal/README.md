@@ -1,6 +1,6 @@
-# M2. Cổng Nhân viên
+# M02. Cổng Nhân viên
 
-M1 tạo ticket NEW vào phòng → staff mở hàng đợi/chi tiết → phân công người nhận active cùng phòng → IN_PROGRESS → người phụ trách xem tệp/ghi note/xử lý → yêu cầu bổ sung nếu thiếu → student trả lời → xử lý tiếp → nhập resolution và đóng CLOSED. Sau đóng, student đánh giá và M3 tính báo cáo.
+M01 tạo ticket NEW vào phòng → staff mở hàng đợi/chi tiết → phân công người nhận active cùng phòng → IN_PROGRESS → người phụ trách xem tệp/ghi note/xử lý → yêu cầu bổ sung nếu thiếu → student trả lời → xử lý tiếp → nhập resolution và đóng CLOSED. Sau đóng, student đánh giá và M03 tính báo cáo.
 
 ## Nội dung module
 
@@ -10,7 +10,7 @@ M1 tạo ticket NEW vào phòng → staff mở hàng đợi/chi tiết → phân
 
 ## Cách đọc
 
-Đọc luồng và quy ước đầu PRD trước, sau đó xem từng FR. Các quy tắc nghiệp vụ liên module nằm trong [M5](../M05-core-platform/prd.md); phiên, quyền, bảo mật, audit và mã lỗi nằm trong [M4](../M04-authentication-security/prd.md). Các thông tin chưa được trường xác nhận không được coi là đã phê duyệt chỉ vì được viết trong tài liệu.
+Đọc luồng và quy ước đầu PRD trước, sau đó xem từng FR. Các quy tắc nghiệp vụ liên module nằm trong [M05](../M05-core-platform/prd.md); phiên, quyền, bảo mật, audit và mã lỗi nằm trong [M04](../M04-authentication-security/prd.md). Các thông tin chưa được trường xác nhận không được coi là đã phê duyệt chỉ vì được viết trong tài liệu.
 
 ## Danh sách chức năng
 
@@ -29,10 +29,10 @@ M1 tạo ticket NEW vào phòng → staff mở hàng đợi/chi tiết → phân
 
 ## Module liên quan
 
-- [M1 — Cổng Sinh viên](../M01-student-portal/prd.md)
-- [M3 — Cổng Admin](../M03-management-portal/prd.md)
-- [M4 — Xác thực & Bảo mật](../M04-authentication-security/prd.md)
-- [M5 — Lõi hệ thống & Nền tảng](../M05-core-platform/prd.md)
+- [M01 — Cổng Sinh viên](../M01-student-portal/prd.md)
+- [M03 — Cổng Admin](../M03-management-portal/prd.md)
+- [M04 — Xác thực & Bảo mật](../M04-authentication-security/prd.md)
+- [M05 — Lõi hệ thống & Nền tảng](../M05-core-platform/prd.md)
 
 ## Quy ước sử dụng tài liệu
 
