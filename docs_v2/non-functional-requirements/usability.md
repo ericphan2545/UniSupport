@@ -2,6 +2,16 @@
 
 Nhiều sinh viên chủ yếu dùng điện thoại; có sinh viên và nhân viên không nói tiếng Việt.
 
+## Yêu cầu
+
+| Mã | Yêu cầu | Ngưỡng | Cách đo |
+|---|---|---|---|
+| `NFR-USE-01` | Người dùng thật hoàn thành các tác vụ chính của từng vai trò | ≥ 80% người tham gia hoàn thành, hoặc theo Usability Test Report | `TS-20` |
+| `NFR-USE-02` | Song ngữ VN/EN theo các quy tắc dưới | Không còn nhãn hiện mã khóa thô | `TS-15`, `FR-CORE-08/AC-01` đến `FR-CORE-08/AC-06` |
+| `NFR-USE-03` | Responsive theo các quy tắc dưới | Không có thanh cuộn ngang ở 360px; vùng bấm ≥ 44×44px | `TS-15`, `FR-CORE-09/AC-01` đến `FR-CORE-09/AC-06` |
+| `NFR-USE-04` | Trình duyệt hỗ trợ: 2 phiên bản mới nhất của Chrome, Safari, Edge và Firefox | Luồng chính chạy trên cả 4 trình duyệt; ghi lại phiên bản đã test | `TS-15` |
+| `NFR-USE-05` | Thông báo lỗi theo ngôn ngữ đang chọn; lỗi nhập liệu hiện theo từng trường | Mọi ca lỗi trong test case có thông báo VN/EN | Test case các AC nhãn Validation |
+
 ## Song ngữ VN/EN
 
 - Mặc định tiếng Việt. Trước khi đăng nhập dùng lựa chọn của phiên trình duyệt; sau khi đăng nhập dùng lựa chọn lưu trên tài khoản.
@@ -19,23 +29,16 @@ Nhiều sinh viên chủ yếu dùng điện thoại; có sinh viên và nhân v
 - Mọi chức năng của các vai trò dùng được trên điện thoại; ưu tiên tối ưu bố cục Cổng Sinh viên.
 - Trên điện thoại, đính kèm được ảnh từ thư viện hoặc chụp bằng camera.
 - Xoay màn hình khi đang điền form không làm mất dữ liệu.
-
-## Trình duyệt
-
-- 2 phiên bản mới nhất của Chrome, Safari, Edge và Firefox; ghi lại phiên bản đã test.
 - Trình duyệt ngoài danh sách vẫn dùng được, có thông báo khuyến nghị đổi trình duyệt.
 
-## Thông báo lỗi
+Hành vi khi lỗi đọc hoặc gửi: xem [reliability.md](reliability.md) (`NFR-REL-09`).
 
-- Thông báo lỗi theo ngôn ngữ đang chọn; lỗi nhập liệu hiện theo từng trường.
-- Hành vi khi lỗi đọc hoặc gửi: xem [reliability.md](reliability.md).
+## Usability test (`NFR-USE-01`)
 
-## Usability test
-
-- Người tham gia thực hiện các tác vụ chính của từng vai trò, theo phạm vi 3 bộ hướng dẫn sử dụng trong Proposal 6.1:
+- Người tham gia thực hiện các tác vụ chính của từng vai trò, theo phạm vi 3 bộ hướng dẫn sử dụng trong Proposal mục 6.1:
   - Sinh viên: tạo yêu cầu, đính kèm minh chứng, theo dõi tiến độ, đánh giá.
   - Nhân viên: nhận hàng việc, phân loại, chuyển tiếp, cập nhật trạng thái.
   - Admin: quản lý phân quyền, thiết lập SLA, xem báo cáo.
-- Mục tiêu nội bộ (QMP): ≥ 80% người tham gia hoàn thành các tác vụ chính, hoặc theo Usability Test Report.
-- Kết quả ghi trong Usability Test Report, hạng mục bàn giao theo Proposal 6.1. Số người tham gia và kịch bản chi tiết do người phụ trách usability test chốt trong báo cáo.
+- Ngưỡng ≥ 80% là mục tiêu trong QMP mục 7 và mục tiêu `G-02`, `G-04` của Proposal.
+- Kết quả ghi trong Usability Test Report, hạng mục bàn giao theo Proposal mục 6.1. Số người tham gia và kịch bản chi tiết do UI/UX / Mid (người phụ trách usability test, issue #136) chốt trong báo cáo.
 - Dùng dữ liệu giả, không dùng dữ liệu sinh viên thật.

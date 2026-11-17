@@ -1,84 +1,289 @@
 # Ma trận truy vết
 
-Mỗi chức năng được nối tới tiêu chí chấp nhận, test case, milestone, issue trên GitHub và kịch bản kiểm thử. Ma trận dùng để đo độ phủ tiêu chí chấp nhận theo QMP mục 7.
+Bảng **tổng hợp** theo từng AC: AC → kịch bản test → parent task → milestone → hạng mục báo giá. Đây không phải nơi gốc để sửa: sửa ở nơi gốc trước (AC trong `modules/*/prd.md`, kịch bản trong [test-scenarios.md](test-scenarios.md), issue trên GitHub, milestone trong [Master Plan](../management/UniSupport_Masterplan_nhom2.xlsx), hạng mục trong [quotation.xlsx](../management/quotation.xlsx)) rồi mới cập nhật bảng này. Ma trận dùng để đo độ phủ tiêu chí chấp nhận theo QMP mục 7.
 
 **Cách đọc**
 
-- **Số AC:** số tiêu chí chấp nhận của chức năng trong `modules/`. Mỗi AC là một test case.
-- **Test case:** mã `TC-<mã chức năng>-AC<số>`, ví dụ `TC-STU-02-AC03` là test case cho tiêu chí AC-03 của STU-02.
-- **Milestone:** số milestone trên GitHub (1 Tạo tài khoản và phân quyền · 2 Tiếp nhận và xử lý ticket · 3 Phân công, xử lý, chuyển phòng ban · 4 Trả kết quả · 5 Thống kê báo cáo). "Dùng chung" là chức năng làm dần qua nhiều milestone.
-- **Issue:** issue cha (các issue backend/frontend) hoặc các issue "Dùng chung" của từng milestone.
-- **Kịch bản:** mã kịch bản trong [test-scenarios.md](test-scenarios.md).
-- **Trạng thái:** Tester cập nhật sau mỗi lần chạy: Chưa chạy / Đạt / Không đạt / Bị chặn.
+- **Test:** kịch bản chức năng của FR (`TS-21` đến `TS-62`) đứng đầu, sau đó là kịch bản trọn luồng hoặc kịch bản chéo cũng kiểm AC này.
+- **Parent task:** issue cha của FR trên GitHub. FR dùng chung cho nhiều màn hình (`FR-SEC-04`, `FR-SEC-05`, `FR-SEC-06`, `FR-CORE-06`, `FR-CORE-08`, `FR-CORE-09`) được làm dần qua các issue "Dùng chung" của từng milestone.
+- **Báo giá:** hạng mục `Q-xx` chứa milestone của FR; `Q-xx` ghi danh sách FR ở sheet Hạng mục.
+- Trạng thái chạy test ghi trong báo cáo kiểm thử, không ghi ở đây.
+
+**Tổng hợp:** 42 FR, 252 AC; 252/252 AC có ít nhất một kịch bản test, một parent task, một milestone và một hạng mục báo giá.
 
 ## Cổng Sinh viên (`modules/M01-student-portal`)
 
-| Mã | Chức năng | Số AC | Test case | Milestone | Issue | Kịch bản | Trạng thái |
-|---|---|---|---|---|---|---|---|
-| STU-01 | Xem thông tin cá nhân lấy từ SSO | 6 | TC-STU-01-AC01…AC06 | 1 | #30 (#31, #32) | E2E-01 | Chưa chạy |
-| STU-02 | Tạo yêu cầu hỗ trợ | 6 | TC-STU-02-AC01…AC06 | 2 | #1 (#2, #3) | E2E-02, X-03, X-10 | Chưa chạy |
-| STU-03 | Hiển thị phòng ban tiếp nhận | 6 | TC-STU-03-AC01…AC06 | 2 | #48 (#49) | E2E-02, X-10 | Chưa chạy |
-| STU-04 | Đính kèm tệp minh chứng | 6 | TC-STU-04-AC01…AC06 | 2 | #19 (#20, #21) | E2E-02, X-04 | Chưa chạy |
-| STU-05 | Nhận mã hồ sơ và xác nhận gửi thành công | 6 | TC-STU-05-AC01…AC06 | 2 | #33 (#34, #35) | E2E-02 | Chưa chạy |
-| STU-06 | Xem danh sách yêu cầu của mình | 6 | TC-STU-06-AC01…AC06 | 2 | #36 (#37, #38) | E2E-02, X-10 | Chưa chạy |
-| STU-07 | Xem trạng thái và tiến độ của từng yêu cầu | 6 | TC-STU-07-AC01…AC06 | 4 | #39 (#40, #41) | E2E-03, E2E-07, X-10 | Chưa chạy |
-| STU-08 | Nhận thông báo trong app | 6 | TC-STU-08-AC01…AC06 | 2 | #16 (#17, #18) | E2E-03, E2E-06 | Chưa chạy |
-| STU-09 | Bổ sung thông tin khi được yêu cầu | 6 | TC-STU-09-AC01…AC06 | 3 | #42 (#43, #44) | E2E-04, X-02, X-03 | Chưa chạy |
-| STU-10 | Đánh giá chất lượng hỗ trợ | 6 | TC-STU-10-AC01…AC06 | 4 | #45 (#46, #47) | E2E-07, X-03 | Chưa chạy |
+| AC | Test | Parent task | Milestone | Báo giá |
+|---|---|---|---|---|
+| `FR-STU-01/AC-01` | `TS-21`, `TS-01` | #30 | MS-01 | Q-02 |
+| `FR-STU-01/AC-02` | `TS-21` | #30 | MS-01 | Q-02 |
+| `FR-STU-01/AC-03` | `TS-21` | #30 | MS-01 | Q-02 |
+| `FR-STU-01/AC-04` | `TS-21` | #30 | MS-01 | Q-02 |
+| `FR-STU-01/AC-05` | `TS-21` | #30 | MS-01 | Q-02 |
+| `FR-STU-01/AC-06` | `TS-21` | #30 | MS-01 | Q-02 |
+| `FR-STU-02/AC-01` | `TS-22`, `TS-02` | #1 | MS-02 | Q-03 |
+| `FR-STU-02/AC-02` | `TS-22` | #1 | MS-02 | Q-03 |
+| `FR-STU-02/AC-03` | `TS-22` | #1 | MS-02 | Q-03 |
+| `FR-STU-02/AC-04` | `TS-22`, `TS-11` | #1 | MS-02 | Q-03 |
+| `FR-STU-02/AC-05` | `TS-22`, `TS-18` | #1 | MS-02 | Q-03 |
+| `FR-STU-02/AC-06` | `TS-22` | #1 | MS-02 | Q-03 |
+| `FR-STU-03/AC-01` | `TS-23`, `TS-02` | #48 | MS-02 | Q-03 |
+| `FR-STU-03/AC-02` | `TS-23` | #48 | MS-02 | Q-03 |
+| `FR-STU-03/AC-03` | `TS-23` | #48 | MS-02 | Q-03 |
+| `FR-STU-03/AC-04` | `TS-23`, `TS-18` | #48 | MS-02 | Q-03 |
+| `FR-STU-03/AC-05` | `TS-23` | #48 | MS-02 | Q-03 |
+| `FR-STU-03/AC-06` | `TS-23` | #48 | MS-02 | Q-03 |
+| `FR-STU-04/AC-01` | `TS-24`, `TS-02` | #19 | MS-02 | Q-03 |
+| `FR-STU-04/AC-02` | `TS-24` | #19 | MS-02 | Q-03 |
+| `FR-STU-04/AC-03` | `TS-24` | #19 | MS-02 | Q-03 |
+| `FR-STU-04/AC-04` | `TS-24` | #19 | MS-02 | Q-03 |
+| `FR-STU-04/AC-05` | `TS-24` | #19 | MS-02 | Q-03 |
+| `FR-STU-04/AC-06` | `TS-24`, `TS-12` | #19 | MS-02 | Q-03 |
+| `FR-STU-05/AC-01` | `TS-25`, `TS-02` | #33 | MS-02 | Q-03 |
+| `FR-STU-05/AC-02` | `TS-25` | #33 | MS-02 | Q-03 |
+| `FR-STU-05/AC-03` | `TS-25` | #33 | MS-02 | Q-03 |
+| `FR-STU-05/AC-04` | `TS-25` | #33 | MS-02 | Q-03 |
+| `FR-STU-05/AC-05` | `TS-25` | #33 | MS-02 | Q-03 |
+| `FR-STU-05/AC-06` | `TS-25` | #33 | MS-02 | Q-03 |
+| `FR-STU-06/AC-01` | `TS-26`, `TS-02` | #36 | MS-02 | Q-03 |
+| `FR-STU-06/AC-02` | `TS-26` | #36 | MS-02 | Q-03 |
+| `FR-STU-06/AC-03` | `TS-26` | #36 | MS-02 | Q-03 |
+| `FR-STU-06/AC-04` | `TS-26` | #36 | MS-02 | Q-03 |
+| `FR-STU-06/AC-05` | `TS-26`, `TS-18` | #36 | MS-02 | Q-03 |
+| `FR-STU-06/AC-06` | `TS-26` | #36 | MS-02 | Q-03 |
+| `FR-STU-07/AC-01` | `TS-27`, `TS-03`, `TS-07` | #39 | MS-04 | Q-05 |
+| `FR-STU-07/AC-02` | `TS-27` | #39 | MS-04 | Q-05 |
+| `FR-STU-07/AC-03` | `TS-27` | #39 | MS-04 | Q-05 |
+| `FR-STU-07/AC-04` | `TS-27` | #39 | MS-04 | Q-05 |
+| `FR-STU-07/AC-05` | `TS-27` | #39 | MS-04 | Q-05 |
+| `FR-STU-07/AC-06` | `TS-27` | #39 | MS-04 | Q-05 |
+| `FR-STU-08/AC-01` | `TS-28`, `TS-03`, `TS-06` | #16 | MS-02 | Q-03 |
+| `FR-STU-08/AC-02` | `TS-28` | #16 | MS-02 | Q-03 |
+| `FR-STU-08/AC-03` | `TS-28` | #16 | MS-02 | Q-03 |
+| `FR-STU-08/AC-04` | `TS-28` | #16 | MS-02 | Q-03 |
+| `FR-STU-08/AC-05` | `TS-28` | #16 | MS-02 | Q-03 |
+| `FR-STU-08/AC-06` | `TS-28` | #16 | MS-02 | Q-03 |
+| `FR-STU-09/AC-01` | `TS-29`, `TS-04` | #42 | MS-03 | Q-04 |
+| `FR-STU-09/AC-02` | `TS-29` | #42 | MS-03 | Q-04 |
+| `FR-STU-09/AC-03` | `TS-29` | #42 | MS-03 | Q-04 |
+| `FR-STU-09/AC-04` | `TS-29` | #42 | MS-03 | Q-04 |
+| `FR-STU-09/AC-05` | `TS-29`, `TS-10`, `TS-11` | #42 | MS-03 | Q-04 |
+| `FR-STU-09/AC-06` | `TS-29` | #42 | MS-03 | Q-04 |
+| `FR-STU-10/AC-01` | `TS-30`, `TS-07` | #45 | MS-04 | Q-05 |
+| `FR-STU-10/AC-02` | `TS-30` | #45 | MS-04 | Q-05 |
+| `FR-STU-10/AC-03` | `TS-30` | #45 | MS-04 | Q-05 |
+| `FR-STU-10/AC-04` | `TS-30`, `TS-07` | #45 | MS-04 | Q-05 |
+| `FR-STU-10/AC-05` | `TS-30`, `TS-11` | #45 | MS-04 | Q-05 |
+| `FR-STU-10/AC-06` | `TS-30` | #45 | MS-04 | Q-05 |
 
 ## Cổng Nhân viên (`modules/M02-staff-portal`)
 
-| Mã | Chức năng | Số AC | Test case | Milestone | Issue | Kịch bản | Trạng thái |
-|---|---|---|---|---|---|---|---|
-| STF-01 | Hàng đợi hồ sơ của phòng ban | 6 | TC-STF-01-AC01…AC06 | 2 | #50 (#51, #52) | E2E-02, X-10 | Chưa chạy |
-| STF-02 | Xem thông tin sinh viên và nội dung yêu cầu | 6 | TC-STF-02-AC01…AC06 | 2 | #68 (#69, #70) | E2E-02, X-10 | Chưa chạy |
-| STF-03 | Xem và tải tệp đính kèm | 6 | TC-STF-03-AC01…AC06 | 2 | #65 (#66, #67) | E2E-02, X-04, X-10 | Chưa chạy |
-| STF-04 | Ghi nhật ký xử lý | 6 | TC-STF-04-AC01…AC06 | 3 | #71 (#72, #73) | E2E-04, X-03, X-10 | Chưa chạy |
-| STF-05 | Yêu cầu sinh viên bổ sung thông tin | 6 | TC-STF-05-AC01…AC06 | 3 | #56 (#57, #58) | E2E-04, X-03 | Chưa chạy |
-| STF-06 | Đóng hồ sơ | 6 | TC-STF-06-AC01…AC06 | 4 | #59 (#60, #61) | E2E-07, X-02, X-03 | Chưa chạy |
-| STF-07 | Phân công nhân viên phụ trách | 6 | TC-STF-07-AC01…AC06 | 3 | #53 (#54, #55) | E2E-04, E2E-06, X-02 | Chưa chạy |
-| STF-08 | Đặt mức ưu tiên | 6 | TC-STF-08-AC01…AC06 | 3 | #74 (#75, #76) | E2E-05 | Chưa chạy |
-| STF-09 | Chuyển hồ sơ sang phòng ban khác | 6 | TC-STF-09-AC01…AC06 | 3 | #62 (#63, #64) | E2E-05, X-02 | Chưa chạy |
-| STF-10 | Tăng mức ưu tiên (escalate) | 6 | TC-STF-10-AC01…AC06 | 3 | #77 (#78, #79) | E2E-05 | Chưa chạy |
+| AC | Test | Parent task | Milestone | Báo giá |
+|---|---|---|---|---|
+| `FR-STF-01/AC-01` | `TS-31`, `TS-02` | #50 | MS-02 | Q-03 |
+| `FR-STF-01/AC-02` | `TS-31` | #50 | MS-02 | Q-03 |
+| `FR-STF-01/AC-03` | `TS-31` | #50 | MS-02 | Q-03 |
+| `FR-STF-01/AC-04` | `TS-31` | #50 | MS-02 | Q-03 |
+| `FR-STF-01/AC-05` | `TS-31`, `TS-18` | #50 | MS-02 | Q-03 |
+| `FR-STF-01/AC-06` | `TS-31` | #50 | MS-02 | Q-03 |
+| `FR-STF-02/AC-01` | `TS-32`, `TS-02` | #68 | MS-02 | Q-03 |
+| `FR-STF-02/AC-02` | `TS-32` | #68 | MS-02 | Q-03 |
+| `FR-STF-02/AC-03` | `TS-32` | #68 | MS-02 | Q-03 |
+| `FR-STF-02/AC-04` | `TS-32` | #68 | MS-02 | Q-03 |
+| `FR-STF-02/AC-05` | `TS-32` | #68 | MS-02 | Q-03 |
+| `FR-STF-02/AC-06` | `TS-32` | #68 | MS-02 | Q-03 |
+| `FR-STF-03/AC-01` | `TS-33`, `TS-02` | #65 | MS-02 | Q-03 |
+| `FR-STF-03/AC-02` | `TS-33` | #65 | MS-02 | Q-03 |
+| `FR-STF-03/AC-03` | `TS-33` | #65 | MS-02 | Q-03 |
+| `FR-STF-03/AC-04` | `TS-33`, `TS-18` | #65 | MS-02 | Q-03 |
+| `FR-STF-03/AC-05` | `TS-33` | #65 | MS-02 | Q-03 |
+| `FR-STF-03/AC-06` | `TS-33`, `TS-12` | #65 | MS-02 | Q-03 |
+| `FR-STF-04/AC-01` | `TS-34`, `TS-04` | #71 | MS-03 | Q-04 |
+| `FR-STF-04/AC-02` | `TS-34` | #71 | MS-03 | Q-04 |
+| `FR-STF-04/AC-03` | `TS-34` | #71 | MS-03 | Q-04 |
+| `FR-STF-04/AC-04` | `TS-34`, `TS-11` | #71 | MS-03 | Q-04 |
+| `FR-STF-04/AC-05` | `TS-34`, `TS-04` | #71 | MS-03 | Q-04 |
+| `FR-STF-04/AC-06` | `TS-34` | #71 | MS-03 | Q-04 |
+| `FR-STF-05/AC-01` | `TS-35`, `TS-04` | #56 | MS-03 | Q-04 |
+| `FR-STF-05/AC-02` | `TS-35` | #56 | MS-03 | Q-04 |
+| `FR-STF-05/AC-03` | `TS-35` | #56 | MS-03 | Q-04 |
+| `FR-STF-05/AC-04` | `TS-35` | #56 | MS-03 | Q-04 |
+| `FR-STF-05/AC-05` | `TS-35`, `TS-11` | #56 | MS-03 | Q-04 |
+| `FR-STF-05/AC-06` | `TS-35` | #56 | MS-03 | Q-04 |
+| `FR-STF-06/AC-01` | `TS-36`, `TS-07`, `TS-11` | #59 | MS-04 | Q-05 |
+| `FR-STF-06/AC-02` | `TS-36` | #59 | MS-04 | Q-05 |
+| `FR-STF-06/AC-03` | `TS-36` | #59 | MS-04 | Q-05 |
+| `FR-STF-06/AC-04` | `TS-36` | #59 | MS-04 | Q-05 |
+| `FR-STF-06/AC-05` | `TS-36`, `TS-10` | #59 | MS-04 | Q-05 |
+| `FR-STF-06/AC-06` | `TS-36` | #59 | MS-04 | Q-05 |
+| `FR-STF-07/AC-01` | `TS-37`, `TS-04`, `TS-06` | #53 | MS-03 | Q-04 |
+| `FR-STF-07/AC-02` | `TS-37` | #53 | MS-03 | Q-04 |
+| `FR-STF-07/AC-03` | `TS-37` | #53 | MS-03 | Q-04 |
+| `FR-STF-07/AC-04` | `TS-37` | #53 | MS-03 | Q-04 |
+| `FR-STF-07/AC-05` | `TS-37`, `TS-10` | #53 | MS-03 | Q-04 |
+| `FR-STF-07/AC-06` | `TS-37` | #53 | MS-03 | Q-04 |
+| `FR-STF-08/AC-01` | `TS-38`, `TS-05` | #74 | MS-03 | Q-04 |
+| `FR-STF-08/AC-02` | `TS-38` | #74 | MS-03 | Q-04 |
+| `FR-STF-08/AC-03` | `TS-38` | #74 | MS-03 | Q-04 |
+| `FR-STF-08/AC-04` | `TS-38` | #74 | MS-03 | Q-04 |
+| `FR-STF-08/AC-05` | `TS-38` | #74 | MS-03 | Q-04 |
+| `FR-STF-08/AC-06` | `TS-38` | #74 | MS-03 | Q-04 |
+| `FR-STF-09/AC-01` | `TS-39`, `TS-05` | #62 | MS-03 | Q-04 |
+| `FR-STF-09/AC-02` | `TS-39` | #62 | MS-03 | Q-04 |
+| `FR-STF-09/AC-03` | `TS-39` | #62 | MS-03 | Q-04 |
+| `FR-STF-09/AC-04` | `TS-39`, `TS-10` | #62 | MS-03 | Q-04 |
+| `FR-STF-09/AC-05` | `TS-39` | #62 | MS-03 | Q-04 |
+| `FR-STF-09/AC-06` | `TS-39` | #62 | MS-03 | Q-04 |
+| `FR-STF-10/AC-01` | `TS-40`, `TS-05` | #77 | MS-03 | Q-04 |
+| `FR-STF-10/AC-02` | `TS-40` | #77 | MS-03 | Q-04 |
+| `FR-STF-10/AC-03` | `TS-40` | #77 | MS-03 | Q-04 |
+| `FR-STF-10/AC-04` | `TS-40` | #77 | MS-03 | Q-04 |
+| `FR-STF-10/AC-05` | `TS-40` | #77 | MS-03 | Q-04 |
+| `FR-STF-10/AC-06` | `TS-40` | #77 | MS-03 | Q-04 |
 
 ## Cổng Admin (`modules/M03-management-portal`)
 
-| Mã | Chức năng | Số AC | Test case | Milestone | Issue | Kịch bản | Trạng thái |
-|---|---|---|---|---|---|---|---|
-| MGT-01 | Dashboard: số hồ sơ mới, đang xử lý, quá hạn | 6 | TC-MGT-01-AC01…AC06 | 5 | #86 (#87, #88) | E2E-06, E2E-08, X-10 | Chưa chạy |
-| MGT-02 | Dashboard: thời gian xử lý trung bình | 6 | TC-MGT-02-AC01…AC06 | 5 | #89 (#90, #91) | E2E-08, X-09, X-10 | Chưa chạy |
-| MGT-03 | Báo cáo loại yêu cầu phổ biến | 6 | TC-MGT-03-AC01…AC06 | 5 | #95 (#96, #97) | E2E-08, X-09, X-10 | Chưa chạy |
-| MGT-04 | Báo cáo khối lượng công việc theo phòng ban | 6 | TC-MGT-04-AC01…AC06 | 5 | #98 (#99, #100) | E2E-08, X-09, X-10 | Chưa chạy |
-| MGT-05 | Báo cáo mức độ hài lòng của sinh viên | 6 | TC-MGT-05-AC01…AC06 | 5 | #92 (#93, #94) | E2E-08, X-09, X-10 | Chưa chạy |
-| MGT-06 | Quản lý phân quyền | 6 | TC-MGT-06-AC01…AC06 | 1 | #80 (#81, #82) | E2E-01, X-02, X-10 | Chưa chạy |
-| MGT-07 | Thiết lập SLA cho từng loại yêu cầu | 6 | TC-MGT-07-AC01…AC06 | 2 | #83 (#84, #85) | E2E-02, X-02, X-08, X-10 | Chưa chạy |
+| AC | Test | Parent task | Milestone | Báo giá |
+|---|---|---|---|---|
+| `FR-MGT-01/AC-01` | `TS-41`, `TS-06`, `TS-08` | #86 | MS-05 | Q-06 |
+| `FR-MGT-01/AC-02` | `TS-41` | #86 | MS-05 | Q-06 |
+| `FR-MGT-01/AC-03` | `TS-41` | #86 | MS-05 | Q-06 |
+| `FR-MGT-01/AC-04` | `TS-41` | #86 | MS-05 | Q-06 |
+| `FR-MGT-01/AC-05` | `TS-41`, `TS-18` | #86 | MS-05 | Q-06 |
+| `FR-MGT-01/AC-06` | `TS-41` | #86 | MS-05 | Q-06 |
+| `FR-MGT-02/AC-01` | `TS-42`, `TS-08` | #89 | MS-05 | Q-06 |
+| `FR-MGT-02/AC-02` | `TS-42`, `TS-08` | #89 | MS-05 | Q-06 |
+| `FR-MGT-02/AC-03` | `TS-42`, `TS-17` | #89 | MS-05 | Q-06 |
+| `FR-MGT-02/AC-04` | `TS-42` | #89 | MS-05 | Q-06 |
+| `FR-MGT-02/AC-05` | `TS-42`, `TS-18` | #89 | MS-05 | Q-06 |
+| `FR-MGT-02/AC-06` | `TS-42` | #89 | MS-05 | Q-06 |
+| `FR-MGT-03/AC-01` | `TS-43`, `TS-08` | #95 | MS-05 | Q-06 |
+| `FR-MGT-03/AC-02` | `TS-43` | #95 | MS-05 | Q-06 |
+| `FR-MGT-03/AC-03` | `TS-43`, `TS-17` | #95 | MS-05 | Q-06 |
+| `FR-MGT-03/AC-04` | `TS-43` | #95 | MS-05 | Q-06 |
+| `FR-MGT-03/AC-05` | `TS-43`, `TS-18` | #95 | MS-05 | Q-06 |
+| `FR-MGT-03/AC-06` | `TS-43` | #95 | MS-05 | Q-06 |
+| `FR-MGT-04/AC-01` | `TS-44`, `TS-08` | #98 | MS-05 | Q-06 |
+| `FR-MGT-04/AC-02` | `TS-44` | #98 | MS-05 | Q-06 |
+| `FR-MGT-04/AC-03` | `TS-44`, `TS-17` | #98 | MS-05 | Q-06 |
+| `FR-MGT-04/AC-04` | `TS-44` | #98 | MS-05 | Q-06 |
+| `FR-MGT-04/AC-05` | `TS-44`, `TS-18` | #98 | MS-05 | Q-06 |
+| `FR-MGT-04/AC-06` | `TS-44` | #98 | MS-05 | Q-06 |
+| `FR-MGT-05/AC-01` | `TS-45`, `TS-08` | #92 | MS-05 | Q-06 |
+| `FR-MGT-05/AC-02` | `TS-45` | #92 | MS-05 | Q-06 |
+| `FR-MGT-05/AC-03` | `TS-45`, `TS-17` | #92 | MS-05 | Q-06 |
+| `FR-MGT-05/AC-04` | `TS-45` | #92 | MS-05 | Q-06 |
+| `FR-MGT-05/AC-05` | `TS-45`, `TS-18` | #92 | MS-05 | Q-06 |
+| `FR-MGT-05/AC-06` | `TS-45` | #92 | MS-05 | Q-06 |
+| `FR-MGT-06/AC-01` | `TS-46`, `TS-01` | #80 | MS-01 | Q-02 |
+| `FR-MGT-06/AC-02` | `TS-46` | #80 | MS-01 | Q-02 |
+| `FR-MGT-06/AC-03` | `TS-46`, `TS-01` | #80 | MS-01 | Q-02 |
+| `FR-MGT-06/AC-04` | `TS-46` | #80 | MS-01 | Q-02 |
+| `FR-MGT-06/AC-05` | `TS-46`, `TS-10` | #80 | MS-01 | Q-02 |
+| `FR-MGT-06/AC-06` | `TS-46` | #80 | MS-01 | Q-02 |
+| `FR-MGT-07/AC-01` | `TS-47`, `TS-02`, `TS-16` | #83 | MS-02 | Q-03 |
+| `FR-MGT-07/AC-02` | `TS-47`, `TS-16` | #83 | MS-02 | Q-03 |
+| `FR-MGT-07/AC-03` | `TS-47`, `TS-02`, `TS-16` | #83 | MS-02 | Q-03 |
+| `FR-MGT-07/AC-04` | `TS-47`, `TS-16` | #83 | MS-02 | Q-03 |
+| `FR-MGT-07/AC-05` | `TS-47`, `TS-10`, `TS-16` | #83 | MS-02 | Q-03 |
+| `FR-MGT-07/AC-06` | `TS-47`, `TS-16` | #83 | MS-02 | Q-03 |
 
 ## Xác thực và bảo mật (`modules/M04-authentication-security`)
 
-| Mã | Chức năng | Số AC | Test case | Milestone | Issue | Kịch bản | Trạng thái |
-|---|---|---|---|---|---|---|---|
-| SEC-01 | Đăng nhập bằng SSO tài khoản trường | 6 | TC-SEC-01-AC01…AC06 | 1 | #4 (#5, #6) | E2E-01, X-06, X-10 | Chưa chạy |
-| SEC-02 | Đăng xuất | 6 | TC-SEC-02-AC01…AC06 | 1 | #7 (#8, #9) | E2E-01, X-06 | Chưa chạy |
-| SEC-03 | Phân quyền theo 3 vai trò | 6 | TC-SEC-03-AC01…AC06 | 1 | #10 (#11) | E2E-01, X-01, X-06 | Chưa chạy |
-| SEC-04 | Giới hạn phạm vi dữ liệu theo vai trò | 6 | TC-SEC-04-AC01…AC06 | Dùng chung: 1, 2, 3, 4, 5 | #117, #123, #129, #155, #157 | E2E-05, E2E-08, X-01 | Chưa chạy |
-| SEC-05 | Bảo vệ tệp đính kèm | 6 | TC-SEC-05-AC01…AC06 | Dùng chung: 2 | #123 | X-01, X-04 | Chưa chạy |
-| SEC-06 | Ghi nhật ký hệ thống | 6 | TC-SEC-06-AC01…AC06 | Dùng chung: 1, 2, 3, 4 | #117, #123, #129, #155 | X-05 | Chưa chạy |
+| AC | Test | Parent task | Milestone | Báo giá |
+|---|---|---|---|---|
+| `FR-SEC-01/AC-01` | `TS-48`, `TS-01` | #4 | MS-01 | Q-02 |
+| `FR-SEC-01/AC-02` | `TS-48` | #4 | MS-01 | Q-02 |
+| `FR-SEC-01/AC-03` | `TS-48` | #4 | MS-01 | Q-02 |
+| `FR-SEC-01/AC-04` | `TS-48`, `TS-14` | #4 | MS-01 | Q-02 |
+| `FR-SEC-01/AC-05` | `TS-48`, `TS-18` | #4 | MS-01 | Q-02 |
+| `FR-SEC-01/AC-06` | `TS-48`, `TS-14` | #4 | MS-01 | Q-02 |
+| `FR-SEC-02/AC-01` | `TS-49`, `TS-01` | #7 | MS-01 | Q-02 |
+| `FR-SEC-02/AC-02` | `TS-49` | #7 | MS-01 | Q-02 |
+| `FR-SEC-02/AC-03` | `TS-49`, `TS-14` | #7 | MS-01 | Q-02 |
+| `FR-SEC-02/AC-04` | `TS-49` | #7 | MS-01 | Q-02 |
+| `FR-SEC-02/AC-05` | `TS-49` | #7 | MS-01 | Q-02 |
+| `FR-SEC-02/AC-06` | `TS-49`, `TS-14` | #7 | MS-01 | Q-02 |
+| `FR-SEC-03/AC-01` | `TS-50`, `TS-01` | #10 | MS-01 | Q-02 |
+| `FR-SEC-03/AC-02` | `TS-50` | #10 | MS-01 | Q-02 |
+| `FR-SEC-03/AC-03` | `TS-50` | #10 | MS-01 | Q-02 |
+| `FR-SEC-03/AC-04` | `TS-50`, `TS-09`, `TS-14` | #10 | MS-01 | Q-02 |
+| `FR-SEC-03/AC-05` | `TS-50` | #10 | MS-01 | Q-02 |
+| `FR-SEC-03/AC-06` | `TS-50`, `TS-14` | #10 | MS-01 | Q-02 |
+| `FR-SEC-04/AC-01` | `TS-51`, `TS-05`, `TS-08` | #117, #123, #129, #155, #157 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-SEC-04/AC-02` | `TS-51` | #117, #123, #129, #155, #157 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-SEC-04/AC-03` | `TS-51` | #117, #123, #129, #155, #157 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-SEC-04/AC-04` | `TS-51`, `TS-09` | #117, #123, #129, #155, #157 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-SEC-04/AC-05` | `TS-51` | #117, #123, #129, #155, #157 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-SEC-04/AC-06` | `TS-51` | #117, #123, #129, #155, #157 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-SEC-05/AC-01` | `TS-52` | #123 | MS-02 | Q-03 |
+| `FR-SEC-05/AC-02` | `TS-52` | #123 | MS-02 | Q-03 |
+| `FR-SEC-05/AC-03` | `TS-52`, `TS-09` | #123 | MS-02 | Q-03 |
+| `FR-SEC-05/AC-04` | `TS-52` | #123 | MS-02 | Q-03 |
+| `FR-SEC-05/AC-05` | `TS-52` | #123 | MS-02 | Q-03 |
+| `FR-SEC-05/AC-06` | `TS-52`, `TS-12` | #123 | MS-02 | Q-03 |
+| `FR-SEC-06/AC-01` | `TS-53`, `TS-13` | #117, #123, #129, #155 | MS-01, MS-02, MS-03, MS-04 | Q-02, Q-03, Q-04, Q-05 |
+| `FR-SEC-06/AC-02` | `TS-53`, `TS-13` | #117, #123, #129, #155 | MS-01, MS-02, MS-03, MS-04 | Q-02, Q-03, Q-04, Q-05 |
+| `FR-SEC-06/AC-03` | `TS-53`, `TS-13` | #117, #123, #129, #155 | MS-01, MS-02, MS-03, MS-04 | Q-02, Q-03, Q-04, Q-05 |
+| `FR-SEC-06/AC-04` | `TS-53`, `TS-13` | #117, #123, #129, #155 | MS-01, MS-02, MS-03, MS-04 | Q-02, Q-03, Q-04, Q-05 |
+| `FR-SEC-06/AC-05` | `TS-53`, `TS-13` | #117, #123, #129, #155 | MS-01, MS-02, MS-03, MS-04 | Q-02, Q-03, Q-04, Q-05 |
+| `FR-SEC-06/AC-06` | `TS-53`, `TS-13` | #117, #123, #129, #155 | MS-01, MS-02, MS-03, MS-04 | Q-02, Q-03, Q-04, Q-05 |
 
 ## Lõi hệ thống (`modules/M05-core-platform`)
 
-| Mã | Chức năng | Số AC | Test case | Milestone | Issue | Kịch bản | Trạng thái |
-|---|---|---|---|---|---|---|---|
-| CORE-01 | Sinh mã hồ sơ | 6 | TC-CORE-01-AC01…AC06 | 2 | #24 (#25) | E2E-02, X-02, X-09 | Chưa chạy |
-| CORE-02 | Trạng thái hồ sơ và quy tắc chuyển trạng thái | 6 | TC-CORE-02-AC01…AC06 | 2 | #12 (#13) | E2E-03, E2E-06, X-02 | Chưa chạy |
-| CORE-03 | Tính hạn xử lý (SLA) | 6 | TC-CORE-03-AC01…AC06 | 2 | #14 (#15) | E2E-02, E2E-04, E2E-06, X-09 | Chưa chạy |
-| CORE-04 | Mức độ ưu tiên | 6 | TC-CORE-04-AC01…AC06 | 2 | #26 (#27) | E2E-02, E2E-05 | Chưa chạy |
-| CORE-05 | Danh mục loại yêu cầu và phòng ban | 6 | TC-CORE-05-AC01…AC06 | 2 | #22 (#23) | E2E-02, X-08 | Chưa chạy |
-| CORE-06 | Lịch sử thay đổi của hồ sơ | 6 | TC-CORE-06-AC01…AC06 | Dùng chung: 2, 3, 4 | #123, #129, #155 | E2E-03, X-05 | Chưa chạy |
-| CORE-07 | Giới hạn tệp đính kèm | 6 | TC-CORE-07-AC01…AC06 | 2 | #28 (#29) | E2E-02, X-04 | Chưa chạy |
-| CORE-08 | Giao diện song ngữ VN/EN | 6 | TC-CORE-08-AC01…AC06 | Dùng chung: 1, 2, 3, 4, 5 | #118, #124, #130, #156, #158 | E2E-03, X-07 | Chưa chạy |
-| CORE-09 | Giao diện responsive cho mobile và desktop | 6 | TC-CORE-09-AC01…AC06 | Dùng chung: 1, 2, 3, 4, 5 | #118, #124, #130, #156, #158 | X-07 | Chưa chạy |
-
-## Tổng hợp
-
-- 42 chức năng, 252 tiêu chí chấp nhận, tương ứng 252 test case.
-- Mọi chức năng đều nằm trong ít nhất một kịch bản kiểm thử.
+| AC | Test | Parent task | Milestone | Báo giá |
+|---|---|---|---|---|
+| `FR-CORE-01/AC-01` | `TS-54`, `TS-02` | #24 | MS-02 | Q-03 |
+| `FR-CORE-01/AC-02` | `TS-54` | #24 | MS-02 | Q-03 |
+| `FR-CORE-01/AC-03` | `TS-54`, `TS-17` | #24 | MS-02 | Q-03 |
+| `FR-CORE-01/AC-04` | `TS-54` | #24 | MS-02 | Q-03 |
+| `FR-CORE-01/AC-05` | `TS-54`, `TS-10` | #24 | MS-02 | Q-03 |
+| `FR-CORE-01/AC-06` | `TS-54` | #24 | MS-02 | Q-03 |
+| `FR-CORE-02/AC-01` | `TS-55`, `TS-03`, `TS-06` | #12 | MS-02 | Q-03 |
+| `FR-CORE-02/AC-02` | `TS-55` | #12 | MS-02 | Q-03 |
+| `FR-CORE-02/AC-03` | `TS-55` | #12 | MS-02 | Q-03 |
+| `FR-CORE-02/AC-04` | `TS-55` | #12 | MS-02 | Q-03 |
+| `FR-CORE-02/AC-05` | `TS-55`, `TS-10` | #12 | MS-02 | Q-03 |
+| `FR-CORE-02/AC-06` | `TS-55` | #12 | MS-02 | Q-03 |
+| `FR-CORE-03/AC-01` | `TS-56`, `TS-02`, `TS-04`, `TS-06` | #14 | MS-02 | Q-03 |
+| `FR-CORE-03/AC-02` | `TS-56`, `TS-02`, `TS-04`, `TS-06` | #14 | MS-02 | Q-03 |
+| `FR-CORE-03/AC-03` | `TS-56`, `TS-17` | #14 | MS-02 | Q-03 |
+| `FR-CORE-03/AC-04` | `TS-56` | #14 | MS-02 | Q-03 |
+| `FR-CORE-03/AC-05` | `TS-56` | #14 | MS-02 | Q-03 |
+| `FR-CORE-03/AC-06` | `TS-56` | #14 | MS-02 | Q-03 |
+| `FR-CORE-04/AC-01` | `TS-57`, `TS-02`, `TS-05` | #26 | MS-02 | Q-03 |
+| `FR-CORE-04/AC-02` | `TS-57` | #26 | MS-02 | Q-03 |
+| `FR-CORE-04/AC-03` | `TS-57` | #26 | MS-02 | Q-03 |
+| `FR-CORE-04/AC-04` | `TS-57` | #26 | MS-02 | Q-03 |
+| `FR-CORE-04/AC-05` | `TS-57` | #26 | MS-02 | Q-03 |
+| `FR-CORE-04/AC-06` | `TS-57` | #26 | MS-02 | Q-03 |
+| `FR-CORE-05/AC-01` | `TS-58`, `TS-02`, `TS-16` | #22 | MS-02 | Q-03 |
+| `FR-CORE-05/AC-02` | `TS-58`, `TS-16` | #22 | MS-02 | Q-03 |
+| `FR-CORE-05/AC-03` | `TS-58`, `TS-16` | #22 | MS-02 | Q-03 |
+| `FR-CORE-05/AC-04` | `TS-58`, `TS-16` | #22 | MS-02 | Q-03 |
+| `FR-CORE-05/AC-05` | `TS-58`, `TS-16` | #22 | MS-02 | Q-03 |
+| `FR-CORE-05/AC-06` | `TS-58`, `TS-16` | #22 | MS-02 | Q-03 |
+| `FR-CORE-06/AC-01` | `TS-59`, `TS-03`, `TS-13` | #123, #129, #155 | MS-02, MS-03, MS-04 | Q-03, Q-04, Q-05 |
+| `FR-CORE-06/AC-02` | `TS-59`, `TS-13` | #123, #129, #155 | MS-02, MS-03, MS-04 | Q-03, Q-04, Q-05 |
+| `FR-CORE-06/AC-03` | `TS-59`, `TS-13` | #123, #129, #155 | MS-02, MS-03, MS-04 | Q-03, Q-04, Q-05 |
+| `FR-CORE-06/AC-04` | `TS-59`, `TS-13` | #123, #129, #155 | MS-02, MS-03, MS-04 | Q-03, Q-04, Q-05 |
+| `FR-CORE-06/AC-05` | `TS-59`, `TS-13` | #123, #129, #155 | MS-02, MS-03, MS-04 | Q-03, Q-04, Q-05 |
+| `FR-CORE-06/AC-06` | `TS-59`, `TS-13` | #123, #129, #155 | MS-02, MS-03, MS-04 | Q-03, Q-04, Q-05 |
+| `FR-CORE-07/AC-01` | `TS-60`, `TS-02` | #28 | MS-02 | Q-03 |
+| `FR-CORE-07/AC-02` | `TS-60` | #28 | MS-02 | Q-03 |
+| `FR-CORE-07/AC-03` | `TS-60` | #28 | MS-02 | Q-03 |
+| `FR-CORE-07/AC-04` | `TS-60` | #28 | MS-02 | Q-03 |
+| `FR-CORE-07/AC-05` | `TS-60` | #28 | MS-02 | Q-03 |
+| `FR-CORE-07/AC-06` | `TS-60`, `TS-12` | #28 | MS-02 | Q-03 |
+| `FR-CORE-08/AC-01` | `TS-61`, `TS-03`, `TS-15` | #118, #124, #130, #156, #158 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-CORE-08/AC-02` | `TS-61`, `TS-15` | #118, #124, #130, #156, #158 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-CORE-08/AC-03` | `TS-61`, `TS-15` | #118, #124, #130, #156, #158 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-CORE-08/AC-04` | `TS-61`, `TS-15` | #118, #124, #130, #156, #158 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-CORE-08/AC-05` | `TS-61`, `TS-15` | #118, #124, #130, #156, #158 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-CORE-08/AC-06` | `TS-61`, `TS-15` | #118, #124, #130, #156, #158 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-CORE-09/AC-01` | `TS-62`, `TS-15` | #118, #124, #130, #156, #158 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-CORE-09/AC-02` | `TS-62`, `TS-15` | #118, #124, #130, #156, #158 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-CORE-09/AC-03` | `TS-62`, `TS-15` | #118, #124, #130, #156, #158 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-CORE-09/AC-04` | `TS-62`, `TS-15` | #118, #124, #130, #156, #158 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-CORE-09/AC-05` | `TS-62`, `TS-15` | #118, #124, #130, #156, #158 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |
+| `FR-CORE-09/AC-06` | `TS-62`, `TS-15` | #118, #124, #130, #156, #158 | MS-01, MS-02, MS-03, MS-04, MS-05 | Q-02, Q-03, Q-04, Q-05, Q-06 |

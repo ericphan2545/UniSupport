@@ -4,7 +4,7 @@ Trường/DevOps xác nhận SSO và nạp ADMIN đầu → admin cấp quyền 
 
 ## Nội dung module
 
-- [PRD chi tiết của module](prd.md): 6 chức năng, mỗi chức năng có mô tả, actor, điều kiện, luồng, Input/Output, business rules, lỗi, acceptance criteria và edge case.
+- [PRD chi tiết của module](prd.md): 6 chức năng, mỗi chức năng có mô tả, actor, priority (thang ở [product/README.md](../../product/README.md#thang-ưu-tiên-fr)), điều kiện, luồng, Input/Output, business rules, lỗi, acceptance criteria và edge case.
 - Phần đầu PRD mô tả luồng, đầu vào/đầu ra module, phụ thuộc và những giả định cần xác nhận.
 - Actor là người sử dụng/hệ thống. Người lập trình và task thuộc kế hoạch của nhóm, không được suy từ Actor.
 

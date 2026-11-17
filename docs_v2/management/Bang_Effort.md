@@ -2,7 +2,11 @@
 
 **DỰ ÁN: HỆ THỐNG TIẾP NHẬN VÀ XỬ LÝ YÊU CẦU SINH VIÊN TRỰC TUYẾN (UniSupport)**
 
-## PHẦN 1: BẢNG DỰ TOÁN TIỀN CÔNG LAO ĐỘNG THEO NGƯỜI THAM GIA
+> **Tài liệu nội bộ, không gửi khách.** Khách hàng Aurora University và đội thực thi là **Mô phỏng**. Đội thực thi gồm 10 người, mỗi vị trí ở Phần 1 là 1 người; ban quản lý dự án là 4 thành viên nhóm (xem [team-charter.md](team-charter.md)).
+>
+> Nơi gốc: giá và hạng mục gửi khách ở [quotation.xlsx](quotation.xlsx) (mã `Q-xx`); lịch, việc và nguồn lực theo tuần ở [UniSupport_Masterplan_nhom2.xlsx](UniSupport_Masterplan_nhom2.xlsx) (sheet WBS, Resources); rủi ro ở [risk-register.md](risk-register.md) (mã `R-xx`). Tài liệu này giữ cơ sở chi phí và thuyết minh phân bổ giờ.
+
+## PHẦN 1: BẢNG DỰ TOÁN TIỀN CÔNG LAO ĐỘNG THEO NGƯỜI THAM GIA (ĐỘI THỰC THI MÔ PHỎNG)
 
 | STT | Vị trí nhân sự & Cấp bậc | Lương gross/tháng (đồng) | Đơn giá/giờ (đồng) | Tổng giờ (h) | Tổng quy đổi (PD) | Thành tiền công (đồng) |
 |---|---|---|---|---|---|---|
@@ -23,20 +27,24 @@
 - Đơn giá/giờ = Lương gross/tháng ÷ 208 giờ, hiển thị làm tròn 2 chữ số thập phân; thành tiền tính từ đơn giá chưa làm tròn. 1 PD = 8 giờ.
 - Senior tập trung vào kiến trúc, phần kỹ thuật phức tạp và review mã nguồn; Mid và Junior thực hiện phần chuẩn hóa dưới sự kèm cặp.
 
-## PHẦN 2: BÓC TÁCH EFFORT THEO MILESTONE & QUẢN TRỊ RỦI RO TRỰC TIẾP
+## PHẦN 2: BÓC TÁCH EFFORT THEO MILESTONE VÀ HẠNG MỤC BÁO GIÁ
 
-Effort được bóc tách theo 7 milestone và việc quản lý dự án xuyên suốt, đúng với các issue trên GitHub. Toàn bộ rủi ro kỹ thuật và nghiệp vụ được gắn trực tiếp vào quỹ Buffer của từng milestone, không lập bảng rủi ro rời rạc ở cuối tài liệu.
+Effort được bóc tách theo 6 milestone `MS-01` đến `MS-06` và việc quản lý dự án xuyên suốt, đúng với các issue trên GitHub và hạng mục `Q-xx` trong báo giá. Mỗi hạng mục có một quỹ giờ dự phòng (Buffer) cho các rủi ro đã ghi trong sổ rủi ro; bảng dưới chỉ dẫn mã `R-xx`, mô tả, owner và phương án nằm ở [risk-register.md](risk-register.md).
 
-**Cơ sở phân bổ:** tổng giờ của từng vị trí ở Phần 1 được chia theo số ngày làm việc của các issue người đó phụ trách trong từng milestone; mỗi issue tính tối đa 10 ngày; vai trò hỗ trợ/duyệt tính 25% số ngày của issue.
+**Cơ sở phân bổ:** tổng giờ của từng vị trí ở Phần 1 được chia cho các issue người đó phụ trách, theo tỷ trọng số ngày công ước lượng của issue; mỗi issue tính tối đa 10 ngày; vai trò hỗ trợ/duyệt tính 25%. Lịch thực hiện của từng issue nằm ở sheet WBS; đổi lịch không làm đổi giờ.
 
-### 2.1. PROTOTYPE VÀ BÁO CÁO GIỮA KỲ — TỔNG: 285 GIỜ (35,63 PD)
+### 2.1. MS-01 · CHỐT YÊU CẦU, ĐĂNG NHẬP VÀ PHÂN QUYỀN — TỔNG: 359 GIỜ (44,88 PD)
+
+Milestone gồm hai hạng mục báo giá: `Q-01` (285 giờ) và `Q-02` (74 giờ). Cuối milestone khách đăng nhập thử được trên Staging.
+
+#### 2.1a. Q-01 · Phân tích, thiết kế, prototype và chốt yêu cầu — 285 giờ (35,63 PD)
 
 **Mục tiêu cốt lõi:** Khách bấm thử prototype 3 cổng trên dữ liệu mẫu; nhóm bàn giao bộ tài liệu phân tích kỹ thuật, luồng dữ liệu, UI/UX và chốt phạm vi cùng tiêu chí chất lượng bằng văn bản.
 
 | Nhân sự tham gia | Vai trò tác nghiệp chính | Số giờ (h) | Quy đổi (PD) |
 |---|---|---|---|
 | PM / Senior | Kickoff, phân vai, lập kế hoạch; xác nhận với trường danh mục loại yêu cầu, phòng ban và cách đăng nhập; chốt phạm vi và tiêu chí chất lượng bằng văn bản | 38 | 4,75 |
-| BA / Mid | Viết đặc tả chức năng, chỉnh theo phản hồi của khách; soạn bộ tài liệu phân tích kỹ thuật, luồng dữ liệu, UI/UX cho nghiệm thu giữa kỳ | 72 | 9,00 |
+| BA / Mid | Viết đặc tả chức năng, chỉnh theo phản hồi của khách; soạn bộ tài liệu phân tích kỹ thuật, luồng dữ liệu, UI/UX để khách duyệt khi chốt yêu cầu | 72 | 9,00 |
 | UI/UX / Mid | Thiết kế wireframe và giao diện 3 cổng (VN/EN, điện thoại và máy tính); hỗ trợ chỉnh prototype theo phản hồi | 50 | 6,25 |
 | BE Dev / Senior | Thiết kế kiến trúc hệ thống, ERD, sơ đồ luồng dữ liệu | 20 | 2,50 |
 | BE Dev / Mid | Hỗ trợ dựng ERD và sơ đồ luồng dữ liệu | 7 | 0,88 |
@@ -46,15 +54,11 @@ Effort được bóc tách theo 7 milestone và việc quản lý dự án xuyê
 | DevOps / Mid | Dựng repo, CI, Docker, môi trường dev và SSO giả lập | 32 | 4,00 |
 | **Effort cơ sở (Baseline)** | Tổng giờ kỹ thuật thực thi trực tiếp | 261 h | 32,63 PD |
 | **Buffer dự phòng (9,2%)** | Quỹ giờ giải quyết các rủi ro kỹ thuật phát sinh | 24 h | 3,00 PD |
-| **TỔNG KẾ HOẠCH (PROTOTYPE)** | Tổng effort được phê duyệt | **285 h** | **35,63 PD** |
+| **TỔNG KẾ HOẠCH (Q-01)** | Tổng effort được phê duyệt | **285 h** | **35,63 PD** |
 
-**Các rủi ro chính được giải quyết trong quỹ Buffer (24h):**
+**Dự phòng 24 giờ dùng cho rủi ro:** R-01, R-02, R-03. Mô tả, owner và phương án: [risk-register.md](risk-register.md).
 
-- **Khách thay đổi luồng sau khi bấm thử prototype:** nhiều góp ý về luồng và màn hình dồn vào cuối giai đoạn → Dùng buffer cho một vòng chỉnh prototype và tài liệu trước khi chốt.
-- **Trường chậm cung cấp danh mục loại yêu cầu, phòng ban và thông tin đăng nhập tập trung:** chưa đủ dữ liệu để chốt luồng → Dùng buffer để dựng danh mục mẫu và SSO giả lập, cập nhật lại khi có dữ liệu thật.
-- **Chậm chốt phạm vi bằng văn bản:** khách chưa ký xác nhận sau buổi review → Dùng buffer cho buổi làm rõ bổ sung và hoàn thiện biên bản chốt.
-
-### 2.2. TẠO TÀI KHOẢN VÀ PHÂN QUYỀN — TỔNG: 74 GIỜ (9,25 PD)
+#### 2.1b. Q-02 · Đăng nhập và phân quyền — 74 giờ (9,25 PD)
 
 **Mục tiêu cốt lõi:** Admin thêm email nhân viên, cấp/thu quyền, vô hiệu hóa tài khoản; 3 vai trò đăng nhập đúng cổng bằng tài khoản trường; sinh viên xem thông tin lấy từ tài khoản trường. Có Staging và dữ liệu seed.
 
@@ -69,15 +73,11 @@ Effort được bóc tách theo 7 milestone và việc quản lý dự án xuyê
 | DevOps / Mid | Dựng Staging và CI tự động deploy lên Staging | 10 | 1,25 |
 | **Effort cơ sở (Baseline)** | Tổng giờ kỹ thuật thực thi trực tiếp | 68 h | 8,50 PD |
 | **Buffer dự phòng (8,8%)** | Quỹ giờ giải quyết các rủi ro kỹ thuật phát sinh | 6 h | 0,75 PD |
-| **TỔNG KẾ HOẠCH (MILESTONE 1)** | Tổng effort được phê duyệt | **74 h** | **9,25 PD** |
+| **TỔNG KẾ HOẠCH (Q-02)** | Tổng effort được phê duyệt | **74 h** | **9,25 PD** |
 
-**Các rủi ro chính được giải quyết trong quỹ Buffer (6h):**
+**Dự phòng 6 giờ dùng cho rủi ro:** R-04, R-05, R-06. Mô tả, owner và phương án: [risk-register.md](risk-register.md).
 
-- **Truy cập chéo giữa các vai trò:** người dùng sửa đường dẫn để mở màn hình hoặc dữ liệu của vai trò khác → Dùng buffer để kiểm tra quyền ở tầng backend cho mọi API và bổ sung test truy cập chéo.
-- **Thu quyền không có hiệu lực ngay:** tài khoản bị vô hiệu hóa vẫn dùng được phiên đang mở → Dùng buffer để hủy phiên ngay khi thu quyền.
-- **Staging chưa ổn định:** khác biệt giữa môi trường dev và Staging làm test bị chặn → Dùng buffer để chuẩn hóa cấu hình bằng Docker Compose.
-
-### 2.3. QUY TRÌNH TIẾP NHẬN VÀ XỬ LÝ TICKET — TỔNG: 128 GIỜ (16,00 PD)
+### 2.2. MS-02 · GỬI VÀ TIẾP NHẬN YÊU CẦU (Q-03) — TỔNG: 128 GIỜ (16,00 PD)
 
 **Mục tiêu cốt lõi:** Sinh viên chọn loại yêu cầu, thấy phòng ban tiếp nhận, gửi kèm tệp và nhận mã hồ sơ; có SLA và chuông thông báo; nhân viên thấy hồ sơ trong hàng đợi, xem chi tiết và tệp; Admin thiết lập SLA.
 
@@ -91,15 +91,11 @@ Effort được bóc tách theo 7 milestone và việc quản lý dự án xuyê
 | Tester / Junior | Chạy test trọn luồng trên Staging | 22 | 2,75 |
 | **Effort cơ sở (Baseline)** | Tổng giờ kỹ thuật thực thi trực tiếp | 117 h | 14,63 PD |
 | **Buffer dự phòng (9,4%)** | Quỹ giờ giải quyết các rủi ro kỹ thuật phát sinh | 11 h | 1,38 PD |
-| **TỔNG KẾ HOẠCH (MILESTONE 2)** | Tổng effort được phê duyệt | **128 h** | **16,00 PD** |
+| **TỔNG KẾ HOẠCH (MS-02)** | Tổng effort được phê duyệt | **128 h** | **16,00 PD** |
 
-**Các rủi ro chính được giải quyết trong quỹ Buffer (11h):**
+**Dự phòng 11 giờ dùng cho rủi ro:** R-07, R-08, R-09. Mô tả, owner và phương án: [risk-register.md](risk-register.md).
 
-- **Tệp giả mạo định dạng hoặc vượt giới hạn:** tệp bị đổi đuôi thành PDF/JPG/PNG hoặc vượt 5 tệp, 10MB mỗi tệp → Dùng buffer để kiểm tra nội dung tệp ở backend, không chỉ dựa vào đuôi tệp.
-- **SLA tính sai thời điểm:** máy chủ chạy UTC trong khi lịch làm việc là UTC+7 → Dùng buffer để chuẩn hóa múi giờ và viết unit test cho mốc hạn xử lý.
-- **Trùng mã hồ sơ khi nhiều sinh viên gửi cùng lúc** → Dùng buffer để sinh mã trong transaction và test gửi đồng thời.
-
-### 2.4. PHÂN CÔNG, XỬ LÝ, CHUYỂN PHÒNG BAN — TỔNG: 83 GIỜ (10,38 PD)
+### 2.3. MS-03 · PHÂN CÔNG, XỬ LÝ, CHUYỂN PHÒNG BAN (Q-04) — TỔNG: 83 GIỜ (10,38 PD)
 
 **Mục tiêu cốt lõi:** Nhân viên phân công người phụ trách, ghi nhật ký, yêu cầu sinh viên bổ sung; sinh viên bổ sung thông tin; nhân viên đặt ưu tiên, escalate và chuyển hồ sơ sang phòng ban khác.
 
@@ -113,15 +109,11 @@ Effort được bóc tách theo 7 milestone và việc quản lý dự án xuyê
 | Tester / Junior | Chạy test trọn luồng trên Staging | 17 | 2,13 |
 | **Effort cơ sở (Baseline)** | Tổng giờ kỹ thuật thực thi trực tiếp | 76 h | 9,50 PD |
 | **Buffer dự phòng (9,2%)** | Quỹ giờ giải quyết các rủi ro kỹ thuật phát sinh | 7 h | 0,88 PD |
-| **TỔNG KẾ HOẠCH (MILESTONE 3)** | Tổng effort được phê duyệt | **83 h** | **10,38 PD** |
+| **TỔNG KẾ HOẠCH (MS-03)** | Tổng effort được phê duyệt | **83 h** | **10,38 PD** |
 
-**Các rủi ro chính được giải quyết trong quỹ Buffer (7h):**
+**Dự phòng 7 giờ dùng cho rủi ro:** R-10, R-11, R-12. Mô tả, owner và phương án: [risk-register.md](risk-register.md).
 
-- **Hai nhân viên cùng thao tác một hồ sơ:** cùng phân công hoặc cùng đổi trạng thái gây ghi đè dữ liệu → Dùng buffer để khóa bản ghi khi cập nhật và test thao tác đồng thời.
-- **Phòng cũ vẫn xử lý được sau khi chuyển phòng** → Dùng buffer để thu quyền ngay khi chuyển và test lại phạm vi dữ liệu.
-- **Chuyển trạng thái sai thứ tự:** hồ sơ chờ bổ sung hoặc quá hạn chuyển sang trạng thái không hợp lệ → Dùng buffer để kiểm thử toàn bộ ma trận chuyển trạng thái.
-
-### 2.5. TRẢ KẾT QUẢ CHO SINH VIÊN — TỔNG: 43 GIỜ (5,38 PD)
+### 2.4. MS-04 · TRẢ KẾT QUẢ CHO SINH VIÊN (Q-05) — TỔNG: 43 GIỜ (5,38 PD)
 
 **Mục tiêu cốt lõi:** Người phụ trách đóng hồ sơ kèm kết quả; sinh viên nhận thông báo, xem trạng thái, tiến độ, kết quả và đánh giá một lần.
 
@@ -135,15 +127,11 @@ Effort được bóc tách theo 7 milestone và việc quản lý dự án xuyê
 | Tester / Junior | Chạy test trọn luồng trên Staging | 9 | 1,13 |
 | **Effort cơ sở (Baseline)** | Tổng giờ kỹ thuật thực thi trực tiếp | 39 h | 4,88 PD |
 | **Buffer dự phòng (10,3%)** | Quỹ giờ giải quyết các rủi ro kỹ thuật phát sinh | 4 h | 0,50 PD |
-| **TỔNG KẾ HOẠCH (MILESTONE 4)** | Tổng effort được phê duyệt | **43 h** | **5,38 PD** |
+| **TỔNG KẾ HOẠCH (MS-04)** | Tổng effort được phê duyệt | **43 h** | **5,38 PD** |
 
-**Các rủi ro chính được giải quyết trong quỹ Buffer (4h):**
+**Dự phòng 4 giờ dùng cho rủi ro:** R-13, R-14, R-15. Mô tả, owner và phương án: [risk-register.md](risk-register.md).
 
-- **Đánh giá nhiều lần hoặc đánh giá hồ sơ chưa đóng** → Dùng buffer để ràng buộc một lần đánh giá ở backend.
-- **Sinh viên không nhận được thông báo đóng hồ sơ khi mạng chập chờn** → Dùng buffer để lưu thông báo chưa đọc và hiển thị lại khi sinh viên vào app.
-- **Đóng hồ sơ thiếu kết quả** → Dùng buffer để bắt buộc nhập kết quả trước khi đóng.
-
-### 2.6. THỐNG KÊ BÁO CÁO CHO ADMIN — TỔNG: 73 GIỜ (9,13 PD)
+### 2.5. MS-05 · THỐNG KÊ BÁO CÁO CHO ADMIN (Q-06) — TỔNG: 73 GIỜ (9,13 PD)
 
 **Mục tiêu cốt lõi:** Admin xem dashboard (hồ sơ mới, đang xử lý, quá hạn, thời gian xử lý trung bình) và 3 báo cáo; có bộ 200 ticket mẫu; feature freeze.
 
@@ -157,22 +145,18 @@ Effort được bóc tách theo 7 milestone và việc quản lý dự án xuyê
 | Tester / Junior | Tạo bộ 200 ticket mẫu đủ mọi trạng thái; chạy test trọn luồng trên Staging | 24 | 3,00 |
 | **Effort cơ sở (Baseline)** | Tổng giờ kỹ thuật thực thi trực tiếp | 67 h | 8,38 PD |
 | **Buffer dự phòng (9,0%)** | Quỹ giờ giải quyết các rủi ro kỹ thuật phát sinh | 6 h | 0,75 PD |
-| **TỔNG KẾ HOẠCH (MILESTONE 5)** | Tổng effort được phê duyệt | **73 h** | **9,13 PD** |
+| **TỔNG KẾ HOẠCH (MS-05)** | Tổng effort được phê duyệt | **73 h** | **9,13 PD** |
 
-**Các rủi ro chính được giải quyết trong quỹ Buffer (6h):**
+**Dự phòng 6 giờ dùng cho rủi ro:** R-16, R-17, R-18. Mô tả, owner và phương án: [risk-register.md](risk-register.md).
 
-- **Số liệu dashboard lệch dữ liệu nguồn** → Dùng buffer để đối chiếu với bộ 200 ticket mẫu có kết quả tính sẵn.
-- **Dashboard chậm khi nhiều Admin cùng mở** → Dùng buffer để tối ưu truy vấn tổng hợp và chỉ mục trên các trường lọc thường dùng.
-- **Báo cáo lộ chi tiết hồ sơ hoặc thông tin cá nhân** → Dùng buffer để kiểm tra API báo cáo chỉ trả số liệu tổng hợp.
+### 2.6. MS-06 · TRIỂN KHAI, BÀN GIAO VÀ BẢO HÀNH (Q-07, Q-08) — TỔNG: 158 GIỜ (19,75 PD)
 
-### 2.7. BÀN GIAO — TỔNG: 158 GIỜ (19,75 PD)
-
-**Mục tiêu cốt lõi:** Hoàn thiện hồ sơ bàn giao, triển khai lên server của trường với đăng nhập thật, Go-live và bảo hành.
+**Mục tiêu cốt lõi:** Hoàn thiện hồ sơ bàn giao, triển khai lên server của trường với đăng nhập thật, Go-live và bảo hành. Trong 158 giờ, bảo hành (`Q-08`) gồm BE Dev / Mid 30 giờ và FE Dev / Junior 23 giờ; phần còn lại thuộc `Q-07`.
 
 | Nhân sự tham gia | Vai trò tác nghiệp chính | Số giờ (h) | Quy đổi (PD) |
 |---|---|---|---|
-| PM / Senior | Chuẩn bị Final Presentation | 10 | 1,25 |
-| BA / Mid | Viết hướng dẫn sử dụng cho Sinh viên, Nhân viên, Admin; hỗ trợ Final Presentation | 18 | 2,25 |
+| PM / Senior | Chuẩn bị và điều phối buổi demo nghiệm thu với khách trên server trường | 10 | 1,25 |
+| BA / Mid | Viết hướng dẫn sử dụng cho Sinh viên, Nhân viên, Admin; hỗ trợ buổi demo nghiệm thu | 18 | 2,25 |
 | UI/UX / Mid | Usability test và Usability Test Report | 18 | 2,25 |
 | BE Dev / Senior | Hỗ trợ triển khai production và xử lý sự cố trước Go-live | 3 | 0,38 |
 | BE Dev / Mid | OpenAPI/Swagger, tài liệu mã lỗi; sửa lỗi backend trong bảo hành | 45 | 5,63 |
@@ -182,15 +166,11 @@ Effort được bóc tách theo 7 milestone và việc quản lý dự án xuyê
 | DevOps / Mid | Docker Compose production và .env.example; triển khai lên server trường, nạp tài khoản Admin đầu tiên, nối đăng nhập thật; dự phòng sự cố trước Go-live | 32 | 4,00 |
 | **Effort cơ sở (Baseline)** | Tổng giờ kỹ thuật thực thi trực tiếp | 145 h | 18,13 PD |
 | **Buffer dự phòng (9,0%)** | Quỹ giờ giải quyết các rủi ro kỹ thuật phát sinh | 13 h | 1,63 PD |
-| **TỔNG KẾ HOẠCH (BÀN GIAO)** | Tổng effort được phê duyệt | **158 h** | **19,75 PD** |
+| **TỔNG KẾ HOẠCH (MS-06)** | Tổng effort được phê duyệt | **158 h** | **19,75 PD** |
 
-**Các rủi ro chính được giải quyết trong quỹ Buffer (13h):**
+**Dự phòng 13 giờ dùng cho rủi ro:** R-19, R-20, R-21. Mô tả, owner và phương án: [risk-register.md](risk-register.md).
 
-- **Hạ tầng của trường khác Staging:** firewall hoặc cấu hình mạng chặn cổng dịch vụ → Dùng buffer để phối hợp quản trị mạng của trường kiểm tra thông luồng trước Go-live.
-- **Nối đăng nhập thật của trường bị lỗi cấu hình** → Dùng buffer để thử trước trên server trường và giữ phương án quay lại.
-- **Usability test phát hiện vấn đề sau feature freeze** → Dùng buffer để sửa các lỗi Critical/Major; phần còn lại đưa vào danh sách lỗi còn tồn.
-
-### 2.8. QUẢN LÝ DỰ ÁN XUYÊN SUỐT — TỔNG: 26 GIỜ (3,25 PD)
+### 2.7. QUẢN LÝ DỰ ÁN XUYÊN SUỐT (Q-09) — TỔNG: 26 GIỜ (3,25 PD)
 
 **Mục tiêu cốt lõi:** Theo dõi effort kế hoạch và thực tế, báo cáo khách hằng tuần trong suốt dự án (việc không gắn milestone).
 
@@ -201,16 +181,13 @@ Effort được bóc tách theo 7 milestone và việc quản lý dự án xuyê
 | **Buffer dự phòng (8,3%)** | Quỹ giờ giải quyết các rủi ro kỹ thuật phát sinh | 2 h | 0,25 PD |
 | **TỔNG KẾ HOẠCH (QUẢN LÝ DỰ ÁN)** | Tổng effort được phê duyệt | **26 h** | **3,25 PD** |
 
-**Các rủi ro chính được giải quyết trong quỹ Buffer (2h):**
+**Dự phòng 2 giờ dùng cho rủi ro:** R-22, R-23. Mô tả, owner và phương án: [risk-register.md](risk-register.md).
 
-- **Giờ thực tế lệch kế hoạch không được phát hiện sớm** → Dùng buffer để đối chiếu bảng theo dõi giờ hằng tuần.
-- **Phản hồi của khách chậm** → Dùng buffer để nhắc qua email tuần và ghi quyết định vào Decision Log.
+### 2.8. MA TRẬN ĐỐI SOÁT KIỂM TRA CHÉO NGUỒN LỰC (CROSS-CHECK MATRIX)
 
-### 2.9. MA TRẬN ĐỐI SOÁT KIỂM TRA CHÉO NGUỒN LỰC (CROSS-CHECK MATRIX)
+Khớp 100% giữa chiều dọc nhân sự (Phần 1) và chiều ngang milestone. Giờ/tuần và độ sẵn sàng của từng người theo lịch nằm ở sheet Resources của Master Plan; sheet đó tách 73 giờ dự phòng thành Quỹ dự phòng.
 
-Khớp 100% giữa chiều dọc nhân sự (Phần 1) và chiều ngang milestone.
-
-| Nhân sự | Prototype | MS1 Tài khoản | MS2 Tiếp nhận | MS3 Phân công | MS4 Trả kết quả | MS5 Thống kê | Bàn giao | Quản lý dự án | TỔNG (h) |
+| Nhân sự | MS-01 (Q-01) | MS-01 (Q-02) | MS-02 | MS-03 | MS-04 | MS-05 | MS-06 | Quản lý dự án (Q-09) | TỔNG (h) |
 |---|---|---|---|---|---|---|---|---|---|
 | PM / Senior | 38 | 0 | 0 | 0 | 0 | 0 | 10 | 26 | 74 |
 | BA / Mid | 72 | 0 | 0 | 0 | 0 | 0 | 18 | 0 | 90 |
@@ -251,9 +228,11 @@ Khớp 100% giữa chiều dọc nhân sự (Phần 1) và chiều ngang milesto
 | 7 | Thuế giá trị gia tăng (VAT 10%) | 10% x 302.105.383 đồng | 30.210.538 |
 | **C** | **GIÁ THẦU TÍNH TOÁN SAU THUẾ VAT 10%** | Giá trước VAT + Thuế VAT 10% | **332.315.921** |
 
-### BẢNG 3.2: PHƯƠNG ÁN BÁO GIÁ THƯƠNG MẠI CHÍNH THỨC GỬI KHÁCH HÀNG (LÀM TRÒN SAU THUẾ)
+### BẢNG 3.2: ĐỐI CHIẾU GIÁ CHÀO VỚI CHI PHÍ (NỘI BỘ, KHÔNG GỬI KHÁCH)
 
-Giá chào thầu thương mại gửi Quý Khách hàng được làm tròn lên mốc hàng nghìn: **332.316.000 đồng** (Đã bao gồm 10% VAT). Toàn bộ phần thặng dư tài chính phát sinh sau khi làm tròn được kết chuyển trực tiếp vào Lợi nhuận của doanh nghiệp.
+Giá chào khách hàng nằm ở [quotation.xlsx](quotation.xlsx) sheet Hạng mục: **332.316.000 đồng** (đã gồm 10% VAT), làm tròn lên hàng nghìn từ tổng các hạng mục `Q-01` đến `Q-10`. Đơn giá bán từng vai trò = đơn giá chi phí ở Phần 1 × 2,1 (= 1,2 dự phòng lao động × 1,4 phúc lợi và vận hành ÷ 0,8 biên lợi nhuận). Bảng dưới chỉ dùng nội bộ để đối chiếu lợi nhuận; phần thặng dư sau khi làm tròn được kết chuyển vào lợi nhuận.
+
+**Hai loại dự phòng khác nhau:** 73 giờ dự phòng ở Phần 2 là quỹ giờ cho rủi ro đã nhận diện (`R-xx`), đã nằm trong 870 giờ và trong kế hoạch. Dự phòng lao động 20% ở Bảng 3.1 là dự phòng tài chính cho sai lệch chi phí nhân sự thực tế so với ước lượng (đơn giá, giờ thực tế), không cấp thêm giờ trong kế hoạch. Change request do khách yêu cầu được báo giá riêng, không lấy từ hai khoản này.
 
 | STT | Khoản mục thương mại | Cơ sở và công thức xác định | Giá trị thực tế (đồng) |
 |---|---|---|---|

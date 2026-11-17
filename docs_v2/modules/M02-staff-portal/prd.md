@@ -44,6 +44,9 @@ Hiển thị danh sách hồ sơ thuộc phòng ban của nhân viên, lọc đ�
 **Actor**
 Nhân viên đã đăng nhập, đã được gán phòng ban.
 
+**Priority**
+`Must`: Hàng đợi chung của phòng giải quyết vấn đề thất lạc hồ sơ (G-01).
+
 **Preconditions**
 - Nhân viên đã đăng nhập và có phòng ban.
 
@@ -104,6 +107,9 @@ Nhân viên xem đầy đủ thông tin một hồ sơ để xử lý, không c�
 **Actor**
 Nhân viên thuộc phòng ban đang giữ hồ sơ.
 
+**Priority**
+`Must`: Nhân viên phải đọc nội dung yêu cầu mới xử lý được.
+
 **Preconditions**
 - Hồ sơ thuộc phòng ban của nhân viên.
 
@@ -155,6 +161,9 @@ Nhân viên xem trực tiếp hoặc tải tệp minh chứng của hồ sơ đ�
 
 **Actor**
 Nhân viên thuộc phòng ban đang giữ hồ sơ.
+
+**Priority**
+`Must`: Minh chứng đính kèm là đầu vào để xử lý.
 
 **Preconditions**
 - Hồ sơ thuộc phòng ban của nhân viên.
@@ -209,6 +218,9 @@ Nhân viên phụ trách ghi lại các bước đã làm với hồ sơ, giúp 
 
 **Actor**
 Nhân viên phụ trách hồ sơ.
+
+**Priority**
+`Should`: Ghi nhật ký giúp phối hợp trong phòng; hồ sơ vẫn xử lý được nếu làm muộn hơn.
 
 **Preconditions**
 - Nhân viên là người phụ trách hồ sơ.
@@ -267,6 +279,9 @@ Nhân viên phụ trách gửi yêu cầu sinh viên bổ sung thông tin khi h�
 
 **Actor**
 Nhân viên phụ trách hồ sơ.
+
+**Priority**
+`Must`: Không có yêu cầu bổ sung thì hồ sơ thiếu thông tin không xử lý tiếp được.
 
 **Preconditions**
 - Nhân viên là người phụ trách hồ sơ.
@@ -327,6 +342,9 @@ Nhân viên phụ trách đóng hồ sơ khi đã xử lý xong, thông báo k�
 **Actor**
 Nhân viên phụ trách hồ sơ.
 
+**Priority**
+`Must`: Đóng hồ sơ kèm kết quả là đầu ra của luồng chính.
+
 **Preconditions**
 - Nhân viên là người phụ trách hồ sơ.
 - Hồ sơ ở `IN_PROGRESS`, `PENDING_INFO` hoặc `OVERDUE`.
@@ -382,6 +400,9 @@ Nhân viên trong phòng ban phân công người phụ trách cho hồ sơ, đ�
 
 **Actor**
 Nhân viên thuộc phòng ban đang giữ hồ sơ.
+
+**Priority**
+`Must`: Rõ người phụ trách là mục tiêu G-01; chỉ người phụ trách được xử lý.
 
 **Preconditions**
 - Hồ sơ thuộc phòng ban của nhân viên và không ở `CLOSED`.
@@ -439,6 +460,9 @@ Nhân viên trong phòng ban đặt mức ưu tiên cho hồ sơ để phòng ba
 **Actor**
 Nhân viên thuộc phòng ban đang giữ hồ sơ.
 
+**Priority**
+`Should`: Giúp sắp xếp thứ tự xử lý; hàng đợi vẫn dùng được theo thời gian gửi.
+
 **Preconditions**
 - Hồ sơ thuộc phòng ban của nhân viên và không ở `CLOSED`.
 
@@ -490,6 +514,9 @@ Nhân viên chuyển hồ sơ sang đúng phòng ban khi hồ sơ không thuộc
 
 **Actor**
 Nhân viên thuộc phòng ban đang giữ hồ sơ.
+
+**Priority**
+`Must`: Hồ sơ gửi nhầm loại chỉ đi đúng phòng nhờ chuyển phòng; thiếu thì hồ sơ bị kẹt.
 
 **Preconditions**
 - Hồ sơ thuộc phòng ban của nhân viên và không ở `CLOSED`.
@@ -551,6 +578,9 @@ Nhân viên tăng mức ưu tiên của hồ sơ kèm lý do khi phát hiện v�
 
 **Actor**
 Nhân viên thuộc phòng ban đang giữ hồ sơ.
+
+**Priority**
+`Could`: Đã có thể đổi mức ưu tiên bằng FR-STF-08; escalate thêm bước có lý do.
 
 **Preconditions**
 - Hồ sơ thuộc phòng ban của nhân viên và không ở `CLOSED`.
