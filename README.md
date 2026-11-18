@@ -12,5 +12,5 @@ Bài làm môn Software Project Management: hồ sơ quản lý dự án xây d�
 | --- | --- | --- | --- |
 | 23090039 | Lê Hoàng Tùng | [lehoangtung269](https://github.com/lehoangtung269) | Trưởng nhóm; Proposal và báo giá; Quản trị và giám sát |
 | 23090032 | Ngô Tấn Đức | [duc1011](https://github.com/duc1011) | PRD |
-| 23090019 | Phan Tiến Thịnh | [ericphan2545](https://github.com/ericphan2545) | Master Plan, sổ rủi ro, GitHub |
+| 23090023 | Phan Tiến Thịnh | [ericphan2545](https://github.com/ericphan2545) | Master Plan, sổ rủi ro, GitHub |
 | 23090031 | Đào Tuấn Bảo | [baodao230931-cyber](https://github.com/baodao230931-cyber) | Team Charter, Quality, Product |
