@@ -33,8 +33,8 @@ Mỗi AC trong `modules/` có nhãn nhóm (Happy Path, Validation, Boundary, Sec
 | Bước | Ai làm | Khi nào | Dùng gì |
 |---|---|---|---|
 | 1. Viết test case từ AC của các FR trong milestone | QA / Senior; Tester / Junior hỗ trợ | Đầu milestone (dòng WBS "Viết test case từ AC") | Kịch bản chức năng `TS-21` đến `TS-62` |
-| 2. Chạy test case khi chức năng lên Staging; ghi lỗi | Tester / Junior | Trong milestone | Mẫu issue Bug trên GitHub, mức lỗi theo QMP mục 6 |
-| 3. Chạy kịch bản trọn luồng của milestone và regression của các milestone đã giao | Tester / Junior; QA / Senior duyệt | Cuối milestone (dòng WBS "Test trọn luồng và regression") | Kịch bản `TS-01` đến `TS-18` có Regression = có |
+| 2. Chạy test case theo từng chức năng ngay khi hoàn thành lên Staging; ghi lỗi | Tester / Junior | Trong milestone (bắt đầu sau khi hoàn tất dòng WBS "Viết test case từ AC") | Mẫu issue Bug trên GitHub, mức lỗi theo QMP mục 6 |
+| 3. Chạy kịch bản trọn luồng của milestone và regression của các milestone đã giao | Tester / Junior; QA / Senior duyệt | Đợt cuối milestone, **sau khi hoàn tất toàn bộ dòng WBS phát triển, phần dùng chung và dữ liệu mẫu của milestone** (dòng WBS "Test trọn luồng và regression") | Kịch bản `TS-01` đến `TS-18` có Regression = có |
 | 4. Đối chiếu điều kiện đóng milestone, báo PM | QA / Senior | Trước buổi demo milestone | QMP mục 2.1; sheet Milestones cột "Điều kiện nghiệm thu" |
 | 5. Demo cho client, client tự chạy kịch bản trọn luồng | PM / Senior, BA / Mid, QA / Senior | Cuối milestone | Sheet Milestones cột "Client kiểm tra bằng cách"; góp ý ghi bằng mẫu issue Feedback |
 

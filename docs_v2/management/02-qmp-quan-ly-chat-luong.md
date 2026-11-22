@@ -64,7 +64,7 @@ Test case được viết và QA / Senior duyệt trước khi chức năng lên
 | Cấp | Hoàn thành khi |
 |---|---|
 | Task | Theo Team Charter (mục 5, bước 4) |
-| Chức năng | Mọi task backend và frontend của chức năng đã xong · đạt đủ tiêu chí chấp nhận · phần dùng chung (VN/EN, responsive, quyền, nhật ký) đã làm cho các màn hình của chức năng |
+| Chức năng | Mọi task backend và frontend của chức năng đã xong · đạt đủ tiêu chí chấp nhận · phần dùng chung (VN/EN, responsive, quyền, nhật ký, lịch sử) đã làm cho các màn hình của chức năng *(nên Hạn của FR parent task trên GitHub phải ≥ ngày hoàn thành của BE, FE và phần dùng chung tương ứng trong WBS, xong trước đợt test trọn luồng cuối milestone)* |
 | Milestone | Đạt checklist 2.1 · đã đóng trên GitHub |
 | Dự án | Đạt checklist 2.2 · hệ thống chạy trên server của trường với SSO thật |
 
@@ -99,9 +99,10 @@ Lỗi trùng, không tái hiện được hoặc thực chất là yêu cầu th
 
 **Lỗi phát hiện sau khi milestone đã đóng.** Milestone đã đóng thì **không mở lại**.
 
-- Mọi mức lỗi đều tạo issue mới, gắn milestone `Hotfix`.
-- Critical: QA / Senior xác nhận mức; PM / Senior phê duyệt việc sửa; sửa xong chạy regression các chức năng liên quan.
+- Mọi mức lỗi đều tạo issue mới (mẫu Bug), gắn milestone `Hotfix`, nhãn `bug` và mức `sev: …`.
+- Critical: QA / Senior xác nhận mức trong 1 ngày làm việc; PM / Senior phê duyệt việc sửa ngay (hạn sửa 1 ngày làm việc); sửa xong bắt buộc chạy lại regression các chức năng liên quan (`TS-01` đến `TS-18`).
 - Major và Minor: PM / Senior quyết thứ tự sửa. Vì Go-live yêu cầu Major = 0, mọi Major phải sửa trước Go-live.
+- **Hạch toán WBS và thanh toán:** công sức sửa lỗi `Hotfix` trong giai đoạn đang phát triển hạch toán vào dòng WBS "Sửa lỗi sau test" của milestone hiện tại (ví dụ `4.11–4.14` tại `MS-04`, `5.13–5.16` tại `MS-05`), ghi giờ thực tế vào Bảng theo dõi giờ và cộng vào dự báo baseline 870 giờ (bên phát triển chịu chi phí nếu vượt). Việc phát hiện lỗi `Hotfix` không mở lại milestone đã đóng và không đảo ngược biên bản nghiệm thu hay thanh toán đợt 2 của `MS-03` đã ký; tuy nhiên lỗi Critical/Major phải đóng hoàn toàn trước khi ký biên bản nghiệm thu tổng thể và thanh toán đợt 3.
 
 **Điều kiện dừng test hoặc dừng release:**
 

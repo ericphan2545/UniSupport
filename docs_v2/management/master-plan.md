@@ -29,10 +29,17 @@ Kế hoạch có 6 milestone, chia theo luồng nghiệp vụ của một hồ s
 
 ## Phụ thuộc giữa các milestone
 
-- Giữa các milestone: `MS-01` → `MS-02` → `MS-03` → `MS-04` → `MS-05` → `MS-06` (sheet Milestones, cột "Phụ thuộc").
-- Giữa các việc: cột "Phụ thuộc" của sheet WBS là nơi gốc, ghi mã WBS phải xong trước. Mỗi issue GitHub ghi mã WBS của nó; issue không ghi lại phụ thuộc.
-- Phát triển backend và frontend của mỗi milestone chỉ bắt đầu sau khi test trọn luồng của milestone trước kết thúc, để phần mới dựng trên phần đã nghiệm thu.
-- Khi một milestone trễ: các milestone sau dời theo. Go-live 22/12/2026 là mốc đã chốt với khách, nên trước hết dùng quỹ dự phòng của milestone đó và năng lực dư ở sheet Resources; nếu vẫn không giữ được mốc thì PM / Senior báo khách và xử lý như thay đổi về mốc ([03-quan-tri-giam-sat.md](03-quan-tri-giam-sat.md) mục 5).
+- **Giữa các milestone:** `MS-01` → `MS-02` → `MS-03` → `MS-04` → `MS-05` → `MS-06` (sheet Milestones, cột "Phụ thuộc").
+- **Giữa các việc trong WBS:** cột "Phụ thuộc" của sheet WBS là nơi gốc, ghi đầy đủ mã dòng WBS phải xong trước. Mỗi issue GitHub ghi mã WBS của nó; issue không tự định nghĩa phụ thuộc mâu thuẫn với WBS.
+- **Thứ tự bắt buộc trong mỗi milestone (phần dùng chung xong trước kiểm thử cuối):**
+  - Phát triển backend và frontend của mỗi milestone chỉ bắt đầu sau khi dòng "Test trọn luồng và regression" của milestone trước kết thúc, để phần mới dựng trên nền đã nghiệm thu.
+  - Các dòng **Phần dùng chung** (`1.24–1.25`, `2.05–2.07`, `3.05–3.07`, `4.05–4.06`, `5.05–5.06`) và dữ liệu kiểm thử (`5.07–5.08` bộ 200 ticket mẫu) được xếp hoàn thành **trước tuần/đợt test trọn luồng cuối milestone** (ví dụ tại `MS-02`, `2.05` chạy `05/10–15/10` và `2.06–2.07` chạy `12/10–16/10`, để trọn tuần `19/10–23/10` cho `2.10–2.15` test trọn luồng, sửa lỗi, regression và demo khách; tương tự `4.05–4.06` xong `20/11` trước tuần cuối `MS-04`, `5.05–5.08` xong chậm nhất `07/12` trước đợt test cuối `MS-05`).
+  - Mọi dòng **"Test trọn luồng và regression"** (`1.28–1.29`, `2.10–2.11`, `3.10–3.11`, `4.09–4.10`, `5.11–5.12`) và **"Buổi demo nghiệm thu"** (`6.12–6.13`) ghi rõ đầy đủ mã WBS của toàn bộ các dòng dev, phần dùng chung, dữ liệu mẫu và viết test case phải hoàn tất trước khi chốt kiểm thử.
+  - **Đồng bộ Hạn issue GitHub với WBS và DoD mức chức năng:** theo [QMP](02-qmp-quan-ly-chat-luong.md) mục 5, một FR chỉ đạt DoD khi xong cả BE, FE và phần dùng chung trên màn hình đó; do vậy `**Hạn:**` của FR parent task trên GitHub (ví dụ `#1` ở `MS-02`) phải `≥ max(Hạn BE, Hạn FE, Hạn phần dùng chung)` và kết thúc trước đợt kiểm thử trọn luồng cuối milestone (ví dụ `16/10/2026` cho các FR của `MS-02`).
+- **Xử lý khi một milestone bị trễ:**
+  - *Trễ do nguyên nhân nội bộ đội phát triển:* ưu tiên dùng quỹ dự phòng rủi ro của milestone đó (`Dự phòng Q-xx`) và năng lực còn trống ở sheet `Resources` để giữ mốc Go-live `22/12/2026`; nếu vẫn không giữ được mốc thì PM / Senior báo Aurora University bằng văn bản và xử lý theo quy trình thay đổi mốc ([03-quan-tri-giam-sat.md](03-quan-tri-giam-sat.md) mục 5).
+  - *Trễ do khách hàng chậm phản hồi/chốt phạm vi (giả định `A-03`, rủi ro `R-02`, `R-03`):* vì thời gian chờ phản hồi của trường không tính vào 15 tuần, nếu `MS-01` trễ 1 tuần do phía trường thì toàn bộ các mốc `MS-02` đến `MS-06` và ngày Go-live (`22/12/2026 → 29/12/2026`) dời tương ứng 1 tuần, **giá 332.316.000 VNĐ giữ nguyên**, và hai bên ghi nhận bằng một Change Request điều chỉnh lịch trong sheet `Change log`.
+- **Theo dõi công sức Hotfix sau khi milestone đã đóng:** theo QMP mục 6, lỗi phát hiện sau khi một milestone đã đóng (ví dụ phát hiện lỗi `MS-03` khi đang ở `MS-04`) được tạo issue gắn milestone `Hotfix`, không mở lại milestone cũ và không đảo ngược biên bản nghiệm thu hay đợt thanh toán đã chốt; công sức sửa lỗi Hotfix trong giai đoạn phát triển được hạch toán vào dòng WBS "Sửa lỗi sau test" của milestone đang chạy (`4.11–4.14` tại `MS-04`, `5.13–5.16` tại `MS-05`) và cộng vào dự báo giờ công baseline 870 giờ.
 
 ## Effort cho test, regression và sửa lỗi
 
