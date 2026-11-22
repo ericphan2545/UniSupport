@@ -10,7 +10,7 @@ Nhiều sinh viên chủ yếu dùng điện thoại; có sinh viên và nhân v
 | `NFR-USE-02` | Song ngữ VN/EN theo các quy tắc dưới | Không còn nhãn hiện mã khóa thô | `TS-15`, `FR-CORE-08/AC-01` đến `FR-CORE-08/AC-06` |
 | `NFR-USE-03` | Responsive theo các quy tắc dưới | Không có thanh cuộn ngang ở 360px; vùng bấm ≥ 44×44px | `TS-15`, `FR-CORE-09/AC-01` đến `FR-CORE-09/AC-06` |
 | `NFR-USE-04` | Trình duyệt hỗ trợ: 2 phiên bản mới nhất của Chrome, Safari, Edge và Firefox | Luồng chính chạy trên cả 4 trình duyệt; ghi lại phiên bản đã test | `TS-15` |
-| `NFR-USE-05` | Thông báo lỗi theo ngôn ngữ đang chọn; lỗi nhập liệu hiện theo từng trường | Mọi ca lỗi trong test case có thông báo VN/EN | Test case các AC nhãn Validation |
+| `NFR-USE-05` | Thông báo lỗi theo ngôn ngữ đang chọn; lỗi nhập liệu hiện theo từng trường | Mọi ca lỗi trong test case có thông báo VN/EN cùng `error_code` | `TS-15`, `FR-CORE-08/AC-07` |
 
 ## Song ngữ VN/EN
 

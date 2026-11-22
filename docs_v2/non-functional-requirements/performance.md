@@ -30,7 +30,7 @@ Timeout là ngưỡng cắt để giao diện không bị treo, không phải ca
 
 | Mã | Nội dung | Ngưỡng | Cách đo |
 |---|---|---|---|
-| `NFR-PERF-08` | Polling chuông thông báo, trạng thái hồ sơ, hàng đợi, dashboard; chỉ khi trang đang mở và phiên còn hợp lệ | 30 giây | `FR-STF-01/AC-05`, `FR-MGT-01/AC-05`, `TS-03` |
+| `NFR-PERF-08` | Polling chuông thông báo, trạng thái hồ sơ, hàng đợi, dashboard; chỉ khi trang đang mở và phiên còn hợp lệ | 30 giây | `TS-03`, `TS-08`, `FR-STU-07/AC-04`, `FR-STU-08/AC-01` |
 | `NFR-PERF-09` | Tác vụ quá hạn chạy mỗi 1 phút; hồ sơ vượt hạn chuyển `OVERDUE` khi tác vụ chạy bình thường | Tối đa 60 giây | `TS-06` |
 | `NFR-PERF-10` | Cache thông tin tài khoản lấy từ SSO, riêng từng tài khoản | 15 phút | `FR-STU-01/AC-05` |
 | `NFR-PERF-11` | Cache danh mục loại yêu cầu và phòng ban phía server | Đọc từ cache khi nhiều người mở form | `FR-STU-03/AC-04` |

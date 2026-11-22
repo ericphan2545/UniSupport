@@ -38,7 +38,13 @@ Mục này là nơi gốc phía đội của điều kiện Go-live. Điều ki�
 - Mọi AC của 42 FR trong bộ đặc tả đã chốt ở `MS-01` được kiểm bằng kịch bản test và đạt.
 - Critical = 0 và Major = 0.
 - Lỗi Minor chỉ được còn khi không làm AC nào không đạt, và phải nằm trong danh sách lỗi còn tồn (QA đề xuất, PM duyệt).
-- Đạt mục tiêu `G-01` đến `G-05` ([product/README.md](../product/README.md)); riêng `G-05`: đạt `NFR-PERF-01` đến `NFR-PERF-03`, không có lỗi chặn khi chạy 100–200 người dùng đồng thời trên hạ tầng trường.
+- Đạt mục tiêu `G-01` đến `G-05` ([product/README.md](../product/README.md)) và đạt đầy đủ **50/50 yêu cầu phi chức năng (NFR) bắt buộc trước Go-live**, gồm:
+  - **Hiệu năng (`NFR-PERF-01` đến `NFR-PERF-14`):** kiểm thử tải `TS-19` (`NFR-PERF-01..03`) chạy và đạt trên hạ tầng của Aurora University trước Go-live; các ngưỡng timeout, polling, cache và phân trang (`NFR-PERF-04..14`) đạt qua `TS-03, TS-06, TS-08, TS-12` và các AC tương ứng.
+  - **Bảo mật (`NFR-SEC-01` đến `NFR-SEC-13`):** kiểm tra đầy đủ qua `TS-01, TS-08, TS-09, TS-12, TS-13, TS-14, TS-18, TS-63` (CSRF/XSS/không lộ lỗi) trên Staging và `TS-64` (cấm SSO giả lập, HTTPS, không chứa bí mật trong repo) trước Go-live.
+  - **Độ tin cậy (`NFR-REL-01` đến `NFR-REL-10`):** đạt qua `TS-03, TS-06, TS-10, TS-11, TS-12, TS-13, TS-14` và `TS-64` (không tự xóa dữ liệu, xác nhận chính sách lưu trữ/sao lưu `R-25`).
+  - **Giám sát và truy vết (`NFR-OBS-01` đến `NFR-OBS-04`):** đạt qua `TS-12, TS-13, TS-14, TS-16, TS-63` (`correlation_id`, log UTC không chứa bí mật, đủ sự kiện log bắt buộc).
+  - **Triển khai và vận hành (`NFR-DEP-01` đến `NFR-DEP-04`):** đạt qua `TS-16` (seed danh mục/SLA) và `TS-64` (Docker Compose production, HTTPS, SSO thật, Admin đầu tiên trên server trường).
+  - **Khả năng sử dụng (`NFR-USE-01` đến `NFR-USE-05`):** đạt qua `TS-15` (VN/EN, responsive 360px, 4 trình duyệt, lỗi theo trường) và `TS-20` (Usability Test Report ≥ 80%).
 - Có Báo cáo kiểm thử và Usability Test Report.
 - Các hạng mục bàn giao còn lại đủ theo Proposal 6.1 (PM kiểm).
 

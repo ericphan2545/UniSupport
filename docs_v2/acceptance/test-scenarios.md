@@ -3,7 +3,7 @@
 Nơi gốc của mã kịch bản test `TS-xx`. Mỗi kịch bản ghi mã AC hoặc NFR mà nó kiểm; PRD không ghi ngược lại mã test. Có ba nhóm:
 
 - `TS-01` đến `TS-08`: kịch bản trọn luồng, một hồ sơ đi qua nhiều vai trò; client dùng các kịch bản này khi demo từng milestone.
-- `TS-09` đến `TS-20`: kịch bản chéo, kiểm quy tắc áp dụng cho nhiều chức năng (quyền, đồng thời, gửi lại, lỗi, giao diện, rate limit, hiệu năng, usability).
+- `TS-09` đến `TS-20`, `TS-63`, `TS-64`: kịch bản chéo và kịch bản phi chức năng, kiểm quy tắc áp dụng cho nhiều chức năng (quyền, đồng thời, gửi lại, lỗi, giao diện, rate limit, bảo mật đầu vào/log, hiệu năng, usability, sẵn sàng triển khai production).
 - `TS-21` đến `TS-62`: kịch bản chức năng, mỗi FR một kịch bản chạy lần lượt mọi AC của FR đó theo đúng điều kiện, dữ liệu và kết quả mong đợi ghi trong AC.
 
 Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗi lần bàn giao (dòng WBS "Test trọn luồng và regression"), để phần mới không làm hỏng phần đã giao. Bảng tổng hợp theo từng AC: [traceability-matrix.md](traceability-matrix.md).
@@ -12,26 +12,28 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 | Mã | Kịch bản | Số AC được kiểm | NFR | Milestone chạy lần đầu | Regression |
 |---|---|---|---|---|---|
-| `TS-01` | Đăng nhập, phân quyền và cấp quyền nhân viên | 6 | — | MS-01 | có |
+| `TS-01` | Đăng nhập, phân quyền và cấp quyền nhân viên | 6 | NFR-SEC-01, NFR-SEC-02, NFR-SEC-03 | MS-01 | có |
 | `TS-02` | Sinh viên gửi yêu cầu kèm tệp đến đúng phòng | 16 | — | MS-02 | có |
-| `TS-03` | Thông báo quá hạn, danh sách trạng thái và đổi ngôn ngữ cho sinh viên | 11 | NFR-PERF-08 | MS-02 | có |
+| `TS-03` | Thông báo quá hạn, danh sách trạng thái và đổi ngôn ngữ cho sinh viên | 11 | NFR-PERF-08, NFR-REL-09 | MS-02 | có |
 | `TS-04` | Phân công, ghi nhật ký, yêu cầu bổ sung, bổ sung và thông báo | 10 | — | MS-03 | có |
 | `TS-05` | Ưu tiên, escalate và chuyển phòng | 6 | — | MS-03 | có |
 | `TS-06` | Quá hạn tự động | 5 | NFR-PERF-09, NFR-REL-07 | MS-03 | có |
 | `TS-07` | Đóng hồ sơ, trả kết quả, lịch sử công khai và đánh giá | 7 | — | MS-04 | có |
-| `TS-08` | Báo cáo và dashboard của Admin khớp dữ liệu | 7 | NFR-SEC-12 | MS-05 | có |
+| `TS-08` | Báo cáo và dashboard của Admin khớp dữ liệu | 7 | NFR-SEC-12, NFR-PERF-08 | MS-05 | có |
 | `TS-09` | Phạm vi dữ liệu và truy cập chéo | 6 | NFR-SEC-03, NFR-SEC-06 | MS-01 đến MS-05 | có |
 | `TS-10` | Thao tác đồng thời | 9 | NFR-REL-04 | MS-01 đến MS-04 | có |
-| `TS-11` | Mất phản hồi và gửi lại | 7 | NFR-REL-03 | MS-02 đến MS-04 | có |
-| `TS-12` | Lỗi tệp, kho tệp và CSDL | 4 | NFR-REL-01, NFR-REL-06, NFR-PERF-14 | MS-02 | có |
-| `TS-13` | Lịch sử hồ sơ và nhật ký hệ thống | 13 | NFR-REL-02, NFR-SEC-09, NFR-OBS-04 | MS-01 đến MS-04 | có |
-| `TS-14` | Phiên, đăng xuất và cache | 6 | NFR-SEC-02, NFR-SEC-07 | MS-01 | có |
-| `TS-15` | VN/EN, responsive và trình duyệt | 14 | NFR-USE-02, NFR-USE-03, NFR-USE-04 | MS-01 đến MS-05 | có |
-| `TS-16` | Danh mục và SLA khi triển khai lại | 12 | NFR-DEP-01, NFR-DEP-02 | MS-02 | có |
+| `TS-11` | Mất phản hồi và gửi lại | 7 | NFR-REL-03, NFR-REL-09 | MS-02 đến MS-04 | có |
+| `TS-12` | Lỗi tệp, kho tệp và CSDL | 4 | NFR-REL-01, NFR-REL-06, NFR-REL-08, NFR-PERF-14, NFR-SEC-06, NFR-OBS-03 | MS-02 | có |
+| `TS-13` | Lịch sử hồ sơ và nhật ký hệ thống | 13 | NFR-REL-01, NFR-REL-02, NFR-SEC-09, NFR-OBS-02, NFR-OBS-04 | MS-01 đến MS-04 | có |
+| `TS-14` | Phiên, đăng xuất và cache | 6 | NFR-SEC-02, NFR-SEC-07, NFR-REL-05, NFR-OBS-03 | MS-01 | có |
+| `TS-15` | VN/EN, responsive và trình duyệt | 14 | NFR-USE-02, NFR-USE-03, NFR-USE-04, NFR-USE-05 | MS-01 đến MS-05 | có |
+| `TS-16` | Danh mục và SLA khi triển khai lại | 12 | NFR-DEP-01, NFR-DEP-02, NFR-OBS-03 | MS-02 | có |
 | `TS-17` | Múi giờ và biên ngày | 6 | — | MS-02, MS-05 | có |
 | `TS-18` | Rate limit | 11 | NFR-SEC-13 | MS-01 đến MS-05 | có |
 | `TS-19` | Hiệu năng | 0 | NFR-PERF-01, NFR-PERF-02, NFR-PERF-03 | MS-06 | không |
 | `TS-20` | Usability | 0 | NFR-USE-01 | MS-06 | không |
+| `TS-63` | Bảo mật đầu vào (CSRF/XSS), phản hồi lỗi `correlation_id` và log vận hành | 0 | NFR-SEC-04, NFR-SEC-05, NFR-SEC-08, NFR-OBS-01, NFR-OBS-02, NFR-OBS-03 | MS-01 đến MS-05 | có |
+| `TS-64` | Sẵn sàng triển khai production: HTTPS, cấm SSO giả lập, bí mật và lưu trữ dữ liệu | 0 | NFR-SEC-01, NFR-SEC-10, NFR-SEC-11, NFR-DEP-03, NFR-DEP-04, NFR-REL-10 | MS-06 | không |
 
 **Dữ liệu dùng chung:** phòng A và phòng B; nhân viên A1, A2 thuộc phòng A, B1 thuộc phòng B; sinh viên SV1, SV2; một Admin; loại yêu cầu X ánh xạ phòng A với SLA 48 giờ; loại yêu cầu Y có SLA 1 giờ để test quá hạn.
 
@@ -40,6 +42,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 ### TS-01. Đăng nhập, phân quyền và cấp quyền nhân viên
 
 **Kiểm AC:** `FR-SEC-01/AC-01`, `FR-SEC-02/AC-01`, `FR-SEC-03/AC-01`, `FR-MGT-06/AC-01`, `FR-MGT-06/AC-03`, `FR-STU-01/AC-01`
+
+**Kiểm NFR:** `NFR-SEC-01`, `NFR-SEC-02`, `NFR-SEC-03`
 
 **Milestone chạy lần đầu:** MS-01 · **Regression:** có
 
@@ -74,7 +78,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 **Kiểm AC:** `FR-STU-06/AC-01`, `FR-STU-08/AC-05`, `FR-STU-08/AC-07`, `FR-STU-08/AC-08`, `FR-STU-08/AC-09`, `FR-STU-08/AC-10`, `FR-CORE-02/AC-01`, `FR-CORE-03/AC-01`, `FR-CORE-06/AC-03`, `FR-CORE-08/AC-01`, `FR-CORE-08/AC-08`
 
-**Kiểm NFR:** `NFR-PERF-08`
+**Kiểm NFR:** `NFR-PERF-08`, `NFR-REL-09`
 
 **Milestone chạy lần đầu:** MS-02 · **Regression:** có
 
@@ -159,7 +163,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 **Kiểm AC:** `FR-MGT-01/AC-01`, `FR-MGT-02/AC-01`, `FR-MGT-02/AC-02`, `FR-MGT-03/AC-01`, `FR-MGT-04/AC-01`, `FR-MGT-05/AC-01`, `FR-SEC-04/AC-01`
 
-**Kiểm NFR:** `NFR-SEC-12`
+**Kiểm NFR:** `NFR-SEC-12`, `NFR-PERF-08`
 
 **Milestone chạy lần đầu:** MS-05 · **Regression:** có
 
@@ -212,14 +216,14 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 **Kiểm AC:** `FR-STU-02/AC-04`, `FR-STU-09/AC-05`, `FR-STU-10/AC-05`, `FR-STF-04/AC-04`, `FR-STF-05/AC-05`, `FR-STF-06/AC-01`, `FR-CORE-09/AC-06`
 
-**Kiểm NFR:** `NFR-REL-03`
+**Kiểm NFR:** `NFR-REL-03`, `NFR-REL-09`
 
 **Milestone chạy lần đầu:** MS-02 đến MS-04 · **Regression:** có
 
 - Tạo hồ sơ, mất mạng sau khi server đã commit, gửi lại cùng `Idempotency-Key` → nhận lại đúng mã cũ; không có hồ sơ, tệp, nhật ký hay thông báo thứ hai.
 - Gửi lại cùng key nhưng khác nội dung → 409 `IDEMPOTENCY_PAYLOAD_MISMATCH`.
 - Hai request cùng key gửi đồng thời → một request chạy, request kia nhận 409 `REQUEST_IN_PROGRESS` kèm `Retry-After`.
-- Mất mạng trước khi commit → không có hồ sơ; gửi lại cùng key thì tạo thành công.
+- Mất mạng trước khi commit → không trắng trang, form giữ nguyên dữ liệu và tệp đã chọn kèm nút Thử lại, không lưu nội dung nhạy cảm lâu dài vào localStorage; gửi lại cùng key thì tạo thành công.
 - Lặp lại các ca trên cho bổ sung thông tin, ghi nhật ký, yêu cầu bổ sung, đóng hồ sơ.
 - Gửi lại đánh giá sau khi mất phản hồi → 409; giao diện tải lại đánh giá đã lưu thay vì báo lỗi chung.
 
@@ -227,55 +231,55 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 **Kiểm AC:** `FR-STU-04/AC-06`, `FR-STF-03/AC-06`, `FR-CORE-07/AC-06`, `FR-SEC-05/AC-06`
 
-**Kiểm NFR:** `NFR-REL-01`, `NFR-REL-06`, `NFR-PERF-14`
+**Kiểm NFR:** `NFR-REL-01`, `NFR-REL-06`, `NFR-REL-08`, `NFR-PERF-14`, `NFR-SEC-06`, `NFR-OBS-03`
 
 **Milestone chạy lần đầu:** MS-02 · **Regression:** có
 
-- Tệp PNG đổi đuôi thành `.pdf` → chấp nhận và lưu với định dạng PNG.
+- Tệp PNG đổi đuôi thành `.pdf` → chấp nhận và lưu với định dạng PNG (kiểm bằng magic bytes).
 - Tên tệp `../../etc/passwd.pdf` → bỏ ký tự đường dẫn; tệp lưu với tên ngẫu nhiên.
 - Tệp rỗng → 400. Tệp đúng 10 MiB → chấp nhận. 5 tệp, mỗi tệp 10 MiB trong một lần gửi → hợp lệ.
-- CSDL lỗi sau khi tệp đã lưu tạm → không có hồ sơ; tệp tạm không tải được và được dọn.
-- Kho tệp không phản hồi khi tải → 503. Tệp đã mất trên kho → 404 và có ghi lỗi.
-- Ghi nhật ký khởi tạo tải bị lỗi → 503, không trả tệp.
+- CSDL lỗi sau khi tệp đã lưu tạm → không có hồ sơ; tệp tạm không tải được; chạy tác vụ dọn tệp (`NFR-REL-08`) → tệp tạm mồ côi bị xóa sạch, các tệp thuộc hồ sơ đã commit còn nguyên vẹn; trường hợp xóa bù lỗi có ghi log mã tham chiếu (`NFR-OBS-03`).
+- Kho tệp không phản hồi khi tải → 503. Tệp đã mất trên kho → 404 và có ghi lỗi vào log vận hành (`NFR-OBS-03`).
+- Ghi nhật ký khởi tạo tải bị lỗi → 503, không trả tệp; lỗi ghi kết quả đọc sau khi bắt đầu stream → ghi cảnh báo log (`NFR-OBS-03`).
 
 ### TS-13. Lịch sử hồ sơ và nhật ký hệ thống
 
 **Kiểm AC:** `FR-CORE-06/AC-01`, `FR-CORE-06/AC-02`, `FR-CORE-06/AC-03`, `FR-CORE-06/AC-04`, `FR-CORE-06/AC-05`, `FR-CORE-06/AC-06`, `FR-SEC-06/AC-01`, `FR-SEC-06/AC-02`, `FR-SEC-06/AC-03`, `FR-SEC-06/AC-04`, `FR-SEC-06/AC-05`, `FR-SEC-06/AC-06`, `FR-SEC-06/AC-07`
 
-**Kiểm NFR:** `NFR-REL-02`, `NFR-SEC-09`, `NFR-OBS-04`
+**Kiểm NFR:** `NFR-REL-01`, `NFR-REL-02`, `NFR-SEC-09`, `NFR-OBS-02`, `NFR-OBS-04`
 
 **Milestone chạy lần đầu:** MS-01 đến MS-04 · **Regression:** có
 
 - Hồ sơ đi đủ luồng tạo → phân công → yêu cầu bổ sung → bổ sung → đóng: lịch sử công khai có đúng 5 mốc; nhân viên thấy thêm mốc phân công và thay đổi hạn.
 - Lịch sử công khai không chứa hạn xử lý, mức ưu tiên, tên nhân viên hay lý do chuyển phòng.
-- Mỗi thao tác có đúng một bản ghi nhật ký; bản ghi tạo hồ sơ chỉ chứa mã hồ sơ, không chứa mô tả.
+- Mỗi thao tác có đúng một bản ghi nhật ký; bản ghi tạo hồ sơ chỉ chứa mã hồ sơ, không chứa mô tả; log vận hành ghi thời điểm UTC và không chứa cookie, token hay nội dung nhạy cảm (`NFR-OBS-02`).
 - Ứng dụng thử sửa hoặc xóa bảng nhật ký → CSDL từ chối.
-- Bảng nhật ký không ghi được → thao tác nghiệp vụ bị rollback, hồ sơ không đổi.
+- Bảng nhật ký không ghi được → toàn bộ thao tác nghiệp vụ (hồ sơ, lịch sử, thông báo, idempotency) bị rollback, hồ sơ không đổi (`NFR-REL-01`, `NFR-REL-02`).
 
 ### TS-14. Phiên, đăng xuất và cache
 
 **Kiểm AC:** `FR-SEC-01/AC-04`, `FR-SEC-01/AC-06`, `FR-SEC-02/AC-03`, `FR-SEC-02/AC-06`, `FR-SEC-03/AC-04`, `FR-SEC-03/AC-06`
 
-**Kiểm NFR:** `NFR-SEC-02`, `NFR-SEC-07`
+**Kiểm NFR:** `NFR-SEC-02`, `NFR-SEC-07`, `NFR-REL-05`, `NFR-OBS-03`
 
 **Milestone chạy lần đầu:** MS-01 · **Regression:** có
 
 - Phiên tạo lúc 08:00 → request lúc 15:59 thành công; lúc 16:01 nhận 401 và về trang đăng nhập.
-- Đăng nhập trên 2 thiết bị, đăng xuất ở thiết bị A → thiết bị B vẫn dùng bình thường; cookie cũ của thiết bị A nhận 401.
+- Đăng nhập trên 2 thiết bị, đăng xuất ở thiết bị A → thiết bị B vẫn dùng bình thường; cookie cũ của thiết bị A nhận 401; giả lập lỗi lưu thu hồi phiên hoặc lỗi ghi nhật ký đăng nhập thất bại → có ghi log vận hành (`NFR-OBS-03`).
 - Đăng xuất hai lần liên tiếp, hoặc đăng xuất khi không có phiên → đều 200.
-- Sau khi đăng xuất bấm Back → trang chứa dữ liệu cá nhân không hiện lại từ cache.
-- Kho phiên không đọc được → API trả 503, không cho request đi tiếp.
+- Sau khi đăng xuất bấm Back → trang chứa dữ liệu cá nhân không hiện lại từ cache (`Cache-Control: private, no-store`).
+- Kho phiên/quyền không đọc được → API trả 503, tuyệt đối không mặc định cho phép request đi tiếp (`NFR-REL-05`).
 
 ### TS-15. VN/EN, responsive và trình duyệt
 
 **Kiểm AC:** `FR-CORE-08/AC-01`, `FR-CORE-08/AC-02`, `FR-CORE-08/AC-03`, `FR-CORE-08/AC-04`, `FR-CORE-08/AC-05`, `FR-CORE-08/AC-06`, `FR-CORE-09/AC-01`, `FR-CORE-09/AC-02`, `FR-CORE-09/AC-03`, `FR-CORE-09/AC-04`, `FR-CORE-09/AC-05`, `FR-CORE-09/AC-06`, `FR-CORE-09/AC-07`, `FR-CORE-09/AC-08`
 
-**Kiểm NFR:** `NFR-USE-02`, `NFR-USE-03`, `NFR-USE-04`
+**Kiểm NFR:** `NFR-USE-02`, `NFR-USE-03`, `NFR-USE-04`, `NFR-USE-05`
 
 **Milestone chạy lần đầu:** MS-01 đến MS-05 · **Regression:** có
 
-- Đổi sang EN → nhãn, trạng thái, tên loại yêu cầu, thông báo và lỗi đều bằng tiếng Anh; nội dung người dùng nhập giữ nguyên; lần đăng nhập sau vẫn là EN.
-- Thiếu bản dịch tiếng Anh của một nhãn → hiện bản tiếng Việt, không hiện mã khóa thô.
+- Đổi sang EN → nhãn, trạng thái, tên loại yêu cầu, thông báo và lỗi nhập liệu theo từng trường đều bằng tiếng Anh với cùng `error_code` (`NFR-USE-05`); nội dung người dùng nhập giữ nguyên; lần đăng nhập sau vẫn là EN.
+- Thiếu bản dịch tiếng Anh của một nhãn → hiện bản tiếng Việt, không hiện mã khóa thô và ghi cảnh báo log (`NFR-OBS-03`).
 - Mọi màn hình ở độ rộng 360px → không có thanh cuộn ngang, không cắt chữ hay nút; vùng bấm tối thiểu 44×44px; bảng chuyển sang dạng thẻ.
 - Độ rộng 767px dùng bố cục điện thoại; 768px chuyển sang bố cục máy tính bảng.
 - Trên điện thoại: đính kèm ảnh chụp từ camera; xoay màn hình hoặc đổi ngôn ngữ khi đang điền form không mất dữ liệu đã nhập.
@@ -285,7 +289,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 **Kiểm AC:** `FR-CORE-05/AC-01`, `FR-CORE-05/AC-02`, `FR-CORE-05/AC-03`, `FR-CORE-05/AC-04`, `FR-CORE-05/AC-05`, `FR-CORE-05/AC-06`, `FR-MGT-07/AC-01`, `FR-MGT-07/AC-02`, `FR-MGT-07/AC-03`, `FR-MGT-07/AC-04`, `FR-MGT-07/AC-05`, `FR-MGT-07/AC-06`
 
-**Kiểm NFR:** `NFR-DEP-01`, `NFR-DEP-02`
+**Kiểm NFR:** `NFR-DEP-01`, `NFR-DEP-02`, `NFR-OBS-03`
 
 **Milestone chạy lần đầu:** MS-02 · **Regression:** có
 
@@ -332,6 +336,32 @@ Theo `non-functional-requirements/performance.md` (`NFR-PERF-01` đến `NFR-PER
 **Milestone chạy lần đầu:** MS-06 · **Regression:** không
 
 Theo `non-functional-requirements/usability.md` (`NFR-USE-01`): người dùng thật thực hiện các tác vụ chính của 3 vai trò.
+
+### TS-63. Bảo mật đầu vào (CSRF/XSS), phản hồi lỗi `correlation_id` và log vận hành
+
+**Kiểm NFR:** `NFR-SEC-04`, `NFR-SEC-05`, `NFR-SEC-08`, `NFR-OBS-01`, `NFR-OBS-02`, `NFR-OBS-03`
+
+**Milestone chạy lần đầu:** MS-01 đến MS-05 · **Regression:** có · **Vai trò thực hiện:** Tester / Junior chạy trên Staging, QA / Senior rà soát log và phê duyệt
+
+| # | Cách đo / Bước thực hiện | Kết quả mong đợi |
+|---|---|---|
+| 1 | Gửi request ghi (`POST/PUT/PATCH/DELETE`) thiếu CSRF token, sai CSRF token hoặc giả mạo header `Origin` từ miền khác (`NFR-SEC-04`) | Hệ thống trả 403; không ghi dữ liệu nghiệp vụ |
+| 2 | Nhập chuỗi HTML/JavaScript (ví dụ `<script>alert(1)</script>`, `<img src=x onerror=alert(1)>`) vào mô tả hồ sơ, ghi chú nội bộ, nội dung yêu cầu bổ sung, kết quả xử lý, lý do chuyển phòng, nhận xét đánh giá và tên tệp (`NFR-SEC-05`) | Mọi giao diện hiển thị nguyên văn chuỗi văn bản đã escape, tuyệt đối không thực thi script |
+| 3 | Thu thập mẫu response lỗi ở tất cả mã lỗi `400/401/403/404/409/413/415/429/500/502/503/504` khi chạy test các milestone (`NFR-SEC-08`, `NFR-OBS-01`) | 100% response lỗi có trường `correlation_id` và tra cứu khớp đúng dòng tương ứng trong log vận hành; không chứa stack trace, câu SQL, đường dẫn vật lý kho tệp hay token/cookie |
+| 4 | Rà log vận hành sau khi chạy các kịch bản `TS-01` đến `TS-16` (`NFR-OBS-02`, `NFR-OBS-03`) | Toàn bộ mốc thời gian trong log vận hành lưu chuẩn UTC; không chứa cookie, token hay nội dung mô tả nhạy cảm; ghi đủ các sự kiện bắt buộc trong danh sách `NFR-OBS-03` (thiếu bản dịch EN, nạp danh mục lỗi, lỗi xóa bù tệp, tệp mất trên kho, lỗi ghi audit/thu hồi phiên, vi phạm unique sinh mã) |
+
+### TS-64. Sẵn sàng triển khai production: HTTPS, cấm SSO giả lập, bí mật và lưu trữ dữ liệu
+
+**Kiểm NFR:** `NFR-SEC-01`, `NFR-SEC-10`, `NFR-SEC-11`, `NFR-DEP-03`, `NFR-DEP-04`, `NFR-REL-10`
+
+**Milestone chạy lần đầu:** MS-06 (trước Go-live, gắn issue `#141`, `#142`, `#143`) · **Regression:** không · **Vai trò thực hiện:** DevOps / Mid chạy kiểm tra hạ tầng & cấu hình; QA / Senior và PM / Senior đối chiếu kết quả trước khi ký nghiệm thu
+
+| # | Cách đo / Bước thực hiện | Kết quả mong đợi |
+|---|---|---|
+| 1 | Khởi động bản dựng production với biến môi trường cố tình bật SSO giả lập (`NFR-SEC-01`, `NFR-DEP-03`) | Ứng dụng từ chối khởi động (fail-fast) và ghi rõ lý do trong log vận hành |
+| 2 | Triển khai bằng Docker Compose lên server của Aurora University với cấu hình production, nạp Admin đầu tiên và nối SSO thật; gửi request HTTP cổng 80 (`NFR-DEP-04`, `NFR-SEC-10`) | Mọi truy cập HTTP tự động chuyển hướng sang HTTPS (chứng chỉ TLS hợp lệ); Admin đầu tiên đăng nhập thành công bằng SSO thật vào Cổng Admin; chạy lại `TS-01` đến `TS-08` trên server trường đều đạt |
+| 3 | Chạy công cụ/danh mục rà soát bí mật trên toàn bộ lịch sử nhánh phát hành và file `.env.example` trước khi đóng gói bàn giao (`NFR-SEC-11`) | Không tồn tại khóa SSO, khóa ký phiên, mật khẩu CSDL hay khóa lưu trữ thật trong repo; `.env.example` chỉ chứa tên biến và giá trị mẫu trống |
+| 4 | Kiểm tra cấu hình tác vụ nền (cron/worker) và lược đồ CSDL production, đối chiếu biên bản bàn giao với trường (`NFR-REL-10`, rủi ro `R-25`) | Không có tác vụ nền nào tự động xóa hồ sơ, tệp đính kèm, lịch sử hay nhật ký hệ thống; hồ sơ bàn giao ghi rõ trạng thái xác nhận thời hạn lưu dữ liệu và lịch sao lưu của nhà trường |
 
 ## Kịch bản chức năng (TS-21 đến TS-62)
 

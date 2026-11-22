@@ -4,9 +4,9 @@ Tra lỗi dựa vào ba nguồn: mã truy vết trong response lỗi, log vận 
 
 | Mã | Yêu cầu | Cách đo |
 |---|---|---|
-| `NFR-OBS-01` | Mọi response lỗi có `correlation_id`; khi người dùng báo lỗi, đối chiếu mã này với log vận hành | Kiểm response của các ca lỗi trong test case |
-| `NFR-OBS-02` | Log vận hành ghi thời điểm theo UTC; không ghi cookie, token, nội dung nhạy cảm | Rà log sau khi chạy `TS-01` đến `TS-08` |
-| `NFR-OBS-03` | Các sự kiện ở danh sách dưới đều được ghi log | Chạy các ca lỗi tương ứng trong `TS-12`, `TS-14`, `TS-16` và kiểm log |
+| `NFR-OBS-01` | Mọi response lỗi có `correlation_id`; khi người dùng báo lỗi, đối chiếu mã này với log vận hành | `TS-63` bước 3 (kiểm `correlation_id` trên mọi mã lỗi và đối chiếu log vận hành) |
+| `NFR-OBS-02` | Log vận hành ghi thời điểm theo UTC; không ghi cookie, token, nội dung nhạy cảm | `TS-13`, `TS-63` bước 4 |
+| `NFR-OBS-03` | Các sự kiện ở danh sách dưới đều được ghi log | `TS-12`, `TS-14`, `TS-16`, `TS-63` bước 4 |
 | `NFR-OBS-04` | Nhật ký hệ thống lưu trong CSDL, chỉ thêm mới, thời điểm UTC; khi truy vấn hiển thị giờ Việt Nam. Không có màn hình xem; người vận hành truy vấn CSDL theo quyền vận hành | `TS-13` |
 
 ## Sự kiện phải ghi log (`NFR-OBS-03`)

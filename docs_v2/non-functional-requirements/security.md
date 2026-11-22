@@ -8,17 +8,17 @@ Cách thực hiện từng biện pháp nằm ở `architecture/security-design.
 
 | Mã | Yêu cầu | Cách đo |
 |---|---|---|
-| `NFR-SEC-01` | Chỉ đăng nhập qua SSO của trường; SSO giả lập không chạy ở production | `TS-01`; khởi động bản production với cấu hình bật SSO giả lập → ứng dụng từ chối khởi động |
+| `NFR-SEC-01` | Chỉ đăng nhập qua SSO của trường; SSO giả lập không chạy ở production | `TS-01`, `TS-64` (bước 1: khởi động bản production bật SSO giả lập → ứng dụng từ chối khởi động) |
 | `NFR-SEC-02` | Phiên trong cookie HttpOnly, Secure, SameSite=Lax; 8 giờ; thu hồi khi đăng xuất hoặc tài khoản bị vô hiệu hóa | `TS-01`, `TS-14` |
 | `NFR-SEC-03` | Vai trò và phạm vi dữ liệu kiểm tra ở backend; ngoài phạm vi trả 404, không có quyền ghi trả 403 | `TS-01`, `TS-09` |
-| `NFR-SEC-04` | Request ghi kiểm tra CSRF token và Origin | Gửi request ghi thiếu CSRF token hoặc từ Origin khác → 403 |
-| `NFR-SEC-05` | Nội dung người dùng nhập không thực thi được | Nhập thẻ HTML và script vào mô tả, ghi chú, kết quả, lý do, nhận xét, tên tệp → hiển thị nguyên văn |
+| `NFR-SEC-04` | Request ghi kiểm tra CSRF token và Origin | `TS-63` bước 1 (request ghi thiếu/sai CSRF token hoặc khác Origin → 403) |
+| `NFR-SEC-05` | Nội dung người dùng nhập không thực thi được | `TS-63` bước 2 (thẻ HTML/script trong mô tả, ghi chú, kết quả, lý do, nhận xét, tên tệp → hiển thị nguyên văn) |
 | `NFR-SEC-06` | Tệp chỉ tải được qua API có kiểm tra quyền; định dạng kiểm tra bằng magic bytes | `TS-09`, `TS-12` |
-| `NFR-SEC-07` | Trang và tệp có dữ liệu cá nhân không bị lưu cache | `TS-14`; header `Cache-Control: private, no-store` |
-| `NFR-SEC-08` | Lỗi không lộ thông tin hệ thống | Response lỗi của mọi test case không có stack trace, câu SQL, đường dẫn kho, token |
-| `NFR-SEC-09` | Nhật ký hệ thống chỉ thêm mới; log không chứa cookie, token, nội dung nhạy cảm | `TS-13`; rà log sau khi chạy các kịch bản `TS-01` đến `TS-08` |
-| `NFR-SEC-10` | Chỉ phục vụ HTTPS | Gọi bằng HTTP → chuyển sang HTTPS |
-| `NFR-SEC-11` | Bí mật không nằm trong repo | Rà repo và `.env.example` trước bàn giao |
+| `NFR-SEC-07` | Trang và tệp có dữ liệu cá nhân không bị lưu cache | `TS-14` (header `Cache-Control: private, no-store`) |
+| `NFR-SEC-08` | Lỗi không lộ thông tin hệ thống | `TS-63` bước 3 (response lỗi không chứa stack trace, câu SQL, đường dẫn kho, token) |
+| `NFR-SEC-09` | Nhật ký hệ thống chỉ thêm mới; log không chứa cookie, token, nội dung nhạy cảm | `TS-13`, `TS-63` bước 4 |
+| `NFR-SEC-10` | Chỉ phục vụ HTTPS | `TS-64` bước 2 (gọi HTTP → chuyển hướng sang HTTPS trên server trường) |
+| `NFR-SEC-11` | Bí mật không nằm trong repo | `TS-64` bước 3 (rà soát repo và `.env.example` trước bàn giao) |
 | `NFR-SEC-12` | Admin không xem chi tiết hồ sơ, thông tin cá nhân, tệp của sinh viên | `TS-08` bước 2 và 7 |
 | `NFR-SEC-13` | Rate limit theo bảng dưới | `TS-18` |
 
