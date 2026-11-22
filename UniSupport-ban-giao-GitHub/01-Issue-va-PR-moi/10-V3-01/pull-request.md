@@ -3,12 +3,12 @@
 ## Tóm tắt thay đổi
 
 - **Mã hạng mục / rà soát** V3-01
-- **Nội dung thay đổi** Đưa quyết định công nghệ và điều kiện dùng cache về ADR-005. Nối xác nhận tương thích hạ tầng với giả định, rủi ro, giá và WBS.
+- **Nội dung thay đổi** Đưa quyết định công nghệ và điều kiện dùng cache về ADR-005. Nối xác nhận tương thích hạ tầng với giả định, rủi ro, giá và WBS. ADR-005 chuyển sang Chấp nhận ngày 17/09/2026 (khớp DL-02), ghi rõ ngăn xếp NestJS, React, PostgreSQL, Redis và kho tệp ngoài web root; A-14 ghi đã xác nhận; R-27 đóng.
 
 ## Liên quan
 
 - **Issue đóng / cập nhật** Closes #<issue mới của mục này>
-- **Mã liên quan** ADR-005, A-14, R-27, WBS 1.37
+- **Mã liên quan** ADR-005, A-14, R-27, DL-02, WBS 1.37
 
 ## Tài liệu Word / Excel / PDF đã đổi
 

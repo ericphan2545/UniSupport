@@ -2,7 +2,7 @@
 
 ## Phạm vi
 
-Đưa quyết định công nghệ và điều kiện dùng cache về ADR-005. Nối xác nhận tương thích hạ tầng với giả định, rủi ro, giá và WBS.
+Đưa quyết định công nghệ và điều kiện dùng cache về ADR-005. Nối xác nhận tương thích hạ tầng với giả định, rủi ro, giá và WBS. ADR-005 chuyển sang Chấp nhận ngày 17/09/2026 (khớp DL-02), ghi rõ ngăn xếp NestJS, React, PostgreSQL, Redis và kho tệp ngoài web root; A-14 ghi đã xác nhận; R-27 đóng.
 
 ## Tiêu chí chấp nhận
 

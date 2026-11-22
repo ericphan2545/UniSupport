@@ -1,6 +1,6 @@
 # Bàn giao UniSupport · 12 hạng mục
 
-Kho local `C:/Users/ADMIN/Downloads/UniSupport` có bản tích hợp tại `docs/fix-feedback-nhom-2` (`13cc58e`) và 12 nhánh riêng trong bảng. Bản tích hợp và đầu chuỗi 12 nhánh có cùng nội dung. Dùng các nhánh riêng làm PR. Giữ PR #172 ngoài đợt squash.
+Kho local `C:/Users/ADMIN/Downloads/UniSupport` có bản tích hợp tại `docs/fix-feedback-nhom-2` (nội dung tài liệu đồng bộ ở `40468c4`) và 12 nhánh riêng trong bảng. Bản tích hợp và đầu chuỗi 12 nhánh có cùng nội dung. Dùng các nhánh riêng làm PR. Giữ PR #172 ngoài đợt squash.
 
 ## Hồ sơ đã kiểm
 
@@ -23,9 +23,9 @@ Kho local `C:/Users/ADMIN/Downloads/UniSupport` có bản tích hợp tại `doc
 | V2-02 | `docs/v2-02-ac-dung-chung-ready` | `43644b1` | `666417d` | Ghi rõ nghiệm thu và hồi quy cho sáu FR dùng chung |
 | V2-03 | `docs/v2-03-phu-thuoc-wbs-ready` | `00d955a` | `43644b1` | Sửa lịch WBS và kiểm ngày hoàn tất tiền nhiệm |
 | V2-04 | `docs/v2-04-truy-vet-nfr-ready` | `5f1ec8a` | `00d955a` | Hoàn tất truy vết NFR và điều kiện Go-live |
-| V3-01 | `docs/v3-01-quyet-dinh-cong-nghe-ready` | `7a272b9` | `5f1ec8a` | Thống nhất giả định công nghệ giữa PRD và kiến trúc |
-| V3-02 | `docs/v3-02-permalink-dac-ta-ready` | `aa4e18b` | `7a272b9` | Cố định permalink đặc tả tại baseline có phiên bản |
-| V3-03 | `docs/v3-03-ho-so-quan-tri-ready` | `56ea4be` | `aa4e18b` | Bổ sung hồ sơ quản trị có thể kiểm tra tại repo |
+| V3-01 | `docs/v3-01-quyet-dinh-cong-nghe-ready` | `433771e` | `5f1ec8a` | Thống nhất giả định công nghệ giữa PRD và kiến trúc |
+| V3-02 | `docs/v3-02-permalink-dac-ta-ready` | `ae01b43` | `433771e` | Cố định permalink đặc tả tại baseline có phiên bản |
+| V3-03 | `docs/v3-03-ho-so-quan-tri-ready` | `ece7d45` | `ae01b43` | Bổ sung hồ sơ quản trị có thể kiểm tra tại repo |
 
 ## Push và review
 
