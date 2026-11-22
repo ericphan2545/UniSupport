@@ -20,13 +20,13 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 | `TS-06` | Quá hạn tự động | 5 | NFR-PERF-09, NFR-REL-07 | MS-03 | có |
 | `TS-07` | Đóng hồ sơ, trả kết quả, lịch sử công khai và đánh giá | 7 | — | MS-04 | có |
 | `TS-08` | Báo cáo và dashboard của Admin khớp dữ liệu | 7 | NFR-SEC-12 | MS-05 | có |
-| `TS-09` | Phạm vi dữ liệu và truy cập chéo | 3 | NFR-SEC-03, NFR-SEC-06 | MS-01 đến MS-05 | có |
-| `TS-10` | Thao tác đồng thời | 8 | NFR-REL-04 | MS-01 đến MS-04 | có |
-| `TS-11` | Mất phản hồi và gửi lại | 6 | NFR-REL-03 | MS-02 đến MS-04 | có |
+| `TS-09` | Phạm vi dữ liệu và truy cập chéo | 6 | NFR-SEC-03, NFR-SEC-06 | MS-01 đến MS-05 | có |
+| `TS-10` | Thao tác đồng thời | 9 | NFR-REL-04 | MS-01 đến MS-04 | có |
+| `TS-11` | Mất phản hồi và gửi lại | 7 | NFR-REL-03 | MS-02 đến MS-04 | có |
 | `TS-12` | Lỗi tệp, kho tệp và CSDL | 4 | NFR-REL-01, NFR-REL-06, NFR-PERF-14 | MS-02 | có |
-| `TS-13` | Lịch sử hồ sơ và nhật ký hệ thống | 12 | NFR-REL-02, NFR-SEC-09, NFR-OBS-04 | MS-01 đến MS-04 | có |
+| `TS-13` | Lịch sử hồ sơ và nhật ký hệ thống | 13 | NFR-REL-02, NFR-SEC-09, NFR-OBS-04 | MS-01 đến MS-04 | có |
 | `TS-14` | Phiên, đăng xuất và cache | 6 | NFR-SEC-02, NFR-SEC-07 | MS-01 | có |
-| `TS-15` | VN/EN, responsive và trình duyệt | 12 | NFR-USE-02, NFR-USE-03, NFR-USE-04 | MS-01 đến MS-05 | có |
+| `TS-15` | VN/EN, responsive và trình duyệt | 14 | NFR-USE-02, NFR-USE-03, NFR-USE-04 | MS-01 đến MS-05 | có |
 | `TS-16` | Danh mục và SLA khi triển khai lại | 12 | NFR-DEP-01, NFR-DEP-02 | MS-02 | có |
 | `TS-17` | Múi giờ và biên ngày | 6 | — | MS-02, MS-05 | có |
 | `TS-18` | Rate limit | 11 | NFR-SEC-13 | MS-01 đến MS-05 | có |
@@ -179,7 +179,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 ### TS-09. Phạm vi dữ liệu và truy cập chéo
 
-**Kiểm AC:** `FR-SEC-03/AC-04`, `FR-SEC-04/AC-04`, `FR-SEC-05/AC-03`
+**Kiểm AC:** `FR-SEC-03/AC-04`, `FR-SEC-04/AC-02`, `FR-SEC-04/AC-04`, `FR-SEC-04/AC-05`, `FR-SEC-04/AC-06`, `FR-SEC-05/AC-03`
 
 **Kiểm NFR:** `NFR-SEC-03`, `NFR-SEC-06`
 
@@ -194,7 +194,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 ### TS-10. Thao tác đồng thời
 
-**Kiểm AC:** `FR-STF-06/AC-05`, `FR-STF-07/AC-05`, `FR-STF-09/AC-04`, `FR-STU-09/AC-05`, `FR-MGT-06/AC-05`, `FR-MGT-07/AC-05`, `FR-CORE-01/AC-05`, `FR-CORE-02/AC-05`
+**Kiểm AC:** `FR-STF-06/AC-05`, `FR-STF-07/AC-05`, `FR-STF-09/AC-04`, `FR-STU-09/AC-05`, `FR-MGT-06/AC-05`, `FR-MGT-07/AC-05`, `FR-CORE-01/AC-05`, `FR-CORE-02/AC-05`, `FR-SEC-04/AC-07`
 
 **Kiểm NFR:** `NFR-REL-04`
 
@@ -210,7 +210,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 ### TS-11. Mất phản hồi và gửi lại
 
-**Kiểm AC:** `FR-STU-02/AC-04`, `FR-STU-09/AC-05`, `FR-STU-10/AC-05`, `FR-STF-04/AC-04`, `FR-STF-05/AC-05`, `FR-STF-06/AC-01`
+**Kiểm AC:** `FR-STU-02/AC-04`, `FR-STU-09/AC-05`, `FR-STU-10/AC-05`, `FR-STF-04/AC-04`, `FR-STF-05/AC-05`, `FR-STF-06/AC-01`, `FR-CORE-09/AC-06`
 
 **Kiểm NFR:** `NFR-REL-03`
 
@@ -240,7 +240,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 ### TS-13. Lịch sử hồ sơ và nhật ký hệ thống
 
-**Kiểm AC:** `FR-CORE-06/AC-01`, `FR-CORE-06/AC-02`, `FR-CORE-06/AC-03`, `FR-CORE-06/AC-04`, `FR-CORE-06/AC-05`, `FR-CORE-06/AC-06`, `FR-SEC-06/AC-01`, `FR-SEC-06/AC-02`, `FR-SEC-06/AC-03`, `FR-SEC-06/AC-04`, `FR-SEC-06/AC-05`, `FR-SEC-06/AC-06`
+**Kiểm AC:** `FR-CORE-06/AC-01`, `FR-CORE-06/AC-02`, `FR-CORE-06/AC-03`, `FR-CORE-06/AC-04`, `FR-CORE-06/AC-05`, `FR-CORE-06/AC-06`, `FR-SEC-06/AC-01`, `FR-SEC-06/AC-02`, `FR-SEC-06/AC-03`, `FR-SEC-06/AC-04`, `FR-SEC-06/AC-05`, `FR-SEC-06/AC-06`, `FR-SEC-06/AC-07`
 
 **Kiểm NFR:** `NFR-REL-02`, `NFR-SEC-09`, `NFR-OBS-04`
 
@@ -268,7 +268,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 ### TS-15. VN/EN, responsive và trình duyệt
 
-**Kiểm AC:** `FR-CORE-08/AC-01`, `FR-CORE-08/AC-02`, `FR-CORE-08/AC-03`, `FR-CORE-08/AC-04`, `FR-CORE-08/AC-05`, `FR-CORE-08/AC-06`, `FR-CORE-09/AC-01`, `FR-CORE-09/AC-02`, `FR-CORE-09/AC-03`, `FR-CORE-09/AC-04`, `FR-CORE-09/AC-05`, `FR-CORE-09/AC-06`
+**Kiểm AC:** `FR-CORE-08/AC-01`, `FR-CORE-08/AC-02`, `FR-CORE-08/AC-03`, `FR-CORE-08/AC-04`, `FR-CORE-08/AC-05`, `FR-CORE-08/AC-06`, `FR-CORE-09/AC-01`, `FR-CORE-09/AC-02`, `FR-CORE-09/AC-03`, `FR-CORE-09/AC-04`, `FR-CORE-09/AC-05`, `FR-CORE-09/AC-06`, `FR-CORE-09/AC-07`, `FR-CORE-09/AC-08`
 
 **Kiểm NFR:** `NFR-USE-02`, `NFR-USE-03`, `NFR-USE-04`
 
@@ -369,15 +369,26 @@ Mỗi kịch bản chạy lần lượt mọi AC của một FR trên Staging, v
 | `TS-48` | `FR-SEC-01` | `FR-SEC-01/AC-01` đến `FR-SEC-01/AC-09` | MS-01 | không |
 | `TS-49` | `FR-SEC-02` | `FR-SEC-02/AC-01` đến `FR-SEC-02/AC-07` | MS-01 | không |
 | `TS-50` | `FR-SEC-03` | `FR-SEC-03/AC-01` đến `FR-SEC-03/AC-08` | MS-01 | không |
-| `TS-51` | `FR-SEC-04` | `FR-SEC-04/AC-01` đến `FR-SEC-04/AC-08` | MS-01, MS-02, MS-03, MS-04, MS-05 | không |
-| `TS-52` | `FR-SEC-05` | `FR-SEC-05/AC-01` đến `FR-SEC-05/AC-07` | MS-02 | không |
-| `TS-53` | `FR-SEC-06` | `FR-SEC-06/AC-01` đến `FR-SEC-06/AC-09` | MS-01, MS-02, MS-03, MS-04 | không |
+| `TS-51` | `FR-SEC-04` | `FR-SEC-04/AC-01` đến `FR-SEC-04/AC-08` *(phân tách từng AC theo mốc ở bảng dưới)* | MS-01 (`AC-06`), MS-02 (`AC-02,08`), MS-03 (`AC-05`), MS-04 (`AC-03`), MS-05 (`AC-01,04,07`) | có (theo `TS-09`) |
+| `TS-52` | `FR-SEC-05` | `FR-SEC-05/AC-01` đến `FR-SEC-05/AC-07` *(đủ 7 AC ở `#123`; `AC-04` regression trọn luồng ở `MS-03`)* | MS-02 | có (theo `TS-09`, `TS-12`) |
+| `TS-53` | `FR-SEC-06` | `FR-SEC-06/AC-01` đến `FR-SEC-06/AC-09` *(phân tách từng AC theo mốc ở bảng dưới)* | MS-01 (`AC-04,06,08`), MS-02 (`AC-02,09`), MS-03 (`AC-01,03,05,07`) | có (theo `TS-13`) |
 | `TS-54` | `FR-CORE-01` | `FR-CORE-01/AC-01` đến `FR-CORE-01/AC-08` | MS-02 | không |
 | `TS-55` | `FR-CORE-02` | `FR-CORE-02/AC-01` đến `FR-CORE-02/AC-08` | MS-02 | không |
 | `TS-56` | `FR-CORE-03` | `FR-CORE-03/AC-01` đến `FR-CORE-03/AC-09` | MS-02 | không |
 | `TS-57` | `FR-CORE-04` | `FR-CORE-04/AC-01` đến `FR-CORE-04/AC-07` | MS-02 | không |
 | `TS-58` | `FR-CORE-05` | `FR-CORE-05/AC-01` đến `FR-CORE-05/AC-08` | MS-02 | không |
-| `TS-59` | `FR-CORE-06` | `FR-CORE-06/AC-01` đến `FR-CORE-06/AC-08` | MS-02, MS-03, MS-04 | không |
+| `TS-59` | `FR-CORE-06` | `FR-CORE-06/AC-01` đến `FR-CORE-06/AC-08` *(phân tách từng AC theo mốc ở bảng dưới)* | MS-02 (`AC-03,05,06`), MS-03 (`AC-02,04,07`), MS-04 (`AC-01,08`) | có (theo `TS-13`) |
 | `TS-60` | `FR-CORE-07` | `FR-CORE-07/AC-01` đến `FR-CORE-07/AC-08` | MS-02 | không |
-| `TS-61` | `FR-CORE-08` | `FR-CORE-08/AC-01` đến `FR-CORE-08/AC-08` | MS-01, MS-02, MS-03, MS-04, MS-05 | không |
-| `TS-62` | `FR-CORE-09` | `FR-CORE-09/AC-01` đến `FR-CORE-09/AC-08` | MS-01, MS-02, MS-03, MS-04, MS-05 | không |
+| `TS-61` | `FR-CORE-08` | `FR-CORE-08/AC-01` đến `FR-CORE-08/AC-08` *(phân tách từng AC theo mốc ở bảng dưới)* | MS-01 (`AC-03,04,06,07`), MS-02 (`AC-01,02,05,08`) | có (theo `TS-15`) |
+| `TS-62` | `FR-CORE-09` | `FR-CORE-09/AC-01` đến `FR-CORE-09/AC-08` *(phân tách từng AC theo mốc ở bảng dưới)* | MS-01 (`AC-02,04,07`), MS-02 (`AC-01,03,05,06`), MS-05 (`AC-08`) | có (theo `TS-15`) |
+
+### Phân bổ chạy kiểm thử 48 AC của 6 FR dùng chung theo từng milestone
+
+| Kịch bản | FR dùng chung | `MS-01` (`Q-02`, `#117`/`#118`) | `MS-02` (`Q-03`, `#123`/`#124`) | `MS-03` (`Q-04`, `#129`/`#130`) | `MS-04` (`Q-05`, `#155`/`#156`) | `MS-05` (`Q-06`, `#157`/`#158`) |
+|---|---|---|---|---|---|---|
+| `TS-51` | `FR-SEC-04` (8 AC) | Đạt lần đầu: `AC-06` (`#117`) | Đạt lần đầu: `AC-02, AC-08` (`#123`); triển khai phần SV/NV của `AC-01,04,07` | Đạt lần đầu: `AC-05` (`#129`); nhánh phân công `AC-03`; regression `AC-02,06,08` | Đạt lần đầu: `AC-03` (`#155`); regression `AC-02,05,06,08` | Đạt lần đầu: `AC-01, AC-04, AC-07` (`#157`); regression toàn bộ |
+| `TS-52` | `FR-SEC-05` (7 AC) | — | Đạt lần đầu: **`AC-01` đến `AC-07`** (`#123`, trong đó `AC-04` test trên seed đổi phòng) | Regression toàn bộ + kiểm trọn luồng `AC-04` cùng `FR-STF-09` (`#129`, `TS-05`) | Regression `TS-09`, `TS-12` | Regression `TS-09`, `TS-12` |
+| `TS-53` | `FR-SEC-06` (9 AC) | Đạt lần đầu: `AC-04, AC-06, AC-08` (`#117`) | Đạt lần đầu: `AC-02, AC-09` (`#123`); nhánh `OVERDUE`/`SYSTEM` của `AC-03`; regression `AC-04,06,08` | Đạt lần đầu: `AC-01, AC-03, AC-05, AC-07` (`#129`); regression `AC-02,04,06,08,09` | Mở rộng `CLOSE_TICKET`/`RATE_TICKET` (`#155`); regression `TS-13` | Regression `AC-08` & `TS-13` trên báo cáo Admin |
+| `TS-59` | `FR-CORE-06` (8 AC) | — | Đạt lần đầu: `AC-03, AC-05, AC-06` (`#123`); nhánh chi tiết NV của `AC-08` | Đạt lần đầu: `AC-02, AC-04, AC-07` (`#129`); regression `AC-03,05,06` | Đạt lần đầu: `AC-01, AC-08` (`#155`); regression toàn bộ (`TS-07`, `TS-13`) | Regression `TS-07`, `TS-13` |
+| `TS-61` | `FR-CORE-08` (8 AC) | Đạt lần đầu: `AC-03, AC-04, AC-06, AC-07` (`#118`) | Đạt lần đầu: `AC-01, AC-02, AC-05, AC-08` (`#124`); regression `AC-03,04,06,07` | Mở rộng & regression `AC-01..08` cho màn hình `MS-03` (`#130`, `TS-15`) | Mở rộng & regression `AC-01..08` cho màn hình `MS-04` (`#156`, `TS-15`) | Mở rộng & regression `AC-01..08` cho dashboard/báo cáo `MS-05` (`#158`, `TS-15`) |
+| `TS-62` | `FR-CORE-09` (8 AC) | Đạt lần đầu: `AC-02, AC-04, AC-07` (`#118`) | Đạt lần đầu: `AC-01, AC-03, AC-05, AC-06` (`#124`); regression `AC-02,04,07` | Mở rộng & regression `AC-01..07` + nhánh NV mobile `AC-08` (`#130`, `TS-15`) | Mở rộng & regression `AC-02..07` + nhánh đóng mobile `AC-08` (`#156`, `TS-15`) | Đạt lần đầu: `AC-08` (`#158`, đủ NV + dashboard Admin 360px); regression toàn bộ (`TS-15`) |
