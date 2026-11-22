@@ -21,7 +21,7 @@ Phiên bản 1.4
 Cần đủ cả 5 điều:
 
 - Mọi issue của milestone đạt DoD (mục 5).
-- 100% test case của milestone đã chạy và mọi AC của các FR thuộc milestone đạt; đã test trọn luồng qua các vai trò trên Staging.
+- 100% test case của milestone đã chạy và mọi AC của các FR (kể cả phần AC dùng chung) thuộc milestone đạt; đã test trọn luồng qua các kịch bản `TS-01` đến `TS-08` tương ứng với chức năng đã có trên Staging tại milestone đó (không phụ thuộc chức năng của milestone sau).
 - Không còn lỗi Critical hoặc Major đang mở.
 - Regression của các milestone đã đóng đều đạt.
 - QA / Senior xác nhận, PM / Senior đóng milestone trên GitHub. Sau đó áp dụng mục 6.

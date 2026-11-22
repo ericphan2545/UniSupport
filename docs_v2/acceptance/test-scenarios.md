@@ -14,12 +14,12 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 |---|---|---|---|---|---|
 | `TS-01` | Đăng nhập, phân quyền và cấp quyền nhân viên | 6 | — | MS-01 | có |
 | `TS-02` | Sinh viên gửi yêu cầu kèm tệp đến đúng phòng | 16 | — | MS-02 | có |
-| `TS-03` | Thông báo và trạng thái cho sinh viên | 5 | — | MS-02 | có |
-| `TS-04` | Phân công, ghi nhật ký, yêu cầu bổ sung và bổ sung | 7 | — | MS-03 | có |
-| `TS-05` | Ưu tiên, escalate và chuyển phòng | 5 | — | MS-03 | có |
-| `TS-06` | Quá hạn tự động | 6 | NFR-PERF-09, NFR-REL-07 | MS-03 | có |
-| `TS-07` | Đóng hồ sơ, trả kết quả và đánh giá | 4 | — | MS-04 | có |
-| `TS-08` | Báo cáo của Admin khớp dữ liệu | 7 | NFR-SEC-12 | MS-05 | có |
+| `TS-03` | Thông báo quá hạn, danh sách trạng thái và đổi ngôn ngữ cho sinh viên | 11 | NFR-PERF-08 | MS-02 | có |
+| `TS-04` | Phân công, ghi nhật ký, yêu cầu bổ sung, bổ sung và thông báo | 10 | — | MS-03 | có |
+| `TS-05` | Ưu tiên, escalate và chuyển phòng | 6 | — | MS-03 | có |
+| `TS-06` | Quá hạn tự động | 5 | NFR-PERF-09, NFR-REL-07 | MS-03 | có |
+| `TS-07` | Đóng hồ sơ, trả kết quả, lịch sử công khai và đánh giá | 7 | — | MS-04 | có |
+| `TS-08` | Báo cáo và dashboard của Admin khớp dữ liệu | 7 | NFR-SEC-12 | MS-05 | có |
 | `TS-09` | Phạm vi dữ liệu và truy cập chéo | 3 | NFR-SEC-03, NFR-SEC-06 | MS-01 đến MS-05 | có |
 | `TS-10` | Thao tác đồng thời | 8 | NFR-REL-04 | MS-01 đến MS-04 | có |
 | `TS-11` | Mất phản hồi và gửi lại | 6 | NFR-REL-03 | MS-02 đến MS-04 | có |
@@ -47,7 +47,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 |---|---|---|
 | 1 | SV1 đăng nhập lần đầu | Tạo tài khoản `STUDENT`, vào Cổng Sinh viên; cookie phiên có HttpOnly, Secure, SameSite=Lax; response không chứa token SSO |
 | 2 | SV1 mở thông tin cá nhân | Hiện họ tên, MSSV; trường SSO không trả về hiện `--` |
-| 3 | SV1 gọi API hàng đợi của Cổng Nhân viên | 403 |
+| 3 | SV1 truy cập đường dẫn hoặc API dành cho Cổng Nhân viên / Cổng Admin | 403 |
 | 4 | Admin thêm email của A1, vai trò `STAFF`, phòng A | Lưu thành công; có bản ghi `ROLE_CHANGE` |
 | 5 | A1 đăng nhập | Vào Cổng Nhân viên |
 | 6 | Admin vô hiệu hóa A2 (không phụ trách hồ sơ mở) khi A2 còn phiên | Request kế tiếp của A2 nhận 403, phiên bị thu hồi |
@@ -70,40 +70,44 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 | 6 | Admin đổi SLA loại X thành 24 giờ | Hồ sơ đã tạo giữ hạn cũ; hồ sơ tạo sau đó dùng 24 giờ |
 | 7 | SV1 gửi mô tả 19 ký tự; tệp `.docx`; tệp 10 MiB + 1 byte; 6 tệp | Lần lượt 400; 415; 413; 400; không tạo hồ sơ nào |
 
-### TS-03. Thông báo và trạng thái cho sinh viên
+### TS-03. Thông báo quá hạn, danh sách trạng thái và đổi ngôn ngữ cho sinh viên
 
-**Kiểm AC:** `FR-STU-07/AC-01`, `FR-STU-08/AC-01`, `FR-CORE-02/AC-01`, `FR-CORE-06/AC-01`, `FR-CORE-08/AC-01`
+**Kiểm AC:** `FR-STU-06/AC-01`, `FR-STU-08/AC-05`, `FR-STU-08/AC-07`, `FR-STU-08/AC-08`, `FR-STU-08/AC-09`, `FR-STU-08/AC-10`, `FR-CORE-02/AC-01`, `FR-CORE-03/AC-01`, `FR-CORE-06/AC-03`, `FR-CORE-08/AC-01`, `FR-CORE-08/AC-08`
+
+**Kiểm NFR:** `NFR-PERF-08`
 
 **Milestone chạy lần đầu:** MS-02 · **Regression:** có
 
+*(Chỉ sử dụng các chức năng đã có trên Staging tại `MS-02`: tạo yêu cầu loại Y có SLA ngắn trên Staging, tác vụ quá hạn tự động `NEW → OVERDUE`, danh sách yêu cầu sinh viên, chuông thông báo, lịch sử tạo hồ sơ và chuyển ngôn ngữ VN/EN. Thông báo phân công/bổ sung được kiểm ở `TS-04` tại `MS-03`; trang chi tiết và lịch sử 5 mốc của sinh viên được kiểm ở `TS-07` tại `MS-04`.)*
+
 | # | Bước | Kết quả mong đợi |
 |---|---|---|
-| 1 | A2 phân công A1 cho hồ sơ `NEW` của SV1 | Hồ sơ `IN_PROGRESS`; SV1 nhận 1 thông báo, chuông tăng 1 trong vòng 30 giây |
-| 2 | SV1 mở chi tiết | Lịch sử công khai có mốc tạo hồ sơ và mốc đang xử lý; không có tên nhân viên, hạn xử lý, mức ưu tiên |
-| 3 | A1 yêu cầu bổ sung | SV1 nhận thông báo; lịch sử công khai có nội dung yêu cầu, không có tên nhân viên |
-| 4 | SV1 bổ sung | Không có thông báo cho hành động của chính SV1 |
-| 5 | SV1 đổi giao diện sang EN | Thông báo cũ hiển thị bằng tiếng Anh |
-| 6 | SV1 đánh dấu tất cả đã đọc | Số chưa đọc về 0; thông báo đến sau mốc `read_before` vẫn chưa đọc |
+| 1 | SV1 gửi một yêu cầu loại Y (loại cấu hình SLA ngắn trên Staging để test quá hạn); A1 mở chi tiết hồ sơ trên Cổng Nhân viên | Hồ sơ ở trạng thái `NEW`; mốc tạo hồ sơ (`CREATE`) có phòng ban, mã hồ sơ và ngày gửi; hạn xử lý chỉ hiện ở dữ liệu nội bộ cho A1, không lộ ở danh sách/API của SV1 |
+| 2 | Chờ qua hạn SLA của hồ sơ loại Y (không cần phân công) | Muộn nhất sau 60 giây hồ sơ tự chuyển `NEW → OVERDUE`; SV1 nhận 1 thông báo quá hạn, số chưa đọc trên chuông tăng 1 trong vòng 30 giây |
+| 3 | SV1 mở danh sách yêu cầu của mình (`FR-STU-06`) và mở danh sách thông báo (`FR-STU-08`) | Hồ sơ hiển thị trạng thái `OVERDUE` (Quá hạn) trên danh sách yêu cầu; danh sách thông báo hiển thị 20 mục mới nhất/trang với thông báo quá hạn ở đầu |
+| 4 | SV1 đổi giao diện từ VN sang EN | Nhãn trạng thái, danh mục và cả thông báo quá hạn đã nhận trước đó hiển thị bằng tiếng Anh; mô tả SV1 nhập vẫn giữ nguyên ngôn ngữ gốc; lần đăng nhập sau vẫn là EN |
+| 5 | SV1 đánh dấu đã đọc 1 thông báo (gửi lại lần 2 cùng `notification_id`), sau đó bấm "Đánh dấu tất cả đã đọc" với `read_before` | Đánh dấu lặp trả 200 idempotent; sau "Đánh dấu tất cả đã đọc", số chưa đọc về 0; thông báo mới phát sinh sau mốc `read_before` vẫn giữ trạng thái chưa đọc |
+| 6 | Giả lập API đếm thông báo chưa đọc lỗi khi trang đang mở | Chuông thông báo giữ nguyên số cũ, không trắng trang và tự gọi lại ở chu kỳ polling 30 giây kế tiếp |
 
-### TS-04. Phân công, ghi nhật ký, yêu cầu bổ sung và bổ sung
+### TS-04. Phân công, ghi nhật ký, yêu cầu bổ sung, bổ sung và thông báo
 
-**Kiểm AC:** `FR-STF-04/AC-01`, `FR-STF-04/AC-05`, `FR-STF-05/AC-01`, `FR-STF-07/AC-01`, `FR-STU-09/AC-01`, `FR-CORE-03/AC-01`, `FR-CORE-03/AC-02`
+**Kiểm AC:** `FR-STF-04/AC-01`, `FR-STF-04/AC-05`, `FR-STF-05/AC-01`, `FR-STF-07/AC-01`, `FR-STU-09/AC-01`, `FR-STU-08/AC-01`, `FR-STU-08/AC-02`, `FR-CORE-03/AC-01`, `FR-CORE-03/AC-02`, `FR-CORE-06/AC-02`
 
 **Milestone chạy lần đầu:** MS-03 · **Regression:** có
 
 | # | Bước | Kết quả mong đợi |
 |---|---|---|
-| 1 | A2 phân công A1 | `IN_PROGRESS`; mốc phân công chỉ hiện trong lịch sử nội bộ |
-| 2 | A2 (không phụ trách) ghi nhật ký, yêu cầu bổ sung, đóng hồ sơ | Cả ba trả 403 |
+| 1 | A2 phân công A1 cho hồ sơ `NEW` của SV1 | Hồ sơ chuyển `IN_PROGRESS`; mốc phân công chỉ hiện trong lịch sử nội bộ; SV1 nhận 1 thông báo trạng thái, chuông tăng 1 trong vòng 30 giây |
+| 2 | A2 (không phụ trách) ghi nhật ký xử lý hoặc gửi yêu cầu bổ sung | Cả hai thao tác trả 403 *(quyền chặn đóng hồ sơ bởi người không phụ trách kiểm tại `TS-07` ở `MS-04`)* |
 | 3 | A1 ghi nhật ký xử lý | Nhân viên phòng A thấy; SV1 không thấy |
-| 4 | A1 yêu cầu bổ sung (nội dung 10–1000 ký tự) khi hồ sơ còn hạn | `PENDING_INFO`; SLA tạm dừng, thời gian còn lại giữ cố định |
+| 4 | A1 yêu cầu bổ sung (nội dung 10–1000 ký tự) khi hồ sơ còn hạn | Hồ sơ chuyển `PENDING_INFO`; SLA tạm dừng, thời gian còn lại giữ cố định; SV1 nhận 1 thông báo yêu cầu bổ sung; mốc yêu cầu bổ sung trả cho SV1 có nội dung yêu cầu, không có tên nhân viên |
 | 5 | A1 gửi thêm một yêu cầu bổ sung khi yêu cầu cũ còn mở | 409 |
-| 6 | Sau 6 giờ, SV1 bổ sung (nội dung 10–2000 ký tự, tối đa 5 tệp) | `IN_PROGRESS`; hạn xử lý lùi đúng 6 giờ; có mốc nội bộ thay đổi hạn |
+| 6 | Sau 6 giờ, SV1 bổ sung (nội dung 10–2000 ký tự, tối đa 5 tệp) | Hồ sơ chuyển lại `IN_PROGRESS`; hạn xử lý lùi đúng 6 giờ; có mốc nội bộ thay đổi hạn; không tạo thông báo mới cho hành động của chính SV1 |
 | 7 | SV1 bổ sung lần hai cho cùng yêu cầu | Bị từ chối; mỗi yêu cầu chỉ được trả lời một lần |
 
 ### TS-05. Ưu tiên, escalate và chuyển phòng
 
-**Kiểm AC:** `FR-STF-08/AC-01`, `FR-STF-09/AC-01`, `FR-STF-10/AC-01`, `FR-CORE-04/AC-01`, `FR-SEC-04/AC-01`
+**Kiểm AC:** `FR-STF-08/AC-01`, `FR-STF-09/AC-01`, `FR-STF-10/AC-01`, `FR-CORE-04/AC-01`, `FR-SEC-04/AC-05`, `FR-CORE-06/AC-04`
 
 **Milestone chạy lần đầu:** MS-03 · **Regression:** có
 
@@ -114,42 +118,44 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 | 3 | A1 chuyển hồ sơ sang phòng B kèm lý do | Trạng thái, hạn xử lý, loại yêu cầu và yêu cầu bổ sung đang mở giữ nguyên; SV1 không nhận thông báo |
 | 4 | A1 mở lại hồ sơ hoặc tải tệp của hồ sơ đó | 404 |
 | 5 | B1 mở hàng đợi và chi tiết | Thấy hồ sơ, xem được tệp và lý do chuyển |
-| 6 | SV1 mở chi tiết | Thấy hồ sơ đã chuyển đến phòng B, không thấy lý do |
+| 6 | SV1 mở danh sách yêu cầu của mình (`FR-STU-06`) và kiểm tra dữ liệu lịch sử công khai trả về | Thấy hồ sơ đã chuyển sang phòng B; API không trả về mốc nội bộ hay lý do chuyển phòng |
 | 7 | B1 chuyển hồ sơ sang chính phòng B | Bị từ chối; phòng đích phải khác phòng hiện tại |
 
 ### TS-06. Quá hạn tự động
 
-**Kiểm AC:** `FR-CORE-02/AC-01`, `FR-CORE-03/AC-01`, `FR-CORE-03/AC-02`, `FR-STU-08/AC-01`, `FR-STF-07/AC-01`, `FR-MGT-01/AC-01`
+**Kiểm AC:** `FR-CORE-02/AC-01`, `FR-CORE-03/AC-01`, `FR-CORE-03/AC-02`, `FR-STU-08/AC-08`, `FR-STF-07/AC-01`
 
 **Kiểm NFR:** `NFR-PERF-09`, `NFR-REL-07`
 
 **Milestone chạy lần đầu:** MS-03 · **Regression:** có
 
+*(Số đếm Quá hạn trên dashboard Admin thuộc `FR-MGT-01` ở `MS-05`, được kiểm tại `TS-08` bước 1.)*
+
 | # | Bước | Kết quả mong đợi |
 |---|---|---|
-| 1 | Hồ sơ `IN_PROGRESS` loại Y, hạn 10:00:00 | Lúc 09:59:59 vẫn `IN_PROGRESS`; muộn nhất 10:01:00 thành `OVERDUE`; có `STATUS_CHANGE` do `SYSTEM`; SV nhận thông báo; số Quá hạn trên dashboard Admin tăng trong vòng 30 giây |
+| 1 | Hồ sơ `IN_PROGRESS` loại Y, hạn 10:00:00 | Lúc 09:59:59 vẫn `IN_PROGRESS`; muộn nhất 10:01:00 thành `OVERDUE`; có `STATUS_CHANGE` do `SYSTEM`; SV1 nhận 1 thông báo; trạng thái `OVERDUE` cập nhật trong vòng 30 giây trên hàng đợi phòng A (`FR-STF-01`) và danh sách yêu cầu của SV1 (`FR-STU-06`) |
 | 2 | Hồ sơ `PENDING_INFO` đã qua hạn ban đầu | Giữ `PENDING_INFO` |
 | 3 | Hồ sơ `NEW` quá hạn chưa phân công, sau đó được phân công | Thành `OVERDUE`; sau khi phân công vẫn `OVERDUE` |
-| 4 | Người phụ trách yêu cầu bổ sung cho hồ sơ `OVERDUE`, sinh viên bổ sung | Trạng thái giữ `OVERDUE` suốt quá trình; sinh viên vẫn nhận thông báo yêu cầu bổ sung |
+| 4 | Người phụ trách yêu cầu bổ sung cho hồ sơ `OVERDUE`, sinh viên bổ sung | Trạng thái giữ `OVERDUE` suốt quá trình; sinh viên vẫn nhận 1 thông báo yêu cầu bổ sung |
 | 5 | Dừng tác vụ quá hạn giữa chừng rồi chạy lại | Hồ sơ còn lại được xử lý tiếp; không tạo trùng lịch sử hay thông báo |
 
-### TS-07. Đóng hồ sơ, trả kết quả và đánh giá
+### TS-07. Đóng hồ sơ, trả kết quả, lịch sử công khai và đánh giá
 
-**Kiểm AC:** `FR-STF-06/AC-01`, `FR-STU-07/AC-01`, `FR-STU-10/AC-01`, `FR-STU-10/AC-04`
+**Kiểm AC:** `FR-STF-06/AC-01`, `FR-STU-07/AC-01`, `FR-STU-08/AC-08`, `FR-STU-10/AC-01`, `FR-STU-10/AC-04`, `FR-CORE-06/AC-01`, `FR-SEC-04/AC-03`
 
 **Milestone chạy lần đầu:** MS-04 · **Regression:** có
 
 | # | Bước | Kết quả mong đợi |
 |---|---|---|
-| 1 | A1 đóng hồ sơ `IN_PROGRESS` với kết quả 10–2000 ký tự | `CLOSED`; SV1 nhận thông báo |
+| 1 | A2 (cùng phòng nhưng không phụ trách) gọi API đóng hồ sơ `IN_PROGRESS` của A1; sau đó A1 đóng hồ sơ với kết quả 10–2000 ký tự | Lệnh của A2 trả 403; lệnh của A1 chuyển hồ sơ sang `CLOSED` và SV1 nhận 1 thông báo đóng hồ sơ (cập nhật trong 30 giây) |
 | 2 | Đóng một hồ sơ đang `NEW` | 409 |
-| 3 | SV1 mở chi tiết | Thấy kết quả xử lý, thời điểm đóng và form đánh giá |
-| 4 | SV1 đánh giá 4 sao kèm nhận xét | 201; đánh giá hiển thị chỉ đọc và được tính vào báo cáo hài lòng |
+| 3 | SV1 mở trang chi tiết hồ sơ (`FR-STU-07`) | Thấy đầy đủ 5 mốc lịch sử công khai (`CREATE` → `IN_PROGRESS` → `REQUEST_INFO` → `SUPPLEMENT` → `CLOSED`), không có tên nhân viên, hạn xử lý, mức ưu tiên hay lý do nội bộ; thấy kết quả xử lý, thời điểm đóng và form đánh giá |
+| 4 | SV1 đánh giá 4 sao kèm nhận xét | 201; đánh giá được lưu, ghi nhật ký `RATE_TICKET` và hiển thị ở chế độ chỉ đọc trên trang chi tiết *(việc tổng hợp điểm đánh giá vào báo cáo hài lòng Admin thuộc `FR-MGT-05`, được kiểm tại `TS-08` ở `MS-05`)* |
 | 5 | SV1 đánh giá lần hai; đánh giá 0, 6 hoặc 3,5 sao; nhận xét 1001 ký tự | 409; 400; 400 |
 | 6 | Gọi bất kỳ thao tác sửa nào trên hồ sơ `CLOSED` | 409; không có chức năng mở lại |
 | 7 | Đóng một hồ sơ đang `PENDING_INFO` | Yêu cầu bổ sung đang mở được đóng; khoảng tạm dừng cuối tính đến lúc đóng |
 
-### TS-08. Báo cáo của Admin khớp dữ liệu
+### TS-08. Báo cáo và dashboard của Admin khớp dữ liệu
 
 **Kiểm AC:** `FR-MGT-01/AC-01`, `FR-MGT-02/AC-01`, `FR-MGT-02/AC-02`, `FR-MGT-03/AC-01`, `FR-MGT-04/AC-01`, `FR-MGT-05/AC-01`, `FR-SEC-04/AC-01`
 
@@ -161,10 +167,10 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 | # | Bước | Kết quả mong đợi |
 |---|---|---|
-| 1 | Admin mở dashboard | Mới = số `NEW`; Đang xử lý = `IN_PROGRESS` + `PENDING_INFO`; Quá hạn = `OVERDUE`; không tính `CLOSED`; khớp bảng tính sẵn |
+| 1 | Admin mở dashboard; cho 1 hồ sơ loại Y vừa hết hạn chuyển sang `OVERDUE` | Mới = số `NEW`; Đang xử lý = `IN_PROGRESS` + `PENDING_INFO`; Quá hạn = `OVERDUE`; không tính `CLOSED`; khớp bảng tính sẵn; số Quá hạn trên dashboard tăng thêm 1 trong vòng 30 giây sau khi hồ sơ chuyển `OVERDUE` |
 | 2 | Bấm từng chỉ số | Danh sách tóm tắt (mã, loại, phòng, trạng thái, ngày gửi); không có tên, MSSV, email, số điện thoại; không có thao tác xử lý |
 | 3 | Xem thời gian xử lý trung bình | Bằng thời điểm đóng trừ thời điểm gửi, trừ tổng thời gian chờ bổ sung; khớp bảng tính sẵn |
-| 4 | Xem báo cáo loại yêu cầu, khối lượng phòng ban, mức độ hài lòng với khoảng ngày mặc định và một khoảng tự chọn | Khớp bảng tính sẵn |
+| 4 | Xem báo cáo loại yêu cầu, khối lượng phòng ban và mức độ hài lòng (bao gồm hồ sơ đã đánh giá 4 sao ở `TS-07` và bộ 200 ticket mẫu) với khoảng ngày mặc định và khoảng tự chọn | Tất cả chỉ số và phân bố sao khớp 100% bảng tính sẵn |
 | 5 | Nhập `from` sau `to`, hoặc khoảng dài hơn 365 ngày | 400 |
 | 6 | Chọn khoảng không có dữ liệu | Hiện 0 hoặc trống, không lỗi |
 | 7 | Admin gọi API chi tiết hồ sơ hoặc tải tệp | 403 |
