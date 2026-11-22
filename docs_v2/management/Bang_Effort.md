@@ -33,6 +33,8 @@ Effort được bóc tách theo 6 milestone `MS-01` đến `MS-06` và việc qu
 
 **Cách cộng theo milestone (Baseline v1.0/v1.1):** tổng giờ của mục 2.1 đến 2.6 không gồm việc quản lý dự án `Q-09` (26 giờ, mục 2.7). Sheet WBS của Master Plan chia 26 giờ này vào từng milestone (5, 6, 5, 3, 3, 4 giờ cho `MS-01` đến `MS-06`), nên tổng theo milestone ở WBS là 364, 134, 88, 46, 76, 162 giờ. Tổng chung baseline là **870 giờ** (797 giờ cơ sở + 73 giờ dự phòng rủi ro); tổng theo hạng mục `Q-xx` khớp tuyệt đối với [quotation.xlsx](quotation.xlsx).
 
+**Cơ sở công nghệ dùng để ước lượng (`A-14`, `ADR-005`):** Toàn bộ định mức giờ phát triển, tích hợp và triển khai dưới đây được ước lượng dựa trên giả định **`A-14`** (đội thực thi sử dụng ngăn xếp web, CSDL quan hệ và bộ nhớ đệm phía server phổ biến phù hợp năng lực đội như đề xuất tại [ADR-005](../architecture/technical-decisions/ADR-005-technology-stack-and-cache.md), trong đó Redis là lựa chọn triển khai đề xuất cho yêu cầu cache 15 phút, đóng gói Docker Compose trên server trường). Ngăn xếp chốt chính thức tại WBS `1.04–1.05` (`08/09–11/09/2026`) và xác nhận hạ tầng ở WBS `1.11–1.14` (`14/09–17/09/2026`); thay đổi tương đương xử lý trong dự phòng `Q-01` (`R-27`), còn thay đổi bắt buộc vượt `A-14` phải lập CR đánh giá lại effort và giá trước khi lập trình.
+
 ### 2.0a. Phương pháp ước lượng từ khối lượng công việc (Bottom-up)
 
 Để tránh nhược điểm chia ngược từ tổng giờ cố định theo số ngày trên lịch, dự án áp dụng công thức ước lượng từ khối lượng công việc thực tế làm chuẩn đối chiếu và làm cơ sở ước lượng cho mọi Change Request (`CR-xx`):
@@ -152,7 +154,7 @@ Milestone gồm hai hạng mục báo giá: `Q-01` (285 giờ) và `Q-02` (74 gi
 | **Buffer dự phòng (9,2%)** | Quỹ giờ giải quyết các rủi ro kỹ thuật phát sinh | 24 h | 3,00 PD |
 | **TỔNG KẾ HOẠCH (Q-01)** | Tổng effort được phê duyệt | **285 h** | **35,63 PD** |
 
-**Dự phòng 24 giờ dùng cho rủi ro:** R-01, R-02, R-03. Mô tả, owner và phương án: [risk-register.md](risk-register.md).
+**Dự phòng 24 giờ dùng cho rủi ro:** R-01, R-02, R-03, R-27. Mô tả, owner và phương án: [risk-register.md](risk-register.md).
 
 #### 2.1b. Q-02 · Đăng nhập và phân quyền — 74 giờ (9,25 PD)
 

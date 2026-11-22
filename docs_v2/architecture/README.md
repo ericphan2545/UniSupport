@@ -13,6 +13,6 @@ Mô tả cách UniSupport được dựng để đáp ứng các chức năng tr
 
 **Nguồn:** `modules/M04-authentication-security/prd.md` (quy tắc quyền, bảo mật, mã lỗi) và `modules/M05-core-platform/prd.md` (quy tắc dữ liệu, version, idempotency, lưu tệp). Khi tài liệu này và module mâu thuẫn, module là chuẩn.
 
-**Chưa chốt:** công nghệ cụ thể (ngôn ngữ backend, framework frontend, hệ quản trị CSDL, kho tệp) và cấu hình hạ tầng của trường.
+**Trạng thái lựa chọn công nghệ:** Ngăn xếp công nghệ cụ thể (ngôn ngữ backend, framework frontend, CSDL, kho tệp và bộ nhớ đệm phía server — trong đó Redis chỉ là một phương án triển khai đề xuất cho yêu cầu cache 15 phút) hiện ở trạng thái **Đề xuất** tại [ADR-005](technical-decisions/ADR-005-technology-stack-and-cache.md) và giả định ước lượng **`A-14`** ([assumptions.md](../project/assumptions.md)). Do `BE Dev / Senior`, `FE Dev / Senior` và `DevOps / Mid` chốt ở **WBS `1.04–1.05` (`08/09–11/09/2026`, `#105`)** và xác nhận tương thích hạ tầng với Aurora University ở **WBS `1.11–1.14` (`14/09–17/09/2026`)** (rủi ro theo dõi: `R-27`).
 
 Sơ đồ viết bằng Mermaid, hiển thị trực tiếp trên GitHub.

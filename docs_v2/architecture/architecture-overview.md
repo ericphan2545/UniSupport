@@ -35,7 +35,7 @@ flowchart TB
 | Tác vụ nền | Chuyển hồ sơ quá hạn sang `OVERDUE` mỗi 1 phút, chỉ một tiến trình chạy tại một thời điểm; dọn tệp tạm không được tham chiếu |
 | CSDL quan hệ | Dữ liệu nghiệp vụ, phiên, idempotency, lịch sử, nhật ký; cần transaction, sequence theo năm, unique constraint và phân quyền chỉ thêm/đọc trên bảng nhật ký |
 | Kho tệp | Lưu tệp với tên ngẫu nhiên, không có đường dẫn công khai; chỉ trả qua API có kiểm tra quyền |
-| Cache phía server | Thông tin tài khoản lấy từ SSO, 15 phút, riêng từng tài khoản (đặc tả module ghi Redis); danh mục loại yêu cầu và phòng ban |
+| Cache phía server | Lưu thông tin tài khoản lấy từ SSO trong 15 phút riêng từng tài khoản (`FR-STU-01/BR-05`, `NFR-PERF-10`) và cache danh mục (`NFR-PERF-11`); phương án triển khai đề xuất (như Redis hoặc tương đương) chốt theo [ADR-005](technical-decisions/ADR-005-technology-stack-and-cache.md) |
 
 ## Cách backend xử lý một request ghi
 
@@ -122,10 +122,13 @@ stateDiagram-v2
 
 ## Công nghệ
 
-Chưa chốt ngôn ngữ backend, framework frontend, hệ quản trị CSDL và kho tệp. Yêu cầu bắt buộc với lựa chọn:
+Ngăn xếp công nghệ cụ thể (ngôn ngữ backend, framework frontend, hệ quản trị CSDL, kho tệp và giải pháp cache phía server — với **Redis** là phương án triển khai đề xuất, không phải yêu cầu nghiệp vụ cứng) hiện đang ở trạng thái **Đề xuất** tại [ADR-005](technical-decisions/ADR-005-technology-stack-and-cache.md). Giả định công nghệ dùng để ước lượng baseline (870 giờ / 332.316.000 VNĐ) ghi ở **`A-14`** ([assumptions.md](../project/assumptions.md)) và rủi ro liên quan ở **`R-27`** ([risk-register.md](../management/risk-register.md)).
 
-- CSDL hỗ trợ transaction, sequence, unique constraint, khóa dòng và phân quyền theo bảng.
-- Kho tệp nằm ngoài thư mục web và không phát URL công khai.
-- Chạy được bằng Docker Compose trên hạ tầng của trường.
+- **Vai trò quyết định và mốc chốt:** `BE Dev / Senior`, `FE Dev / Senior` và `DevOps / Mid` chốt kỹ thuật ở **WBS `1.04–1.05` (`08/09–11/09/2026`, `#105`)**; `PM / Senior` và `BE Dev / Senior` xác nhận tương thích hạ tầng với Aurora University ở **WBS `1.11–1.14` (`14/09–17/09/2026`)** trước khi khởi động lập trình (`1.20–1.23`).
+- **Yêu cầu bắt buộc với mọi lựa chọn:**
+  - CSDL hỗ trợ transaction, sequence, unique constraint, khóa dòng và phân quyền theo bảng.
+  - Bộ nhớ đệm phía server đáp ứng TTL 15 phút tách biệt theo từng tài khoản (`FR-STU-01/BR-05`, `NFR-PERF-10`) và cache danh mục (`NFR-PERF-11`).
+  - Kho tệp nằm ngoài thư mục web và không phát URL công khai.
+  - Đóng gói và chạy được bằng Docker Compose trên hạ tầng của trường (`A-11`, `A-14`).
 
 Prototype hiện tại (thư mục `prototype/`) chỉ là vỏ giao diện chạy luồng, không phải kiến trúc production.
