@@ -2,7 +2,7 @@
 
 > **Quy định:** Áp dụng cho buổi họp tuần của ban quản lý (thứ Hai 20h00 qua Discord, Team Charter mục 7) và họp đầu/cuối mỗi milestone (`03` mục 2.2, 2.3). Thành viên ghi biên bản theo lượt; PM kiểm duyệt và lưu bản chính thức trong vòng 24 giờ.
 >
-> Đường dẫn thư mục Google Drive lưu các biên bản thật: *chờ Lê Hoàng Tùng xác nhận tại [records/README.md](README.md)*.
+> Nơi lưu chính thức: mỗi biên bản lưu thành một file mới trong thư mục `records/` này, cập nhật qua PR ([records/README.md](README.md)).
 
 ---
 

@@ -2,7 +2,7 @@
 
 > **Trạng thái dữ liệu:** Dữ liệu dưới đây là **Mô phỏng**, minh họa cách ghi nhận và tổng hợp giờ công tính đến hết **Tuần 6 (`12/10 – 16/10/2026`, `MS-02`)** để đối chiếu trực tiếp với ví dụ Báo cáo tuần ở [03-quan-tri-giam-sat.md](../03-quan-tri-giam-sat.md) mục 6.2.
 >
-> **Người quản lý:** `PM / Senior` (ban quản lý: Lê Hoàng Tùng) · **Quyền truy cập:** Toàn bộ đội thực thi ghi giờ trước 21h30 mỗi ngày làm việc; PM và ban quản lý xem trực tiếp bất cứ lúc nào. Đường dẫn Google Drive bản vận hành thật: *chờ Lê Hoàng Tùng xác nhận và gắn tại [records/README.md](README.md)*.
+> **Người quản lý:** `PM / Senior` (ban quản lý: Lê Hoàng Tùng) · **Quyền truy cập:** Toàn bộ đội thực thi ghi giờ trước 21h30 mỗi ngày làm việc; PM và ban quản lý xem trực tiếp bất cứ lúc nào. Nơi lưu chính thức: file này trong repo, cập nhật qua PR ([records/README.md](README.md)).
 
 ## 1. Nguồn dữ liệu và công thức tính chỉ số Giờ công
 
