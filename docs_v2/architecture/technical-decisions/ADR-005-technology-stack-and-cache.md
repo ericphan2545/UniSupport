@@ -4,6 +4,8 @@
 
 **Liên quan:** `FR-STU-01/BR-05`, `NFR-PERF-10`, `NFR-PERF-11`, giả định `A-11`, `A-14`, rủi ro `R-27`, WBS `1.04`, `1.05`, `1.11`, `1.14`, `1.35`
 
+Giá và lịch hiện hành tham chiếu Proposal và Master Plan v2.0. Việc xác nhận hồ sơ mô phỏng nằm ở WBS 1.37, sau các bước chuẩn bị và đánh giá tương thích 1.11–1.15.
+
 ## Bối cảnh
 
 Bộ đặc tả nghiệp vụ (`modules/`) và yêu cầu phi chức năng (`non-functional-requirements/`) quy định các yêu cầu bắt buộc ở mức hành vi:
