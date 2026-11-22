@@ -27,13 +27,107 @@
 - Đơn giá/giờ = Lương gross/tháng ÷ 208 giờ, hiển thị làm tròn 2 chữ số thập phân; thành tiền tính từ đơn giá chưa làm tròn. 1 PD = 8 giờ.
 - Senior tập trung vào kiến trúc, phần kỹ thuật phức tạp và review mã nguồn; Mid và Junior thực hiện phần chuẩn hóa dưới sự kèm cặp.
 
-## PHẦN 2: BÓC TÁCH EFFORT THEO MILESTONE VÀ HẠNG MỤC BÁO GIÁ
+## PHẦN 2: PHƯƠNG PHÁP ƯỚC LƯỢNG, BÓC TÁCH EFFORT VÀ QUY TẮC QUẢN LÝ GIỜ
 
 Effort được bóc tách theo 6 milestone `MS-01` đến `MS-06` và việc quản lý dự án xuyên suốt, đúng với các issue trên GitHub và hạng mục `Q-xx` trong báo giá. Mỗi hạng mục có một quỹ giờ dự phòng (Buffer) cho các rủi ro đã ghi trong sổ rủi ro; bảng dưới chỉ dẫn mã `R-xx`, mô tả, owner và phương án nằm ở [risk-register.md](risk-register.md).
 
-**Cơ sở phân bổ:** tổng giờ của từng vị trí ở Phần 1 được chia cho các issue người đó phụ trách, theo tỷ trọng số ngày công ước lượng của issue; mỗi issue tính tối đa 10 ngày; vai trò hỗ trợ/duyệt tính 25%. Lịch thực hiện của từng issue nằm ở sheet WBS; đổi lịch không làm đổi giờ.
+**Cách cộng theo milestone (Baseline v1.0/v1.1):** tổng giờ của mục 2.1 đến 2.6 không gồm việc quản lý dự án `Q-09` (26 giờ, mục 2.7). Sheet WBS của Master Plan chia 26 giờ này vào từng milestone (5, 6, 5, 3, 3, 4 giờ cho `MS-01` đến `MS-06`), nên tổng theo milestone ở WBS là 364, 134, 88, 46, 76, 162 giờ. Tổng chung baseline là **870 giờ** (797 giờ cơ sở + 73 giờ dự phòng rủi ro); tổng theo hạng mục `Q-xx` khớp tuyệt đối với [quotation.xlsx](quotation.xlsx).
 
-**Cách cộng theo milestone:** tổng giờ của mục 2.1 đến 2.6 không gồm việc quản lý dự án `Q-09` (26 giờ, mục 2.7). Sheet WBS của Master Plan chia 26 giờ này vào từng milestone (5, 6, 5, 3, 3, 4 giờ cho `MS-01` đến `MS-06`), nên tổng theo milestone ở WBS là 364, 134, 88, 46, 76, 162 giờ. Tổng chung giống nhau: 870 giờ; tổng theo hạng mục `Q-xx` khớp tuyệt đối.
+### 2.0a. Phương pháp ước lượng từ khối lượng công việc (Bottom-up)
+
+Để tránh nhược điểm chia ngược từ tổng giờ cố định theo số ngày trên lịch, dự án áp dụng công thức ước lượng từ khối lượng công việc thực tế làm chuẩn đối chiếu và làm cơ sở ước lượng cho mọi Change Request (`CR-xx`):
+
+| Nhóm công việc | Đơn vị đo khối lượng | Định mức ước lượng chuẩn | Vai trò thực hiện |
+|---|---|---|---|
+| **Phát triển chức năng (FR)** — Mức Đơn giản (`S`) | FR có 1 luồng/màn hình đơn, ít trạng thái, ≤ 7 AC | `BE: 3h`, `FE: 2h` (0h nếu FR hệ thống không có UI) | BE Dev / Mid, FE Dev / Junior |
+| **Phát triển chức năng (FR)** — Mức Trung bình (`M`) | FR có nhiều quy tắc nghiệp vụ, lọc/phân trang, cache, snapshot hoặc phạm vi dữ liệu, 7–8 AC | `BE: 5h`, `FE: 3h` (0h nếu không có UI) | BE Dev / Mid–Senior, FE Dev / Junior–Senior |
+| **Phát triển chức năng (FR)** — Mức Phức tạp (`C`) | FR có đồng thời/idempotency, state machine, SLA/job nền, upload tệp/magic bytes, polling hoặc báo cáo tổng hợp, ≥ 8 AC | `BE: 8h`, `FE: 5h` (0h nếu không có UI) | BE Dev / Senior–Mid, FE Dev / Senior–Junior |
+| **Phần dùng chung theo milestone (Shared)** | Số AC dùng chung triển khai lần đầu tại milestone (`FR-SEC-04..06`, `FR-CORE-06, 08, 09`) | `0,6–0,85 giờ / AC` theo mảng BE hoặc FE | BE Dev / Mid, FE Dev / Senior–Junior |
+| **Viết & duyệt test case từ AC** | Tổng số AC của milestone, phủ đủ 5 nhóm kiểm thử (`Happy Path`, `Validation`, `Security`, `Concurrency`, `Resilience`) | `0,12 giờ / AC` (~7 phút/AC gồm thiết kế dữ liệu, bước kiểm và review; ~30% QA Senior, ~70% Tester Junior) | QA / Senior, Tester / Junior |
+| **Tích hợp, chạy test trọn luồng & regression** | Số AC chạy lần đầu + số kịch bản trọn luồng/chéo + số milestone trước cần regression | `0,10 giờ / AC` + `4h` kịch bản trọn luồng/chéo + `4h × số milestone trước` (regression) + `2h` seed/môi trường | QA / Senior, Tester / Junior |
+| **Sửa lỗi sau test & retest** | Tỷ lệ trên giờ phát triển của milestone (việc biết trước, không lấy từ quỹ dự phòng rủi ro) | `20%` giờ phát triển (BE + FE) của milestone | BE Dev, FE Dev |
+| **Quỹ dự phòng rủi ro (Buffer)** | Tỷ lệ trên tổng effort cơ sở của hạng mục, gắn trực tiếp mã `R-xx` | `8% – 10%` effort cơ sở; chỉ giải ngân khi rủi ro trong `risk-register.md` xảy ra | Quỹ dự phòng (PM / Senior duyệt) |
+
+### 2.0b. Ví dụ ước lượng chi tiết cho `Q-03 / MS-02` và tác động của 87 AC bổ sung
+
+`Q-03 / MS-02` (Gửi và tiếp nhận yêu cầu) có **16 FR chuyên biệt (131 AC, 104 BR, 46 Error flow)** và **FR dùng chung độc quyền của MS-02 là `FR-SEC-05` (7 AC, 7 BR, 5 Error flow)** → tổng **138 AC cốt lõi**; ngoài ra còn **15 AC** thuộc lát cắt MS-02 của 5 FR dùng chung (`FR-SEC-04`: 2 AC, `FR-SEC-06`: 2 AC, `FR-CORE-06`: 3 AC, `FR-CORE-08`: 4 AC, `FR-CORE-09`: 4 AC) → tổng **153 AC** cần nghiệm thu lần đầu tại `MS-02`.
+
+| Mã FR | Tên chức năng | Số AC / BR / E | Mức phức tạp | BE (h) | FE (h) | Tổng Dev (h) |
+|---|---|---:|---|---:|---:|---:|
+| `FR-STU-02` | Tạo yêu cầu hỗ trợ (idempotency, rate limit, snapshot) | 10 / 8 / 6 | Phức tạp (`C`) | 8 | 5 | 13 |
+| `FR-STU-03` | Hiển thị phòng ban tiếp nhận | 7 / 5 / 2 | Đơn giản (`S`) | 3 | 2 | 5 |
+| `FR-STU-04` | Đính kèm tệp minh chứng (5 tệp, 10 MiB, rollback) | 9 / 5 / 4 | Phức tạp (`C`) | 8 | 5 | 13 |
+| `FR-STU-05` | Nhận mã hồ sơ và xác nhận gửi thành công | 7 / 5 / 2 | Đơn giản (`S`) | 3 | 2 | 5 |
+| `FR-STU-06` | Xem danh sách yêu cầu của mình (lọc, phân trang) | 8 / 6 / 2 | Trung bình (`M`) | 5 | 3 | 8 |
+| `FR-STU-08` | Nhận thông báo trong app (polling 30s, `read_before`) | 10 / 7 / 3 | Phức tạp (`C`) | 8 | 5 | 13 |
+| `FR-STF-01` | Hàng đợi hồ sơ của phòng ban (lọc, sắp xếp ưu tiên/SLA) | 9 / 8 / 3 | Phức tạp (`C`) | 8 | 5 | 13 |
+| `FR-STF-02` | Xem thông tin sinh viên và nội dung yêu cầu | 7 / 4 / 3 | Trung bình (`M`) | 5 | 3 | 8 |
+| `FR-STF-03` | Xem và tải tệp đính kèm | 8 / 4 / 3 | Trung bình (`M`) | 5 | 3 | 8 |
+| `FR-CORE-01` | Sinh mã hồ sơ đồng thời (`USP-YYYY-NNNNN`) | 8 / 5 / 2 | Trung bình (`M`, no UI) | 5 | 0 | 5 |
+| `FR-CORE-02` | Trạng thái hồ sơ và quy tắc chuyển trạng thái | 8 / 10 / 3 | Phức tạp (`C`, no UI) | 8 | 0 | 8 |
+| `FR-CORE-03` | Tính hạn xử lý (SLA) và tác vụ quá hạn ≤ 60 giây | 9 / 10 / 2 | Phức tạp (`C`, no UI) | 8 | 0 | 8 |
+| `FR-CORE-04` | Mức độ ưu tiên mặc định và thứ tự | 7 / 5 / 2 | Đơn giản (`S`, no UI) | 3 | 0 | 3 |
+| `FR-CORE-05` | Danh mục loại yêu cầu và phòng ban (nạp khi khởi động) | 8 / 8 / 2 | Trung bình (`M`, no UI) | 5 | 0 | 5 |
+| `FR-CORE-07` | Giới hạn tệp đính kèm và kiểm tra magic bytes | 8 / 7 / 4 | Trung bình (`M`, no UI) | 5 | 0 | 5 |
+| `FR-MGT-07` | Thiết lập SLA cho từng loại yêu cầu (1–720h, không hồi tố) | 8 / 7 / 3 | Trung bình (`M`) | 5 | 3 | 8 |
+| `FR-SEC-05` | Bảo vệ tệp đính kèm (`#123`, riêng `MS-02`) | 7 / 7 / 5 | Dùng chung BE | 6 | 0 | 6 |
+| Shared BE | `FR-SEC-04` (2 AC), `FR-SEC-06` (2 AC), `FR-CORE-06` (3 AC) (`#123`) | 7 AC | Dùng chung BE | 5 | 0 | 5 |
+| Shared FE | `FR-CORE-08` (4 AC), `FR-CORE-09` (4 AC) (`#124`) | 8 AC | Dùng chung FE | 0 | 6 | 6 |
+| **TỔNG PHÁT TRIỂN (`Q-03`)** | **16 FR + 6 phần dùng chung (138 AC cốt lõi; 153 AC tổng)** | **153 AC** | — | **103** | **42** | **145** |
+
+**Tổng hợp đối chiếu `Q-03 / MS-02` (Baseline v1.0/v1.1 vs Bottom-up):**
+
+| Nhóm việc trong `Q-03` | Baseline v1.0/v1.1 (`quotation.xlsx`) | Ước lượng Bottom-up | Chênh lệch | Nhận xét đối chiếu |
+|---|---:|---:|---:|---|
+| Phát triển (BE + FE, gồm phần dùng chung) | 62 h (BE 41h, FE 21h) | **145 h** (BE 103h, FE 42h) | **+83 h** | 62h ở baseline tương đương ~3,2–3,9h/FR cả BE lẫn FE, không đủ cho 16 FR + 6 phần dùng chung có SLA, upload, state machine và polling |
+| Viết & duyệt test case từ AC | 4 h (QA Sr 3h, Tester Jr 1h) | **18 h** (`153 × 0,12 ≈ 18,4h`; riêng 138 AC cốt lõi = `16,6h`) | **+14 h** | 4h ở baseline tương đương ~1,6 phút/AC cho 138–153 AC, không khả thi |
+| Tích hợp, chạy test trọn luồng & regression | 22 h (QA Sr 3h, Tester Jr 19h) | **25 h** (`153 × 0,10 + 4 + 4 + 2 ≈ 25,3h`) | **+3 h** | Phủ toàn bộ 153 AC + `TS-02, TS-03, TS-11, TS-12, TS-16, TS-17` + regression `MS-01` |
+| Sửa lỗi sau test & retest | 29 h (BE 17h, FE 12h) | **29 h** (`20% × 145h`) | **0 h** | Giờ sửa lỗi baseline sát định mức 20% phát triển |
+| Quỹ dự phòng rủi ro (`R-07, R-08, R-09`) | 11 h (9,4% cơ sở) | **19 h** (~8,8% cơ sở mới) | **+8 h** | Giữ tỷ lệ dự phòng ~9% theo mức rủi ro |
+| **TỔNG `Q-03 / MS-02`** | **128 h** | **236 h** | **+108 h** | Chênh lệch cần ban quản lý phê duyệt phương án xử lý ở mục 2.0c |
+
+**Rà soát tác động của 87 AC được bổ sung (từ 252 AC → 339 AC, tăng +34,5%):**
+- Trong đợt bổ sung chi tiết đặc tả (`252 → 339 AC`), toàn dự án tăng **+87 AC** (chủ yếu bổ sung các ca `Validation`, `Security`, `Concurrency`, `Resilience` như khóa lạc quan, idempotency, rate limit, lỗi 502/503/504 và biên ngày/múi giờ); riêng `Q-03 / MS-02` tăng **+36 AC** (từ 102 → 138 AC cốt lõi, +35,3%).
+- Tác động trực tiếp lên khối lượng kiểm thử: toàn dự án tăng `+87 × 0,12 = +10,4h` viết test case và `+87 × 0,10 = +8,7h` chạy test/retest → tối thiểu **+19,1 giờ QA/Test** (làm tròn **+20 giờ**); riêng `Q-03 / MS-02` tăng **+7,9 giờ QA/Test** (`+4,3h` viết + `+3,6h` chạy) và khoảng **+16–20 giờ phát triển** cho các ca xử lý lỗi và đồng thời bổ sung.
+
+### 2.0c. Đối chiếu toàn dự án với Baseline (870 giờ / 332.316.000 VNĐ) và phương án trình duyệt
+
+Áp dụng cùng bộ định mức ở mục 2.0a cho toàn bộ 9 hạng mục giờ công (`Q-01` đến `Q-09`):
+
+| Hạng mục | Milestone | Khối lượng chính | Baseline v1.0/v1.1 (h) | Ước lượng Bottom-up (h) | Chênh lệch (h) |
+|---|---|---|---:|---:|---:|
+| `Q-01` | `MS-01` | Phân tích 42 FR, kiến trúc, wireframe, prototype, repo/CI | 285 | 285 | 0 |
+| `Q-02` | `MS-01` | 5 FR (40 AC) + 11 AC dùng chung = 51 AC; Staging & seed | 74 | 92 | +18 |
+| `Q-03` | `MS-02` | 16 FR (131 AC) + `FR-SEC-05` (7 AC) + 15 AC dùng chung = 153 AC | 128 | 236 | +108 |
+| `Q-04` | `MS-03` | 7 FR (57 AC) + 8 AC dùng chung = 65 AC | 83 | 118 | +35 |
+| `Q-05` | `MS-04` | 3 FR (24 AC) + 3 AC dùng chung = 27 AC | 43 | 53 | +10 |
+| `Q-06` | `MS-05` | 5 FR (39 AC) + 4 AC dùng chung = 43 AC; bộ 200 ticket mẫu | 73 | 95 | +22 |
+| `Q-07` | `MS-06` | Triển khai production, SSO thật, tài liệu, usability test | 105 | 105 | 0 |
+| `Q-08` | `MS-06` | Bảo hành 1 tháng sau nghiệm thu | 53 | 53 | 0 |
+| `Q-09` | Xuyên suốt | Quản lý dự án, theo dõi giờ công, báo cáo tuần | 26 | 26 | 0 |
+| **TỔNG CỘNG** | — | **42 FR / 339 AC** | **870 h** | **1.063 h** | **+193 h (+22,2%)** |
+
+**Trạng thái Baseline và 2 phương án chờ ban quản lý phê duyệt qua quy trình thay đổi (`03` mục 5):**
+- Hồ sơ hiện hành **giữ nguyên baseline 870 giờ và 332.316.000 VNĐ** (đã phát hành trong Proposal v1.0/v1.1, `quotation.xlsx` v1.0/v1.1 và Master Plan v1.0/v1.1) để bảo toàn tính nhất quán tài chính cho đến khi ban quản lý biểu quyết chọn phương án:
+  1. **Phương án A — Giữ nguyên giá chào 332.316.000 VNĐ (870 giờ baseline) và quản trị chênh lệch nội bộ:** ghi nhận chênh lệch `+193h` là rủi ro vượt giờ nội bộ (`R-22`), dùng quỹ dự phòng lao động tài chính 20% (`28.533.846 VNĐ`) và biên lợi nhuận để hấp thụ phần giờ vượt nếu xảy ra (nhà thầu chịu 100% chi phí, không thu thêm Aurora University); đồng thời ưu tiên hoàn thành toàn bộ FR `Must` trước, thương lượng chuyển một số FR `Should` sang giai đoạn sau nếu cần giữ mốc 15 tuần.
+  2. **Phương án B — Điều chỉnh báo giá lên phiên bản `v2.0` trước khi ký hợp đồng:** cập nhật baseline lên **1.063 giờ** (+193 giờ, ước tính giá sau VAT tăng thêm khoảng **66–72 triệu VNĐ** lên mức **398–404 triệu VNĐ** tùy tỷ trọng Senior/Mid/Junior), đồng bộ lại `quotation.xlsx`, Master Plan (WBS, Resources, Change log) và phát hành Proposal `v2.0`.
+
+### 2.0d. Phân biệt 4 loại giờ và quy tắc xử lý khi vượt giờ
+
+Quy tắc dưới đây áp dụng thống nhất trên `Bang_Effort.md`, `proposal.docx`, `quotation.xlsx`, Master Plan (`WBS`, `Resources`), `master-plan.md`, `team-charter.md` và chỉ số Giờ công ở `03-quan-tri-giam-sat.md`:
+
+| Loại giờ | Số giờ (Baseline v1.1) | Có nằm trong giá 332.316.000 VNĐ? | Có tính vào dự báo (EAC) so với 870 giờ? | Mục đích và quy tắc sử dụng |
+|---|---:|---|---|---|
+| **1. Giờ thực thi cơ sở trong báo giá** | **797 h** | **Có** | **Có** | Toàn bộ việc biết trước trong WBS (phân tích, thiết kế, phát triển, viết test case, tích hợp/test/regression, sửa lỗi sau test, triển khai, tài liệu, bảo hành, quản lý) |
+| **2. Quỹ giờ dự phòng rủi ro (Buffer)** | **73 h** | **Có** | **Có** (khi giải ngân) | 8 dòng `Dự phòng Q-xx` trong WBS; chỉ giải ngân khi rủi ro đã nhận diện (`R-01` đến `R-27`) xảy ra và được PM / Senior duyệt; báo cáo hằng tuần |
+| **3. Năng lực nhân sự còn trống (`Resources` cột `Dư`)** | Xem sheet `Resources` | **Không** | **Có**, nếu dùng cho việc thuộc phạm vi baseline; **Không**, nếu dùng cho CR đã duyệt riêng | Cho biết số giờ/tuần còn rảnh của đội thực thi để (a) tiếp nhận CR có báo giá riêng, hoặc (b) tăng cường lực lượng giữ mốc lịch khi việc baseline vượt giờ |
+| **4. Giờ của Change Request (`CR-xx`)** | Phát sinh riêng | **Không** (báo giá bổ sung riêng) | Theo dõi bằng ngân sách CR riêng (chỉ cộng vào baseline sau khi khách ký duyệt CR) | Áp dụng cho yêu cầu thay đổi phạm vi hoặc giả định phía khách sai (`A-01` đến `A-14`) theo `03` mục 5 |
+
+- **Ai chịu chi phí khi vượt giờ:** Nếu giờ thực tế vượt quá baseline **870 giờ** (hoặc vượt giờ kế hoạch từng hạng mục) trong **phạm vi 42 FR đã chốt** do sai lệch ước lượng nội bộ, làm lại hoặc phát sinh lỗi, **bên phát triển chịu 100% chi phí phát sinh** (hấp thụ bằng khoản dự phòng lao động tài chính 20% = 28.533.846 VNĐ và biên lợi nhuận nội bộ), **tuyệt đối không tính thêm tiền cho Aurora University**. Aurora University chỉ thanh toán thêm khi ký duyệt Change Request mở rộng phạm vi hoặc khi giả định phía khách (`A-01` đến `A-14`) sai thực tế.
+- **Giờ nào tính vào dự báo tổng giờ (`EAC`):** `Dự báo tổng giờ baseline = Giờ thực tế lũy kế của phạm vi baseline (gồm cả giờ lấy thêm từ năng lực dư ở sheet Resources để làm hoặc test phạm vi baseline) + Giờ kế hoạch còn lại của phạm vi baseline`. Khi `EAC > 870 giờ`, chỉ số Giờ công ở `03` mục 3.1 chuyển mức **Đỏ** để ban quản lý phát hiện sớm độ lệch thực tế, không che giấu bằng năng lực dư của `Resources`.
+- **Khi nào phải báo khách bằng văn bản:** PM / Senior bắt buộc thông báo bằng văn bản cho Aurora University khi xảy ra ít nhất một trong ba trường hợp: (1) Vượt giờ có nguy cơ làm trễ mốc milestone hoặc mốc Go-live 22/12/2026 dù đã điều phối quỹ dự phòng và năng lực dư; (2) Cần thương lượng ưu tiên lại hoặc dời FR mức `Should` để bảo vệ mốc Go-live; (3) Nguyên nhân vượt giờ xuất phát từ thay đổi phạm vi hoặc giả định phía khách sai (`A-xx`), cần kích hoạt quy trình CR (`03` mục 5).
+
+> **Lưu ý về phân bổ baseline v1.0/v1.1 trong bảng 2.1–2.8 dưới đây:** các bảng bên dưới phản ánh chính xác phân bổ baseline **870 giờ** đang khớp 100% với `quotation.xlsx` v1.1 và Master Plan v1.1. Khi ban quản lý duyệt thay đổi theo Phương án B (nếu chọn), các bảng này sẽ được cập nhật đồng bộ theo quy trình thay đổi.
 
 ### 2.1. MS-01 · CHỐT YÊU CẦU, ĐĂNG NHẬP VÀ PHÂN QUYỀN — TỔNG: 359 GIỜ (44,88 PD)
 

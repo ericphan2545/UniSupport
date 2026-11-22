@@ -9,7 +9,7 @@ Ngày cập nhật: 17/11/2026
 
 ## 2. Mục tiêu chung
 
-- Bàn giao đúng phạm vi đã chốt trong 15 tuần và 870 giờ công; thời gian chờ khách phản hồi không tính vào 15 tuần.
+- Bàn giao đúng phạm vi đã chốt trong 15 tuần và định mức baseline **870 giờ công** (gồm 797 giờ cơ sở và 73 giờ quỹ dự phòng rủi ro); thời gian chờ khách phản hồi không tính vào 15 tuần. Quy tắc phân biệt giờ baseline, năng lực dư (`Resources`), giờ CR và chịu chi phí vượt giờ theo [Bang_Effort.md](Bang_Effort.md) mục 2.0d.
 - Chất lượng bàn giao: đạt điều kiện Go-live ở [QMP](02-qmp-quan-ly-chat-luong.md) mục 2.2, khớp điều kiện nghiệm thu với khách ở Proposal mục 6.2.
 - Phạm vi theo PRD ([product/README.md](../product/README.md) và `modules/`). Tiêu chí nghiệm thu chính thức chốt với khách bằng văn bản ở cuối tuần 2 của `MS-01`.
 
@@ -48,7 +48,7 @@ Mỗi vai trò 1 người, tổng 10 người. Tên vai trò thống nhất vớ
 ## 4. Quy tắc làm việc
 
 1. Mỗi người làm tối đa 2 task cùng lúc; cập nhật trạng thái issue trên GitHub và ghi giờ thực tế vào Bảng theo dõi giờ ([03](03-quan-tri-giam-sat.md) mục 6.1) mỗi ngày làm việc.
-2. Bị chặn quá nửa ngày: báo ngay trên Discord, nêu task, vấn đề và người cần hỗ trợ. Dự kiến vượt 20% giờ kế hoạch: báo PM trước khi làm tiếp.
+2. Bị chặn quá nửa ngày: báo ngay trên Discord, nêu task, vấn đề và người cần hỗ trợ. Dự kiến vượt 20% giờ kế hoạch của một task: báo PM trước khi làm tiếp. Mọi giờ bổ sung cho phạm vi baseline (kể cả lấy từ năng lực dư ở sheet `Resources`) đều ghi vào Bảng theo dõi giờ và tính vào dự báo so với 870 giờ; chi phí vượt nội bộ do bên phát triển tự chịu, và PM phải báo Aurora University bằng văn bản nếu việc vượt giờ đe dọa mốc bàn giao, cần điều chỉnh ưu tiên FR `Should` hoặc phát sinh từ thay đổi phạm vi/giả định của khách.
 3. Mọi thay đổi vào nhánh `main` chỉ qua Pull Request đã được review theo mục 9; người kiêm vai trò vẫn không tự review.
 4. Yêu cầu từ khách chuyển về PM. Sửa nhỏ theo Proposal mục 4 được hỗ trợ trong giới hạn 2–5 lần; thay đổi lớn đi theo quy trình change request ([03](03-quan-tri-giam-sat.md) mục 5).
 5. Sau mỗi milestone, ban quản lý xem lại Team Charter; Đào Tuấn Bảo sửa, Lê Hoàng Tùng duyệt, thay đổi đi qua PR.
