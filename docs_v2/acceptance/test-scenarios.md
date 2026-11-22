@@ -14,7 +14,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 |---|---|---|---|---|---|
 | `TS-01` | Đăng nhập, phân quyền và cấp quyền nhân viên | 6 | NFR-SEC-01, NFR-SEC-02, NFR-SEC-03 | MS-01 | có |
 | `TS-02` | Sinh viên gửi yêu cầu kèm tệp đến đúng phòng | 16 | — | MS-02 | có |
-| `TS-03` | Thông báo quá hạn, danh sách trạng thái và đổi ngôn ngữ cho sinh viên | 11 | NFR-PERF-08, NFR-REL-09 | MS-02 | có |
+| `TS-03` | Thông báo quá hạn, danh sách trạng thái và đổi ngôn ngữ cho sinh viên | 10 | NFR-PERF-08, NFR-REL-09 | MS-02 | có |
 | `TS-04` | Phân công, ghi nhật ký, yêu cầu bổ sung, bổ sung và thông báo | 10 | — | MS-03 | có |
 | `TS-05` | Ưu tiên, escalate và chuyển phòng | 8 | — | MS-03 | có |
 | `TS-06` | Quá hạn tự động | 5 | NFR-PERF-09, NFR-REL-07 | MS-03 | có |
@@ -76,7 +76,9 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 ### TS-03. Thông báo quá hạn, danh sách trạng thái và đổi ngôn ngữ cho sinh viên
 
-**Kiểm AC:** `FR-STU-06/AC-01`, `FR-STU-08/AC-05`, `FR-STU-08/AC-07`, `FR-STU-08/AC-08`, `FR-STU-08/AC-09`, `FR-STU-08/AC-10`, `FR-CORE-02/AC-01`, `FR-CORE-03/AC-01`, `FR-CORE-06/AC-03`, `FR-CORE-08/AC-01`, `FR-CORE-08/AC-08`
+**Kiểm AC:** `FR-STU-06/AC-01`, `FR-STU-08/AC-05`, `FR-STU-08/AC-07`, `FR-STU-08/AC-08`, `FR-STU-08/AC-09`, `FR-STU-08/AC-10`, `FR-CORE-03/AC-01`, `FR-CORE-06/AC-03`, `FR-CORE-08/AC-01`, `FR-CORE-08/AC-08`
+
+**Phạm vi AC nhiều nhánh:** `FR-STU-08/AC-05` kiểm đánh dấu đọc và snapshot; `FR-STU-08/AC-08` kiểm thông báo quá hạn. Các nhánh yêu cầu bổ sung và đóng hồ sơ kiểm tại `MS-03` và `MS-04` theo bảng bên dưới.
 
 **Kiểm NFR:** `NFR-PERF-08`, `NFR-REL-09`
 
@@ -207,7 +209,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 - A1 và A2 phân công cùng một hồ sơ với cùng version → một người thành công, người kia nhận 409.
 - SV1 bổ sung và A1 đóng hồ sơ với cùng version → chỉ một thao tác thành công.
 - Admin vô hiệu hóa A2 đúng lúc A1 phân công hồ sơ cho A2 → không có hồ sơ mở nào được gán cho tài khoản đã vô hiệu hóa.
-- Sau khi hồ sơ chuyển sang phòng B, A1 gửi thao tác với version cũ → 404, không phải 409.
+- Sau khi hồ sơ chuyển sang phòng B, A1 gửi thao tác với version cũ → 404, không phải 409. Bước này chạy từ `MS-03` và chỉ kiểm nhánh chuyển phòng của `FR-SEC-04/AC-07`. Nhánh lọc báo cáo Admin được nghiệm thu ở `MS-05` qua `TS-51`.
 - Admin đổi SLA đúng lúc sinh viên tạo hồ sơ → hồ sơ lưu đúng một giá trị SLA đã commit.
 - Tác vụ quá hạn và thao tác đóng cùng lúc → chỉ một thay đổi commit; hồ sơ đã `CLOSED` không bị đổi lại.
 - 100 hồ sơ tạo đồng thời → 100 mã khác nhau.
@@ -365,7 +367,7 @@ Theo `non-functional-requirements/usability.md` (`NFR-USE-01`): người dùng t
 
 ## Kịch bản chức năng (TS-21 đến TS-62)
 
-Mỗi kịch bản chạy lần lượt mọi AC của một FR trên Staging, với dữ liệu dùng chung ở đầu tài liệu và dữ liệu riêng ghi trong AC. **Các bước** và **kết quả mong đợi** của từng AC là phần "điều kiện → kết quả" ghi trong AC ở `modules/*/prd.md`. Kịch bản đạt khi mọi AC đạt. Chạy trong milestone của FR; các milestone sau kiểm lại bằng kịch bản trọn luồng và kịch bản chéo có Regression = có.
+Mỗi kịch bản chạy lần lượt mọi AC của một FR trên Staging, với dữ liệu dùng chung ở đầu tài liệu và dữ liệu riêng ghi trong AC. **Các bước** và **kết quả mong đợi** của từng AC là phần "điều kiện → kết quả" ghi trong AC ở `modules/*/prd.md`. Kịch bản đạt khi mọi AC hoặc mọi nhánh AC đã đến mốc nghiệm thu đều đạt. Các AC nhiều nhánh trong bảng phân bổ bên dưới chạy vào mốc có chức năng tương ứng; các milestone sau kiểm lại bằng kịch bản trọn luồng và kịch bản chéo có Regression = có.
 
 | Mã | FR | Kiểm AC | Milestone chạy lần đầu | Regression |
 |---|---|---|---|---|
@@ -376,7 +378,7 @@ Mỗi kịch bản chạy lần lượt mọi AC của một FR trên Staging, v
 | `TS-25` | `FR-STU-05` | `FR-STU-05/AC-01` đến `FR-STU-05/AC-07` | MS-02 | không |
 | `TS-26` | `FR-STU-06` | `FR-STU-06/AC-01` đến `FR-STU-06/AC-08` | MS-02 | không |
 | `TS-27` | `FR-STU-07` | `FR-STU-07/AC-01` đến `FR-STU-07/AC-08` | MS-04 | không |
-| `TS-28` | `FR-STU-08` | `FR-STU-08/AC-01` đến `FR-STU-08/AC-10` | MS-02 | không |
+| `TS-28` | `FR-STU-08` | `FR-STU-08/AC-01` đến `FR-STU-08/AC-10` | MS-02 đến MS-04 (theo phạm vi bên dưới) | không |
 | `TS-29` | `FR-STU-09` | `FR-STU-09/AC-01` đến `FR-STU-09/AC-10` | MS-03 | không |
 | `TS-30` | `FR-STU-10` | `FR-STU-10/AC-01` đến `FR-STU-10/AC-08` | MS-04 | không |
 | `TS-31` | `FR-STF-01` | `FR-STF-01/AC-01` đến `FR-STF-01/AC-09` | MS-02 | không |
@@ -403,14 +405,24 @@ Mỗi kịch bản chạy lần lượt mọi AC của một FR trên Staging, v
 | `TS-52` | `FR-SEC-05` | `FR-SEC-05/AC-01` đến `FR-SEC-05/AC-07` *(đủ 7 AC ở `#123`; `AC-04` regression trọn luồng ở `MS-03`)* | MS-02 | có (theo `TS-09`, `TS-12`) |
 | `TS-53` | `FR-SEC-06` | `FR-SEC-06/AC-01` đến `FR-SEC-06/AC-09` *(phân tách từng AC theo mốc ở bảng dưới)* | MS-01 (`AC-04,06,08`), MS-02 (`AC-02,09`), MS-03 (`AC-01,03,05,07`) | có (theo `TS-13`) |
 | `TS-54` | `FR-CORE-01` | `FR-CORE-01/AC-01` đến `FR-CORE-01/AC-08` | MS-02 | không |
-| `TS-55` | `FR-CORE-02` | `FR-CORE-02/AC-01` đến `FR-CORE-02/AC-08` | MS-02 | không |
-| `TS-56` | `FR-CORE-03` | `FR-CORE-03/AC-01` đến `FR-CORE-03/AC-09` | MS-02 | không |
+| `TS-55` | `FR-CORE-02` | `FR-CORE-02/AC-01` đến `FR-CORE-02/AC-08` | MS-02 đến MS-04 (theo phạm vi bên dưới) | không |
+| `TS-56` | `FR-CORE-03` | `FR-CORE-03/AC-01` đến `FR-CORE-03/AC-09` | MS-02 đến MS-04 (theo phạm vi bên dưới) | không |
 | `TS-57` | `FR-CORE-04` | `FR-CORE-04/AC-01` đến `FR-CORE-04/AC-07` | MS-02 | không |
 | `TS-58` | `FR-CORE-05` | `FR-CORE-05/AC-01` đến `FR-CORE-05/AC-08` | MS-02 | không |
 | `TS-59` | `FR-CORE-06` | `FR-CORE-06/AC-01` đến `FR-CORE-06/AC-08` *(phân tách từng AC theo mốc ở bảng dưới)* | MS-02 (`AC-03,05,06`), MS-03 (`AC-02,04,07`), MS-04 (`AC-01,08`) | có (theo `TS-13`) |
 | `TS-60` | `FR-CORE-07` | `FR-CORE-07/AC-01` đến `FR-CORE-07/AC-08` | MS-02 | không |
 | `TS-61` | `FR-CORE-08` | `FR-CORE-08/AC-01` đến `FR-CORE-08/AC-08` *(phân tách từng AC theo mốc ở bảng dưới)* | MS-01 (`AC-03,04,06,07`), MS-02 (`AC-01,02,05,08`) | có (theo `TS-15`) |
 | `TS-62` | `FR-CORE-09` | `FR-CORE-09/AC-01` đến `FR-CORE-09/AC-08` *(phân tách từng AC theo mốc ở bảng dưới)* | MS-01 (`AC-02,04,07`), MS-02 (`AC-01,03,05,06`), MS-05 (`AC-08`) | có (theo `TS-15`) |
+
+### Phân bổ kịch bản chức năng có thao tác liên mốc
+
+| Kịch bản | MS-02 | MS-03 | MS-04 |
+|---|---|---|---|
+| TS-28 · Thông báo | Quá hạn, danh sách, quyền đọc, đánh dấu đọc, ngôn ngữ, giới hạn và lỗi polling. AC-05 kiểm đánh dấu đọc/snapshot. AC-08 kiểm thông báo quá hạn. | AC-01–02, nhánh REQUEST_INFO của AC-05–06 và nhánh yêu cầu bổ sung của AC-08. | Nhánh thông báo khi đóng hồ sơ của AC-08. |
+| TS-55 · Trạng thái | Tạo NEW, quá hạn tự động, cập nhật trạng thái từ API được phép và ghi log job. | Phân công, chuyển phòng, ghi chú, đổi ưu tiên và bổ sung. Kiểm các nhánh IN_PROGRESS/PENDING_INFO/OVERDUE và version tương ứng. | Đóng hồ sơ, đánh giá, tranh chấp job với đóng và hoàn tất đường đi kết thúc ở CLOSED. |
+| TS-56 · SLA | Tính hạn lúc tạo, lấy snapshot SLA, kiểm dữ liệu trả về theo quyền và bỏ qua due_at gửi từ client. | Tạm dừng/tiếp tục, đồng thời và rollback khi bổ sung, chuyển phòng, đổi ưu tiên và hồ sơ quá hạn. | Các nhánh dừng đếm khi đóng, kết thúc khoảng tạm dừng lúc đóng và tính thời gian đến lúc đóng. |
+
+Ở từng milestone, QA ghi riêng kết quả các nhánh đến hạn. Mốc triển khai nền chức năng trong ma trận vẫn là MS-02; các nhánh cần chức năng khác được kiểm khi chức năng đó có trên Staging.
 
 ### Phân bổ chạy kiểm thử 48 AC của 6 FR dùng chung theo từng milestone
 

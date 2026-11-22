@@ -26,6 +26,8 @@ Bảng **tổng hợp** theo từng AC: AC → kịch bản test → parent task
 | `#157` | `MS-05` | `Q-06` | BE Dev / Mid | `FR-SEC-04/AC-01, AC-04, AC-07` (3 AC — hoàn tất đầy đủ nhánh Admin & lọc báo cáo không PII) | Regression toàn bộ `FR-SEC-04/AC-02,03,05,06,08` và `FR-SEC-06/AC-08` trên API báo cáo `MS-05` (`TS-08`, `TS-09`) |
 | `#158` | `MS-05` | `Q-06` | FE Dev / Junior | `FR-CORE-09/AC-08` (1 AC — hoàn tất thao tác mobile 360px cả luồng NV và dashboard Admin) | Mở rộng & regression toàn bộ `FR-CORE-08/AC-01..08` và `FR-CORE-09/AC-02,04,07` trên dashboard & 3 báo cáo `MS-05` (`TS-15`) |
 
+Phạm vi kiểm theo từng mốc của TS-28, TS-55 và TS-56 xem [kịch bản kiểm thử](test-scenarios.md#phân-bổ-kịch-bản-chức-năng-có-thao-tác-liên-mốc).
+
 ## Cổng Sinh viên (`modules/M01-student-portal`)
 
 | AC | Test | Parent task | Milestone | Báo giá |
@@ -329,7 +331,7 @@ Bảng **tổng hợp** theo từng AC: AC → kịch bản test → parent task
 | `FR-CORE-01/AC-06` | `TS-54` | #24 | MS-02 | Q-03 |
 | `FR-CORE-01/AC-07` | `TS-54` | #24 | MS-02 | Q-03 |
 | `FR-CORE-01/AC-08` | `TS-54` | #24 | MS-02 | Q-03 |
-| `FR-CORE-02/AC-01` | `TS-55`, `TS-03`, `TS-06` | #12 | MS-02 | Q-03 |
+| `FR-CORE-02/AC-01` | `TS-55`, `TS-06` | #12 | MS-02 | Q-03 |
 | `FR-CORE-02/AC-02` | `TS-55` | #12 | MS-02 | Q-03 |
 | `FR-CORE-02/AC-03` | `TS-55` | #12 | MS-02 | Q-03 |
 | `FR-CORE-02/AC-04` | `TS-55` | #12 | MS-02 | Q-03 |
