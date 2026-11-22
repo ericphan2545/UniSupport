@@ -1,5 +1,7 @@
 # Giả định
 
+Bộ hồ sơ gửi khách mô phỏng gồm Proposal và báo giá cùng phiên bản. Đọc đủ A-01–A-14, tác động và hạng mục liên quan trong mục 1.3 của Proposal hoặc sheet Giả định của báo giá. Bảng dưới là nguồn cập nhật nội bộ; người sửa giả định phải đối chiếu cả hai bản trước khi phát hành.
+
 Đây là **nơi gốc quản lý nội bộ** của giả định (`A-xx`). Để Aurora University có thể đọc đầy đủ mọi giả định ảnh hưởng đến giá hoặc tiến độ ngay cả khi chỉ nhận bộ hồ sơ gửi khách, toàn bộ nội dung, tác động và hạng mục `Q-xx` bị ảnh hưởng trong bảng dưới được **đồng bộ đầy đủ** vào hai tài liệu khách nhận: [Proposal](../management/proposal.docx) mục 1.3 (và bản PDF gửi kèm tại `management/sent/`) và [quotation.xlsx](../management/quotation.xlsx) sheet `Giả định`. Phần đầu mỗi PRD trong `modules/` chỉ dẫn lại mã `A-xx`.
 
 Giả định nào được trường xác nhận khác đi thì xử lý như một thay đổi theo [Kế hoạch quản trị và giám sát](../management/03-quan-tri-giam-sat.md) mục 5: đánh giá lại effort, giá và mốc, rồi báo giá bổ sung nếu cần.
