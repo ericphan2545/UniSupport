@@ -111,8 +111,8 @@ Mỗi vai trò 1 người, tổng 10 người. Tên vai trò thống nhất vớ
 - **Pull Request:** bắt buộc điền đầy đủ `.github/pull_request_template.md` (không để nguyên placeholder chưa điền); ghi rõ mã hạng mục/rà soát, `Closes #n` cho từng issue được xử lý, tóm tắt quyết định/lý do và bằng chứng kiểm tra thực tế; với file Word/Excel/PDF phải ghi rõ file, sheet hoặc mục đã đổi và kết quả các ô kiểm tra.
 - **Review bắt buộc bởi người khác tác giả (SLA 24 giờ):**
   - Mọi PR phải có **ít nhất 1 thành viên khác tác giả** duyệt (`Approve` trên GitHub). Tác giả không tự review và không tự gộp khi chưa có duyệt.
-  - PR sửa tài liệu thuộc mảng nào do người phụ trách mảng đó (mục 3.1) review; nếu tác giả chính là người phụ trách file đó (kể cả Word/Excel) thì **người dự phòng ở mục 3.1** review. Với code: Senior của mảng review; code của Senior do Senior mảng còn lại review.
-  - Thời hạn phản hồi review tối đa **24 giờ** (1 ngày làm việc). Nếu reviewer chính không phản hồi sau 12 giờ, tác giả chuyển thẻ sang người dự phòng (mục 3.1/3.2) để bảo đảm tiến độ.
+  - PR sửa tài liệu thuộc mảng nào do người phụ trách mảng đó (mục 3.1) review; nếu người phụ trách là tác giả thì **người dự phòng ở mục 3.1** review. PR chạm nhiều mảng mời các đầu mối của từng mảng. Với code: Senior của mảng review; code của Senior do Senior mảng còn lại review.
+  - Thời hạn phản hồi review tối đa **1 ngày làm việc**. Nếu reviewer chính không phản hồi sau 12 giờ, tác giả chuyển thẻ sang người dự phòng (mục 3.1/3.2) để bảo đảm tiến độ.
 - **Merge:** chỉ gộp sau khi có ít nhất 1 lượt `Approve` từ người khác tác giả và mọi góp ý đã được xử lý; bắt buộc dùng **Squash and merge**; xóa nhánh sau khi gộp.
 - **Ngoại lệ có kiểm soát cho sửa nhỏ:**
   - *Trường hợp được phép:* chỉ áp dụng cho sửa lỗi chính tả, định dạng Markdown hoặc cập nhật thông tin hành chính cá nhân trong `README.md` (ví dụ mã số thành viên, sửa một đường dẫn hiển nhiên) với quy mô **≤ 5 dòng thay đổi trên tối đa 1 file Markdown**. **Tuyệt đối không áp dụng** cho mã nguồn, file Word/Excel/PDF, đặc tả PRD (`FR/AC/BR/E`), NFR, kịch bản test, WBS, báo giá, giả định, rủi ro hay quy trình quản trị.
