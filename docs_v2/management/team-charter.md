@@ -119,6 +119,7 @@ Mỗi vai trò 1 người, tổng 10 người. Tên vai trò thống nhất vớ
   - *Người có quyền:* thành viên phụ trách tài liệu đó (mục 3.1) hoặc trưởng nhóm (Lê Hoàng Tùng).
   - *Cách lưu dấu bắt buộc:* dùng tiền tố `docs(typo):` hoặc `docs(admin):` ghi rõ lý do trong thông điệp commit, gửi link commit lên Discord nhóm ngay khi push và phải có ít nhất 1 thành viên khác xác nhận đã xem trong vòng 24 giờ.
 - **Ghi nhận lịch sử chuyển tiếp giai đoạn khởi tạo:** các PR `#169`, `#170`, `#171` và một số commit cập nhật hành chính/tài liệu trước mốc `29871da` được gộp trong giai đoạn thiết lập hồ sơ ban đầu trước khi nhóm áp dụng đầy đủ quy tắc kiểm soát này. Từ đợt hoàn thiện hồ sơ này (`V1-01` đến `V3-03`), mỗi hạng mục được tách thành một nhánh và một PR riêng có mã hạng mục, link issue liên quan, mẫu PR điền đầy đủ và bằng chứng kiểm tra để áp dụng nhất quán quy trình review khác tác giả và squash merge.
+- **Tag baseline cho permalink đặc tả:** mỗi lần chốt phạm vi hoặc duyệt CR làm thay đổi PRD, trưởng nhóm hoặc người phụ trách GitHub tạo tag bản chốt (ví dụ `baseline-v1.1`, `baseline-v1.2`) để toàn bộ GitHub Issue dùng permalink ổn định trỏ thẳng tới heading FR theo quy ước ở [master-plan.md](master-plan.md).
 - **Hạng mục rà soát chất lượng nội bộ:** mỗi hạng mục rà soát mở thành một issue riêng kèm mã theo dõi; xử lý bằng PR có `Closes #n`, hoặc đóng issue kèm lý do cụ thể nếu giữ nguyên hiện trạng.
 
 ## 10. Thuật ngữ cần biết

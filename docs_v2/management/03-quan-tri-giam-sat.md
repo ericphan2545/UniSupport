@@ -201,7 +201,7 @@ Các đợt rà soát, chuẩn hóa tài liệu nội bộ trước khi hai bên
 4. **Cập nhật đồng bộ.** Khi được duyệt, cập nhật trong một PR có `Closes #<CR>` và ghi danh sách đã cập nhật vào issue:
    - PRD: FR và AC trong `modules/`, non-goals trong `product/README.md` (Ngô Tấn Đức);
    - báo giá: thêm dòng mới ở sheet Phiên bản của `quotation.xlsx` (Lê Hoàng Tùng);
-   - kế hoạch: sheet Milestones, WBS, Change log của Master Plan với giá trị cũ và mới; issue và milestone trên GitHub (Phan Tiến Thịnh);
+   - kế hoạch: sheet Milestones, WBS, Change log của Master Plan với giá trị cũ và mới; gắn tag baseline mới (nếu PRD đổi) và cập nhật issue (gồm permalink dẫn thẳng heading FR và danh sách AC trên FR cha, issue Dùng chung và sub-issue `[BE]`/`[FE]`) cùng milestone trên GitHub (Phan Tiến Thịnh);
    - kiểm thử: `acceptance/test-scenarios.md` và ma trận truy vết (Ngô Tấn Đức);
    - sổ rủi ro (Phan Tiến Thịnh);
    - Proposal: nếu đổi phạm vi, giá hoặc mốc, lập phiên bản mới và lưu PDF vào `sent/` (Lê Hoàng Tùng).

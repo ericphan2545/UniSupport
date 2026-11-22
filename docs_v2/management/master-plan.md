@@ -68,6 +68,19 @@ Kế hoạch có 6 milestone, chia theo luồng nghiệp vụ của một hồ s
 3. BA / Mid phân loại: lỗi đi theo quy trình lỗi ([02-qmp-quan-ly-chat-luong.md](02-qmp-quan-ly-chat-luong.md) mục 6); thay đổi phạm vi đi theo quy trình change request ([03-quan-tri-giam-sat.md](03-quan-tri-giam-sat.md) mục 5).
 4. Đạt điều kiện nghiệm thu thì hai bên ký biên bản nghiệm thu milestone; PM / Senior gửi kèm báo cáo milestone (03 mục 2.3).
 
+## Quy ước liên kết từ GitHub Issue đến đặc tả
+
+Để mọi thành viên đi thẳng từ công việc sang đúng yêu cầu mà không phải tự tìm trong file dài hàng trăm dòng:
+
+- **Dẫn thẳng đến heading FR và ghi rõ AC:**
+  - *FR parent task* (36 issue): dẫn thẳng tới heading anchor của FR trong `docs_v2/modules/<module>/prd.md` (dạng `#fr-xxx-nn-...`) và ghi phạm vi `AC-01` đến `AC-xx` của FR đó.
+  - *Sub-issue `[BE]`/`[FE]`* (64 issue): dẫn thẳng tới cùng heading anchor của FR (kèm tham chiếu `Issue cha: #n`) và ghi phạm vi AC mảng BE/FE liên quan.
+  - *Issue Dùng chung* (10 issue: `#117`, `#118`, `#123`, `#124`, `#129`, `#130`, `#155`, `#156`, `#157`, `#158`): dẫn thẳng tới heading anchor của từng FR dùng chung thuộc issue và **liệt kê tường minh danh sách từng AC chịu trách nhiệm nghiệm thu ở milestone đó** theo [traceability-matrix.md](../acceptance/traceability-matrix.md) (kể cả đủ 7 AC của `FR-SEC-05` trong `#123`).
+- **Permalink theo bản chốt vs link theo nhánh:**
+  - *Trước khi chốt phạm vi cuối tuần 2 `MS-01`:* dùng link theo nhánh `main` (`https://github.com/ericphan2545/UniSupport/blob/main/docs_v2/modules/.../prd.md#<anchor>`) để phản ánh bản rà soát mới nhất.
+  - *Từ thời điểm chốt phạm vi / phát hành baseline:* ban quản lý tạo Git tag bản chốt (ví dụ `baseline-v1.1`) và chuẩn hóa link trên issue sang **permalink cố định theo tag** (`.../blob/baseline-v1.1/docs_v2/modules/.../prd.md#<anchor>`) để bảo đảm đội lập trình và QA luôn đọc đúng phiên bản đã chốt với Aurora University.
+- **Cập nhật khi có Change Request (`CR-xx`):** khi một `CR-xx` sửa PRD được duyệt và gộp vào `main`, ban quản lý gắn tag bản chốt mới (ví dụ `baseline-v1.2`), sau đó Phan Tiến Thịnh cập nhật permalink/anchor và danh sách AC trên mọi issue bị ảnh hưởng (FR cha, issue Dùng chung và `[BE]`/`[FE]` con) trong bước 4 quy trình kiểm soát thay đổi ([03-quan-tri-giam-sat.md](03-quan-tri-giam-sat.md) mục 5).
+
 ## Thay đổi kế hoạch
 
 Kế hoạch baseline ban đầu là phiên bản `v1.0` (04/09/2026) và đã được làm rõ ở phiên bản `v1.1` (05/09/2026, giữ nguyên baseline 6 milestone, 870 giờ công và tổng giá 332.316.000 VNĐ) trong sheet Change log, gửi kèm Proposal v1.1 ([sent/](sent/README.md)). Mỗi thay đổi phạm vi, giá hoặc mốc được duyệt (CR) ghi một dòng mới vào Change log (phiên bản, ngày, CR, giá trị cũ và mới), không ghi đè.

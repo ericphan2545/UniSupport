@@ -131,4 +131,4 @@ Ngăn xếp công nghệ cụ thể (ngôn ngữ backend, framework frontend, h�
   - Kho tệp nằm ngoài thư mục web và không phát URL công khai.
   - Đóng gói và chạy được bằng Docker Compose trên hạ tầng của trường (`A-11`, `A-14`).
 
-Prototype hiện tại (thư mục `prototype/`) chỉ là vỏ giao diện chạy luồng, không phải kiến trúc production.
+Prototype 3 cổng dữ liệu mẫu là sản phẩm đầu ra theo kế hoạch ở tuần 1–2 của `MS-01` (WBS `1.07–1.09`, các issue `#107`, `#108`, `#110`) để Aurora University bấm thử và chốt yêu cầu; bản mẫu này không lưu trong kho tài liệu quản lý dự án hiện tại (không có thư mục `prototype/` trong repo) và chỉ là vỏ giao diện chạy luồng, không phải kiến trúc production.
