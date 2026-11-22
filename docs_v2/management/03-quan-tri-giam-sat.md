@@ -113,16 +113,48 @@ Mỗi báo cáo tuần và báo cáo milestone đánh giá bốn lĩnh vực the
 
 Chỉ số giờ công đo bằng giờ, không quy đổi ra tiền.
 
-**Lấy số liệu từ GitHub.** Mọi task là issue có milestone `MS-xx`, nhãn `task` và nhãn `vai trò: …`; lỗi có nhãn `bug` và nhãn mức `sev: …`; change request có nhãn `change-request`. PM lấy số liệu cho báo cáo tuần bằng các bộ lọc:
+**Lấy số liệu từ GitHub và tránh đếm trùng cha/con.** Trên GitHub Issues (tại thời điểm đối chiếu có 158 issue kế hoạch đang mở), công việc được phân thành **hai tầng tách biệt** để vừa theo dõi tiến độ chức năng/milestone vừa đo đúng tải từng vai trò mà không đếm trùng:
 
-| Chỉ số | Bộ lọc trên GitHub (tab Issues) |
-|---|---|
-| Task của milestone đã xong / tổng | `is:issue label:task milestone:"<tên MS-xx>" is:closed` so với cùng bộ lọc không có `is:closed` |
-| Task quá hạn | Issue `label:task is:open` có Hạn (dòng **Hạn:** trong issue, theo WBS) đã qua; xem theo cột Hạn trên Project #4 |
-| Tải theo vai trò | `is:issue is:open label:task label:"vai trò: BE Dev / Mid"` (đổi tên vai trò) |
-| Lỗi đang mở theo mức | `is:issue is:open label:bug label:"sev: Critical"` (đổi mức) |
-| Change request đang chờ | `is:issue is:open label:change-request` |
-| Dự báo ngày đóng milestone | Ngày đến hạn của milestone trên GitHub so với số task còn mở và Hạn của chúng |
+1. **Tầng 1 — Issue mức milestone / hạng mục cha (`label:task`, 94 issue đang mở):**
+   - **36 FR parent task** (ví dụ `#1` `[MS-02] FR-STU-02 · Tạo yêu cầu hỗ trợ`): gắn `task` + `loại: FR` + milestone `MS-xx`; **không gắn nhãn `vai trò: …`** vì công việc thực thi đã tách xuống issue `[BE]`/`[FE]` con.
+   - **57 task một cấp gắn milestone** (phân tích, thiết kế, dùng chung, viết test case, test trọn luồng, sửa lỗi, triển khai, tài liệu, bảo hành — trong đó `#145`, `#146` là task bảo hành 1 cấp kèm `loại: BE`/`loại: FE`): gắn `task` + `vai trò: …` + milestone `MS-xx`; **không gắn `loại: FR`**.
+   - **1 task quản lý xuyên suốt không gắn milestone (`#101`, hạng mục `Q-09`):** gắn `task` + `loại: quản lý` + `vai trò: PM / Senior`, để trống milestone và theo dõi tiến độ từng kỳ bằng checklist 6 milestone (`MS-01` đến `MS-06`, khớp các dòng WBS `1.34, 2.16, 3.16, 4.15, 5.17, 6.16`).
+2. **Tầng 2 — Issue thực thi theo vai trò (`-label:"loại: FR"`, 122 issue đang mở):**
+   - **64 sub-issue `[BE]`/`[FE]`** (ví dụ `#2` `[BE] FR-STU-02`, `#3` `[FE] FR-STU-02`): gắn `loại: BE` hoặc `loại: FE` + `vai trò: …` + milestone `MS-xx`; **không gắn nhãn `task`**.
+   - **58 task một cấp** (57 task gắn milestone + `#101`): trùng tập task 1 cấp ở trên vì không có issue con.
+
+Lỗi dùng nhãn `bug` và nhãn mức `sev: …`; phản hồi dùng `feedback`; change request dùng `change-request`. PM lấy số liệu báo cáo tuần theo đúng tập cần đếm trong bảng sau:
+
+| Chỉ số | Tập issue được đếm (chống đếm trùng) | Bộ lọc trên GitHub (tab Issues) |
+|---|---|---|
+| Task của milestone đã xong / tổng | **Tầng 1** (36 FR cha + 57 task 1 cấp thuộc milestone; loại 64 BE/FE con → không đếm trùng `#1` và `#2`) | `is:issue label:task milestone:"<tên MS-xx>" is:closed` chia cho `is:issue label:task milestone:"<tên MS-xx>"` |
+| Việc xuyên suốt không gắn milestone (`#101`) | **Task quản lý xuyên suốt** (1 issue `#101`, theo dõi bằng checklist `MS-01`–`MS-06`) | `is:issue is:open label:"loại: quản lý" no:milestone` |
+| Tải theo vai trò | **Tầng 2** (64 BE/FE con + 58 task 1 cấp; loại 36 FR cha bằng `-label:"loại: FR"` → bao gồm `#2`, loại `#1`) | `is:issue is:open -label:"loại: FR" -label:bug -label:feedback -label:change-request label:"vai trò: BE Dev / Mid"` (đổi tên vai trò) |
+| Task quá hạn (đo tỷ lệ đúng hạn vận hành) | **Tầng 2** (122 issue thực thi — phát hiện sớm trễ ở BE/FE mà không đếm trùng với FR cha) | Lọc `is:issue is:open -label:"loại: FR" -label:bug -label:feedback -label:change-request`, so trường `**Hạn:**` (theo WBS) với ngày báo cáo; đối chiếu riêng tầng FR cha bằng `is:issue is:open label:task`, **không cộng gộp hai tầng** |
+| Lỗi đang mở theo mức | Issue lỗi (`bug`) | `is:issue is:open label:bug label:"sev: Critical"` (đổi mức `Major` / `Minor`) |
+| Change request đang chờ | Issue CR (`change-request`) | `is:issue is:open label:change-request` |
+| Dự báo ngày đóng milestone | **Tầng 1 & Tầng 2** thuộc milestone đó (so riêng từng tầng, không cộng gộp) | So due date của milestone trên GitHub với các issue còn mở có `**Hạn:**` lớn nhất trong milestone |
+
+**Kết quả chạy thử bộ lọc trên tập issue GitHub thực tế (158 issue đang mở — đối chiếu trước khi cập nhật):**
+
+- **Kiểm chứng chống đếm trùng cha/con:** số issue đang mở mang đồng thời `loại: FR` và `vai trò: …` bằng **0**; `#1` (`task`, `loại: FR`, không có `vai trò:`) chỉ vào Tầng 1; `#2` (`loại: BE`, `vai trò: BE Dev / Mid`, không có `task`) và `#3` (`loại: FE`, `vai trò: FE Dev / Junior`) chỉ vào Tầng 2; `#101` (`task`, `loại: quản lý`, `vai trò: PM / Senior`, `no:milestone`) chỉ vào bộ lọc việc xuyên suốt và tải của `PM / Senior`.
+- **Chạy thử “Tải theo vai trò” (bộ lọc cũ `label:task label:"vai trò: ..."` so với bộ lọc mới `-label:"loại: FR" ... label:"vai trò: ..."`):**
+
+| Vai trò | Bộ lọc cũ (thiếu BE/FE) | Bộ lọc mới (chuẩn, 0 đếm trùng) | Sub-issue BE/FE được khôi phục |
+|---|---:|---:|---:|
+| `PM / Senior` | 5 | 5 | 0 |
+| `BA / Mid` | 4 | 4 | 0 |
+| `UI/UX / Mid` | 2 | 2 | 0 |
+| `BE Dev / Senior` | 6 | 22 | +16 |
+| `BE Dev / Mid` | 8 | 27 | +19 |
+| `FE Dev / Senior` | 7 | 22 | +15 |
+| `FE Dev / Junior` | 7 | 21 | +14 |
+| `QA / Senior` | 7 | 7 | 0 |
+| `Tester / Junior` | 7 | 7 | 0 |
+| `DevOps / Mid` | 5 | 5 | 0 |
+| **Tổng (Tầng 2)** | **58** | **122** | **+64** |
+
+- **Chạy thử “Task quá hạn” tại mốc mô phỏng `16/10/2026` (khớp ví dụ tuần 6 ở mục 6.2):** toàn bộ `122/122` issue thực thi đều có trường `**Hạn:**` (`0` issue thiếu hạn); bộ lọc Tầng 2 ghi nhận `53` issue có hạn trước `16/10/2026` (gồm `31` sub-issue BE/FE như `#2` hạn `12/10/2026` và `22` task một cấp); đối chiếu tách biệt trên Tầng 1 (`94` issue `label:task`) ghi nhận `40` issue (trong đó có `#1` hạn `12/10/2026`) — hai tầng không cộng gộp nên hoàn toàn không đếm trùng `#1` và `#2`.
 
 Giờ thực tế lấy từ Bảng theo dõi giờ (mục 6.1), cộng theo số issue để so với giờ kế hoạch của dòng WBS tương ứng.
 

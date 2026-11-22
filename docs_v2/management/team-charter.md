@@ -55,7 +55,7 @@ Mỗi vai trò 1 người, tổng 10 người. Tên vai trò thống nhất vớ
 
 ## 5. Quy trình nhận và hoàn thành task
 
-1. **Nhận việc:** mở issue trên GitHub đã được giao ở buổi họp đầu milestone ([03](03-quan-tri-giam-sat.md) mục 2.3). Kiểm tra mã FR, milestone `MS-xx`, owner (nhãn `vai trò: …`), hạn, mã WBS và điều kiện hoàn thành. Chưa rõ yêu cầu thì hỏi BA trước khi làm.
+1. **Nhận việc:** mở issue trên GitHub đã được giao ở buổi họp đầu milestone ([03](03-quan-tri-giam-sat.md) mục 2.3). Kiểm tra mã FR, milestone `MS-xx`, nhãn đúng tầng issue (issue thực thi `[BE]`/`[FE]` hoặc task 1 cấp mang nhãn `vai trò: …`; FR parent task mang `task` + `loại: FR` để theo dõi tổng thể theo [03](03-quan-tri-giam-sat.md) mục 3.1), hạn theo WBS, mã WBS và điều kiện hoàn thành. Chưa rõ yêu cầu thì hỏi BA trước khi làm.
 2. **Thực hiện:** cập nhật trạng thái issue và giờ thực tế mỗi ngày làm việc. Tạo nhánh riêng theo mục 9. Nếu bị chặn hoặc sắp vượt giờ, xử lý theo mục 4.
 3. **Nộp việc:** mở Pull Request theo mẫu, ghi `Closes #n`, phần đã làm và cách kiểm tra. Nhờ người review theo mục 9, sửa các góp ý rồi gửi lại.
 4. **Kiểm tra và hoàn tất:** chỉ đóng issue khi đạt Definition of Done ([02-qmp-quan-ly-chat-luong.md](02-qmp-quan-ly-chat-luong.md) mục 5). Với task: đã review và merge, đạt tiêu chí chấp nhận liên quan, Tester đã kiểm thử, không còn lỗi Critical, chạy được trên Staging và đã ghi giờ thực tế.
