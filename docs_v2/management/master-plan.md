@@ -63,6 +63,6 @@ Kế hoạch có 6 milestone, chia theo luồng nghiệp vụ của một hồ s
 
 ## Thay đổi kế hoạch
 
-Kế hoạch đã chốt là phiên bản v1.0 trong sheet Change log, gửi kèm Proposal v1.0 ([sent/](sent/README.md)). Mỗi CR được duyệt ghi một dòng mới vào Change log (phiên bản, ngày, CR, giá trị cũ và mới), không ghi đè.
+Kế hoạch baseline ban đầu là phiên bản `v1.0` (04/09/2026) và đã được làm rõ ở phiên bản `v1.1` (05/09/2026, giữ nguyên baseline 6 milestone, 870 giờ công và tổng giá 332.316.000 VNĐ) trong sheet Change log, gửi kèm Proposal v1.1 ([sent/](sent/README.md)). Mỗi thay đổi phạm vi, giá hoặc mốc được duyệt (CR) ghi một dòng mới vào Change log (phiên bản, ngày, CR, giá trị cũ và mới), không ghi đè.
 
-Trước khi gửi proposal cho khách lần đầu, nhóm sửa kế hoạch và báo giá trực tiếp; lịch sử sửa nằm trong PR. Sửa theo feedback của giảng viên không phải là change request. Sau khi khách đã nhận proposal, thay đổi phạm vi, giá hoặc mốc do khách yêu cầu (thật hoặc `Mô phỏng`) mới đi qua CR và ghi Change log.
+Trước khi Aurora University ký chốt chính thức bộ đặc tả và kế hoạch, các đợt rà soát, chuẩn hóa nội bộ của nhóm được thực hiện qua Pull Request và phát hành phiên bản làm rõ trong Change log mà không tính là change request. Sau khi hai bên đã chốt phạm vi, mọi thay đổi phạm vi, giá hoặc mốc do khách yêu cầu (thật hoặc `Mô phỏng`) đều đi qua quy trình CR và ghi Change log.

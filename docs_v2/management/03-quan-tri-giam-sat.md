@@ -161,7 +161,7 @@ Mọi quyết định quan trọng được ghi vào Decision Log để các th�
 
 Mọi thay đổi về phạm vi, tiến độ hoặc báo giá phải được đánh giá và xác nhận trước khi thực hiện, theo cam kết trong Proposal mục 4. Thay đổi mục tiêu hoặc ngưỡng chất lượng (QMP mục 8) cũng đi theo quy trình này. Mỗi change request là một issue mã `CR-xx` tạo bằng mẫu Change request trên GitHub (nhãn `change-request`); CR mô phỏng ghi rõ `Mô phỏng`.
 
-Sửa tài liệu theo góp ý của giảng viên không phải là change request. Trước khi gửi proposal v1.0 cho khách, nhóm sửa kế hoạch và báo giá trực tiếp; sau đó, thay đổi do khách yêu cầu mới đi qua quy trình dưới đây.
+Các đợt rà soát, chuẩn hóa tài liệu nội bộ trước khi hai bên ký chốt phạm vi không phải là change request mà được quản lý qua Pull Request và lịch sử phiên bản. Sau khi phạm vi đã chốt với Aurora University, mọi thay đổi do khách yêu cầu hoặc làm thay đổi phạm vi, mốc, báo giá đều đi qua quy trình dưới đây.
 
 1. **Ghi nhận.** Ai cũng tạo được issue bằng mẫu Change request, nêu nội dung, lý do và feedback gốc (nếu có). Yêu cầu từ khách chuyển về PM (Team Charter mục 4).
 2. **Đánh giá tác động.** Kiểm tra cổng bắt buộc và chấm tiêu chí theo [01](01-quan-ly-san-pham.md) mục 7. Điền bảng tác động trong mẫu issue: phạm vi (FR, AC bị ảnh hưởng), effort (BE Dev / Senior và FE Dev / Senior ước giờ), giá (Lê Hoàng Tùng tính theo đơn giá ở `quotation.xlsx`), timeline (milestone bị dời), rủi ro (mã `R-xx` mới hoặc đổi điểm), test (kịch bản `TS-xx` phải viết hoặc chạy lại, QA / Senior đánh giá), dự phòng đã dùng và còn lại.

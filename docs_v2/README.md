@@ -32,9 +32,9 @@ Nội dung không có trong mục lục này thì không phải tài liệu đan
 | Feedback, roadmap, chỉ số giá trị, ai quyết sau bàn giao | 01-quan-ly-san-pham mục 5, 8, 6, 7.3 |
 | Giả định, ràng buộc | [assumptions.md](project/assumptions.md) (`A-xx`), [constraints.md](project/constraints.md) |
 
-## Đối chiếu với cấu trúc chuẩn của môn
+## Đối chiếu cấu trúc thư mục tài liệu
 
-Nhóm giữ tên thư mục riêng; bảng dưới chỉ vị trí tương ứng.
+Nhóm giữ tên thư mục gọn cho dự án; bảng dưới ánh xạ sang cấu trúc tài liệu tham chiếu.
 
 | Cấu trúc chuẩn | Vị trí trong repo |
 |---|---|
@@ -80,7 +80,7 @@ Liên kết chỉ ghi ở một phía: phía ghi là cột "Liên kết phải g
 |---|---|---|
 | Client Aurora University, hiện trạng của trường | Có | Proposal, `product/README.md` |
 | Đội thực thi 10 vai trò | Có | Team Charter mục 3.2, sheet Resources, `Bang_Effort.md` |
-| Proposal đã gửi (v1.0, 04/09/2026) | Có | `management/sent/` |
+| Proposal đã gửi khách | Có | `management/sent/`: bản [v1.1 (05/09/2026)](management/sent/proposal-v1.1-2026-09-05.pdf) đang hiệu lực; bản v1.0 (04/09/2026) lưu lịch sử |
 | Feedback, change request | Có khi phát sinh | Ghi `Mô phỏng` trong issue (mẫu Feedback, Change request) |
 | Báo cáo và số liệu ví dụ | Có | Ví dụ báo cáo tuần ở 03 mục 6.2 |
 

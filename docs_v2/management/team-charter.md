@@ -106,13 +106,13 @@ Mỗi vai trò 1 người, tổng 10 người. Tên vai trò thống nhất vớ
 
 Áp dụng cho tài liệu ngay bây giờ và cho code khi dự án chạy.
 
-- **Branch:** không push trực tiếp lên `main`. Nhánh tài liệu đặt tên `docs/<mô-tả-ngắn>`; nhánh code `feat/<số-issue>-<mô-tả-ngắn>` hoặc `fix/<số-issue>-<mô-tả-ngắn>`. Chữ thường, không dấu, nối bằng gạch ngang. Ví dụ: `docs/r1-feedback`, `feat/1-tao-yeu-cau`.
+- **Branch:** không push trực tiếp lên `main`. Nhánh tài liệu đặt tên `docs/<mô-tả-ngắn>`; nhánh code `feat/<số-issue>-<mô-tả-ngắn>` hoặc `fix/<số-issue>-<mô-tả-ngắn>`. Chữ thường, không dấu, nối bằng gạch ngang. Ví dụ: `docs/v1-01-cap-nhat-proposal`, `feat/1-tao-yeu-cau`.
 - **Commit:** bắt đầu bằng loại thay đổi (`docs:`, `feat:`, `fix:`), mô tả ngắn việc đã làm.
 - **Pull Request:** dùng mẫu `.github/pull_request_template.md`; ghi `Closes #n` cho từng issue được xử lý; ghi quyết định và lý do; với file Word/Excel ghi rõ sheet hoặc mục đã đổi.
 - **Review:** ít nhất 1 thành viên ban quản lý khác tác giả duyệt. PR sửa file Word/Excel phải được người chịu trách nhiệm file đó duyệt; nếu tác giả chính là người đó thì người dự phòng duyệt. Với code: Senior của mảng review; code của Senior do Senior mảng còn lại review.
 - **Merge:** tác giả merge sau khi có duyệt và không còn góp ý chưa xử lý; dùng squash merge; xóa nhánh sau khi merge.
-- **Ngoại lệ đã ghi nhận:** PR #169 và #170 (sửa theo góp ý vòng 1 và chấm thử) được trưởng nhóm merge khi chưa có review và bằng merge commit, trước khi nhóm thống nhất áp dụng mục này cho PR sửa theo feedback. Từ PR sau, mọi PR áp dụng đúng quy tắc trên, không có ngoại lệ.
-- **Góp ý của giảng viên:** mỗi góp ý một issue, giữ tiêu đề và mã `R1-xx`; sửa bằng PR có `Closes #n`, hoặc đóng issue kèm lý do nếu không đồng ý.
+- **Lịch sử chuyển tiếp giai đoạn khởi tạo:** các PR `#169`, `#170` và `#171` (hoàn thiện hồ sơ dự án ban đầu) được gộp trước khi nhóm áp dụng đầy đủ quy tắc review bắt buộc. Từ các đợt cập nhật tiếp theo, mọi thay đổi áp dụng đúng quy tắc ở mục này.
+- **Hạng mục rà soát chất lượng nội bộ:** mỗi hạng mục rà soát mở thành một issue riêng kèm mã theo dõi; xử lý bằng PR có `Closes #n`, hoặc đóng issue kèm lý do cụ thể nếu giữ nguyên hiện trạng.
 
 ## 10. Thuật ngữ cần biết
 
