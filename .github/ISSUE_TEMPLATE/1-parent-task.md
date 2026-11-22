@@ -26,13 +26,13 @@ QUY ƯỚC NHÃN VÀ CẤP ISSUE (đồng bộ bộ lọc ở docs_v2/management
 <!--
 QUY ƯỚC LIÊN KẾT ĐẶC TẢ (xem docs_v2/management/master-plan.md mục "Quy ước liên kết từ GitHub Issue đến đặc tả"):
 - Mọi FR parent task, issue Dùng chung và sub-issue [BE]/[FE] đều dẫn THẲNG đến heading anchor của FR tương ứng (`#fr-xxx-nn-...`), KHÔNG chỉ trỏ đến đầu file `prd.md`.
-- Trước khi chốt phạm vi MS-01: dùng link nhánh `blob/main/...#<anchor>`. Ngay khi chốt baseline (ví dụ tag `baseline-v1.1`): dùng permalink cố định theo tag `blob/baseline-v1.1/...#<anchor>`. Khi có Change Request sửa PRD, cập nhật link sang tag mới tại bước 4 quy trình CR (03 mục 5).
+- Trước khi chốt phạm vi MS-01: dùng link nhánh `blob/main/...#<anchor>`. Ngay khi chốt baseline (ví dụ tag `baseline-v2.0`): dùng permalink cố định theo tag `blob/baseline-v2.0/...#<anchor>`. Khi có Change Request sửa PRD, cập nhật link sang tag mới tại bước 4 quy trình CR (03 mục 5).
 - Issue Dùng chung (#117, #118, #123, #124, #129, #130, #155, #156, #157, #158) bắt buộc liệt kê rõ danh sách AC chịu trách nhiệm ở milestone đó.
 - Sub-issue [BE]/[FE] ghi thêm dòng "Issue cha: #<số>" và dẫn thẳng heading FR + phạm vi AC mảng BE/FE.
 -->
 
 - **Issue cha (chỉ điền với sub-issue `[BE]`/`[FE]`):** <!-- Ví dụ: #1 -->
-- **Đặc tả FR (dẫn thẳng heading anchor):** <!-- Ví dụ: [FR-STU-02 · Tạo yêu cầu hỗ trợ](https://github.com/ericphan2545/UniSupport/blob/baseline-v1.1/docs_v2/modules/M01-student-portal/prd.md#fr-stu-02-tạo-yêu-cầu-hỗ-trợ) -->
+- **Đặc tả FR (dẫn thẳng heading anchor):** <!-- Ví dụ: [FR-STU-02 · Tạo yêu cầu hỗ trợ](https://github.com/ericphan2545/UniSupport/blob/baseline-v2.0/docs_v2/modules/M01-student-portal/prd.md#fr-stu-02-tạo-yêu-cầu-hỗ-trợ) -->
 - **Danh sách AC áp dụng:** <!-- Ví dụ: FR-STU-02/AC-01 đến AC-10 (với issue Dùng chung: liệt kê rõ từng mã AC thuộc milestone này) -->
 
 ## Điều kiện hoàn thành
