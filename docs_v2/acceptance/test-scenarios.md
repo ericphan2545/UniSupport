@@ -32,7 +32,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 | `TS-18` | Rate limit | 11 | NFR-SEC-13 | MS-01 đến MS-05 | có |
 | `TS-19` | Hiệu năng | 0 | NFR-PERF-01, NFR-PERF-02, NFR-PERF-03 | MS-06 | không |
 | `TS-20` | Usability | 0 | NFR-USE-01 | MS-06 | không |
-| `TS-63` | Bảo mật đầu vào (CSRF/XSS), phản hồi lỗi `correlation_id` và log vận hành | 0 | NFR-SEC-04, NFR-SEC-05, NFR-SEC-08, NFR-OBS-01, NFR-OBS-02, NFR-OBS-03 | MS-01 đến MS-05 | có |
+| `TS-63` | Bảo mật đầu vào (CSRF/XSS), phản hồi lỗi `correlation_id` và log vận hành | 0 | NFR-SEC-04, NFR-SEC-05, NFR-SEC-08, NFR-SEC-09, NFR-OBS-01, NFR-OBS-02, NFR-OBS-03 | MS-01 đến MS-05 | có |
 | `TS-64` | Sẵn sàng triển khai production: HTTPS, cấm SSO giả lập, bí mật và lưu trữ dữ liệu | 0 | NFR-SEC-01, NFR-SEC-10, NFR-SEC-11, NFR-DEP-03, NFR-DEP-04, NFR-REL-10 | MS-06 | không |
 
 **Dữ liệu dùng chung:** phòng A và phòng B; nhân viên A1, A2 thuộc phòng A, B1 thuộc phòng B; sinh viên SV1, SV2; một Admin; loại yêu cầu X ánh xạ phòng A với SLA 48 giờ; loại yêu cầu Y có SLA 1 giờ để test quá hạn.
@@ -341,7 +341,7 @@ Theo `non-functional-requirements/usability.md` (`NFR-USE-01`): người dùng t
 
 ### TS-63. Bảo mật đầu vào (CSRF/XSS), phản hồi lỗi `correlation_id` và log vận hành
 
-**Kiểm NFR:** `NFR-SEC-04`, `NFR-SEC-05`, `NFR-SEC-08`, `NFR-OBS-01`, `NFR-OBS-02`, `NFR-OBS-03`
+**Kiểm NFR:** `NFR-SEC-04`, `NFR-SEC-05`, `NFR-SEC-08`, `NFR-SEC-09`, `NFR-OBS-01`, `NFR-OBS-02`, `NFR-OBS-03`
 
 **Milestone chạy lần đầu:** MS-01 đến MS-05 · **Regression:** có · **Vai trò thực hiện:** Tester / Junior chạy trên Staging, QA / Senior rà soát log và phê duyệt
 

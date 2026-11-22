@@ -7,7 +7,7 @@
 | `NFR-DEP-01` | Danh mục loại yêu cầu, phòng ban và SLA ban đầu nạp từ dữ liệu seed, idempotent theo mã, trong một transaction; nạp lại không ghi đè SLA Admin đã sửa, không xóa loại đã có hồ sơ; nạp lỗi thì giữ nguyên bộ đang dùng | `TS-16` |
 | `NFR-DEP-02` | Loại yêu cầu không ánh xạ phòng ban, hoặc ánh xạ tới phòng không tồn tại: nạp thất bại, ứng dụng không khởi động | `TS-16`, `FR-CORE-05/AC-02` |
 | `NFR-DEP-03` | Bản production từ chối khởi động nếu cấu hình bật SSO giả lập | `TS-64` bước 1 |
-| `NFR-DEP-04` | Ứng dụng chạy bằng Docker Compose trên server do trường chỉ định, chỉ qua HTTPS, đăng nhập bằng SSO thật; Admin đầu tiên vào được Cổng Admin | `TS-64` bước 2 (kèm chạy lại `TS-01` đến `TS-08` trên server trường ở buổi demo nghiệm thu `MS-06`) |
+| `NFR-DEP-04` | Ứng dụng chạy bằng Docker Compose trên server do trường chỉ định, chỉ qua HTTPS, đăng nhập bằng SSO thật; Admin đầu tiên vào được Cổng Admin | `TS-64` bước 2. Các kịch bản trọn luồng được chạy lại trên máy chủ trường trong demo nghiệm thu MS-06. |
 
 - Không có giao diện thêm, sửa, xóa danh mục (`NG-08`). Muốn đổi thì đội phát triển cập nhật dữ liệu nạp và triển khai lại.
 - Các việc triển khai production theo dõi trong `MS-06` (sheet WBS và GitHub): Docker Compose production và `.env.example`; triển khai lên server trường, nạp tài khoản Admin đầu tiên, nối SSO thật, chạy test hiệu năng `TS-19`; hỗ trợ Go-live và xử lý sự cố triển khai.
