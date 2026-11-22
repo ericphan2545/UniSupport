@@ -2,7 +2,7 @@
 
 <!-- Bắt buộc điền cụ thể (không để nguyên chú thích mẫu): sửa file nào, quyết định gì và lý do. -->
 
-- **Mã hạng mục / rà soát (nếu có):** <!-- Ví dụ: V1-05, CR-01 -->
+- **Mã hạng mục / rà soát (nếu có):** <!-- Ví dụ: CR-01, #n -->
 - **Nội dung thay đổi:**
 
 ## Liên quan
