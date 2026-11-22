@@ -81,7 +81,7 @@ Liên kết chỉ ghi ở một phía: phía ghi là cột "Liên kết phải g
 |---|---|---|
 | Client Aurora University, hiện trạng của trường | Có | Proposal, `product/README.md` |
 | Đội thực thi 10 vai trò | Có | Team Charter mục 3.2, sheet Resources, `Bang_Effort.md` |
-| Proposal đã gửi khách | Có | `management/sent/`: bản [v1.1 (05/09/2026)](management/sent/proposal-v1.1-2026-09-05.pdf) đang hiệu lực; bản v1.0 (04/09/2026) lưu lịch sử |
+| Proposal đã gửi khách | Có | `management/sent/`: bản [v2.0 (06/09/2026)](management/sent/proposal-v2.0-2026-09-06.pdf) đang hiệu lực (Mô phỏng) |
 | Feedback, change request | Có khi phát sinh | Ghi `Mô phỏng` trong issue (mẫu Feedback, Change request) |
 | Báo cáo, bảng giờ, Decision Log và biên bản ví dụ | Có | Ví dụ báo cáo tuần ở 03 mục 6.2; mẫu & số liệu minh họa ở [management/records/](management/records/README.md) |
 

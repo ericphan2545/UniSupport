@@ -9,7 +9,7 @@ Ngày cập nhật: 17/11/2026
 
 ## 2. Mục tiêu chung
 
-- Bàn giao đúng phạm vi đã chốt trong 15 tuần và định mức baseline **870 giờ công** (gồm 797 giờ cơ sở và 73 giờ quỹ dự phòng rủi ro); thời gian chờ khách phản hồi không tính vào 15 tuần. Quy tắc phân biệt giờ baseline, năng lực dư (`Resources`), giờ CR và chịu chi phí vượt giờ theo [Bang_Effort.md](Bang_Effort.md) mục 2.0d.
+- Bàn giao đúng phạm vi đã chốt trong 15 tuần và định mức baseline **1109 giờ công** (gồm 1021 giờ cơ sở và 88 giờ quỹ dự phòng rủi ro); thời gian chờ khách phản hồi không tính vào 15 tuần. Quy tắc phân biệt giờ baseline, năng lực dư (`Resources`), giờ CR và chịu chi phí vượt giờ theo [Bang_Effort.md](Bang_Effort.md) mục 2.0d.
 - Chất lượng bàn giao: đạt điều kiện Go-live ở [QMP](02-qmp-quan-ly-chat-luong.md) mục 2.2, khớp điều kiện nghiệm thu với khách ở Proposal mục 6.2.
 - Phạm vi theo PRD ([product/README.md](../product/README.md) và `modules/`). Tiêu chí nghiệm thu chính thức chốt với khách bằng văn bản ở cuối tuần 2 của `MS-01`.
 
@@ -48,7 +48,7 @@ Mỗi vai trò 1 người, tổng 10 người. Tên vai trò thống nhất vớ
 ## 4. Quy tắc làm việc
 
 1. Mỗi người làm tối đa 2 task cùng lúc; cập nhật trạng thái issue trên GitHub và ghi giờ thực tế vào Bảng theo dõi giờ ([03](03-quan-tri-giam-sat.md) mục 6.1) mỗi ngày làm việc.
-2. Bị chặn quá nửa ngày: báo ngay trên Discord, nêu task, vấn đề và người cần hỗ trợ. Dự kiến vượt 20% giờ kế hoạch của một task: báo PM trước khi làm tiếp. Mọi giờ bổ sung cho phạm vi baseline (kể cả lấy từ năng lực dư ở sheet `Resources`) đều ghi vào Bảng theo dõi giờ và tính vào dự báo so với 870 giờ; chi phí vượt nội bộ do bên phát triển tự chịu, và PM phải báo Aurora University bằng văn bản nếu việc vượt giờ đe dọa mốc bàn giao, cần điều chỉnh ưu tiên FR `Should` hoặc phát sinh từ thay đổi phạm vi/giả định của khách.
+2. Bị chặn quá nửa ngày: báo ngay trên Discord, nêu task, vấn đề và người cần hỗ trợ. Dự kiến vượt 20% giờ kế hoạch của một task: báo PM trước khi làm tiếp. Mọi giờ bổ sung cho phạm vi baseline (kể cả lấy từ năng lực dư ở sheet `Resources`) đều ghi vào Bảng theo dõi giờ và tính vào dự báo so với 1109 giờ; chi phí vượt nội bộ do bên phát triển tự chịu, và PM phải báo Aurora University bằng văn bản nếu việc vượt giờ đe dọa mốc bàn giao, cần điều chỉnh ưu tiên FR `Should` hoặc phát sinh từ thay đổi phạm vi/giả định của khách.
 3. Mọi thay đổi về tài liệu dự án, kế hoạch, báo giá, đặc tả, quy trình và mã nguồn đưa vào nhánh `main` đều thực hiện qua Pull Request, có ít nhất 1 người khác tác giả review và gộp bằng **squash merge** theo mục 9; người kiêm vai trò tuyệt đối không tự duyệt PR của mình. Ngoại lệ sửa nhỏ hành chính/chính tả chỉ được phép trong phạm vi hẹp có kiểm soát và phải lưu dấu theo đúng mục 9.
 4. Yêu cầu từ khách chuyển về PM. Sửa nhỏ theo Proposal mục 4 được hỗ trợ trong giới hạn 2–5 lần; thay đổi lớn đi theo quy trình change request ([03](03-quan-tri-giam-sat.md) mục 5).
 5. Sau mỗi milestone, ban quản lý xem lại Team Charter; Đào Tuấn Bảo sửa, Lê Hoàng Tùng duyệt, thay đổi đi qua PR.
@@ -119,7 +119,7 @@ Mỗi vai trò 1 người, tổng 10 người. Tên vai trò thống nhất vớ
   - *Người có quyền:* thành viên phụ trách tài liệu đó (mục 3.1) hoặc trưởng nhóm (Lê Hoàng Tùng).
   - *Cách lưu dấu bắt buộc:* dùng tiền tố `docs(typo):` hoặc `docs(admin):` ghi rõ lý do trong thông điệp commit, gửi link commit lên Discord nhóm ngay khi push và phải có ít nhất 1 thành viên khác xác nhận đã xem trong vòng 24 giờ.
 - **Áp dụng quy trình:** Mỗi hạng mục rà soát có một nhánh và một PR riêng, liên kết issue liên quan, điền đầy đủ mẫu PR và ghi bằng chứng kiểm tra. Thực hiện review khác tác giả và squash merge theo quy định trên.
-- **Tag baseline cho permalink đặc tả:** mỗi lần chốt phạm vi hoặc duyệt CR làm thay đổi PRD, trưởng nhóm hoặc người phụ trách GitHub tạo tag bản chốt (ví dụ `baseline-v1.1`, `baseline-v1.2`) để toàn bộ GitHub Issue dùng permalink ổn định trỏ thẳng tới heading FR theo quy ước ở [master-plan.md](master-plan.md).
+- **Tag baseline cho permalink đặc tả:** mỗi lần chốt phạm vi hoặc duyệt CR làm thay đổi PRD, trưởng nhóm hoặc người phụ trách GitHub tạo tag bản chốt (ví dụ `baseline-v2.0`, `baseline-v2.1`) để toàn bộ GitHub Issue dùng permalink ổn định trỏ thẳng tới heading FR theo quy ước ở [master-plan.md](master-plan.md).
 - **Hạng mục rà soát chất lượng nội bộ:** mỗi hạng mục rà soát mở thành một issue riêng kèm mã theo dõi; xử lý bằng PR có `Closes #n`, hoặc đóng issue kèm lý do cụ thể nếu giữ nguyên hiện trạng.
 
 ## 10. Thuật ngữ cần biết

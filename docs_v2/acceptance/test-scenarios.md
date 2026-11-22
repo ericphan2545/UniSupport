@@ -17,7 +17,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 | `TS-03` | Thông báo quá hạn, danh sách trạng thái và đổi ngôn ngữ cho sinh viên | 10 | NFR-PERF-08, NFR-REL-09 | MS-02 | có |
 | `TS-04` | Phân công, ghi nhật ký, yêu cầu bổ sung, bổ sung và thông báo | 10 | — | MS-03 | có |
 | `TS-05` | Ưu tiên, escalate và chuyển phòng | 8 | — | MS-03 | có |
-| `TS-06` | Quá hạn tự động | 5 | NFR-PERF-09, NFR-REL-07 | MS-03 | có |
+| `TS-06` | Quá hạn tự động | 4 | NFR-PERF-09, NFR-REL-07 | MS-03 | có |
 | `TS-07` | Đóng hồ sơ, trả kết quả, lịch sử công khai và đánh giá | 7 | — | MS-04 | có |
 | `TS-08` | Báo cáo và dashboard của Admin khớp dữ liệu | 8 | NFR-SEC-12, NFR-PERF-08 | MS-05 | có |
 | `TS-09` | Phạm vi dữ liệu và truy cập chéo | 6 | NFR-SEC-03, NFR-SEC-06 | MS-01 đến MS-05 | có |
@@ -129,7 +129,9 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 ### TS-06. Quá hạn tự động
 
-**Kiểm AC:** `FR-CORE-02/AC-01`, `FR-CORE-03/AC-01`, `FR-CORE-03/AC-02`, `FR-STU-08/AC-08`, `FR-STF-07/AC-01`
+**Kiểm AC:** `FR-CORE-03/AC-01`, `FR-CORE-03/AC-02`, `FR-STU-08/AC-08`, `FR-STF-07/AC-01`
+
+Ở đây kiểm nhánh yêu cầu bổ sung/quá hạn của thông báo và nhánh SLA tương ứng. Luồng kết thúc CLOSED được kiểm trong TS-55 và TS-07 ở MS-04.
 
 **Kiểm NFR:** `NFR-PERF-09`, `NFR-REL-07`
 
@@ -350,7 +352,7 @@ Theo `non-functional-requirements/usability.md` (`NFR-USE-01`): người dùng t
 | 1 | Gửi request ghi (`POST/PUT/PATCH/DELETE`) thiếu CSRF token, sai CSRF token hoặc giả mạo header `Origin` từ miền khác (`NFR-SEC-04`) | Hệ thống trả 403; không ghi dữ liệu nghiệp vụ |
 | 2 | Nhập chuỗi HTML/JavaScript (ví dụ `<script>alert(1)</script>`, `<img src=x onerror=alert(1)>`) vào mô tả hồ sơ, ghi chú nội bộ, nội dung yêu cầu bổ sung, kết quả xử lý, lý do chuyển phòng, nhận xét đánh giá và tên tệp (`NFR-SEC-05`) | Mọi giao diện hiển thị nguyên văn chuỗi văn bản đã escape, tuyệt đối không thực thi script |
 | 3 | Thu thập mẫu response lỗi ở tất cả mã lỗi `400/401/403/404/409/413/415/429/500/502/503/504` khi chạy test các milestone (`NFR-SEC-08`, `NFR-OBS-01`) | 100% response lỗi có trường `correlation_id` và tra cứu khớp đúng dòng tương ứng trong log vận hành; không chứa stack trace, câu SQL, đường dẫn vật lý kho tệp hay token/cookie |
-| 4 | Rà log vận hành sau khi chạy các kịch bản `TS-01` đến `TS-16` (`NFR-OBS-02`, `NFR-OBS-03`) | Toàn bộ mốc thời gian trong log vận hành lưu chuẩn UTC; không chứa cookie, token hay nội dung mô tả nhạy cảm; ghi đủ các sự kiện bắt buộc trong danh sách `NFR-OBS-03` (thiếu bản dịch EN, nạp danh mục lỗi, lỗi xóa bù tệp, tệp mất trên kho, lỗi ghi audit/thu hồi phiên, vi phạm unique sinh mã) |
+| 4 | Rà log vận hành sau khi chạy các kịch bản `TS-01` đến `TS-16` (`NFR-SEC-09`, `NFR-OBS-02`, `NFR-OBS-03`) | Toàn bộ mốc thời gian trong log vận hành lưu chuẩn UTC; không chứa cookie, token hay nội dung mô tả nhạy cảm; ghi đủ các sự kiện bắt buộc trong danh sách `NFR-OBS-03` (thiếu bản dịch EN, nạp danh mục lỗi, lỗi xóa bù tệp, tệp mất trên kho, lỗi ghi audit/thu hồi phiên, vi phạm unique sinh mã) |
 
 ### TS-64. Sẵn sàng triển khai production: HTTPS, cấm SSO giả lập, bí mật và lưu trữ dữ liệu
 

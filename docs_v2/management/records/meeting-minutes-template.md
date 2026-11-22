@@ -40,17 +40,17 @@
 
 ### 1. Nội dung rà soát chính (Mô phỏng)
 
-- **Trạng thái chung: Vàng** (do chỉ số Tiến độ ở mức Vàng: 5/7 task đúng hạn = 71% < 90%; `#25` sinh mã hồ sơ `FR-CORE-01` chậm 2 ngày).
-- **Giờ công: Xanh** — Tuần 6 dùng `52h`, lũy kế `455h`, còn lại `407h`, dự báo `862h ≤ 870h`, không task nào lệch > 20%, chưa giải ngân dự phòng `Q-03` (`11h`).
+- **Tiến độ (Mô phỏng).** Hoàn tất phần phát triển và dùng chung đến 16/10. Dự kiến giữ buổi demo 23/10.
+- **Giờ công Xanh (Mô phỏng).** tuần này 52 giờ, lũy kế 550 giờ, còn lại 551 giờ, dự báo 1101 giờ. Dùng số liệu từ [bảng giờ](time-tracking-log.md).
 - **Chất lượng: Xanh** — 0 Critical, 0 Major, 3 Minor đang sửa, 4 task chờ test; phần dùng chung `#123` (`2.05`) và `#124` (`2.06–2.07`) đã xong trước tuần test cuối.
 - **Rủi ro:** rà `R-02` (Trung bình — đã gửi email tuần nhắc Aurora University xác nhận danh mục thật) và `R-09` (Trung bình — chưa có dấu hiệu trùng mã).
-- **Quyết định chốt (`DL-03`):** BE Dev / Senior hỗ trợ trực tiếp BE Dev / Mid hoàn tất `#25` trước `20/10/2026` để bảo vệ trọn tuần test cuối và buổi demo `MS-02` ngày `23/10/2026`.
+- **Quyết định DL-03 (Mô phỏng).** QA xác nhận sẵn sàng test vào 19/10, kiểm lại sau sửa lỗi ngày 23/10.
 
 ### 2. Việc cần làm (Mô phỏng)
 
 | STT | Việc cần làm | Issue / Tài liệu liên quan | Người phụ trách | Thời hạn | Trạng thái |
 |---|---|---|---|---|---|
-| 1 | Hỗ trợ hoàn tất giao dịch sinh mã hồ sơ đồng thời `FR-CORE-01` | `#25`, `DL-03` | BE Dev / Senior & BE Dev / Mid | 20/10/2026 | Đang làm |
-| 2 | Chạy test trọn luồng `TS-02`, `TS-03` và regression `TS-01` trên Staging | `#126` (`2.10–2.11`) | QA / Senior & Tester / Junior | 22/10/2026 | Mở |
+| 1 | Đối chiếu điều kiện sẵn sàng cho test | #126, DL-03 | QA / Senior | 16/10/2026 | Xong (Mô phỏng) |
+| 2 | Chạy test trọn luồng `TS-02`, `TS-03` và regression `TS-01` trên Staging | `#126` (`2.10–2.11`) | QA / Senior & Tester / Junior | 20/10/2026 | Mở |
 | 3 | Gửi báo cáo tuần 6 và nhắc danh mục thật (`R-02`) cho Aurora University | `03` mục 6.2, `R-02` | PM / Senior | 16/10/2026 | Xong |
 | 4 | Chuẩn bị demo đóng `MS-02` và họp khởi động `MS-03` | `MS-02`, `MS-03` | PM / Senior, BA / Mid, QA / Senior | 23/10/2026 | Mở |

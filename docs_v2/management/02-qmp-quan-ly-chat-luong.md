@@ -108,7 +108,7 @@ Lỗi trùng, không tái hiện được hoặc thực chất là yêu cầu th
 - Mọi mức lỗi đều tạo issue mới (mẫu Bug), gắn milestone `Hotfix`, nhãn `bug` và mức `sev: …`.
 - Critical: QA / Senior xác nhận mức trong 1 ngày làm việc; PM / Senior phê duyệt việc sửa ngay (hạn sửa 1 ngày làm việc); sửa xong bắt buộc chạy lại regression các chức năng liên quan (`TS-01` đến `TS-18`).
 - Major và Minor: PM / Senior quyết thứ tự sửa. Vì Go-live yêu cầu Major = 0, mọi Major phải sửa trước Go-live.
-- **Hạch toán WBS và thanh toán:** công sức sửa lỗi `Hotfix` trong giai đoạn đang phát triển hạch toán vào dòng WBS "Sửa lỗi sau test" của milestone hiện tại (ví dụ `4.11–4.14` tại `MS-04`, `5.13–5.16` tại `MS-05`), ghi giờ thực tế vào Bảng theo dõi giờ và cộng vào dự báo baseline 870 giờ (bên phát triển chịu chi phí nếu vượt). Việc phát hiện lỗi `Hotfix` không mở lại milestone đã đóng và không đảo ngược biên bản nghiệm thu hay thanh toán đợt 2 của `MS-03` đã ký; tuy nhiên lỗi Critical/Major phải đóng hoàn toàn trước khi ký biên bản nghiệm thu tổng thể và thanh toán đợt 3.
+- **Hạch toán WBS và thanh toán:** công sức sửa lỗi `Hotfix` trong giai đoạn đang phát triển hạch toán vào dòng WBS "Sửa lỗi sau test" của milestone hiện tại (ví dụ `4.11–4.14` tại `MS-04`, `5.13–5.16` tại `MS-05`), ghi giờ thực tế vào Bảng theo dõi giờ và cộng vào dự báo baseline 1109 giờ (bên phát triển chịu chi phí nếu vượt). Việc phát hiện lỗi `Hotfix` không mở lại milestone đã đóng và không đảo ngược biên bản nghiệm thu hay thanh toán đợt 2 của `MS-03` đã ký; tuy nhiên lỗi Critical/Major phải đóng hoàn toàn trước khi ký biên bản nghiệm thu tổng thể và thanh toán đợt 3.
 
 **Điều kiện dừng test hoặc dừng release:**
 

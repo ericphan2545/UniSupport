@@ -331,7 +331,7 @@ Phạm vi kiểm theo từng mốc của TS-28, TS-55 và TS-56 xem [kịch bả
 | `FR-CORE-01/AC-06` | `TS-54` | #24 | MS-02 | Q-03 |
 | `FR-CORE-01/AC-07` | `TS-54` | #24 | MS-02 | Q-03 |
 | `FR-CORE-01/AC-08` | `TS-54` | #24 | MS-02 | Q-03 |
-| `FR-CORE-02/AC-01` | `TS-55`, `TS-06` | #12 | MS-02 | Q-03 |
+| `FR-CORE-02/AC-01` | `TS-55` | #12 | MS-02 | Q-03 |
 | `FR-CORE-02/AC-02` | `TS-55` | #12 | MS-02 | Q-03 |
 | `FR-CORE-02/AC-03` | `TS-55` | #12 | MS-02 | Q-03 |
 | `FR-CORE-02/AC-04` | `TS-55` | #12 | MS-02 | Q-03 |
