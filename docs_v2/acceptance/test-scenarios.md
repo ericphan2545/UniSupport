@@ -428,6 +428,8 @@ Mỗi kịch bản chạy lần lượt mọi AC của một FR trên Staging, v
 
 ### Phân bổ chạy kiểm thử 48 AC của 6 FR dùng chung theo từng milestone
 
+Khi đối chiếu một issue Dùng chung, chép các dòng nghiệm thu lần đầu của issue từ [ma trận truy vết](traceability-matrix.md) và các nhánh mở rộng/hồi quy từ bảng dưới. Tester ghi kết quả theo AC và mốc, QA xác nhận trước khi đóng issue. Những issue chỉ mở rộng màn hình vẫn cần checklist về phạm vi và TS để nghiệm thu công việc.
+
 | Kịch bản | FR dùng chung | `MS-01` (`Q-02`, `#117`/`#118`) | `MS-02` (`Q-03`, `#123`/`#124`) | `MS-03` (`Q-04`, `#129`/`#130`) | `MS-04` (`Q-05`, `#155`/`#156`) | `MS-05` (`Q-06`, `#157`/`#158`) |
 |---|---|---|---|---|---|---|
 | `TS-51` | `FR-SEC-04` (8 AC) | Đạt lần đầu: `AC-06` (`#117`) | Đạt lần đầu: `AC-02, AC-08` (`#123`); triển khai phần SV/NV của `AC-01,04,07` | Đạt lần đầu: `AC-05` (`#129`); nhánh phân công `AC-03`; regression `AC-02,06,08` | Đạt lần đầu: `AC-03` (`#155`); regression `AC-02,05,06,08` | Đạt lần đầu: `AC-01, AC-04, AC-07` (`#157`); regression toàn bộ |
