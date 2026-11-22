@@ -1,0 +1,11 @@
+# V2-04 · Hoàn tất truy vết NFR và điều kiện Go-live
+
+## Phạm vi
+
+Nối từng NFR với TS hoặc AC, ghi vai trò thực hiện và mốc. TS-63 dẫn NFR-SEC-09 ở bảng đầu và chi tiết. TS-64 kiểm sẵn sàng triển khai trước Go-live.
+
+## Tiêu chí chấp nhận
+
+- [ ] Đối chiếu danh mục NFR, test scenarios, QMP mục 2.2 và hướng dẫn nghiệm thu.
+- [ ] Xác nhận bằng chứng kiểm tra ghi trong PR. Đã kiểm 50 NFR đều có truy vết hợp lệ, 17 kịch bản NFR có vai trò và milestone.
+- [ ] Người khác tác giả Approve.
