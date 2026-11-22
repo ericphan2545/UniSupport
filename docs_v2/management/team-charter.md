@@ -49,7 +49,7 @@ Mỗi vai trò 1 người, tổng 10 người. Tên vai trò thống nhất vớ
 
 1. Mỗi người làm tối đa 2 task cùng lúc; cập nhật trạng thái issue trên GitHub và ghi giờ thực tế vào Bảng theo dõi giờ ([03](03-quan-tri-giam-sat.md) mục 6.1) mỗi ngày làm việc.
 2. Bị chặn quá nửa ngày: báo ngay trên Discord, nêu task, vấn đề và người cần hỗ trợ. Dự kiến vượt 20% giờ kế hoạch của một task: báo PM trước khi làm tiếp. Mọi giờ bổ sung cho phạm vi baseline (kể cả lấy từ năng lực dư ở sheet `Resources`) đều ghi vào Bảng theo dõi giờ và tính vào dự báo so với 870 giờ; chi phí vượt nội bộ do bên phát triển tự chịu, và PM phải báo Aurora University bằng văn bản nếu việc vượt giờ đe dọa mốc bàn giao, cần điều chỉnh ưu tiên FR `Should` hoặc phát sinh từ thay đổi phạm vi/giả định của khách.
-3. Mọi thay đổi vào nhánh `main` chỉ qua Pull Request đã được review theo mục 9; người kiêm vai trò vẫn không tự review.
+3. Mọi thay đổi về tài liệu dự án, kế hoạch, báo giá, đặc tả, quy trình và mã nguồn đưa vào nhánh `main` đều thực hiện qua Pull Request, có ít nhất 1 người khác tác giả review và gộp bằng **squash merge** theo mục 9; người kiêm vai trò tuyệt đối không tự duyệt PR của mình. Ngoại lệ sửa nhỏ hành chính/chính tả chỉ được phép trong phạm vi hẹp có kiểm soát và phải lưu dấu theo đúng mục 9.
 4. Yêu cầu từ khách chuyển về PM. Sửa nhỏ theo Proposal mục 4 được hỗ trợ trong giới hạn 2–5 lần; thay đổi lớn đi theo quy trình change request ([03](03-quan-tri-giam-sat.md) mục 5).
 5. Sau mỗi milestone, ban quản lý xem lại Team Charter; Đào Tuấn Bảo sửa, Lê Hoàng Tùng duyệt, thay đổi đi qua PR.
 
@@ -104,14 +104,21 @@ Mỗi vai trò 1 người, tổng 10 người. Tên vai trò thống nhất vớ
 
 ## 9. Quy tắc branch, Pull Request, review, merge
 
-Áp dụng cho tài liệu ngay bây giờ và cho code khi dự án chạy.
+Áp dụng cho toàn bộ tài liệu ngay từ hiện tại và cho mã nguồn khi dự án triển khai.
 
-- **Branch:** không push trực tiếp lên `main`. Nhánh tài liệu đặt tên `docs/<mô-tả-ngắn>`; nhánh code `feat/<số-issue>-<mô-tả-ngắn>` hoặc `fix/<số-issue>-<mô-tả-ngắn>`. Chữ thường, không dấu, nối bằng gạch ngang. Ví dụ: `docs/v1-01-cap-nhat-proposal`, `feat/1-tao-yeu-cau`.
-- **Commit:** bắt đầu bằng loại thay đổi (`docs:`, `feat:`, `fix:`), mô tả ngắn việc đã làm.
-- **Pull Request:** dùng mẫu `.github/pull_request_template.md`; ghi `Closes #n` cho từng issue được xử lý; ghi quyết định và lý do; với file Word/Excel ghi rõ sheet hoặc mục đã đổi.
-- **Review:** ít nhất 1 thành viên ban quản lý khác tác giả duyệt. PR sửa file Word/Excel phải được người chịu trách nhiệm file đó duyệt; nếu tác giả chính là người đó thì người dự phòng duyệt. Với code: Senior của mảng review; code của Senior do Senior mảng còn lại review.
-- **Merge:** tác giả merge sau khi có duyệt và không còn góp ý chưa xử lý; dùng squash merge; xóa nhánh sau khi merge.
-- **Lịch sử chuyển tiếp giai đoạn khởi tạo:** các PR `#169`, `#170` và `#171` (hoàn thiện hồ sơ dự án ban đầu) được gộp trước khi nhóm áp dụng đầy đủ quy tắc review bắt buộc. Từ các đợt cập nhật tiếp theo, mọi thay đổi áp dụng đúng quy tắc ở mục này.
+- **Branch và bảo vệ `main`:** Không push trực tiếp lên `main` (trừ ngoại lệ sửa nhỏ có kiểm soát nêu dưới đây). Khuyến nghị bật Branch Protection trên GitHub cho `main` (chặn force-push, yêu cầu ≥ 1 `Approve` trước khi gộp, bật **Squash and merge**). Tên nhánh dùng chữ thường, không dấu, nối bằng gạch ngang: tài liệu `docs/<mã>-<mô-tả-ngắn>` (ví dụ `docs/v1-05-quy-tac-branch-pr-review`), tính năng `feat/<số-issue>-<mô-tả-ngắn>` (ví dụ `feat/1-tao-yeu-cau`), sửa lỗi `fix/<số-issue>-<mô-tả-ngắn>`.
+- **Commit:** dùng tiền tố chuẩn (`docs:`, `feat:`, `fix:`, `chore:`), mô tả ngắn gọn việc đã làm.
+- **Pull Request:** bắt buộc điền đầy đủ `.github/pull_request_template.md` (không để nguyên placeholder chưa điền); ghi rõ mã hạng mục/rà soát, `Closes #n` cho từng issue được xử lý, tóm tắt quyết định/lý do và bằng chứng kiểm tra thực tế; với file Word/Excel/PDF phải ghi rõ file, sheet hoặc mục đã đổi và kết quả các ô kiểm tra.
+- **Review bắt buộc bởi người khác tác giả (SLA 24 giờ):**
+  - Mọi PR phải có **ít nhất 1 thành viên khác tác giả** duyệt (`Approve` trên GitHub). Tác giả không tự review và không tự gộp khi chưa có duyệt.
+  - PR sửa tài liệu thuộc mảng nào do người phụ trách mảng đó (mục 3.1) review; nếu tác giả chính là người phụ trách file đó (kể cả Word/Excel) thì **người dự phòng ở mục 3.1** review. Với code: Senior của mảng review; code của Senior do Senior mảng còn lại review.
+  - Thời hạn phản hồi review tối đa **24 giờ** (1 ngày làm việc). Nếu reviewer chính không phản hồi sau 12 giờ, tác giả chuyển thẻ sang người dự phòng (mục 3.1/3.2) để bảo đảm tiến độ.
+- **Merge:** chỉ gộp sau khi có ít nhất 1 lượt `Approve` từ người khác tác giả và mọi góp ý đã được xử lý; bắt buộc dùng **Squash and merge**; xóa nhánh sau khi gộp.
+- **Ngoại lệ có kiểm soát cho sửa nhỏ:**
+  - *Trường hợp được phép:* chỉ áp dụng cho sửa lỗi chính tả, định dạng Markdown hoặc cập nhật thông tin hành chính cá nhân trong `README.md` (ví dụ mã số thành viên, sửa một đường dẫn hiển nhiên) với quy mô **≤ 5 dòng thay đổi trên tối đa 1 file Markdown**. **Tuyệt đối không áp dụng** cho mã nguồn, file Word/Excel/PDF, đặc tả PRD (`FR/AC/BR/E`), NFR, kịch bản test, WBS, báo giá, giả định, rủi ro hay quy trình quản trị.
+  - *Người có quyền:* thành viên phụ trách tài liệu đó (mục 3.1) hoặc trưởng nhóm (Lê Hoàng Tùng).
+  - *Cách lưu dấu bắt buộc:* dùng tiền tố `docs(typo):` hoặc `docs(admin):` ghi rõ lý do trong thông điệp commit, gửi link commit lên Discord nhóm ngay khi push và phải có ít nhất 1 thành viên khác xác nhận đã xem trong vòng 24 giờ.
+- **Ghi nhận lịch sử chuyển tiếp giai đoạn khởi tạo:** các PR `#169`, `#170`, `#171` và một số commit cập nhật hành chính/tài liệu trước mốc `29871da` được gộp trong giai đoạn thiết lập hồ sơ ban đầu trước khi nhóm áp dụng đầy đủ quy tắc kiểm soát này. Từ đợt hoàn thiện hồ sơ này (`V1-01` đến `V3-03`), mỗi hạng mục được tách thành một nhánh và một PR riêng có mã hạng mục, link issue liên quan, mẫu PR điền đầy đủ và bằng chứng kiểm tra để áp dụng nhất quán quy trình review khác tác giả và squash merge.
 - **Hạng mục rà soát chất lượng nội bộ:** mỗi hạng mục rà soát mở thành một issue riêng kèm mã theo dõi; xử lý bằng PR có `Closes #n`, hoặc đóng issue kèm lý do cụ thể nếu giữ nguyên hiện trạng.
 
 ## 10. Thuật ngữ cần biết
