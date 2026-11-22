@@ -47,6 +47,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 **Milestone chạy lần đầu:** MS-01 · **Regression:** có
 
+**Thực hiện:** Tester / Junior chạy kịch bản, QA / Senior đối chiếu kết quả.
+
 | # | Bước | Kết quả mong đợi |
 |---|---|---|
 | 1 | SV1 đăng nhập lần đầu | Tạo tài khoản `STUDENT`, vào Cổng Sinh viên; cookie phiên có HttpOnly, Secure, SameSite=Lax; response không chứa token SSO |
@@ -83,6 +85,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 **Kiểm NFR:** `NFR-PERF-08`, `NFR-REL-09`
 
 **Milestone chạy lần đầu:** MS-02 · **Regression:** có
+
+**Thực hiện:** Tester / Junior chạy kịch bản, QA / Senior đối chiếu kết quả.
 
 *(Chỉ sử dụng các chức năng đã có trên Staging tại `MS-02`: tạo yêu cầu loại Y có SLA ngắn trên Staging, tác vụ quá hạn tự động `NEW → OVERDUE`, danh sách yêu cầu sinh viên, chuông thông báo, lịch sử tạo hồ sơ và chuyển ngôn ngữ VN/EN. Thông báo phân công/bổ sung được kiểm ở `TS-04` tại `MS-03`; trang chi tiết và lịch sử 5 mốc của sinh viên được kiểm ở `TS-07` tại `MS-04`.)*
 
@@ -137,6 +141,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 **Milestone chạy lần đầu:** MS-03 · **Regression:** có
 
+**Thực hiện:** Tester / Junior chạy kịch bản, QA / Senior đối chiếu kết quả.
+
 *(Số đếm Quá hạn trên dashboard Admin thuộc `FR-MGT-01` ở `MS-05`, được kiểm tại `TS-08` bước 1.)*
 
 | # | Bước | Kết quả mong đợi |
@@ -171,6 +177,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 **Milestone chạy lần đầu:** MS-05 · **Regression:** có
 
+**Thực hiện:** Tester / Junior chạy kịch bản, QA / Senior đối chiếu kết quả.
+
 **Tiền điều kiện:** đã nạp bộ 200 ticket mẫu và có bảng kết quả tính sẵn cho từng chỉ số.
 
 | # | Bước | Kết quả mong đợi |
@@ -193,6 +201,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 **Milestone chạy lần đầu:** MS-01 đến MS-05 · **Regression:** có
 
+**Thực hiện:** Tester / Junior chạy kịch bản, QA / Senior đối chiếu kết quả.
+
 - SV1 đổi mã hồ sơ trên URL thành hồ sơ của SV2 → 404, giống hệt hồ sơ không tồn tại.
 - A1 mở hồ sơ của phòng B → 404.
 - Gửi `student_id` hoặc `department_id` khác trong body hoặc query → hệ thống bỏ qua.
@@ -207,6 +217,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 **Kiểm NFR:** `NFR-REL-04`
 
 **Milestone chạy lần đầu:** MS-01 đến MS-04 · **Regression:** có
+
+**Thực hiện:** Tester / Junior chạy kịch bản, QA / Senior đối chiếu kết quả.
 
 - A1 và A2 phân công cùng một hồ sơ với cùng version → một người thành công, người kia nhận 409.
 - SV1 bổ sung và A1 đóng hồ sơ với cùng version → chỉ một thao tác thành công.
@@ -224,6 +236,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 **Milestone chạy lần đầu:** MS-02 đến MS-04 · **Regression:** có
 
+**Thực hiện:** Tester / Junior chạy kịch bản, QA / Senior đối chiếu kết quả.
+
 - Tạo hồ sơ, mất mạng sau khi server đã commit, gửi lại cùng `Idempotency-Key` → nhận lại đúng mã cũ; không có hồ sơ, tệp, nhật ký hay thông báo thứ hai.
 - Gửi lại cùng key nhưng khác nội dung → 409 `IDEMPOTENCY_PAYLOAD_MISMATCH`.
 - Hai request cùng key gửi đồng thời → một request chạy, request kia nhận 409 `REQUEST_IN_PROGRESS` kèm `Retry-After`.
@@ -238,6 +252,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 **Kiểm NFR:** `NFR-REL-01`, `NFR-REL-06`, `NFR-REL-08`, `NFR-PERF-14`, `NFR-SEC-06`, `NFR-OBS-03`
 
 **Milestone chạy lần đầu:** MS-02 · **Regression:** có
+
+**Thực hiện:** Tester / Junior chạy kịch bản, QA / Senior đối chiếu kết quả.
 
 - Tệp PNG đổi đuôi thành `.pdf` → chấp nhận và lưu với định dạng PNG (kiểm bằng magic bytes).
 - Tên tệp `../../etc/passwd.pdf` → bỏ ký tự đường dẫn; tệp lưu với tên ngẫu nhiên.
@@ -254,6 +270,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 **Milestone chạy lần đầu:** MS-01 đến MS-04 · **Regression:** có
 
+**Thực hiện:** Tester / Junior chạy kịch bản, QA / Senior đối chiếu kết quả.
+
 - Hồ sơ đi đủ luồng tạo → phân công → yêu cầu bổ sung → bổ sung → đóng: lịch sử công khai có đúng 5 mốc; nhân viên thấy thêm mốc phân công và thay đổi hạn.
 - Lịch sử công khai không chứa hạn xử lý, mức ưu tiên, tên nhân viên hay lý do chuyển phòng.
 - Mỗi thao tác có đúng một bản ghi nhật ký; bản ghi tạo hồ sơ chỉ chứa mã hồ sơ, không chứa mô tả; log vận hành ghi thời điểm UTC và không chứa cookie, token hay nội dung nhạy cảm (`NFR-OBS-02`).
@@ -267,6 +285,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 **Kiểm NFR:** `NFR-SEC-02`, `NFR-SEC-07`, `NFR-REL-05`, `NFR-OBS-03`
 
 **Milestone chạy lần đầu:** MS-01 · **Regression:** có
+
+**Thực hiện:** Tester / Junior chạy kịch bản, QA / Senior đối chiếu kết quả.
 
 - Phiên tạo lúc 08:00 → request lúc 15:59 thành công; lúc 16:01 nhận 401 và về trang đăng nhập.
 - Đăng nhập trên 2 thiết bị, đăng xuất ở thiết bị A → thiết bị B vẫn dùng bình thường; cookie cũ của thiết bị A nhận 401; giả lập lỗi lưu thu hồi phiên hoặc lỗi ghi nhật ký đăng nhập thất bại → có ghi log vận hành (`NFR-OBS-03`).
@@ -282,6 +302,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 **Milestone chạy lần đầu:** MS-01 đến MS-05 · **Regression:** có
 
+**Thực hiện:** Tester / Junior chạy kịch bản, QA / Senior đối chiếu kết quả.
+
 - Đổi sang EN → nhãn, trạng thái, tên loại yêu cầu, thông báo và lỗi nhập liệu theo từng trường đều bằng tiếng Anh với cùng `error_code` (`NFR-USE-05`); nội dung người dùng nhập giữ nguyên; lần đăng nhập sau vẫn là EN.
 - Thiếu bản dịch tiếng Anh của một nhãn → hiện bản tiếng Việt, không hiện mã khóa thô và ghi cảnh báo log (`NFR-OBS-03`).
 - Mọi màn hình ở độ rộng 360px → không có thanh cuộn ngang, không cắt chữ hay nút; vùng bấm tối thiểu 44×44px; bảng chuyển sang dạng thẻ.
@@ -296,6 +318,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 **Kiểm NFR:** `NFR-DEP-01`, `NFR-DEP-02`, `NFR-OBS-03`
 
 **Milestone chạy lần đầu:** MS-02 · **Regression:** có
+
+**Thực hiện:** Tester / Junior chạy kịch bản, QA / Senior đối chiếu kết quả.
 
 - Nạp lại danh mục sau khi Admin đã đổi SLA → SLA Admin đã đổi được giữ nguyên.
 - Dữ liệu nạp có loại yêu cầu không ánh xạ phòng ban → ứng dụng không khởi động, log ghi rõ loại bị lỗi.
@@ -322,6 +346,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 **Milestone chạy lần đầu:** MS-01 đến MS-05 · **Regression:** có
 
+**Thực hiện:** Tester / Junior chạy kịch bản, QA / Senior đối chiếu kết quả.
+
 - Với mỗi dòng trong bảng rate limit: gửi request vượt ngưỡng → 429 kèm `Retry-After`; request trong ngưỡng không bị chặn.
 - Gửi lại thao tác đã thành công cùng `Idempotency-Key` → không tính thêm vào giới hạn 10 hồ sơ mỗi giờ.
 
@@ -331,6 +357,8 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 **Milestone chạy lần đầu:** MS-06 · **Regression:** không
 
+**Thực hiện:** DevOps / Mid chuẩn bị môi trường và chạy đo tải, QA / Senior xác nhận kết quả.
+
 Theo `non-functional-requirements/performance.md` (`NFR-PERF-01` đến `NFR-PERF-03`): chạy kịch bản 100–200 người dùng đồng thời trên hạ tầng của trường trước Go-live.
 
 ### TS-20. Usability
@@ -339,13 +367,17 @@ Theo `non-functional-requirements/performance.md` (`NFR-PERF-01` đến `NFR-PER
 
 **Milestone chạy lần đầu:** MS-06 · **Regression:** không
 
+**Thực hiện:** UI/UX / Mid điều phối kiểm thử với người dùng, QA / Senior xác nhận kết quả.
+
 Theo `non-functional-requirements/usability.md` (`NFR-USE-01`): người dùng thật thực hiện các tác vụ chính của 3 vai trò.
 
 ### TS-63. Bảo mật đầu vào (CSRF/XSS), phản hồi lỗi `correlation_id` và log vận hành
 
 **Kiểm NFR:** `NFR-SEC-04`, `NFR-SEC-05`, `NFR-SEC-08`, `NFR-SEC-09`, `NFR-OBS-01`, `NFR-OBS-02`, `NFR-OBS-03`
 
-**Milestone chạy lần đầu:** MS-01 đến MS-05 · **Regression:** có · **Vai trò thực hiện:** Tester / Junior chạy trên Staging, QA / Senior rà soát log và phê duyệt
+**Milestone chạy lần đầu:** MS-01 đến MS-05 · **Regression:** có
+
+**Thực hiện:** Tester / Junior chạy trên Staging, QA / Senior rà soát log và phê duyệt.
 
 | # | Cách đo / Bước thực hiện | Kết quả mong đợi |
 |---|---|---|
@@ -358,7 +390,9 @@ Theo `non-functional-requirements/usability.md` (`NFR-USE-01`): người dùng t
 
 **Kiểm NFR:** `NFR-SEC-01`, `NFR-SEC-10`, `NFR-SEC-11`, `NFR-DEP-03`, `NFR-DEP-04`, `NFR-REL-10`
 
-**Milestone chạy lần đầu:** MS-06 (trước Go-live, gắn issue `#141`, `#142`, `#143`) · **Regression:** không · **Vai trò thực hiện:** DevOps / Mid chạy kiểm tra hạ tầng & cấu hình; QA / Senior và PM / Senior đối chiếu kết quả trước khi ký nghiệm thu
+**Milestone chạy lần đầu:** MS-06 (trước Go-live, gắn issue `#141`, `#142`, `#143`) · **Regression:** không
+
+**Thực hiện:** DevOps / Mid kiểm tra hạ tầng và cấu hình. QA / Senior và PM / Senior đối chiếu kết quả trước khi ký nghiệm thu.
 
 | # | Cách đo / Bước thực hiện | Kết quả mong đợi |
 |---|---|---|

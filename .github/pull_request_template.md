@@ -18,7 +18,7 @@
 
 <!-- Ghi rõ kết quả kiểm tra thực tế, không chỉ đánh dấu hộp kiểm. -->
 
-- **Người review khác tác giả (Team Charter mục 9, SLA 24 giờ):**
+- **Người review khác tác giả (Team Charter mục 9, phản hồi trong 1 ngày làm việc):**
 - **Hình thức gộp sau khi duyệt:** Squash and merge
 - **Mục lục `docs_v2/README.md` và liên kết nội bộ / anchor còn hợp lệ:**
 - **Đồng bộ các tài liệu dẫn lại (ma trận truy vết, Master Plan, kịch bản test, issue):**
