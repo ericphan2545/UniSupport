@@ -16,10 +16,10 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 | `TS-02` | Sinh viên gửi yêu cầu kèm tệp đến đúng phòng | 16 | — | MS-02 | có |
 | `TS-03` | Thông báo quá hạn, danh sách trạng thái và đổi ngôn ngữ cho sinh viên | 11 | NFR-PERF-08, NFR-REL-09 | MS-02 | có |
 | `TS-04` | Phân công, ghi nhật ký, yêu cầu bổ sung, bổ sung và thông báo | 10 | — | MS-03 | có |
-| `TS-05` | Ưu tiên, escalate và chuyển phòng | 6 | — | MS-03 | có |
+| `TS-05` | Ưu tiên, escalate và chuyển phòng | 8 | — | MS-03 | có |
 | `TS-06` | Quá hạn tự động | 5 | NFR-PERF-09, NFR-REL-07 | MS-03 | có |
 | `TS-07` | Đóng hồ sơ, trả kết quả, lịch sử công khai và đánh giá | 7 | — | MS-04 | có |
-| `TS-08` | Báo cáo và dashboard của Admin khớp dữ liệu | 7 | NFR-SEC-12, NFR-PERF-08 | MS-05 | có |
+| `TS-08` | Báo cáo và dashboard của Admin khớp dữ liệu | 8 | NFR-SEC-12, NFR-PERF-08 | MS-05 | có |
 | `TS-09` | Phạm vi dữ liệu và truy cập chéo | 6 | NFR-SEC-03, NFR-SEC-06 | MS-01 đến MS-05 | có |
 | `TS-10` | Thao tác đồng thời | 9 | NFR-REL-04 | MS-01 đến MS-04 | có |
 | `TS-11` | Mất phản hồi và gửi lại | 7 | NFR-REL-03, NFR-REL-09 | MS-02 đến MS-04 | có |
@@ -111,7 +111,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 ### TS-05. Ưu tiên, escalate và chuyển phòng
 
-**Kiểm AC:** `FR-STF-08/AC-01`, `FR-STF-09/AC-01`, `FR-STF-10/AC-01`, `FR-CORE-04/AC-01`, `FR-SEC-04/AC-05`, `FR-CORE-06/AC-04`
+**Kiểm AC:** `FR-STF-08/AC-01`, `FR-STF-09/AC-01`, `FR-STF-10/AC-01`, `FR-CORE-04/AC-01`, `FR-SEC-04/AC-05`, `FR-SEC-05/AC-04`, `FR-CORE-06/AC-04`, `FR-CORE-06/AC-07`
 
 **Milestone chạy lần đầu:** MS-03 · **Regression:** có
 
@@ -161,7 +161,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 ### TS-08. Báo cáo và dashboard của Admin khớp dữ liệu
 
-**Kiểm AC:** `FR-MGT-01/AC-01`, `FR-MGT-02/AC-01`, `FR-MGT-02/AC-02`, `FR-MGT-03/AC-01`, `FR-MGT-04/AC-01`, `FR-MGT-05/AC-01`, `FR-SEC-04/AC-01`
+**Kiểm AC:** `FR-MGT-01/AC-01`, `FR-MGT-02/AC-01`, `FR-MGT-02/AC-02`, `FR-MGT-03/AC-01`, `FR-MGT-04/AC-01`, `FR-MGT-05/AC-01`, `FR-SEC-04/AC-01`, `FR-SEC-04/AC-04`
 
 **Kiểm NFR:** `NFR-SEC-12`, `NFR-PERF-08`
 

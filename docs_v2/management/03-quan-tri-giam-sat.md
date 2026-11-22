@@ -8,7 +8,7 @@ Kế hoạch này quy định cách báo cáo tình hình dự án từ người
 
 Kế hoạch dựa trên vai trò và quy tắc làm việc trong Team Charter, due date của milestone trên GitHub, kế hoạch 870 giờ công (Team Charter) và các cam kết trong Proposal. Nội dung sản phẩm xem [01](01-quan-ly-san-pham.md); tiêu chí chất lượng xem [02](02-qmp-quan-ly-chat-luong.md).
 
-Khách hàng Aurora University, đội thực thi và mọi số liệu ví dụ trong tài liệu này là **Mô phỏng**. Nơi gốc của task và tiến độ là GitHub (Issues, Milestones `MS-xx`, Project #4); giờ thực tế ghi ở Bảng theo dõi giờ (mục 6.1); rủi ro ở [risk-register.md](risk-register.md).
+Khách hàng Aurora University, đội thực thi và mọi số liệu ví dụ trong tài liệu này là **Mô phỏng**. Nơi gốc của task và tiến độ là GitHub ([Issues](https://github.com/ericphan2545/UniSupport/issues), [Milestones `MS-xx`](https://github.com/ericphan2545/UniSupport/milestones), [Projects](https://github.com/ericphan2545/UniSupport/projects) — trạng thái Project #4 xem [records/README.md](records/README.md)); giờ thực tế ghi ở [Bảng theo dõi giờ](records/time-tracking-log.md) (mục 6.1); rủi ro ở [risk-register.md](risk-register.md); danh mục toàn bộ hồ sơ quản trị ở [records/README.md](records/README.md).
 
 ## 1. Cơ cấu quản trị và tuyến báo cáo
 
@@ -156,7 +156,10 @@ Lỗi dùng nhãn `bug` và nhãn mức `sev: …`; phản hồi dùng `feedback
 
 - **Chạy thử “Task quá hạn” tại mốc mô phỏng `16/10/2026` (khớp ví dụ tuần 6 ở mục 6.2):** toàn bộ `122/122` issue thực thi đều có trường `**Hạn:**` (`0` issue thiếu hạn); bộ lọc Tầng 2 ghi nhận `53` issue có hạn trước `16/10/2026` (gồm `31` sub-issue BE/FE như `#2` hạn `12/10/2026` và `22` task một cấp); đối chiếu tách biệt trên Tầng 1 (`94` issue `label:task`) ghi nhận `40` issue (trong đó có `#1` hạn `12/10/2026`) — hai tầng không cộng gộp nên hoàn toàn không đếm trùng `#1` và `#2`.
 
-Giờ thực tế lấy từ Bảng theo dõi giờ (mục 6.1), cộng theo số issue để so với giờ kế hoạch của dòng WBS tương ứng.
+**Nguồn dữ liệu và cách tính chỉ số Giờ công:**
+- **Nguồn dữ liệu:** lấy giờ thực tế từng ngày từ [Bảng theo dõi giờ](records/time-tracking-log.md) (ghi kèm số issue, mã WBS và phạm vi `Baseline` hay `CR-xx`) và lấy giờ kế hoạch baseline từng dòng từ sheet `WBS` của [UniSupport_Masterplan_nhom2.xlsx](UniSupport_Masterplan_nhom2.xlsx) (tổng baseline 870 giờ).
+- **Cách tính 3 đại lượng:** (1) `Giờ thực tế lũy kế (AC)` = tổng mọi giờ đã ghi cho phạm vi `Baseline` từ tuần 1 đến kỳ báo cáo (gồm cả giờ giải ngân quỹ dự phòng và giờ lấy thêm từ năng lực dư `Resources` để làm phạm vi baseline); (2) `Giờ kế hoạch còn lại (ETC)` = tổng giờ kế hoạch còn lại trên WBS của các dòng baseline chưa hoàn thành (gồm phần dự phòng chưa giải ngân của milestone đang chạy và toàn bộ WBS của các milestone chưa bắt đầu); (3) `Dự báo tổng giờ (EAC)` = `AC + ETC`, so sánh trực tiếp với baseline **870 giờ**. Công thức chi tiết và bảng đối chiếu Tuần 6 (`455h + 407h = 862h`) xem tại [records/time-tracking-log.md](records/time-tracking-log.md).
+- **Lưu ý về GitHub Project #4:** URL trực tiếp của Project #4 hiện chưa truy cập công khai được (trả HTTP 404 khi chưa đăng nhập; cần Phan Tiến Thịnh mở quyền xem Public hoặc xác nhận URL chính xác tại [records/README.md](records/README.md)). Trong thời gian chờ, PM lấy đầy đủ mọi chỉ số tiến độ, tải vai trò và task quá hạn trực tiếp từ tab [Issues](https://github.com/ericphan2545/UniSupport/issues) bằng các bộ lọc chuẩn ở bảng trên kết hợp trường `**Hạn:**` trong thân issue.
 
 Hành động theo từng mức:
 
@@ -224,15 +227,18 @@ Yêu cầu tính năng mới phát sinh trong thời gian bảo hành không thu
 
 ### 6.1 Nhật ký quản trị
 
-| Nhật ký | Nội dung | Người cập nhật | Nơi lưu |
-|---|---|---|---|
-| Bảng theo dõi giờ | Ngày, người thực hiện, công việc (kèm số issue và mã WBS), số giờ | Từng thành viên; PM tổng hợp hằng tuần | Google Drive |
-| Nhật ký vấn đề | Mô tả, ngày phát hiện, ảnh hưởng, người xử lý, thời hạn, trạng thái | Người phát hiện; PM theo dõi | GitHub: lỗi dùng mẫu Bug (nhãn `bug`, `sev: …`); vấn đề khác là issue thường gắn milestone |
-| Sổ rủi ro | Như mục 3.2 | Phan Tiến Thịnh; owner từng rủi ro | [risk-register.md](risk-register.md) trong repo |
-| Yêu cầu thay đổi | Nội dung, lý do, đánh giá tác động, quyết định, tài liệu đã cập nhật | Người đề xuất; PM | GitHub: mẫu Change request, mã `CR-xx`, nhãn `change-request` |
-| Decision Log | Ngày, nội dung quyết định, người quyết định, lý do, tài liệu cần cập nhật | PM | Google Drive |
-| Biên bản họp | Nội dung thảo luận, việc cần làm, người phụ trách, thời hạn | Thành viên ghi theo lượt | Google Drive |
-| Báo cáo tuần, milestone, tổng kết | Theo mục 2 và mẫu ở mục 6.2 | PM | Google Drive |
+Danh mục định vị đầy đủ kèm trạng thái xác minh truy cập và phần chờ ban quản lý xác nhận được quản lý tập trung tại [records/README.md](records/README.md):
+
+| Nhật ký | Nội dung | Người quản lý / cập nhật | Quyền xem | Đường dẫn & trạng thái nguồn |
+|---|---|---|---|---|
+| **Bảng theo dõi giờ** | Ngày, vai trò, số issue, mã WBS, phạm vi (`Baseline`/`CR-xx`), số giờ | Từng thành viên ghi hằng ngày; `PM / Senior` (Lê Hoàng Tùng) tổng hợp | Toàn bộ đội và ban quản lý | Mẫu & ví dụ (`Mô phỏng`) trong repo: [records/time-tracking-log.md](records/time-tracking-log.md). Link Google Drive vận hành: *chờ Lê Hoàng Tùng xác nhận* |
+| **Nhật ký vấn đề** | Mô tả, ngày phát hiện, ảnh hưởng, người xử lý, thời hạn, trạng thái | Người phát hiện; `PM / Senior` theo dõi | Công khai trên GitHub | **Đã xác minh:** [GitHub Issues](https://github.com/ericphan2545/UniSupport/issues) (lỗi dùng mẫu Bug nhãn `bug`, `sev: …`; vấn đề khác là issue gắn milestone) |
+| **Bảng tiến độ (Project #4)** | Trạng thái cột, hạn hoàn thành và tiến độ milestone | Phan Tiến Thịnh | **Chờ xác nhận quyền Public** | [GitHub Projects](https://github.com/ericphan2545/UniSupport/projects) *(Project #4 hiện 404 khi chưa đăng nhập; dùng tạm bộ lọc tab Issues ở mục 3.1)* |
+| **Sổ rủi ro** | Như mục 3.2 (`R-01` đến `R-27`) | Phan Tiến Thịnh; owner từng rủi ro | Công khai trong repo | **Đã xác minh:** [risk-register.md](risk-register.md) |
+| **Yêu cầu thay đổi** | Nội dung, lý do, đánh giá tác động, quyết định, tài liệu đã cập nhật | Người đề xuất; `PM / Senior` | Công khai trên GitHub | **Đã xác minh:** [GitHub Issues (`change-request`)](https://github.com/ericphan2545/UniSupport/issues?q=is%3Aissue+label%3Achange-request), mẫu Change request, mã `CR-xx` |
+| **Decision Log** | Ngày, nội dung quyết định, người quyết định, lý do, tài liệu cần cập nhật | `PM / Senior` (Lê Hoàng Tùng) | Toàn bộ nhóm | Mẫu & ví dụ (`Mô phỏng`) trong repo: [records/decision-log.md](records/decision-log.md). Link Google Drive: *chờ Lê Hoàng Tùng xác nhận* |
+| **Biên bản họp** | Nội dung thảo luận, việc cần làm, người phụ trách, thời hạn | Thành viên ghi theo lượt; `PM / Senior` duyệt | Toàn bộ nhóm | Mẫu & ví dụ (`Mô phỏng`) trong repo: [records/meeting-minutes-template.md](records/meeting-minutes-template.md). Link Google Drive: *chờ Lê Hoàng Tùng xác nhận* |
+| **Báo cáo tuần, milestone, tổng kết** | Theo mục 2 và mẫu ở mục 6.2 | `PM / Senior` (Lê Hoàng Tùng) | Ban quản lý (bản tóm tắt gửi khách) | Mẫu tại mục 6.2 bên dưới; thư mục lưu Google Drive: *chờ Lê Hoàng Tùng xác nhận* |
 
 Quyết định chốt trên Discord hoặc trong họp phải được cập nhật vào issue hoặc tài liệu liên quan ngay khi chốt (Team Charter mục 7).
 
@@ -245,7 +251,7 @@ Báo cáo tình hình dự án tuần lập theo mẫu dưới đây. Cột Ví 
 | Kỳ báo cáo | Tuần báo cáo; milestone hiện tại; người lập | Tuần 12/10–16/10/2026; `MS-02` Gửi và tiếp nhận yêu cầu; PM lập (Mô phỏng) |
 | Trạng thái chung | Xanh, Vàng hoặc Đỏ, lấy theo lĩnh vực xấu nhất ở mục 3.1 | Vàng, do tiến độ ở mức Vàng |
 | Tiến độ | Số task hoàn thành; tỷ lệ đúng hạn; task đang chậm; dự báo ngày đóng milestone so với kế hoạch đã chốt | Vàng: 5/7 task đúng hạn (71%, dưới ngưỡng 90%); task sinh mã hồ sơ (`FR-CORE-01`) chậm 2 ngày so với Hạn trong WBS; milestone vẫn dự kiến đóng đúng ngày 23/10 |
-| Giờ công | Giờ thực tế trong tuần và lũy kế; dự báo so với 870 giờ; task lệch quá 20%; quỹ dự phòng đã dùng | Xanh: tuần này 52 giờ, lũy kế 455 giờ; dự báo 862 giờ, chưa vượt 870 giờ; không task nào lệch quá 20%; chưa dùng dự phòng `Q-03` |
+| Giờ công | Giờ thực tế trong tuần và lũy kế; giờ kế hoạch còn lại; dự báo (`EAC`) so với 870 giờ; task lệch quá 20%; quỹ dự phòng đã dùng | Xanh: tuần này 52 giờ, lũy kế 455 giờ, kế hoạch còn lại 407 giờ → dự báo `EAC` = 862 giờ (chưa vượt 870 giờ; chi tiết đối chiếu tại [time-tracking-log.md](records/time-tracking-log.md)); không task nào lệch quá 20%; chưa dùng dự phòng `Q-03` |
 | Chất lượng | Số lỗi đang mở theo mức; task chờ test; chỉ số theo QMP mục 7 | Xanh: không có Critical hoặc Major; 3 Minor đang sửa; 4 task chờ test |
 | Phạm vi | Change-request mới, đang đánh giá hoặc đã quyết định; số lần sửa nhỏ đã dùng | Xanh: không có change-request; đã dùng 1/5 lần sửa nhỏ |
 | Rủi ro và vấn đề | Rủi ro mức Cao và rủi ro có dấu hiệu xảy ra (mã `R-xx`); vấn đề mới hoặc chưa xử lý xong, người phụ trách, thời hạn | `R-02` (Trung bình): đã nhắc trường gửi danh mục thật trong email tuần. `R-09` (Trung bình): chưa có dấu hiệu. Chậm sinh mã hồ sơ: BE Dev / Senior hỗ trợ BE Dev / Mid, xong trước 20/10 |
