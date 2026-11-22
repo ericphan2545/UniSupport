@@ -12,7 +12,7 @@ Nội dung không có trong mục lục này thì không phải tài liệu đan
 4. **Giá và kế hoạch:** [Báo giá](management/quotation.xlsx) → [Master Plan](management/master-plan.md) và [file Excel](management/UniSupport_Masterplan_nhom2.xlsx) → [Sổ rủi ro](management/risk-register.md) → [Giả định](project/assumptions.md), [Ràng buộc](project/constraints.md) → [Dự toán effort và giá nội bộ](management/Bang_Effort.md).
 5. **Cách làm việc:** [Team Charter](management/team-charter.md) → [Kế hoạch quản lý chất lượng (QMP)](management/02-qmp-quan-ly-chat-luong.md).
 6. **Sản phẩm sau bàn giao:** [Kế hoạch quản lý sản phẩm](management/01-quan-ly-san-pham.md).
-7. **Quản trị và giám sát:** [Kế hoạch quản trị và giám sát](management/03-quan-tri-giam-sat.md) → [Hồ sơ quản trị](management/records/README.md) ([Bảng theo dõi giờ](management/records/time-tracking-log.md), [Decision Log](management/records/decision-log.md), [Biên bản họp](management/records/meeting-minutes-template.md), GitHub Issues / Milestones / Project #4).
+7. **Quản trị và giám sát:** [Kế hoạch quản trị và giám sát](management/03-quan-tri-giam-sat.md) → [Hồ sơ quản trị](management/records/README.md) ([Bảng theo dõi giờ](management/records/time-tracking-log.md), [Decision Log](management/records/decision-log.md), [Biên bản họp](management/records/meeting-minutes-template.md), GitHub Issues / Milestones).
 8. **Tài liệu hỗ trợ (bằng chứng):** [Kiến trúc](architecture/README.md) (bối cảnh, thành phần, luồng, mô hình dữ liệu, API, bảo mật, quyết định kỹ thuật), [Thuật ngữ](project/glossary.md).
 
 ## Tra nhanh vị trí
@@ -29,7 +29,7 @@ Nội dung không có trong mục lục này thì không phải tài liệu đan
 | Definition of Done | [02-qmp-quan-ly-chat-luong.md](management/02-qmp-quan-ly-chat-luong.md) mục 5 |
 | Mức lỗi, điều kiện release | QMP mục 6 và mục 2 |
 | Báo cáo, chỉ số, ngưỡng escalate | 03 mục 2, 3, 4 |
-| Bảng theo dõi giờ, Decision Log, biên bản họp, GitHub Project #4 | [management/records/README.md](management/records/README.md) (mẫu & ví dụ `Mô phỏng`: [time-tracking-log.md](management/records/time-tracking-log.md), [decision-log.md](management/records/decision-log.md), [meeting-minutes-template.md](management/records/meeting-minutes-template.md)) và `03` mục 6.1 |
+| Bảng theo dõi giờ, Decision Log, biên bản họp, GitHub Issues | [management/records/README.md](management/records/README.md) (mẫu & ví dụ `Mô phỏng`: [time-tracking-log.md](management/records/time-tracking-log.md), [decision-log.md](management/records/decision-log.md), [meeting-minutes-template.md](management/records/meeting-minutes-template.md)) và `03` mục 6.1 |
 | Feedback, roadmap, chỉ số giá trị, ai quyết sau bàn giao | 01-quan-ly-san-pham mục 5, 8, 6, 7.3 |
 | Giả định, ràng buộc | [assumptions.md](project/assumptions.md) (`A-xx`), [constraints.md](project/constraints.md) |
 

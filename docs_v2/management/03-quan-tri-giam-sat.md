@@ -8,7 +8,7 @@ Kế hoạch này quy định cách báo cáo tình hình dự án từ người
 
 Kế hoạch dựa trên vai trò và quy tắc làm việc trong Team Charter, due date của milestone trên GitHub, kế hoạch 870 giờ công (Team Charter) và các cam kết trong Proposal. Nội dung sản phẩm xem [01](01-quan-ly-san-pham.md); tiêu chí chất lượng xem [02](02-qmp-quan-ly-chat-luong.md).
 
-Khách hàng Aurora University, đội thực thi và mọi số liệu ví dụ trong tài liệu này là **Mô phỏng**. Nơi gốc của task và tiến độ là GitHub ([Issues](https://github.com/ericphan2545/UniSupport/issues), [Milestones `MS-xx`](https://github.com/ericphan2545/UniSupport/milestones), [Projects](https://github.com/ericphan2545/UniSupport/projects) — trạng thái Project #4 xem [records/README.md](records/README.md)); giờ thực tế ghi ở [Bảng theo dõi giờ](records/time-tracking-log.md) (mục 6.1); rủi ro ở [risk-register.md](risk-register.md); danh mục toàn bộ hồ sơ quản trị ở [records/README.md](records/README.md).
+Khách hàng Aurora University, đội thực thi và mọi số liệu ví dụ trong tài liệu này là **Mô phỏng**. Nơi gốc của task và tiến độ là GitHub ([Issues](https://github.com/ericphan2545/UniSupport/issues), [Milestones `MS-xx`](https://github.com/ericphan2545/UniSupport/milestones)); giờ thực tế ghi ở [Bảng theo dõi giờ](records/time-tracking-log.md) (mục 6.1); rủi ro ở [risk-register.md](risk-register.md); danh mục toàn bộ hồ sơ quản trị ở [records/README.md](records/README.md).
 
 ## 1. Cơ cấu quản trị và tuyến báo cáo
 
@@ -140,7 +140,7 @@ Lỗi dùng nhãn `bug` và nhãn mức `sev: …`; phản hồi dùng `feedback
 **Nguồn dữ liệu và cách tính chỉ số Giờ công:**
 - **Nguồn dữ liệu:** lấy giờ thực tế từng ngày từ [Bảng theo dõi giờ](records/time-tracking-log.md) (ghi kèm số issue, mã WBS và phạm vi `Baseline` hay `CR-xx`) và lấy giờ kế hoạch baseline từng dòng từ sheet `WBS` của [UniSupport_Masterplan_nhom2.xlsx](UniSupport_Masterplan_nhom2.xlsx) (tổng baseline 870 giờ).
 - **Cách tính 3 đại lượng:** (1) `Giờ thực tế lũy kế (AC)` = tổng mọi giờ đã ghi cho phạm vi `Baseline` từ tuần 1 đến kỳ báo cáo (gồm cả giờ giải ngân quỹ dự phòng và giờ lấy thêm từ năng lực dư `Resources` để làm phạm vi baseline); (2) `Giờ kế hoạch còn lại (ETC)` = tổng giờ kế hoạch còn lại trên WBS của các dòng baseline chưa hoàn thành (gồm phần dự phòng chưa giải ngân của milestone đang chạy và toàn bộ WBS của các milestone chưa bắt đầu); (3) `Dự báo tổng giờ (EAC)` = `AC + ETC`, so sánh trực tiếp với baseline **870 giờ**. Công thức chi tiết và bảng đối chiếu Tuần 6 (`455h + 407h = 862h`) xem tại [records/time-tracking-log.md](records/time-tracking-log.md).
-- **Lưu ý về GitHub Project #4:** URL trực tiếp của Project #4 hiện chưa truy cập công khai được (trả HTTP 404 khi chưa đăng nhập; cần Phan Tiến Thịnh mở quyền xem Public hoặc xác nhận URL chính xác tại [records/README.md](records/README.md)). Trong thời gian chờ, PM lấy đầy đủ mọi chỉ số tiến độ, tải vai trò và task quá hạn trực tiếp từ tab [Issues](https://github.com/ericphan2545/UniSupport/issues) bằng các bộ lọc chuẩn ở bảng trên kết hợp trường `**Hạn:**` trong thân issue.
+- **Bảng tiến độ:** PM lấy trạng thái, hạn và mốc từ GitHub Issues bằng bộ lọc ở bảng trên; đối chiếu mã WBS và trường Hạn trên issue.
 
 Hành động theo từng mức:
 
@@ -214,7 +214,7 @@ Danh mục định vị đầy đủ kèm trạng thái xác minh truy cập và
 |---|---|---|---|---|
 | **Bảng theo dõi giờ** | Ngày, vai trò, số issue, mã WBS, phạm vi (`Baseline`/`CR-xx`), số giờ | Từng thành viên ghi hằng ngày; `PM / Senior` (Lê Hoàng Tùng) tổng hợp | Toàn bộ đội và ban quản lý | Mẫu & ví dụ (`Mô phỏng`) trong repo: [records/time-tracking-log.md](records/time-tracking-log.md). Link Google Drive vận hành: *chờ Lê Hoàng Tùng xác nhận* |
 | **Nhật ký vấn đề** | Mô tả, ngày phát hiện, ảnh hưởng, người xử lý, thời hạn, trạng thái | Người phát hiện; `PM / Senior` theo dõi | Công khai trên GitHub | **Đã xác minh:** [GitHub Issues](https://github.com/ericphan2545/UniSupport/issues) (lỗi dùng mẫu Bug nhãn `bug`, `sev: …`; vấn đề khác là issue gắn milestone) |
-| **Bảng tiến độ (Project #4)** | Trạng thái cột, hạn hoàn thành và tiến độ milestone | Phan Tiến Thịnh | **Chờ xác nhận quyền Public** | [GitHub Projects](https://github.com/ericphan2545/UniSupport/projects) *(Project #4 hiện 404 khi chưa đăng nhập; dùng tạm bộ lọc tab Issues ở mục 3.1)* |
+| **Bảng tiến độ** | Issue mở/đóng, trường Hạn và milestone | Phan Tiến Thịnh | Công khai xem | [GitHub Issues](https://github.com/ericphan2545/UniSupport/issues), bộ lọc ở mục 3.1 |
 | **Sổ rủi ro** | Như mục 3.2 (`R-01` đến `R-27`) | Phan Tiến Thịnh; owner từng rủi ro | Công khai trong repo | **Đã xác minh:** [risk-register.md](risk-register.md) |
 | **Yêu cầu thay đổi** | Nội dung, lý do, đánh giá tác động, quyết định, tài liệu đã cập nhật | Người đề xuất; `PM / Senior` | Công khai trên GitHub | **Đã xác minh:** [GitHub Issues (`change-request`)](https://github.com/ericphan2545/UniSupport/issues?q=is%3Aissue+label%3Achange-request), mẫu Change request, mã `CR-xx` |
 | **Decision Log** | Ngày, nội dung quyết định, người quyết định, lý do, tài liệu cần cập nhật | `PM / Senior` (Lê Hoàng Tùng) | Toàn bộ nhóm | Mẫu & ví dụ (`Mô phỏng`) trong repo: [records/decision-log.md](records/decision-log.md). Link Google Drive: *chờ Lê Hoàng Tùng xác nhận* |
