@@ -1,9 +1,10 @@
 # Bản đã gửi khách
 
-Mỗi lần gửi Proposal cho khách, lưu bản PDF ở đây với tên có phiên bản và ngày, và thêm một dòng vào bảng. Nơi gốc để sửa là [proposal.docx](../proposal.docx) (người chịu trách nhiệm: Lê Hoàng Tùng); bản trong thư mục này không sửa lại.
+Mỗi lần gửi Proposal cho Aurora University, lưu bản PDF ở đây với tên có phiên bản và ngày, cập nhật cột **Trạng thái** và thêm một dòng mới vào bảng. Nơi gốc để chỉnh sửa là [proposal.docx](../proposal.docx) (người chịu trách nhiệm: Lê Hoàng Tùng); các bản PDF đã lưu trong thư mục này không chỉnh sửa lại.
 
-Khách hàng Aurora University là **Mô phỏng**; việc gửi bản 1.0 là mô phỏng.
+Khách hàng Aurora University là **Mô phỏng**; việc phát hành Proposal là mô phỏng. Bản 1.0 đã thay thế và được tra cứu trong lịch sử Git.
 
-| Phiên bản | Ngày gửi | File | Gửi kèm | Thay đổi so với bản trước |
-|---|---|---|---|---|
-| 1.0 | 04/09/2026 | [proposal-v1.0-2026-09-04.pdf](proposal-v1.0-2026-09-04.pdf) | [quotation.xlsx](../quotation.xlsx) sheet Phiên bản v1.0; [Master Plan](../UniSupport_Masterplan_nhom2.xlsx) sheet Change log v1.0 | Bản đầu tiên |
+| Phiên bản | Ngày gửi | Trạng thái | File | Gửi kèm | Thay đổi so với bản trước |
+|---|---|---|---|---|---|
+| 1.1 | 05/09/2026 | Đã thay thế (lưu lịch sử) | [proposal-v1.1-2026-09-05.pdf](proposal-v1.1-2026-09-05.pdf) | Dòng v1.1 ở sheet Phiên bản của báo giá và Change log của Master Plan | Chuẩn hóa bối cảnh Aurora University, bổ sung giả định ảnh hưởng giá và làm rõ cách quản lý giờ công và chi phí. |
+| 2.0 | 06/09/2026 | **Hiệu lực (Mô phỏng)** | [proposal-v2.0-2026-09-06.pdf](proposal-v2.0-2026-09-06.pdf) | [Báo giá](../quotation.xlsx) và [Master Plan](../UniSupport_Masterplan_nhom2.xlsx) v2.0 | Ước lượng theo khối lượng trước khởi động, 1.109 giờ và 424.721.000 đồng. Giữ 42 FR, sáu mốc và Go-live 22/12/2026. |

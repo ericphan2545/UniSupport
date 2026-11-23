@@ -29,10 +29,17 @@ Kế hoạch có 6 milestone, chia theo luồng nghiệp vụ của một hồ s
 
 ## Phụ thuộc giữa các milestone
 
-- Giữa các milestone: `MS-01` → `MS-02` → `MS-03` → `MS-04` → `MS-05` → `MS-06` (sheet Milestones, cột "Phụ thuộc").
-- Giữa các việc: cột "Phụ thuộc" của sheet WBS là nơi gốc, ghi mã WBS phải xong trước. Mỗi issue GitHub ghi mã WBS của nó; issue không ghi lại phụ thuộc.
-- Phát triển backend và frontend của mỗi milestone chỉ bắt đầu sau khi test trọn luồng của milestone trước kết thúc, để phần mới dựng trên phần đã nghiệm thu.
-- Khi một milestone trễ: các milestone sau dời theo. Go-live 22/12/2026 là mốc đã chốt với khách, nên trước hết dùng quỹ dự phòng của milestone đó và năng lực dư ở sheet Resources; nếu vẫn không giữ được mốc thì PM / Senior báo khách và xử lý như thay đổi về mốc ([03-quan-tri-giam-sat.md](03-quan-tri-giam-sat.md) mục 5).
+- **Giữa các milestone:** `MS-01` → `MS-02` → `MS-03` → `MS-04` → `MS-05` → `MS-06` (sheet Milestones, cột "Phụ thuộc").
+- **Giữa các việc trong WBS:** cột "Phụ thuộc" của sheet WBS là nơi gốc, ghi đầy đủ mã dòng WBS phải xong trước. Với lịch theo ngày, ngày bắt đầu của dòng sau phải lớn hơn ngày kết thúc của mọi dòng tiền nhiệm. Mỗi issue GitHub ghi mã WBS của nó; issue không tự định nghĩa phụ thuộc mâu thuẫn với WBS.
+- **Thứ tự bắt buộc trong mỗi milestone (phần dùng chung xong trước kiểm thử cuối):**
+  - Phát triển backend và frontend của mỗi milestone chỉ bắt đầu sau khi dòng "Test trọn luồng và regression" của milestone trước kết thúc, để phần mới dựng trên nền đã nghiệm thu.
+  - Phần dùng chung và dữ liệu kiểm thử xong trước đợt test trọn luồng. Ở MS-02, 2.05 chạy 05–15/10, 2.06–2.07 ngày 16/10, test trọn luồng 19–20/10, sửa lỗi 21–22/10, kiểm lại và demo ngày 23/10. Các mốc MS-03–05 có dòng kiểm lại sau sửa lỗi tương ứng 3.18, 4.17 và 5.19.
+  - Mọi dòng **"Test trọn luồng và regression"** (`1.28–1.29`, `2.10–2.11`, `3.10–3.11`, `4.09–4.10`, `5.11–5.12`) và **"Buổi demo nghiệm thu"** (`6.12–6.13`) ghi rõ đầy đủ mã WBS của toàn bộ các dòng dev, phần dùng chung, dữ liệu mẫu và viết test case phải hoàn tất trước khi chốt kiểm thử.
+  - **Đồng bộ Hạn issue GitHub với WBS và DoD mức chức năng:** theo [QMP](02-qmp-quan-ly-chat-luong.md) mục 5, một FR chỉ đạt DoD khi xong cả BE, FE và phần dùng chung trên màn hình đó; do vậy `**Hạn:**` của FR parent task trên GitHub (ví dụ `#1` ở `MS-02`) phải `≥ max(Hạn BE, Hạn FE, Hạn phần dùng chung)` và kết thúc trước đợt kiểm thử trọn luồng cuối milestone (ví dụ `16/10/2026` cho các FR của `MS-02`).
+- **Xử lý khi một milestone bị trễ:**
+  - *Trễ do nguyên nhân nội bộ đội phát triển:* ưu tiên dùng quỹ dự phòng rủi ro của milestone đó (`Dự phòng Q-xx`) và năng lực còn trống ở sheet `Resources` để giữ mốc Go-live `22/12/2026`; nếu vẫn không giữ được mốc thì PM / Senior báo Aurora University bằng văn bản và xử lý theo quy trình thay đổi mốc ([03-quan-tri-giam-sat.md](03-quan-tri-giam-sat.md) mục 5).
+  - *Trễ do khách hàng chậm phản hồi/chốt phạm vi (giả định `A-03`, rủi ro `R-02`, `R-03`):* vì thời gian chờ phản hồi của trường không tính vào 15 tuần, nếu `MS-01` trễ 1 tuần do phía trường thì toàn bộ các mốc `MS-02` đến `MS-06` và ngày Go-live (`22/12/2026 → 29/12/2026`) dời tương ứng 1 tuần, **giá 424.721.000 VNĐ giữ nguyên**, và hai bên ghi nhận bằng một Change Request điều chỉnh lịch trong sheet `Change log`.
+- **Theo dõi công sức Hotfix sau khi milestone đã đóng:** theo QMP mục 6, lỗi phát hiện sau khi một milestone đã đóng (ví dụ phát hiện lỗi `MS-03` khi đang ở `MS-04`) được tạo issue gắn milestone `Hotfix`, không mở lại milestone cũ và không đảo ngược biên bản nghiệm thu hay đợt thanh toán đã chốt; công sức sửa lỗi Hotfix trong giai đoạn phát triển được hạch toán vào dòng WBS "Sửa lỗi sau test" của milestone đang chạy (`4.11–4.14` tại `MS-04`, `5.13–5.16` tại `MS-05`) và cộng vào dự báo giờ công baseline 1109 giờ.
 
 ## Effort cho test, regression và sửa lỗi
 
@@ -41,14 +48,14 @@ Kế hoạch có 6 milestone, chia theo luồng nghiệp vụ của một hồ s
 - Mỗi milestone `MS-01` đến `MS-05` có 3 nhóm dòng WBS: "Viết test case từ AC", "Test trọn luồng và regression", "Sửa lỗi sau test". Chúng thuộc hạng mục báo giá của milestone đó (`Q-02` đến `Q-06`), loại effort "Kiểm thử", "Tích hợp và kiểm thử", "Sửa lỗi" ở sheet Chi tiết effort của [quotation.xlsx](quotation.xlsx).
 - "Test trọn luồng và regression" chạy kịch bản của milestone đang làm và chạy lại các kịch bản đánh dấu Regression của các milestone trước ([test-scenarios.md](../acceptance/test-scenarios.md)), trước mỗi lần bàn giao cho khách.
 - `MS-06`: usability test, báo cáo kiểm thử (`Q-07`); sửa lỗi trong bảo hành (`Q-08`).
-- Số AC: bộ đặc tả có 339 AC (mỗi business rule và error flow có ít nhất một AC). Giờ "Viết test case từ AC" và "Test trọn luồng và regression" tính theo milestone, không theo số AC; nếu thực tế vượt giờ kế hoạch thì PM / Senior xếp thêm từ năng lực dư ở sheet Resources, không lấy từ quỹ dự phòng.
-- Tích hợp: dựng Staging và CI deploy (`MS-01`), test trọn luồng trên Staging ở mỗi milestone, nối SSO thật trên server trường (`MS-06`).
+- **Ước lượng theo khối lượng công việc và xử lý khi vượt giờ:** Bộ đặc tả có 42 FR / 339 AC (phủ đủ 5 nhóm kiểm thử). Phương pháp ước lượng bottom-up theo độ phức tạp FR, số AC (định mức viết test case `0,12h/AC`, chạy test `0,10h/AC` + trọn luồng/regression), tỷ lệ sửa lỗi (`20%` giờ phát triển) và bảng phân bổ baseline **1109 giờ** nằm ở [Bang_Effort.md](Bang_Effort.md) mục 2.0a–2.0d. Nếu thực tế cần tăng giờ làm hoặc kiểm thử cho phạm vi baseline, PM / Senior có thể điều phối thêm giờ từ năng lực còn trống ở sheet `Resources` để giữ lịch, **nhưng mọi giờ bổ sung cho phạm vi baseline đều phải ghi nhận vào giờ thực tế và dự báo tổng giờ so với 1109 giờ** (không ẩn khỏi chỉ số Giờ công), và **bên phát triển chịu 100% chi phí vượt nội bộ**, không tính thêm tiền cho khách.
+- **Tích hợp:** dựng Staging và CI deploy (`MS-01`), test trọn luồng trên Staging ở mỗi milestone, nối SSO thật trên server trường (`MS-06`).
 
 ## Dự phòng cho thay đổi và rủi ro
 
-- **Rủi ro đã nhận diện:** mỗi hạng mục có một dòng WBS bắt đầu bằng "Dự phòng Q-xx", giao cho "Quỹ dự phòng" ở sheet Resources (tổng và tỷ lệ tự tính ở ô E20, E21). Dòng ghi mã rủi ro được dùng ([risk-register.md](risk-register.md)). PM / Senior duyệt việc dùng quỹ và ghi số giờ đã dùng vào báo cáo tuần. Quỹ này đã nằm trong 870 giờ và trong giá.
+- **Rủi ro đã nhận diện:** mỗi hạng mục có một dòng WBS bắt đầu bằng "Dự phòng Q-xx", giao cho "Quỹ dự phòng" ở sheet Resources (tổng và tỷ lệ tự tính ở ô E20, E21). Dòng ghi mã rủi ro được dùng ([risk-register.md](risk-register.md)). PM / Senior duyệt việc dùng quỹ và ghi số giờ đã dùng vào báo cáo tuần. Quỹ này đã nằm trong 1109 giờ và trong giá.
 - **Không tính trùng:** sửa lỗi sau test và bảo hành là dòng WBS riêng; quỹ dự phòng chỉ dùng khi rủi ro trong sổ xảy ra. Dự phòng lao động 20% trong bảng giá nội bộ là dự phòng tài chính, không cấp thêm giờ ([Bang_Effort.md](Bang_Effort.md) Phần 3).
-- **Change request:** báo giá và lên lịch riêng theo Proposal mục 4, không lấy từ quỹ dự phòng. Cột "Dư" ở sheet Resources cho biết năng lực còn trống của từng vai trò để xếp CR đã duyệt mà không kéo mốc khác. Các lần sửa nhỏ trong giới hạn 2–5 lần của Proposal làm trong dòng "Sửa lỗi sau test" của milestone đang chạy.
+- **Change request và năng lực còn trống (`Resources`):** Change request được ước lượng theo định mức ở [Bang_Effort.md](Bang_Effort.md) mục 2.0a, báo giá và theo dõi riêng theo Proposal mục 4, không lấy từ quỹ dự phòng 88 giờ. Cột "Dư" ở sheet Resources cho biết năng lực còn trống chưa nằm trong giá 424.721.000 VNĐ, dùng để tiếp nhận CR đã duyệt hoặc hỗ trợ bù lịch nội bộ khi việc baseline vượt giờ (khi dùng cho phạm vi baseline, giờ vẫn cộng vào dự báo 1109 giờ và bên phát triển chịu chi phí). Các lần sửa nhỏ trong giới hạn 2–5 lần của Proposal làm trong dòng "Sửa lỗi sau test" của milestone đang chạy.
 
 ## Nguồn lực
 
@@ -61,8 +68,21 @@ Kế hoạch có 6 milestone, chia theo luồng nghiệp vụ của một hồ s
 3. BA / Mid phân loại: lỗi đi theo quy trình lỗi ([02-qmp-quan-ly-chat-luong.md](02-qmp-quan-ly-chat-luong.md) mục 6); thay đổi phạm vi đi theo quy trình change request ([03-quan-tri-giam-sat.md](03-quan-tri-giam-sat.md) mục 5).
 4. Đạt điều kiện nghiệm thu thì hai bên ký biên bản nghiệm thu milestone; PM / Senior gửi kèm báo cáo milestone (03 mục 2.3).
 
+## Quy ước liên kết từ GitHub Issue đến đặc tả
+
+Để mọi thành viên đi thẳng từ công việc sang đúng yêu cầu mà không phải tự tìm trong file dài hàng trăm dòng:
+
+- **Dẫn thẳng đến heading FR và ghi rõ AC:**
+  - *FR parent task* (36 issue): dẫn thẳng tới heading anchor của FR trong `docs_v2/modules/<module>/prd.md` (dạng `#fr-xxx-nn-...`) và ghi phạm vi `AC-01` đến `AC-xx` của FR đó.
+  - *Sub-issue `[BE]`/`[FE]`* (64 issue): dẫn thẳng tới cùng heading anchor của FR (kèm tham chiếu `Issue cha: #n`) và ghi phạm vi AC mảng BE/FE liên quan.
+  - *Issue Dùng chung* (10 issue: `#117`, `#118`, `#123`, `#124`, `#129`, `#130`, `#155`, `#156`, `#157`, `#158`): dẫn thẳng tới heading anchor của từng FR dùng chung thuộc issue và **liệt kê tường minh danh sách từng AC chịu trách nhiệm nghiệm thu ở milestone đó** theo [traceability-matrix.md](../acceptance/traceability-matrix.md) (kể cả đủ 7 AC của `FR-SEC-05` trong `#123`).
+- **Permalink theo bản chốt vs link theo nhánh:**
+  - *Trước khi chốt phạm vi cuối tuần 2 `MS-01`:* dùng link theo nhánh `main` (`https://github.com/ericphan2545/UniSupport/blob/main/docs_v2/modules/.../prd.md#<anchor>`) để phản ánh bản rà soát mới nhất.
+  - *Từ thời điểm chốt phạm vi / phát hành baseline:* ban quản lý tạo Git tag bản chốt (ví dụ `baseline-v2.0`) và chuẩn hóa link trên issue sang **permalink cố định theo tag** (`.../blob/baseline-v2.0/docs_v2/modules/.../prd.md#<anchor>`) để đội lập trình và QA đọc đúng phiên bản. Sau khi có tag, người quản lý GitHub mở thử permalink của một issue cha, một issue con và một issue Dùng chung; kiểm tất cả các liên kết cùng trỏ đúng phiên bản trước khi bàn giao.
+- **Cập nhật khi có Change Request (`CR-xx`):** khi một `CR-xx` sửa PRD được duyệt và gộp vào `main`, ban quản lý gắn tag bản chốt mới (ví dụ `baseline-v2.1`), sau đó Phan Tiến Thịnh cập nhật permalink/anchor và danh sách AC trên mọi issue bị ảnh hưởng (FR cha, issue Dùng chung và `[BE]`/`[FE]` con) trong bước 4 quy trình kiểm soát thay đổi ([03-quan-tri-giam-sat.md](03-quan-tri-giam-sat.md) mục 5).
+
 ## Thay đổi kế hoạch
 
-Kế hoạch đã chốt là phiên bản v1.0 trong sheet Change log, gửi kèm Proposal v1.0 ([sent/](sent/README.md)). Mỗi CR được duyệt ghi một dòng mới vào Change log (phiên bản, ngày, CR, giá trị cũ và mới), không ghi đè.
+Kế hoạch hiện hành là v2.0 (06/09/2026), phát hành mô phỏng trước khởi động và gửi kèm [Proposal](sent/README.md). Sheet Change log lưu các phiên bản trước và các CR được duyệt, kèm ngày, thay đổi và tác động.
 
-Trước khi gửi proposal cho khách lần đầu, nhóm sửa kế hoạch và báo giá trực tiếp; lịch sử sửa nằm trong PR. Sửa theo feedback của giảng viên không phải là change request. Sau khi khách đã nhận proposal, thay đổi phạm vi, giá hoặc mốc do khách yêu cầu (thật hoặc `Mô phỏng`) mới đi qua CR và ghi Change log.
+Trước khi Aurora University ký chốt chính thức bộ đặc tả và kế hoạch, các đợt rà soát, chuẩn hóa nội bộ của nhóm được thực hiện qua Pull Request và phát hành phiên bản làm rõ trong Change log mà không tính là change request. Sau khi hai bên đã chốt phạm vi, mọi thay đổi phạm vi, giá hoặc mốc do khách yêu cầu (thật hoặc `Mô phỏng`) đều đi qua quy trình CR và ghi Change log.

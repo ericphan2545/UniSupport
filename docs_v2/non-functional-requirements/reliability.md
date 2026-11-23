@@ -22,7 +22,7 @@
 
 | Mã | Yêu cầu | Cách đo |
 |---|---|---|
-| `NFR-REL-09` | Không trắng trang. Lỗi khi đọc: giữ dữ liệu cũ kèm chỉ báo hoặc hiện nút Thử lại. Lỗi khi gửi: giữ nội dung form và tệp đã chọn để thử lại với cùng `Idempotency-Key`; không lưu nội dung nhạy cảm lâu dài trong localStorage. Polling lỗi: giữ giá trị cũ, không dồn request thử lại; hết phiên thì dừng polling và chuyển về đăng nhập | `TS-11`, `FR-CORE-09/AC-06` |
+| `NFR-REL-09` | Không trắng trang. Lỗi khi đọc: giữ dữ liệu cũ kèm chỉ báo hoặc hiện nút Thử lại. Lỗi khi gửi: giữ nội dung form và tệp đã chọn để thử lại với cùng `Idempotency-Key`; không lưu nội dung nhạy cảm lâu dài trong localStorage. Polling lỗi: giữ giá trị cũ, không dồn request thử lại; hết phiên thì dừng polling và chuyển về đăng nhập | `TS-11`, `TS-03`, `FR-CORE-09/AC-06` |
 
 Ngưỡng timeout: xem [performance.md](performance.md) (`NFR-PERF-04` đến `NFR-PERF-07`).
 
@@ -30,6 +30,6 @@ Ngưỡng timeout: xem [performance.md](performance.md) (`NFR-PERF-04` đến `N
 
 | Mã | Yêu cầu | Cách đo |
 |---|---|---|
-| `NFR-REL-10` | Hệ thống không tự xóa dữ liệu. Thời hạn lưu hồ sơ, tệp, lịch sử, nhật ký và lịch sao lưu phải được trường xác nhận trước production (rủi ro `R-25`) | Rà cấu hình và tác vụ nền trước bàn giao: không có tác vụ xóa dữ liệu nghiệp vụ |
+| `NFR-REL-10` | Hệ thống không tự xóa dữ liệu. Thời hạn lưu hồ sơ, tệp, lịch sử, nhật ký và lịch sao lưu phải được trường xác nhận trước production (rủi ro `R-25`) | `TS-64` bước 4 (rà cấu hình tác vụ nền và lược đồ CSDL trước bàn giao: không có tác vụ tự xóa dữ liệu nghiệp vụ) |
 
 Trách nhiệm sao lưu sau bàn giao: xem [deployment.md](deployment.md).

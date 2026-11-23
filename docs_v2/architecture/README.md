@@ -13,6 +13,6 @@ Mô tả cách UniSupport được dựng để đáp ứng các chức năng tr
 
 **Nguồn:** `modules/M04-authentication-security/prd.md` (quy tắc quyền, bảo mật, mã lỗi) và `modules/M05-core-platform/prd.md` (quy tắc dữ liệu, version, idempotency, lưu tệp). Khi tài liệu này và module mâu thuẫn, module là chuẩn.
 
-**Chưa chốt:** công nghệ cụ thể (ngôn ngữ backend, framework frontend, hệ quản trị CSDL, kho tệp) và cấu hình hạ tầng của trường.
+**Trạng thái lựa chọn công nghệ:** **Chấp nhận** ngày 17/09/2026 (Mô phỏng) tại [ADR-005](technical-decisions/ADR-005-technology-stack-and-cache.md): TypeScript/NestJS, React và TypeScript, PostgreSQL, Redis cho cache 15 phút, kho tệp là volume Docker ngoài web root. `BE Dev / Senior`, `FE Dev / Senior` và `DevOps / Mid` hoàn thành đề xuất chậm nhất ngày 11/09/2026 (**WBS `1.04–1.05`**, `#105`); bộ phận CNTT của trường xác nhận tương thích hạ tầng ở **WBS `1.11–1.14` (`14/09–17/09/2026`)**. Lựa chọn nằm trong giả định ước lượng **`A-14`** ([assumptions.md](../project/assumptions.md)); rủi ro `R-27` đã đóng.
 
 Sơ đồ viết bằng Mermaid, hiển thị trực tiếp trên GitHub.

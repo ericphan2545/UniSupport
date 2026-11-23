@@ -21,7 +21,7 @@ Phiên bản 1.4
 Cần đủ cả 5 điều:
 
 - Mọi issue của milestone đạt DoD (mục 5).
-- 100% test case của milestone đã chạy và mọi AC của các FR thuộc milestone đạt; đã test trọn luồng qua các vai trò trên Staging.
+- 100% test case của milestone đã chạy và mọi AC của các FR (kể cả phần AC dùng chung) thuộc milestone đạt; đã test trọn luồng qua các kịch bản `TS-01` đến `TS-08` tương ứng với chức năng đã có trên Staging tại milestone đó (không phụ thuộc chức năng của milestone sau).
 - Không còn lỗi Critical hoặc Major đang mở.
 - Regression của các milestone đã đóng đều đạt.
 - QA / Senior xác nhận, PM / Senior đóng milestone trên GitHub. Sau đó áp dụng mục 6.
@@ -38,7 +38,13 @@ Mục này là nơi gốc phía đội của điều kiện Go-live. Điều ki�
 - Mọi AC của 42 FR trong bộ đặc tả đã chốt ở `MS-01` được kiểm bằng kịch bản test và đạt.
 - Critical = 0 và Major = 0.
 - Lỗi Minor chỉ được còn khi không làm AC nào không đạt, và phải nằm trong danh sách lỗi còn tồn (QA đề xuất, PM duyệt).
-- Đạt mục tiêu `G-01` đến `G-05` ([product/README.md](../product/README.md)); riêng `G-05`: đạt `NFR-PERF-01` đến `NFR-PERF-03`, không có lỗi chặn khi chạy 100–200 người dùng đồng thời trên hạ tầng trường.
+- Đạt mục tiêu `G-01` đến `G-05` ([product/README.md](../product/README.md)) và đạt đầy đủ **50/50 yêu cầu phi chức năng (NFR) bắt buộc trước Go-live**, gồm:
+  - **Hiệu năng (`NFR-PERF-01` đến `NFR-PERF-14`):** kiểm thử tải `TS-19` (`NFR-PERF-01..03`) chạy và đạt trên hạ tầng của Aurora University trước Go-live; các ngưỡng timeout, polling, cache và phân trang (`NFR-PERF-04..14`) đạt qua `TS-03, TS-06, TS-08, TS-12` và các AC tương ứng.
+  - **Bảo mật (`NFR-SEC-01` đến `NFR-SEC-13`):** kiểm tra đầy đủ qua `TS-01, TS-08, TS-09, TS-12, TS-13, TS-14, TS-18, TS-63` (CSRF/XSS/không lộ lỗi) trên Staging và `TS-64` (cấm SSO giả lập, HTTPS, không chứa bí mật trong repo) trước Go-live.
+  - **Độ tin cậy (`NFR-REL-01` đến `NFR-REL-10`):** đạt qua `TS-03, TS-06, TS-10, TS-11, TS-12, TS-13, TS-14` và `TS-64` (không tự xóa dữ liệu, xác nhận chính sách lưu trữ/sao lưu `R-25`).
+  - **Giám sát và truy vết (`NFR-OBS-01` đến `NFR-OBS-04`):** đạt qua `TS-12, TS-13, TS-14, TS-16, TS-63` (`correlation_id`, log UTC không chứa bí mật, đủ sự kiện log bắt buộc).
+  - **Triển khai và vận hành (`NFR-DEP-01` đến `NFR-DEP-04`):** đạt qua `TS-16` (seed danh mục/SLA) và `TS-64` (Docker Compose production, HTTPS, SSO thật, Admin đầu tiên trên server trường).
+  - **Khả năng sử dụng (`NFR-USE-01` đến `NFR-USE-05`):** đạt qua `TS-15` (VN/EN, responsive 360px, 4 trình duyệt, lỗi theo trường) và `TS-20` (Usability Test Report ≥ 80%).
 - Có Báo cáo kiểm thử và Usability Test Report.
 - Các hạng mục bàn giao còn lại đủ theo Proposal 6.1 (PM kiểm).
 
@@ -64,7 +70,7 @@ Test case được viết và QA / Senior duyệt trước khi chức năng lên
 | Cấp | Hoàn thành khi |
 |---|---|
 | Task | Theo Team Charter (mục 5, bước 4) |
-| Chức năng | Mọi task backend và frontend của chức năng đã xong · đạt đủ tiêu chí chấp nhận · phần dùng chung (VN/EN, responsive, quyền, nhật ký) đã làm cho các màn hình của chức năng |
+| Chức năng | Mọi task backend và frontend của chức năng đã xong · đạt đủ tiêu chí chấp nhận · phần dùng chung (VN/EN, responsive, quyền, nhật ký, lịch sử) đã làm cho các màn hình của chức năng *(nên Hạn của FR parent task trên GitHub phải ≥ ngày hoàn thành của BE, FE và phần dùng chung tương ứng trong WBS, xong trước đợt test trọn luồng cuối milestone)* |
 | Milestone | Đạt checklist 2.1 · đã đóng trên GitHub |
 | Dự án | Đạt checklist 2.2 · hệ thống chạy trên server của trường với SSO thật |
 
@@ -99,9 +105,10 @@ Lỗi trùng, không tái hiện được hoặc thực chất là yêu cầu th
 
 **Lỗi phát hiện sau khi milestone đã đóng.** Milestone đã đóng thì **không mở lại**.
 
-- Mọi mức lỗi đều tạo issue mới, gắn milestone `Hotfix`.
-- Critical: QA / Senior xác nhận mức; PM / Senior phê duyệt việc sửa; sửa xong chạy regression các chức năng liên quan.
+- Mọi mức lỗi đều tạo issue mới (mẫu Bug), gắn milestone `Hotfix`, nhãn `bug` và mức `sev: …`.
+- Critical: QA / Senior xác nhận mức trong 1 ngày làm việc; PM / Senior phê duyệt việc sửa ngay (hạn sửa 1 ngày làm việc); sửa xong bắt buộc chạy lại regression các chức năng liên quan (`TS-01` đến `TS-18`).
 - Major và Minor: PM / Senior quyết thứ tự sửa. Vì Go-live yêu cầu Major = 0, mọi Major phải sửa trước Go-live.
+- **Hạch toán WBS và thanh toán:** công sức sửa lỗi `Hotfix` trong giai đoạn đang phát triển hạch toán vào dòng WBS "Sửa lỗi sau test" của milestone hiện tại (ví dụ `4.11–4.14` tại `MS-04`, `5.13–5.16` tại `MS-05`), ghi giờ thực tế vào Bảng theo dõi giờ và cộng vào dự báo baseline 1109 giờ (bên phát triển chịu chi phí nếu vượt). Việc phát hiện lỗi `Hotfix` không mở lại milestone đã đóng và không đảo ngược biên bản nghiệm thu hay thanh toán đợt 2 của `MS-03` đã ký; tuy nhiên lỗi Critical/Major phải đóng hoàn toàn trước khi ký biên bản nghiệm thu tổng thể và thanh toán đợt 3.
 
 **Điều kiện dừng test hoặc dừng release:**
 

@@ -67,7 +67,7 @@ Sinh viên đã đăng nhập qua SSO.
 - **BR-02:** MSSV và Họ tên là bắt buộc. Thiếu một trong hai trường này thì xem như payload lỗi.
 - **BR-03:** Các trường tùy chọn (Khoa, Lớp, Email, SĐT): nếu SSO không trả về, trả về null, chuỗi rỗng hoặc chỉ có khoảng trắng thì backend lưu và trả về `null`.
 - **BR-04:** UI hiển thị `--` cho trường `null`, không để trống ô và không hiện `undefined`.
-- **BR-05:** Thông tin lấy từ SSO được cache trên Redis trong 15 phút.
+- **BR-05:** Thông tin lấy từ SSO được lưu trong bộ nhớ đệm phía server (server-side cache) riêng theo từng tài khoản với TTL 15 phút; công nghệ triển khai bộ nhớ đệm (ví dụ Redis hoặc giải pháp tương đương) là quyết định kiến trúc, chốt theo [ADR-005](../../architecture/technical-decisions/ADR-005-technology-stack-and-cache.md).
 
 **Alternative / Error Flows**
 - **E-01:** Nếu token không hợp lệ hoặc hết hạn, hệ thống trả 401 và yêu cầu đăng nhập lại.
@@ -79,7 +79,7 @@ Sinh viên đã đăng nhập qua SSO.
 - **AC-02 [Validation]:** SSO chỉ trả về MSSV, Họ tên, Email -> 200; `phone_number`, `faculty_name`, `class_name` = `null`; UI hiển thị `--`. _(Kiểm cho: BR-03, BR-04)_
 - **AC-03 [Boundary]:** SSO trả về SĐT là `""` hoặc `"   "` -> hệ thống trim và chuyển thành `null`. _(Kiểm cho: BR-03)_
 - **AC-04 [Security]:** Request thiếu cookie phiên ứng dụng, cookie sai chữ ký hoặc phiên hết hạn/đã thu hồi -> 401. Cookie hợp lệ không cần header Authorization. _(Kiểm cho: E-01)_
-- **AC-05 [Concurrency/Cache]:** Sinh viên tải lại trang 3 lần trong 1 phút -> lần 2 và lần 3 lấy dữ liệu từ Redis, không gọi lại SSO. _(Kiểm cho: BR-01, BR-05)_
+- **AC-05 [Concurrency/Cache]:** Sinh viên tải lại trang 3 lần trong 1 phút -> lần 2 và lần 3 lấy dữ liệu từ bộ nhớ đệm phía server (cache 15 phút theo ADR-005), không gọi lại SSO. _(Kiểm cho: BR-01, BR-05)_
 - **AC-06 [Resilience]:** Cache hết hạn và SSO không phản hồi quá 3 giây -> 504, không treo. SSO thiếu MSSV/Họ tên hoặc chuỗi rỗng -> 502. Cookie hợp lệ không có Authorization vẫn đọc được thông tin. _(Kiểm cho: BR-01, BR-02, E-02, E-03)_
 - **AC-07 [Security/Cache]:** Sinh viên A tải thông tin (dữ liệu đã vào cache), ngay sau đó sinh viên B tải thông tin -> B nhận đúng dữ liệu của B, không nhận dữ liệu trong cache của A. Sau 15 phút kể từ lần gọi SSO trước, A tải lại -> hệ thống gọi lại SSO. _(Kiểm cho: BR-01, BR-05)_
 

@@ -1,22 +1,26 @@
-## Thay đổi
+## Tóm tắt thay đổi
 
-<!-- Ngắn gọn: sửa gì, quyết định gì và vì sao. -->
+<!-- Bắt buộc điền cụ thể (không để nguyên chú thích mẫu): sửa file nào, quyết định gì và lý do. -->
+
+- **Mã hạng mục / rà soát (nếu có):** <!-- Ví dụ: CR-01, #n -->
+- **Nội dung thay đổi:**
 
 ## Liên quan
 
-Closes #
+- **Issue đóng / cập nhật:** <!-- Ghi `Closes #n` hoặc `Liên quan #n` -->
+- **Mã liên quan (`FR`, `AC`, `NFR`, `TS`, `Q`, `MS`, `WBS`, `R`, `CR`):**
 
-Mã liên quan (FR, AC, NFR, TS, Q, MS, R, CR):
+## Tài liệu Word / Excel / PDF đã đổi
 
-## Tài liệu Word/Excel đã đổi
+<!-- Bắt buộc ghi rõ tên file, sheet hoặc mục đã sửa vì file nhị phân không xem diff trực tiếp được. Không đổi thì ghi "Không". -->
 
-<!-- Ghi rõ file, sheet hoặc mục đã đổi, vì file nhị phân không xem diff được. Không đổi thì ghi "Không". -->
+## Bằng chứng kiểm tra
 
-## Kiểm tra
+<!-- Ghi rõ kết quả kiểm tra thực tế, không chỉ đánh dấu hộp kiểm. -->
 
-<!-- Ghi ngắn, không chỉ đánh dấu. -->
-
-- Người review (Team Charter mục 9):
-- Mục lục `docs_v2/README.md` còn đúng đường dẫn:
-- Các nơi dẫn lại mã đã cập nhật (ma trận truy vết, Master Plan, kịch bản test, issue):
-- Ô kiểm tra trong Excel bằng 0 (nếu sửa Excel):
+- **Người review khác tác giả (Team Charter mục 9, phản hồi trong 1 ngày làm việc):**
+- **Hình thức gộp sau khi duyệt:** Squash and merge
+- **Mục lục `docs_v2/README.md` và liên kết nội bộ / anchor còn hợp lệ:**
+- **Đồng bộ các tài liệu dẫn lại (ma trận truy vết, Master Plan, kịch bản test, issue):**
+- **Ô kiểm tra trong Excel bằng 0 / OK (nếu sửa Excel):**
+- **Kiểm tra tự động / đối chiếu thực tế đã chạy:**

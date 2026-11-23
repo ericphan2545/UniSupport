@@ -6,9 +6,9 @@ Phiên bản 0.5
 
 Kế hoạch này quy định cách báo cáo tình hình dự án từ người thực hiện lên PM, rồi lên Aurora University (khách hàng). Kế hoạch trả lời bốn câu hỏi: ai báo cáo cho ai, báo cáo khi nào, báo cáo những gì, và khi có vấn đề thì xử lý ra sao. Mục tiêu là để PM luôn biết dự án đang đi đúng hay lệch kế hoạch, từ đó quyết định kịp thời.
 
-Kế hoạch dựa trên vai trò và quy tắc làm việc trong Team Charter, due date của milestone trên GitHub, kế hoạch 870 giờ công (Team Charter) và các cam kết trong Proposal. Nội dung sản phẩm xem [01](01-quan-ly-san-pham.md); tiêu chí chất lượng xem [02](02-qmp-quan-ly-chat-luong.md).
+Kế hoạch dựa trên vai trò và quy tắc làm việc trong Team Charter, due date của milestone trên GitHub, kế hoạch 1109 giờ công (Team Charter) và các cam kết trong Proposal. Nội dung sản phẩm xem [01](01-quan-ly-san-pham.md); tiêu chí chất lượng xem [02](02-qmp-quan-ly-chat-luong.md).
 
-Khách hàng Aurora University, đội thực thi và mọi số liệu ví dụ trong tài liệu này là **Mô phỏng**. Nơi gốc của task và tiến độ là GitHub (Issues, Milestones `MS-xx`, Project #4); giờ thực tế ghi ở Bảng theo dõi giờ (mục 6.1); rủi ro ở [risk-register.md](risk-register.md).
+Khách hàng Aurora University, đội thực thi và mọi số liệu ví dụ trong tài liệu này là **Mô phỏng**. Nơi gốc của task và tiến độ là GitHub ([Issues](https://github.com/ericphan2545/UniSupport/issues), [Milestones `MS-xx`](https://github.com/ericphan2545/UniSupport/milestones)); giờ thực tế ghi ở [Bảng theo dõi giờ](records/time-tracking-log.md) (mục 6.1); rủi ro ở [risk-register.md](risk-register.md); danh mục toàn bộ hồ sơ quản trị ở [records/README.md](records/README.md).
 
 ## 1. Cơ cấu quản trị và tuyến báo cáo
 
@@ -107,24 +107,40 @@ Mỗi báo cáo tuần và báo cáo milestone đánh giá bốn lĩnh vực the
 | Lĩnh vực | Chỉ số và cách đo | Xanh | Vàng | Đỏ |
 |---|---|---|---|---|
 | Tiến độ | Tỷ lệ task xong đúng Hạn ghi trong issue (lấy từ dòng WBS); dự báo ngày đóng milestone so với due date trên GitHub | Tỷ lệ đúng hạn ≥ 90% và milestone dự kiến đóng đúng due date | Tỷ lệ đúng hạn < 90%, hoặc dự báo trễ không quá 1 ngày làm việc | Dự báo trễ quá 1 ngày làm việc so với due date |
-| Giờ công | Dự báo tổng giờ = giờ thực tế đã dùng + giờ kế hoạch của phần việc còn lại, so với 870 giờ (Team Charter) | Dự báo không vượt 870 giờ và không task nào lệch quá 20% | Dự báo không vượt 870 giờ, nhưng có task lệch quá 20% giờ kế hoạch (Team Charter) | Dự báo vượt 870 giờ |
+| Giờ công | Dự báo tổng giờ baseline (`EAC`) = Giờ thực tế lũy kế phạm vi baseline (gồm cả giờ giải ngân từ quỹ dự phòng và giờ lấy thêm từ năng lực dư `Resources` cho phạm vi baseline) + Giờ kế hoạch của phần việc baseline còn lại, so với baseline **1109 giờ** ([Bang_Effort.md](Bang_Effort.md) mục 2.0d). Giờ CR đã duyệt theo dõi ngân sách riêng | `EAC ≤ 1109 giờ` và không task nào lệch quá 20% | `EAC ≤ 1109 giờ`, nhưng có task lệch quá 20% giờ kế hoạch (Team Charter mục 4) | `EAC > 1109 giờ` (bên phát triển chịu chi phí vượt nội bộ; báo khách nếu ảnh hưởng mốc, phạm vi `Should` hoặc do giả định/CR) |
 | Chất lượng | Số lỗi Critical và Major đang mở; các chỉ số theo QMP mục 7 | Không có Critical hoặc Major đang mở; chỉ số đạt ngưỡng | Có Critical hoặc Major đang sửa trong hạn, hoặc chỉ số chưa đạt nhưng chưa đến lúc đóng milestone | Còn Critical hoặc Major khi đến lúc đóng milestone, hoặc Critical quá hạn sửa (QMP mục 6) |
 | Phạm vi | Số change-request đang chờ xử lý; số lần sửa nhỏ đã dùng (tối đa 5 theo Proposal) | Không có CR đang mở và đã dùng dưới 4 lần sửa nhỏ | Có CR đang đánh giá, hoặc đã dùng 4 lần sửa nhỏ | CR chờ quá 3 ngày làm việc, hoặc thay đổi ảnh hưởng đến Go-live hay phạm vi đã thống nhất, cần khách xác nhận |
 
 Chỉ số giờ công đo bằng giờ, không quy đổi ra tiền.
 
-**Lấy số liệu từ GitHub.** Mọi task là issue có milestone `MS-xx`, nhãn `task` và nhãn `vai trò: …`; lỗi có nhãn `bug` và nhãn mức `sev: …`; change request có nhãn `change-request`. PM lấy số liệu cho báo cáo tuần bằng các bộ lọc:
+**Lấy số liệu từ GitHub và tránh đếm trùng cha/con.** Trên GitHub Issues, công việc được phân thành **hai tầng tách biệt** để vừa theo dõi tiến độ chức năng/milestone vừa đo đúng tải từng vai trò mà không đếm trùng:
 
-| Chỉ số | Bộ lọc trên GitHub (tab Issues) |
-|---|---|
-| Task của milestone đã xong / tổng | `is:issue label:task milestone:"<tên MS-xx>" is:closed` so với cùng bộ lọc không có `is:closed` |
-| Task quá hạn | Issue `label:task is:open` có Hạn (dòng **Hạn:** trong issue, theo WBS) đã qua; xem theo cột Hạn trên Project #4 |
-| Tải theo vai trò | `is:issue is:open label:task label:"vai trò: BE Dev / Mid"` (đổi tên vai trò) |
-| Lỗi đang mở theo mức | `is:issue is:open label:bug label:"sev: Critical"` (đổi mức) |
-| Change request đang chờ | `is:issue is:open label:change-request` |
-| Dự báo ngày đóng milestone | Ngày đến hạn của milestone trên GitHub so với số task còn mở và Hạn của chúng |
+1. **Tầng 1 — Issue mức milestone / hạng mục cha (`label:task`):**
+   - **36 FR parent task** (ví dụ `#1` `[MS-02] FR-STU-02 · Tạo yêu cầu hỗ trợ`): gắn `task` + `loại: FR` + milestone `MS-xx`; **không gắn nhãn `vai trò: …`** vì công việc thực thi đã tách xuống issue `[BE]`/`[FE]` con.
+   - **57 task một cấp gắn milestone** (phân tích, thiết kế, dùng chung, viết test case, test trọn luồng, sửa lỗi, triển khai, tài liệu, bảo hành — trong đó `#145`, `#146` là task bảo hành 1 cấp kèm `loại: BE`/`loại: FE`): gắn `task` + `vai trò: …` + milestone `MS-xx`; **không gắn `loại: FR`**.
+   - **1 task quản lý xuyên suốt không gắn milestone (`#101`, hạng mục `Q-09`):** gắn `task` + `loại: quản lý` + `vai trò: PM / Senior`, để trống milestone và theo dõi tiến độ từng kỳ bằng checklist 6 milestone (`MS-01` đến `MS-06`, khớp các dòng WBS `1.34, 2.16, 3.16, 4.15, 5.17, 6.16`).
+2. **Tầng 2 — Issue thực thi theo vai trò (`-label:"loại: FR"`):**
+   - **64 sub-issue `[BE]`/`[FE]`** (ví dụ `#2` `[BE] FR-STU-02`, `#3` `[FE] FR-STU-02`): gắn `loại: BE` hoặc `loại: FE` + `vai trò: …` + milestone `MS-xx`; **không gắn nhãn `task`**.
+   - **58 task một cấp** (57 task gắn milestone + `#101`): trùng tập task 1 cấp ở trên vì không có issue con.
 
-Giờ thực tế lấy từ Bảng theo dõi giờ (mục 6.1), cộng theo số issue để so với giờ kế hoạch của dòng WBS tương ứng.
+Lỗi dùng nhãn `bug` và nhãn mức `sev: …`; phản hồi dùng `feedback`; change request dùng `change-request`. PM lấy số liệu báo cáo tuần theo đúng tập cần đếm trong bảng sau:
+
+| Chỉ số | Tập issue được đếm (chống đếm trùng) | Bộ lọc trên GitHub (tab Issues) |
+|---|---|---|
+| Task của milestone đã xong / tổng | **Tầng 1** (36 FR cha + 57 task 1 cấp thuộc milestone; loại 64 BE/FE con → không đếm trùng `#1` và `#2`) | `is:issue label:task milestone:"<tên MS-xx>" is:closed` chia cho `is:issue label:task milestone:"<tên MS-xx>"` |
+| Việc xuyên suốt không gắn milestone (`#101`) | **Task quản lý xuyên suốt** (1 issue `#101`, theo dõi bằng checklist `MS-01`–`MS-06`) | `is:issue is:open label:"loại: quản lý" no:milestone` |
+| Tải theo vai trò | **Tầng 2** (64 BE/FE con + 58 task 1 cấp; loại 36 FR cha bằng `-label:"loại: FR"` → bao gồm `#2`, loại `#1`) | `is:issue is:open -label:"loại: FR" -label:bug -label:feedback -label:change-request label:"vai trò: BE Dev / Mid"` (đổi tên vai trò) |
+| Task quá hạn (đo tỷ lệ đúng hạn vận hành) | **Tầng 2** (122 issue thực thi — phát hiện sớm trễ ở BE/FE mà không đếm trùng với FR cha) | Lọc `is:issue is:open -label:"loại: FR" -label:bug -label:feedback -label:change-request`, so trường `**Hạn:**` (theo WBS) với ngày báo cáo; đối chiếu riêng tầng FR cha bằng `is:issue is:open label:task`, **không cộng gộp hai tầng** |
+| Lỗi đang mở theo mức | Issue lỗi (`bug`) | `is:issue is:open label:bug label:"sev: Critical"` (đổi mức `Major` / `Minor`) |
+| Change request đang chờ | Issue CR (`change-request`) | `is:issue is:open label:change-request` |
+| Dự báo ngày đóng milestone | **Tầng 1 & Tầng 2** thuộc milestone đó (so riêng từng tầng, không cộng gộp) | So due date của milestone trên GitHub với các issue còn mở có `**Hạn:**` lớn nhất trong milestone |
+
+**Cách kiểm tra trước mỗi báo cáo.** Đối chiếu `#1` (FR cha) chỉ thuộc tập chức năng, `#2` và `#3` (BE/FE) chỉ thuộc tập thực thi. Issue `#101` thuộc việc quản lý xuyên suốt và tải của PM. Khi tính task quá hạn, chỉ đếm issue thực thi đang mở có trường Hạn trước ngày báo cáo. Kiểm riêng số issue thiếu Hạn, người phụ trách xử lý trước khi công bố số liệu. Báo cáo ghi ngày chụp số liệu, bộ lọc và mẫu số. Tỷ lệ đúng hạn dùng các issue thực thi đã đóng trong kỳ, so ngày đóng với Hạn; issue đang mở chỉ dùng để cảnh báo quá hạn.
+
+**Nguồn dữ liệu và cách tính chỉ số Giờ công:**
+- **Nguồn dữ liệu:** lấy giờ thực tế từng ngày từ [Bảng theo dõi giờ](records/time-tracking-log.md) (ghi kèm số issue, mã WBS và phạm vi `Baseline` hay `CR-xx`) và lấy giờ kế hoạch baseline từng dòng từ sheet `WBS` của [UniSupport_Masterplan_nhom2.xlsx](UniSupport_Masterplan_nhom2.xlsx) (tổng baseline 1109 giờ).
+- **Cách tính 3 đại lượng:** (1) `Giờ thực tế lũy kế (AC)` = tổng mọi giờ đã ghi cho phạm vi `Baseline` từ tuần 1 đến kỳ báo cáo (gồm cả giờ giải ngân quỹ dự phòng và giờ lấy thêm từ năng lực dư `Resources` để làm phạm vi baseline); (2) `Giờ kế hoạch còn lại (ETC)` = tổng giờ kế hoạch còn lại trên WBS của các dòng baseline chưa hoàn thành (gồm phần dự phòng chưa giải ngân của milestone đang chạy và toàn bộ WBS của các milestone chưa bắt đầu); (3) `Dự báo tổng giờ (EAC)` = `AC + ETC`, so sánh trực tiếp với baseline **1109 giờ**. Công thức chi tiết và bảng đối chiếu Tuần 6 (`550h + 551h = 1101h`) xem tại [records/time-tracking-log.md](records/time-tracking-log.md).
+- **Bảng tiến độ:** PM lấy trạng thái, hạn và mốc từ GitHub Issues bằng bộ lọc ở bảng trên; đối chiếu mã WBS và trường Hạn trên issue.
 
 Hành động theo từng mức:
 
@@ -161,7 +177,7 @@ Mọi quyết định quan trọng được ghi vào Decision Log để các th�
 
 Mọi thay đổi về phạm vi, tiến độ hoặc báo giá phải được đánh giá và xác nhận trước khi thực hiện, theo cam kết trong Proposal mục 4. Thay đổi mục tiêu hoặc ngưỡng chất lượng (QMP mục 8) cũng đi theo quy trình này. Mỗi change request là một issue mã `CR-xx` tạo bằng mẫu Change request trên GitHub (nhãn `change-request`); CR mô phỏng ghi rõ `Mô phỏng`.
 
-Sửa tài liệu theo góp ý của giảng viên không phải là change request. Trước khi gửi proposal v1.0 cho khách, nhóm sửa kế hoạch và báo giá trực tiếp; sau đó, thay đổi do khách yêu cầu mới đi qua quy trình dưới đây.
+Các đợt rà soát, chuẩn hóa tài liệu nội bộ trước khi hai bên ký chốt phạm vi không phải là change request mà được quản lý qua Pull Request và lịch sử phiên bản. Sau khi phạm vi đã chốt với Aurora University, mọi thay đổi do khách yêu cầu hoặc làm thay đổi phạm vi, mốc, báo giá đều đi qua quy trình dưới đây.
 
 1. **Ghi nhận.** Ai cũng tạo được issue bằng mẫu Change request, nêu nội dung, lý do và feedback gốc (nếu có). Yêu cầu từ khách chuyển về PM (Team Charter mục 4).
 2. **Đánh giá tác động.** Kiểm tra cổng bắt buộc và chấm tiêu chí theo [01](01-quan-ly-san-pham.md) mục 7. Điền bảng tác động trong mẫu issue: phạm vi (FR, AC bị ảnh hưởng), effort (BE Dev / Senior và FE Dev / Senior ước giờ), giá (Lê Hoàng Tùng tính theo đơn giá ở `quotation.xlsx`), timeline (milestone bị dời), rủi ro (mã `R-xx` mới hoặc đổi điểm), test (kịch bản `TS-xx` phải viết hoặc chạy lại, QA / Senior đánh giá), dự phòng đã dùng và còn lại.
@@ -169,7 +185,7 @@ Sửa tài liệu theo góp ý của giảng viên không phải là change requ
 4. **Cập nhật đồng bộ.** Khi được duyệt, cập nhật trong một PR có `Closes #<CR>` và ghi danh sách đã cập nhật vào issue:
    - PRD: FR và AC trong `modules/`, non-goals trong `product/README.md` (Ngô Tấn Đức);
    - báo giá: thêm dòng mới ở sheet Phiên bản của `quotation.xlsx` (Lê Hoàng Tùng);
-   - kế hoạch: sheet Milestones, WBS, Change log của Master Plan với giá trị cũ và mới; issue và milestone trên GitHub (Phan Tiến Thịnh);
+   - kế hoạch: sheet Milestones, WBS, Change log của Master Plan với giá trị cũ và mới; gắn tag baseline mới (nếu PRD đổi) và cập nhật issue (gồm permalink dẫn thẳng heading FR và danh sách AC trên FR cha, issue Dùng chung và sub-issue `[BE]`/`[FE]`) cùng milestone trên GitHub (Phan Tiến Thịnh);
    - kiểm thử: `acceptance/test-scenarios.md` và ma trận truy vết (Ngô Tấn Đức);
    - sổ rủi ro (Phan Tiến Thịnh);
    - Proposal: nếu đổi phạm vi, giá hoặc mốc, lập phiên bản mới và lưu PDF vào `sent/` (Lê Hoàng Tùng).
@@ -192,15 +208,18 @@ Yêu cầu tính năng mới phát sinh trong thời gian bảo hành không thu
 
 ### 6.1 Nhật ký quản trị
 
-| Nhật ký | Nội dung | Người cập nhật | Nơi lưu |
-|---|---|---|---|
-| Bảng theo dõi giờ | Ngày, người thực hiện, công việc (kèm số issue và mã WBS), số giờ | Từng thành viên; PM tổng hợp hằng tuần | Google Drive |
-| Nhật ký vấn đề | Mô tả, ngày phát hiện, ảnh hưởng, người xử lý, thời hạn, trạng thái | Người phát hiện; PM theo dõi | GitHub: lỗi dùng mẫu Bug (nhãn `bug`, `sev: …`); vấn đề khác là issue thường gắn milestone |
-| Sổ rủi ro | Như mục 3.2 | Phan Tiến Thịnh; owner từng rủi ro | [risk-register.md](risk-register.md) trong repo |
-| Yêu cầu thay đổi | Nội dung, lý do, đánh giá tác động, quyết định, tài liệu đã cập nhật | Người đề xuất; PM | GitHub: mẫu Change request, mã `CR-xx`, nhãn `change-request` |
-| Decision Log | Ngày, nội dung quyết định, người quyết định, lý do, tài liệu cần cập nhật | PM | Google Drive |
-| Biên bản họp | Nội dung thảo luận, việc cần làm, người phụ trách, thời hạn | Thành viên ghi theo lượt | Google Drive |
-| Báo cáo tuần, milestone, tổng kết | Theo mục 2 và mẫu ở mục 6.2 | PM | Google Drive |
+Danh mục đầy đủ nơi lưu, quyền đọc và người được cập nhật từng hồ sơ nằm tại [records/README.md](records/README.md). Bảng giờ, Decision Log, biên bản họp và báo cáo lưu chính thức trong thư mục `records/` của repo:
+
+| Nhật ký | Nội dung | Người quản lý / cập nhật | Quyền xem | Đường dẫn & trạng thái nguồn |
+|---|---|---|---|---|
+| **Bảng theo dõi giờ** | Ngày, vai trò, số issue, mã WBS, phạm vi (`Baseline`/`CR-xx`), số giờ | Từng thành viên ghi hằng ngày; `PM / Senior` (Lê Hoàng Tùng) tổng hợp | Công khai (repo công khai) | Mẫu & ví dụ (`Mô phỏng`) trong repo: [records/time-tracking-log.md](records/time-tracking-log.md) (nơi lưu chính thức) |
+| **Nhật ký vấn đề** | Mô tả, ngày phát hiện, ảnh hưởng, người xử lý, thời hạn, trạng thái | Người phát hiện; `PM / Senior` theo dõi | Công khai trên GitHub | **Đã xác minh:** [GitHub Issues](https://github.com/ericphan2545/UniSupport/issues) (lỗi dùng mẫu Bug nhãn `bug`, `sev: …`; vấn đề khác là issue gắn milestone) |
+| **Bảng tiến độ** | Issue mở/đóng, trường Hạn và milestone | Phan Tiến Thịnh | Công khai xem | [GitHub Issues](https://github.com/ericphan2545/UniSupport/issues), bộ lọc ở mục 3.1 |
+| **Sổ rủi ro** | Như mục 3.2 (`R-01` đến `R-27`) | Phan Tiến Thịnh; owner từng rủi ro | Công khai (repo công khai) | **Đã xác minh:** [risk-register.md](risk-register.md) |
+| **Yêu cầu thay đổi** | Nội dung, lý do, đánh giá tác động, quyết định, tài liệu đã cập nhật | Người đề xuất; `PM / Senior` | Công khai trên GitHub | **Đã xác minh:** [GitHub Issues (`change-request`)](https://github.com/ericphan2545/UniSupport/issues?q=is%3Aissue+label%3Achange-request), mẫu Change request, mã `CR-xx` |
+| **Decision Log** | Ngày, nội dung quyết định, người quyết định, lý do, tài liệu cần cập nhật | `PM / Senior` (Lê Hoàng Tùng) | Công khai (repo công khai) | Mẫu & ví dụ (`Mô phỏng`) trong repo: [records/decision-log.md](records/decision-log.md) (nơi lưu chính thức) |
+| **Biên bản họp** | Nội dung thảo luận, việc cần làm, người phụ trách, thời hạn | Thành viên ghi theo lượt; `PM / Senior` duyệt | Công khai (repo công khai) | Mẫu & ví dụ (`Mô phỏng`) trong repo: [records/meeting-minutes-template.md](records/meeting-minutes-template.md); mỗi biên bản lưu thành file mới trong `records/` |
+| **Báo cáo tuần, milestone, tổng kết** | Theo mục 2 và mẫu ở mục 6.2 | `PM / Senior` (Lê Hoàng Tùng) | Công khai (repo công khai); bản tóm tắt gửi khách qua email | Mẫu tại mục 6.2 bên dưới; bản đã gửi lưu thành file trong `records/` |
 
 Quyết định chốt trên Discord hoặc trong họp phải được cập nhật vào issue hoặc tài liệu liên quan ngay khi chốt (Team Charter mục 7).
 
@@ -211,11 +230,11 @@ Báo cáo tình hình dự án tuần lập theo mẫu dưới đây. Cột Ví 
 | Mục | Nội dung cần điền | Ví dụ |
 |---|---|---|
 | Kỳ báo cáo | Tuần báo cáo; milestone hiện tại; người lập | Tuần 12/10–16/10/2026; `MS-02` Gửi và tiếp nhận yêu cầu; PM lập (Mô phỏng) |
-| Trạng thái chung | Xanh, Vàng hoặc Đỏ, lấy theo lĩnh vực xấu nhất ở mục 3.1 | Vàng, do tiến độ ở mức Vàng |
-| Tiến độ | Số task hoàn thành; tỷ lệ đúng hạn; task đang chậm; dự báo ngày đóng milestone so với kế hoạch đã chốt | Vàng: 5/7 task đúng hạn (71%, dưới ngưỡng 90%); task sinh mã hồ sơ (`FR-CORE-01`) chậm 2 ngày so với Hạn trong WBS; milestone vẫn dự kiến đóng đúng ngày 23/10 |
-| Giờ công | Giờ thực tế trong tuần và lũy kế; dự báo so với 870 giờ; task lệch quá 20%; quỹ dự phòng đã dùng | Xanh: tuần này 52 giờ, lũy kế 455 giờ; dự báo 862 giờ, chưa vượt 870 giờ; không task nào lệch quá 20%; chưa dùng dự phòng `Q-03` |
+| Trạng thái chung | Xanh, Vàng hoặc Đỏ, lấy theo lĩnh vực xấu nhất ở mục 3.1 | Xanh (Mô phỏng), dự kiến giữ mốc MS-02 |
+| Tiến độ | Số task hoàn thành; tỷ lệ đúng hạn; task đang chậm; dự báo ngày đóng milestone so với kế hoạch | Mô phỏng: kết thúc hạng mục phát triển và phần dùng chung đến 16/10; test 19–20/10, sửa 21–22/10 và kiểm lại trước demo 23/10. |
+| Giờ công | Giờ thực tế trong tuần và lũy kế; giờ kế hoạch còn lại; dự báo (`EAC`) so với 1109 giờ; task lệch quá 20%; quỹ dự phòng đã dùng | Xanh (Mô phỏng): tuần này 52 giờ, lũy kế 550 giờ, còn lại 551 giờ, dự báo 1101 giờ. Kiểm tra theo [bảng giờ](records/time-tracking-log.md). |
 | Chất lượng | Số lỗi đang mở theo mức; task chờ test; chỉ số theo QMP mục 7 | Xanh: không có Critical hoặc Major; 3 Minor đang sửa; 4 task chờ test |
 | Phạm vi | Change-request mới, đang đánh giá hoặc đã quyết định; số lần sửa nhỏ đã dùng | Xanh: không có change-request; đã dùng 1/5 lần sửa nhỏ |
-| Rủi ro và vấn đề | Rủi ro mức Cao và rủi ro có dấu hiệu xảy ra (mã `R-xx`); vấn đề mới hoặc chưa xử lý xong, người phụ trách, thời hạn | `R-02` (Trung bình): đã nhắc trường gửi danh mục thật trong email tuần. `R-09` (Trung bình): chưa có dấu hiệu. Chậm sinh mã hồ sơ: BE Dev / Senior hỗ trợ BE Dev / Mid, xong trước 20/10 |
+| Rủi ro và vấn đề | Rủi ro mức Cao và rủi ro có dấu hiệu xảy ra (mã `R-xx`); vấn đề mới hoặc chưa xử lý xong, người phụ trách, thời hạn | `R-02` (Trung bình): đã nhắc trường gửi danh mục thật trong email tuần. `R-09` (Trung bình): chưa có dấu hiệu. Theo dõi lỗi mới trong đợt test trọn luồng 19–20/10 |
 | Cần quyết định | Nội dung cần PM, nhóm hoặc Aurora University quyết định | Không có |
 | Kế hoạch tuần tới | Các việc chính và mục tiêu tuần tiếp theo | Chạy test trọn luồng và regression (`TS-01` đến `TS-03`), demo cho khách và đóng `MS-02` ngày 23/10; họp đầu `MS-03` |

@@ -9,7 +9,7 @@ Ngày cập nhật: 17/11/2026
 
 ## 2. Mục tiêu chung
 
-- Bàn giao đúng phạm vi đã chốt trong 15 tuần và 870 giờ công; thời gian chờ khách phản hồi không tính vào 15 tuần.
+- Bàn giao đúng phạm vi đã chốt trong 15 tuần và định mức baseline **1109 giờ công** (gồm 1021 giờ cơ sở và 88 giờ quỹ dự phòng rủi ro); thời gian chờ khách phản hồi không tính vào 15 tuần. Quy tắc phân biệt giờ baseline, năng lực dư (`Resources`), giờ CR và chịu chi phí vượt giờ theo [Bang_Effort.md](Bang_Effort.md) mục 2.0d.
 - Chất lượng bàn giao: đạt điều kiện Go-live ở [QMP](02-qmp-quan-ly-chat-luong.md) mục 2.2, khớp điều kiện nghiệm thu với khách ở Proposal mục 6.2.
 - Phạm vi theo PRD ([product/README.md](../product/README.md) và `modules/`). Tiêu chí nghiệm thu chính thức chốt với khách bằng văn bản ở cuối tuần 2 của `MS-01`.
 
@@ -48,14 +48,14 @@ Mỗi vai trò 1 người, tổng 10 người. Tên vai trò thống nhất vớ
 ## 4. Quy tắc làm việc
 
 1. Mỗi người làm tối đa 2 task cùng lúc; cập nhật trạng thái issue trên GitHub và ghi giờ thực tế vào Bảng theo dõi giờ ([03](03-quan-tri-giam-sat.md) mục 6.1) mỗi ngày làm việc.
-2. Bị chặn quá nửa ngày: báo ngay trên Discord, nêu task, vấn đề và người cần hỗ trợ. Dự kiến vượt 20% giờ kế hoạch: báo PM trước khi làm tiếp.
-3. Mọi thay đổi vào nhánh `main` chỉ qua Pull Request đã được review theo mục 9; người kiêm vai trò vẫn không tự review.
+2. Bị chặn quá nửa ngày: báo ngay trên Discord, nêu task, vấn đề và người cần hỗ trợ. Dự kiến vượt 20% giờ kế hoạch của một task: báo PM trước khi làm tiếp. Mọi giờ bổ sung cho phạm vi baseline (kể cả lấy từ năng lực dư ở sheet `Resources`) đều ghi vào Bảng theo dõi giờ và tính vào dự báo so với 1109 giờ; chi phí vượt nội bộ do bên phát triển tự chịu, và PM phải báo Aurora University bằng văn bản nếu việc vượt giờ đe dọa mốc bàn giao, cần điều chỉnh ưu tiên FR `Should` hoặc phát sinh từ thay đổi phạm vi/giả định của khách.
+3. Mọi thay đổi về tài liệu dự án, kế hoạch, báo giá, đặc tả, quy trình và mã nguồn đưa vào nhánh `main` đều thực hiện qua Pull Request, có ít nhất 1 người khác tác giả review và gộp bằng **squash merge** theo mục 9; người kiêm vai trò tuyệt đối không tự duyệt PR của mình. Ngoại lệ sửa nhỏ hành chính/chính tả chỉ được phép trong phạm vi hẹp có kiểm soát và phải lưu dấu theo đúng mục 9.
 4. Yêu cầu từ khách chuyển về PM. Sửa nhỏ theo Proposal mục 4 được hỗ trợ trong giới hạn 2–5 lần; thay đổi lớn đi theo quy trình change request ([03](03-quan-tri-giam-sat.md) mục 5).
 5. Sau mỗi milestone, ban quản lý xem lại Team Charter; Đào Tuấn Bảo sửa, Lê Hoàng Tùng duyệt, thay đổi đi qua PR.
 
 ## 5. Quy trình nhận và hoàn thành task
 
-1. **Nhận việc:** mở issue trên GitHub đã được giao ở buổi họp đầu milestone ([03](03-quan-tri-giam-sat.md) mục 2.3). Kiểm tra mã FR, milestone `MS-xx`, owner (nhãn `vai trò: …`), hạn, mã WBS và điều kiện hoàn thành. Chưa rõ yêu cầu thì hỏi BA trước khi làm.
+1. **Nhận việc:** mở issue trên GitHub đã được giao ở buổi họp đầu milestone ([03](03-quan-tri-giam-sat.md) mục 2.3). Kiểm tra mã FR, milestone `MS-xx`, nhãn đúng tầng issue (issue thực thi `[BE]`/`[FE]` hoặc task 1 cấp mang nhãn `vai trò: …`; FR parent task mang `task` + `loại: FR` để theo dõi tổng thể theo [03](03-quan-tri-giam-sat.md) mục 3.1), hạn theo WBS, mã WBS và điều kiện hoàn thành. Chưa rõ yêu cầu thì hỏi BA trước khi làm.
 2. **Thực hiện:** cập nhật trạng thái issue và giờ thực tế mỗi ngày làm việc. Tạo nhánh riêng theo mục 9. Nếu bị chặn hoặc sắp vượt giờ, xử lý theo mục 4.
 3. **Nộp việc:** mở Pull Request theo mẫu, ghi `Closes #n`, phần đã làm và cách kiểm tra. Nhờ người review theo mục 9, sửa các góp ý rồi gửi lại.
 4. **Kiểm tra và hoàn tất:** chỉ đóng issue khi đạt Definition of Done ([02-qmp-quan-ly-chat-luong.md](02-qmp-quan-ly-chat-luong.md) mục 5). Với task: đã review và merge, đạt tiêu chí chấp nhận liên quan, Tester đã kiểm thử, không còn lỗi Critical, chạy được trên Staging và đã ghi giờ thực tế.
@@ -75,8 +75,8 @@ Mỗi vai trò 1 người, tổng 10 người. Tên vai trò thống nhất vớ
 
 ## 7. Giao tiếp và lưu tài liệu
 
-- **GitHub là nơi gốc của task và tiến độ:** Issues, Milestones `MS-xx` và Project #4. Mọi chỉ số tiến độ trong [03](03-quan-tri-giam-sat.md) mục 3.1 lấy từ đây. Tài liệu dự án nằm trong `docs_v2/`, đọc từ [mục lục](../README.md).
-- **Bảng theo dõi giờ, Decision Log, biên bản họp, báo cáo:** Google Drive, theo [03](03-quan-tri-giam-sat.md) mục 6.1. Mỗi dòng giờ ghi kèm số issue để PM so với giờ kế hoạch.
+- **GitHub là nơi gốc của task và tiến độ:** [Issues](https://github.com/ericphan2545/UniSupport/issues), [Milestones `MS-xx`](https://github.com/ericphan2545/UniSupport/milestones). Mọi chỉ số tiến độ trong [03](03-quan-tri-giam-sat.md) mục 3.1 lấy từ đây. Tài liệu dự án nằm trong `docs_v2/`, đọc từ [mục lục](../README.md).
+- **Bảng theo dõi giờ, Decision Log, biên bản họp, báo cáo:** danh mục định vị, người quản lý, quyền xem và các mẫu/ví dụ (`Mô phỏng`) đặt tại [records/README.md](records/README.md) ([Bảng theo dõi giờ](records/time-tracking-log.md), [Decision Log](records/decision-log.md), [Biên bản họp](records/meeting-minutes-template.md)); đây là nơi lưu chính thức, cập nhật qua PR ([03](03-quan-tri-giam-sat.md) mục 6.1). Mỗi dòng giờ ghi kèm số issue và mã WBS để PM đối chiếu giờ kế hoạch.
 - **Discord:** trao đổi hằng ngày và báo cáo trước 21h30. Tin nhắn về công việc ghi rõ task, vấn đề, việc cần người nhận hỗ trợ và gắn link liên quan.
 - **Họp:** ban quản lý họp tuần vào thứ Hai, 20h00, qua Discord; họp đầu và cuối mỗi milestone theo [03](03-quan-tri-giam-sat.md) mục 2.3. Biên bản ghi việc cần làm, người phụ trách, thời hạn.
 - **Email với khách:** PM gửi chính thức tối thiểu 1 lần/tuần; quyết định và xác nhận của khách phải được lưu bằng văn bản.
@@ -104,15 +104,23 @@ Mỗi vai trò 1 người, tổng 10 người. Tên vai trò thống nhất vớ
 
 ## 9. Quy tắc branch, Pull Request, review, merge
 
-Áp dụng cho tài liệu ngay bây giờ và cho code khi dự án chạy.
+Áp dụng cho toàn bộ tài liệu ngay từ hiện tại và cho mã nguồn khi dự án triển khai.
 
-- **Branch:** không push trực tiếp lên `main`. Nhánh tài liệu đặt tên `docs/<mô-tả-ngắn>`; nhánh code `feat/<số-issue>-<mô-tả-ngắn>` hoặc `fix/<số-issue>-<mô-tả-ngắn>`. Chữ thường, không dấu, nối bằng gạch ngang. Ví dụ: `docs/r1-feedback`, `feat/1-tao-yeu-cau`.
-- **Commit:** bắt đầu bằng loại thay đổi (`docs:`, `feat:`, `fix:`), mô tả ngắn việc đã làm.
-- **Pull Request:** dùng mẫu `.github/pull_request_template.md`; ghi `Closes #n` cho từng issue được xử lý; ghi quyết định và lý do; với file Word/Excel ghi rõ sheet hoặc mục đã đổi.
-- **Review:** ít nhất 1 thành viên ban quản lý khác tác giả duyệt. PR sửa file Word/Excel phải được người chịu trách nhiệm file đó duyệt; nếu tác giả chính là người đó thì người dự phòng duyệt. Với code: Senior của mảng review; code của Senior do Senior mảng còn lại review.
-- **Merge:** tác giả merge sau khi có duyệt và không còn góp ý chưa xử lý; dùng squash merge; xóa nhánh sau khi merge.
-- **Ngoại lệ đã ghi nhận:** PR #169 và #170 (sửa theo góp ý vòng 1 và chấm thử) được trưởng nhóm merge khi chưa có review và bằng merge commit, trước khi nhóm thống nhất áp dụng mục này cho PR sửa theo feedback. Từ PR sau, mọi PR áp dụng đúng quy tắc trên, không có ngoại lệ.
-- **Góp ý của giảng viên:** mỗi góp ý một issue, giữ tiêu đề và mã `R1-xx`; sửa bằng PR có `Closes #n`, hoặc đóng issue kèm lý do nếu không đồng ý.
+- **Branch và bảo vệ `main`:** Không push trực tiếp lên `main` (trừ ngoại lệ sửa nhỏ có kiểm soát nêu dưới đây). Khuyến nghị bật Branch Protection trên GitHub cho `main` (chặn force-push, yêu cầu ≥ 1 `Approve` trước khi gộp, bật **Squash and merge**). Tên nhánh dùng chữ thường, không dấu, nối bằng gạch ngang: tài liệu `docs/<mã>-<mô-tả-ngắn>` (ví dụ `docs/cap-nhat-quy-trinh-review`), tính năng `feat/<số-issue>-<mô-tả-ngắn>` (ví dụ `feat/1-tao-yeu-cau`), sửa lỗi `fix/<số-issue>-<mô-tả-ngắn>`.
+- **Commit:** dùng tiền tố chuẩn (`docs:`, `feat:`, `fix:`, `chore:`), mô tả ngắn gọn việc đã làm.
+- **Pull Request:** bắt buộc điền đầy đủ `.github/pull_request_template.md` (không để nguyên placeholder chưa điền); ghi rõ mã hạng mục/rà soát, `Closes #n` cho từng issue được xử lý, tóm tắt quyết định/lý do và bằng chứng kiểm tra thực tế; với file Word/Excel/PDF phải ghi rõ file, sheet hoặc mục đã đổi và kết quả các ô kiểm tra.
+- **Review bắt buộc bởi người khác tác giả (SLA 24 giờ):**
+  - Mọi PR phải có **ít nhất 1 thành viên khác tác giả** duyệt (`Approve` trên GitHub). Tác giả không tự review và không tự gộp khi chưa có duyệt.
+  - PR sửa tài liệu thuộc mảng nào do người phụ trách mảng đó (mục 3.1) review; nếu người phụ trách là tác giả thì **người dự phòng ở mục 3.1** review. PR chạm nhiều mảng mời các đầu mối của từng mảng. Với code: Senior của mảng review; code của Senior do Senior mảng còn lại review.
+  - Thời hạn phản hồi review tối đa **1 ngày làm việc**. Nếu reviewer chính không phản hồi sau 12 giờ, tác giả chuyển thẻ sang người dự phòng (mục 3.1/3.2) để bảo đảm tiến độ.
+- **Merge:** chỉ gộp sau khi có ít nhất 1 lượt `Approve` từ người khác tác giả và mọi góp ý đã được xử lý; bắt buộc dùng **Squash and merge**; xóa nhánh sau khi gộp.
+- **Ngoại lệ có kiểm soát cho sửa nhỏ:**
+  - *Trường hợp được phép:* chỉ áp dụng cho sửa lỗi chính tả, định dạng Markdown hoặc cập nhật thông tin hành chính cá nhân trong `README.md` (ví dụ mã số thành viên, sửa một đường dẫn hiển nhiên) với quy mô **≤ 5 dòng thay đổi trên tối đa 1 file Markdown**. **Tuyệt đối không áp dụng** cho mã nguồn, file Word/Excel/PDF, đặc tả PRD (`FR/AC/BR/E`), NFR, kịch bản test, WBS, báo giá, giả định, rủi ro hay quy trình quản trị.
+  - *Người có quyền:* thành viên phụ trách tài liệu đó (mục 3.1) hoặc trưởng nhóm (Lê Hoàng Tùng).
+  - *Cách lưu dấu bắt buộc:* dùng tiền tố `docs(typo):` hoặc `docs(admin):` ghi rõ lý do trong thông điệp commit, gửi link commit lên Discord nhóm ngay khi push và phải có ít nhất 1 thành viên khác xác nhận đã xem trong vòng 24 giờ.
+- **Áp dụng quy trình:** Mỗi hạng mục rà soát có một nhánh và một PR riêng, liên kết issue liên quan, điền đầy đủ mẫu PR và ghi bằng chứng kiểm tra. Thực hiện review khác tác giả và squash merge theo quy định trên.
+- **Tag baseline cho permalink đặc tả:** mỗi lần chốt phạm vi hoặc duyệt CR làm thay đổi PRD, trưởng nhóm hoặc người phụ trách GitHub tạo tag bản chốt (ví dụ `baseline-v2.0`, `baseline-v2.1`) để toàn bộ GitHub Issue dùng permalink ổn định trỏ thẳng tới heading FR theo quy ước ở [master-plan.md](master-plan.md).
+- **Hạng mục rà soát chất lượng nội bộ:** mỗi hạng mục rà soát mở thành một issue riêng kèm mã theo dõi; xử lý bằng PR có `Closes #n`, hoặc đóng issue kèm lý do cụ thể nếu giữ nguyên hiện trạng.
 
 ## 10. Thuật ngữ cần biết
 

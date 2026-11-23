@@ -6,7 +6,7 @@ Những điều cố định mà dự án phải tuân theo.
 
 | # | Ràng buộc |
 |---|---|
-| C1 | Giá trị hợp đồng 332.316.000 VNĐ (đã gồm VAT), thanh toán 3 đợt |
+| C1 | Giá trị hợp đồng 424.721.000 VNĐ (đã gồm VAT), thanh toán 3 đợt |
 | C2 | Thời gian dự kiến 15 tuần, không tính thời gian chờ phản hồi của trường |
 | C3 | Chỉ làm web responsive cho điện thoại và máy tính, có VN/EN; không làm ứng dụng di động riêng |
 | C4 | Không tích hợp SIS/LMS, thanh toán; không tự động ra quyết định học vụ |
@@ -19,7 +19,7 @@ Những điều cố định mà dự án phải tuân theo.
 
 | # | Ràng buộc |
 |---|---|
-| C9 | Tổng 870 giờ công |
+| C9 | Tổng 1109 giờ công |
 | C10 | Chỉ Go-live khi đạt điều kiện ở [QMP](../management/02-qmp-quan-ly-chat-luong.md) mục 2.2 (khớp điều kiện nghiệm thu Proposal mục 6.2) |
 | C11 | Mỗi người tối đa 2 task cùng lúc; code chỉ merge sau khi có người khác review |
 

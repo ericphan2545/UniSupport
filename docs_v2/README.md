@@ -12,7 +12,7 @@ Nội dung không có trong mục lục này thì không phải tài liệu đan
 4. **Giá và kế hoạch:** [Báo giá](management/quotation.xlsx) → [Master Plan](management/master-plan.md) và [file Excel](management/UniSupport_Masterplan_nhom2.xlsx) → [Sổ rủi ro](management/risk-register.md) → [Giả định](project/assumptions.md), [Ràng buộc](project/constraints.md) → [Dự toán effort và giá nội bộ](management/Bang_Effort.md).
 5. **Cách làm việc:** [Team Charter](management/team-charter.md) → [Kế hoạch quản lý chất lượng (QMP)](management/02-qmp-quan-ly-chat-luong.md).
 6. **Sản phẩm sau bàn giao:** [Kế hoạch quản lý sản phẩm](management/01-quan-ly-san-pham.md).
-7. **Quản trị và giám sát:** [Kế hoạch quản trị và giám sát](management/03-quan-tri-giam-sat.md).
+7. **Quản trị và giám sát:** [Kế hoạch quản trị và giám sát](management/03-quan-tri-giam-sat.md) → [Hồ sơ quản trị](management/records/README.md) ([Bảng theo dõi giờ](management/records/time-tracking-log.md), [Decision Log](management/records/decision-log.md), [Biên bản họp](management/records/meeting-minutes-template.md), GitHub Issues / Milestones).
 8. **Tài liệu hỗ trợ (bằng chứng):** [Kiến trúc](architecture/README.md) (bối cảnh, thành phần, luồng, mô hình dữ liệu, API, bảo mật, quyết định kỹ thuật), [Thuật ngữ](project/glossary.md).
 
 ## Tra nhanh vị trí
@@ -29,12 +29,13 @@ Nội dung không có trong mục lục này thì không phải tài liệu đan
 | Definition of Done | [02-qmp-quan-ly-chat-luong.md](management/02-qmp-quan-ly-chat-luong.md) mục 5 |
 | Mức lỗi, điều kiện release | QMP mục 6 và mục 2 |
 | Báo cáo, chỉ số, ngưỡng escalate | 03 mục 2, 3, 4 |
+| Bảng theo dõi giờ, Decision Log, biên bản họp, GitHub Issues | [management/records/README.md](management/records/README.md) (mẫu & ví dụ `Mô phỏng`: [time-tracking-log.md](management/records/time-tracking-log.md), [decision-log.md](management/records/decision-log.md), [meeting-minutes-template.md](management/records/meeting-minutes-template.md)) và `03` mục 6.1 |
 | Feedback, roadmap, chỉ số giá trị, ai quyết sau bàn giao | 01-quan-ly-san-pham mục 5, 8, 6, 7.3 |
 | Giả định, ràng buộc | [assumptions.md](project/assumptions.md) (`A-xx`), [constraints.md](project/constraints.md) |
 
-## Đối chiếu với cấu trúc chuẩn của môn
+## Đối chiếu cấu trúc thư mục tài liệu
 
-Nhóm giữ tên thư mục riêng; bảng dưới chỉ vị trí tương ứng.
+Nhóm giữ tên thư mục gọn cho dự án; bảng dưới ánh xạ sang cấu trúc tài liệu tham chiếu.
 
 | Cấu trúc chuẩn | Vị trí trong repo |
 |---|---|
@@ -80,9 +81,9 @@ Liên kết chỉ ghi ở một phía: phía ghi là cột "Liên kết phải g
 |---|---|---|
 | Client Aurora University, hiện trạng của trường | Có | Proposal, `product/README.md` |
 | Đội thực thi 10 vai trò | Có | Team Charter mục 3.2, sheet Resources, `Bang_Effort.md` |
-| Proposal đã gửi (v1.0, 04/09/2026) | Có | `management/sent/` |
+| Proposal đã gửi khách | Có | `management/sent/`: bản [v2.0 (06/09/2026)](management/sent/proposal-v2.0-2026-09-06.pdf) đang hiệu lực (Mô phỏng) |
 | Feedback, change request | Có khi phát sinh | Ghi `Mô phỏng` trong issue (mẫu Feedback, Change request) |
-| Báo cáo và số liệu ví dụ | Có | Ví dụ báo cáo tuần ở 03 mục 6.2 |
+| Báo cáo, bảng giờ, Decision Log và biên bản ví dụ | Có | Ví dụ báo cáo tuần ở 03 mục 6.2; mẫu & số liệu minh họa ở [management/records/](management/records/README.md) |
 
 ## Người chịu trách nhiệm file Word/Excel
 
