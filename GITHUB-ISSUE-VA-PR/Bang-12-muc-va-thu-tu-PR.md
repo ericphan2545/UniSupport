@@ -29,7 +29,7 @@ Kho local `C:/Users/ADMIN/Downloads/UniSupport` có bản tích hợp tại `doc
 
 ## Push và review
 
-Tệp `UniSupport-GitHub-drafts.zip` chứa 12 bản nháp issue, 12 bản nháp PR và 158 nội dung issue hiện có cần đồng bộ. Công việc trên GitHub đang chờ bạn tự push và người khác tác giả Approve.
+Tệp Thư mục bàn giao chứa 12 bản nháp issue, 12 bản nháp PR và 158 nội dung issue hiện có cần đồng bộ. Công việc trên GitHub đang chờ bạn tự push và người khác tác giả Approve.
 
 1. Tạo issue cho mục đầu tiên bằng bản nháp. Push nhánh đầu và mở PR vào `main`. Thay chỗ giữ số bằng `Closes #n` thật trong PR. Mời người khác tác giả review.
 
@@ -49,4 +49,4 @@ Tệp `UniSupport-GitHub-drafts.zip` chứa 12 bản nháp issue, 12 bản nháp
 
    `git log` phải hiện đúng một commit của mục đang mở. Lặp lại theo thứ tự bảng. Nếu nhánh kế tiếp đã được push trước khi rebase, dùng `git push --force-with-lease` chỉ trên chính nhánh PR đó, sau khi kiểm tra người khác không cập nhật nhánh.
 
-3. Sau khi cả 12 PR được duyệt và gộp, tạo tag `baseline-v2.0` tại commit phát hành trên `main`. Áp dụng nội dung trong `issue-updates/`, so với nội dung hiện tại trước mỗi cập nhật để giữ các chỉnh sửa và trạng thái checklist mới. Mở thử một liên kết ở issue cha, issue con và issue dùng chung sau khi tag xuất hiện.
+3. Sau khi cả 12 PR được duyệt và gộp, tạo tag `baseline-v2.0` tại commit phát hành trên `main`. Áp dụng nội dung trong [02-Cap-nhat-Issue-hien-co](02-Cap-nhat-Issue-hien-co/), so với nội dung hiện tại trước mỗi cập nhật để giữ các chỉnh sửa và trạng thái checklist mới. Mở thử một liên kết ở issue cha, issue con và issue dùng chung sau khi tag xuất hiện.

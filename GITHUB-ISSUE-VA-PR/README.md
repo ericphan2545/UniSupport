@@ -1,4 +1,6 @@
-# Bàn giao cho người quản lý GitHub của UniSupport
+# Bàn giao Issue và Pull Request của UniSupport
+
+**Bắt đầu tại [Prompt xử lý Issue và PR](00-PROMPT-XU-LY-ISSUE-GITHUB.md).**
 
 ## Mở Issue và Pull Request
 
@@ -11,7 +13,7 @@
 Mở PowerShell tại repo UniSupport đã clone. Thay đường dẫn trong dòng đầu bằng đường dẫn đầy đủ đến file [UniSupport-12-nhanh.bundle](03-Nhanh-Git/UniSupport-12-nhanh.bundle) trong thư mục này.
 
 ```powershell
-$bundle = (Resolve-Path 'C:/duong-dan/UniSupport-ban-giao-GitHub/03-Nhanh-Git/UniSupport-12-nhanh.bundle').Path
+$bundle = (Resolve-Path 'C:/duong-dan/00-BAN-GIAO-GITHUB-ISSUE-VA-PR/03-Nhanh-Git/UniSupport-12-nhanh.bundle').Path
 git bundle verify "$bundle"
 git fetch --no-tags "$bundle" 'refs/heads/docs/*:refs/heads/docs/*'
 git branch --list 'docs/*-ready'
