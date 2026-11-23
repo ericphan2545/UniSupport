@@ -1,6 +1,6 @@
 # Bàn giao UniSupport · 12 hạng mục
 
-Kho local `C:/Users/ADMIN/Downloads/UniSupport` có bản tích hợp tại `docs/fix-feedback-nhom-2` (nội dung tài liệu đồng bộ ở `6730dff`) và 12 nhánh riêng trong bảng. Bản tích hợp và đầu chuỗi 12 nhánh có cùng nội dung. Dùng các nhánh riêng làm PR. Giữ PR #172 ngoài đợt squash.
+Kho local `C:/Users/ADMIN/Downloads/UniSupport` có bản tích hợp tại `docs/fix-feedback-nhom-2` (nội dung tài liệu đồng bộ ở `51ab7ca`) và 12 nhánh riêng trong bảng. Bản tích hợp và đầu chuỗi 12 nhánh có cùng nội dung. Dùng các nhánh riêng làm PR. Giữ PR #172 ngoài đợt squash.
 
 ## Hồ sơ đã kiểm
 
@@ -22,10 +22,10 @@ Kho local `C:/Users/ADMIN/Downloads/UniSupport` có bản tích hợp tại `doc
 | V2-01 | `docs/v2-01-kiem-thu-theo-moc-ready` | `4c550d2` | `bde784a` | Khớp kịch bản trọn luồng với chức năng sẵn có |
 | V2-02 | `docs/v2-02-ac-dung-chung-ready` | `8460c65` | `4c550d2` | Ghi rõ nghiệm thu và hồi quy cho sáu FR dùng chung |
 | V2-03 | `docs/v2-03-phu-thuoc-wbs-ready` | `c2e061e` | `8460c65` | Sửa lịch WBS và kiểm ngày hoàn tất tiền nhiệm |
-| V2-04 | `docs/v2-04-truy-vet-nfr-ready` | `339599c` | `c2e061e` | Hoàn tất truy vết NFR và điều kiện Go-live |
-| V3-01 | `docs/v3-01-quyet-dinh-cong-nghe-ready` | `673eaf0` | `339599c` | Thống nhất giả định công nghệ giữa PRD và kiến trúc |
-| V3-02 | `docs/v3-02-permalink-dac-ta-ready` | `8597539` | `673eaf0` | Cố định permalink đặc tả tại baseline có phiên bản |
-| V3-03 | `docs/v3-03-ho-so-quan-tri-ready` | `b2bcdda` | `8597539` | Bổ sung hồ sơ quản trị có thể kiểm tra tại repo |
+| V2-04 | `docs/v2-04-truy-vet-nfr-ready` | `059f04f` | `c2e061e` | Hoàn tất truy vết NFR và điều kiện Go-live |
+| V3-01 | `docs/v3-01-quyet-dinh-cong-nghe-ready` | `2e61e2b` | `059f04f` | Thống nhất giả định công nghệ giữa PRD và kiến trúc |
+| V3-02 | `docs/v3-02-permalink-dac-ta-ready` | `f6fbbc8` | `2e61e2b` | Cố định permalink đặc tả tại baseline có phiên bản |
+| V3-03 | `docs/v3-03-ho-so-quan-tri-ready` | `e8c247a` | `f6fbbc8` | Bổ sung hồ sơ quản trị có thể kiểm tra tại repo |
 
 ## Push và review
 
