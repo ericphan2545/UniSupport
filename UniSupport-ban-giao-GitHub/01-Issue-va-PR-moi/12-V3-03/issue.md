@@ -2,7 +2,7 @@
 
 ## Phạm vi
 
-Lưu Bảng theo dõi giờ, Decision Log, mẫu biên bản và hướng dẫn theo dõi tiến độ từ Issues/Milestones. Đồng bộ giá trong DL-01 và số liệu mẫu tuần 6. Bảng giờ, Decision Log, biên bản họp và báo cáo lưu chính thức trong `records/`, không dùng nơi lưu ngoài repo.
+Lưu Bảng theo dõi giờ, Decision Log, mẫu biên bản và hướng dẫn theo dõi tiến độ từ Issues/Milestones. Đồng bộ giá trong DL-01 và số liệu mẫu tuần 6. Bảng giờ, Decision Log, biên bản họp và báo cáo lưu chính thức trong `records/`, không dùng nơi lưu ngoài repo. README ghi rõ mọi người đọc được hồ sơ trên repo công khai, vai trò được cập nhật từng loại hồ sơ, người mở PR và người duyệt.
 
 ## Tiêu chí chấp nhận
 
