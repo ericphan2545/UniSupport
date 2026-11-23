@@ -57,8 +57,8 @@ Baseline effort, giá và lịch (`Bang_Effort.md`, `quotation.xlsx`, `Master Pl
 WBS `1.16` (repo, CI, môi trường dev, SSO giả lập; DevOps / Mid) chạy trước ngày chấp nhận ADR. Phần việc chia theo mức phụ thuộc vào quyết định công nghệ:
 
 - **Không phụ thuộc ngăn xếp, làm từ 07/09:** tạo repo và bảo vệ nhánh `main` theo Team Charter mục 9; khung Docker Compose (cách đóng gói đã cố định ở `A-11`); SSO giả lập theo OIDC (`A-05`) chỉ bật ở dev và test ([security-design.md](../security-design.md)).
-- **Theo đề xuất ngày 11/09, làm từ 12/09:** cấu hình môi trường dev cho các thành phần trong mục Quyết định. Đây là cấu hình tạm dùng cho dev, chưa dùng cho Staging.
-- **Chờ xác nhận ngày 17/09:** phần phụ thuộc hạ tầng của trường (tài nguyên RAM/CPU cho CSDL và cache, kho tệp, Docker Compose trên server) và việc dựng Staging ở WBS `1.17–1.19` (bắt đầu 17/09). Lập trình `1.20–1.23` bắt đầu 21/09, sau khi ADR đã được chấp nhận.
+- **Theo đề xuất ngày 11/09 (thứ Sáu), làm từ 14/09 (thứ Hai, ngày làm việc đầu tiên sau hạn đề xuất) đến hết `1.16` ngày 16/09:** cấu hình môi trường dev cho các thành phần trong mục Quyết định. Đây là cấu hình tạm dùng cho dev, chưa dùng cho Staging.
+- **Staging (WBS `1.17–1.19`, 17/09–22/09):** bắt đầu chuẩn bị ngày 17/09 theo lịch hiện hành (`1.17`, `1.18` trong ngày 17/09; `1.19` đến 22/09), dựa trên repo và CI của `1.16`. Các cấu hình phụ thuộc kết quả xác nhận hạ tầng của trường (tài nguyên RAM/CPU cho CSDL và cache, kho tệp, Docker Compose trên server) chỉ áp dụng sau khi ADR được chấp nhận ngày 17/09. Lập trình `1.20–1.23` bắt đầu 21/09.
 
 Nếu ngày 17/09 trường không chấp nhận một thành phần, cấu hình tạm được sửa theo mục 1 dưới đây.
 
