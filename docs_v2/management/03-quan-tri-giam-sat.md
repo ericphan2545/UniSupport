@@ -208,18 +208,18 @@ Yêu cầu tính năng mới phát sinh trong thời gian bảo hành không thu
 
 ### 6.1 Nhật ký quản trị
 
-Danh mục đầy đủ nơi lưu, người quản lý và quyền xem nằm tại [records/README.md](records/README.md). Bảng giờ, Decision Log, biên bản họp và báo cáo lưu chính thức trong thư mục `records/` của repo:
+Danh mục đầy đủ nơi lưu, quyền đọc và người được cập nhật từng hồ sơ nằm tại [records/README.md](records/README.md). Bảng giờ, Decision Log, biên bản họp và báo cáo lưu chính thức trong thư mục `records/` của repo:
 
 | Nhật ký | Nội dung | Người quản lý / cập nhật | Quyền xem | Đường dẫn & trạng thái nguồn |
 |---|---|---|---|---|
-| **Bảng theo dõi giờ** | Ngày, vai trò, số issue, mã WBS, phạm vi (`Baseline`/`CR-xx`), số giờ | Từng thành viên ghi hằng ngày; `PM / Senior` (Lê Hoàng Tùng) tổng hợp | Toàn bộ đội và ban quản lý | Mẫu & ví dụ (`Mô phỏng`) trong repo: [records/time-tracking-log.md](records/time-tracking-log.md) (nơi lưu chính thức) |
+| **Bảng theo dõi giờ** | Ngày, vai trò, số issue, mã WBS, phạm vi (`Baseline`/`CR-xx`), số giờ | Từng thành viên ghi hằng ngày; `PM / Senior` (Lê Hoàng Tùng) tổng hợp | Công khai (repo công khai) | Mẫu & ví dụ (`Mô phỏng`) trong repo: [records/time-tracking-log.md](records/time-tracking-log.md) (nơi lưu chính thức) |
 | **Nhật ký vấn đề** | Mô tả, ngày phát hiện, ảnh hưởng, người xử lý, thời hạn, trạng thái | Người phát hiện; `PM / Senior` theo dõi | Công khai trên GitHub | **Đã xác minh:** [GitHub Issues](https://github.com/ericphan2545/UniSupport/issues) (lỗi dùng mẫu Bug nhãn `bug`, `sev: …`; vấn đề khác là issue gắn milestone) |
 | **Bảng tiến độ** | Issue mở/đóng, trường Hạn và milestone | Phan Tiến Thịnh | Công khai xem | [GitHub Issues](https://github.com/ericphan2545/UniSupport/issues), bộ lọc ở mục 3.1 |
-| **Sổ rủi ro** | Như mục 3.2 (`R-01` đến `R-27`) | Phan Tiến Thịnh; owner từng rủi ro | Công khai trong repo | **Đã xác minh:** [risk-register.md](risk-register.md) |
+| **Sổ rủi ro** | Như mục 3.2 (`R-01` đến `R-27`) | Phan Tiến Thịnh; owner từng rủi ro | Công khai (repo công khai) | **Đã xác minh:** [risk-register.md](risk-register.md) |
 | **Yêu cầu thay đổi** | Nội dung, lý do, đánh giá tác động, quyết định, tài liệu đã cập nhật | Người đề xuất; `PM / Senior` | Công khai trên GitHub | **Đã xác minh:** [GitHub Issues (`change-request`)](https://github.com/ericphan2545/UniSupport/issues?q=is%3Aissue+label%3Achange-request), mẫu Change request, mã `CR-xx` |
-| **Decision Log** | Ngày, nội dung quyết định, người quyết định, lý do, tài liệu cần cập nhật | `PM / Senior` (Lê Hoàng Tùng) | Toàn bộ nhóm | Mẫu & ví dụ (`Mô phỏng`) trong repo: [records/decision-log.md](records/decision-log.md) (nơi lưu chính thức) |
-| **Biên bản họp** | Nội dung thảo luận, việc cần làm, người phụ trách, thời hạn | Thành viên ghi theo lượt; `PM / Senior` duyệt | Toàn bộ nhóm | Mẫu & ví dụ (`Mô phỏng`) trong repo: [records/meeting-minutes-template.md](records/meeting-minutes-template.md); mỗi biên bản lưu thành file mới trong `records/` |
-| **Báo cáo tuần, milestone, tổng kết** | Theo mục 2 và mẫu ở mục 6.2 | `PM / Senior` (Lê Hoàng Tùng) | Ban quản lý (bản tóm tắt gửi khách) | Mẫu tại mục 6.2 bên dưới; bản đã gửi lưu thành file trong `records/` |
+| **Decision Log** | Ngày, nội dung quyết định, người quyết định, lý do, tài liệu cần cập nhật | `PM / Senior` (Lê Hoàng Tùng) | Công khai (repo công khai) | Mẫu & ví dụ (`Mô phỏng`) trong repo: [records/decision-log.md](records/decision-log.md) (nơi lưu chính thức) |
+| **Biên bản họp** | Nội dung thảo luận, việc cần làm, người phụ trách, thời hạn | Thành viên ghi theo lượt; `PM / Senior` duyệt | Công khai (repo công khai) | Mẫu & ví dụ (`Mô phỏng`) trong repo: [records/meeting-minutes-template.md](records/meeting-minutes-template.md); mỗi biên bản lưu thành file mới trong `records/` |
+| **Báo cáo tuần, milestone, tổng kết** | Theo mục 2 và mẫu ở mục 6.2 | `PM / Senior` (Lê Hoàng Tùng) | Công khai (repo công khai); bản tóm tắt gửi khách qua email | Mẫu tại mục 6.2 bên dưới; bản đã gửi lưu thành file trong `records/` |
 
 Quyết định chốt trên Discord hoặc trong họp phải được cập nhật vào issue hoặc tài liệu liên quan ngay khi chốt (Team Charter mục 7).
 

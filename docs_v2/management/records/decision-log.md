@@ -2,7 +2,7 @@
 
 > **Trạng thái dữ liệu:** Các bản ghi dưới đây là **Mô phỏng**, làm mẫu theo quy định ở [03-quan-tri-giam-sat.md](../03-quan-tri-giam-sat.md) mục 1.2, 4 và 6.1.
 >
-> **Người quản lý:** `PM / Senior` (ban quản lý: Lê Hoàng Tùng) · **Quyền truy cập:** Toàn bộ nhóm xem; chỉ PM và ban quản lý ghi nhận. Nơi lưu chính thức: file này trong repo, cập nhật qua PR ([records/README.md](README.md)).
+> **Người quản lý:** `PM / Senior` (ban quản lý: Lê Hoàng Tùng) · **Quyền đọc:** công khai (repo công khai). **Cập nhật:** `PM / Senior` ghi; Lê Hoàng Tùng mở PR, Phan Tiến Thịnh duyệt. Nơi lưu chính thức: file này trong repo, cập nhật qua PR ([records/README.md](README.md)).
 
 ## Quy tắc ghi nhận
 

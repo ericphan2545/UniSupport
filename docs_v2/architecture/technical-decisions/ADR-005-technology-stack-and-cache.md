@@ -1,6 +1,9 @@
 # ADR-005: Lựa chọn ngăn xếp công nghệ và bộ nhớ đệm phía server
 
-**Trạng thái:** Chấp nhận, ngày 17/09/2026 (Mô phỏng). Đội thực thi đề xuất ở WBS `1.04–1.05`; bộ phận CNTT của Aurora University xác nhận tương thích hạ tầng ở WBS `1.11–1.14`. Quyết định ghi tại Decision Log `DL-02`.
+**Trạng thái:** Chấp nhận, ngày 17/09/2026 (Mô phỏng). Hai mốc tách biệt:
+
+- **11/09/2026, hạn hoàn thành đề xuất kỹ thuật:** đội thực thi gửi đề xuất ngăn xếp (WBS `1.04–1.05`, `#105`).
+- **17/09/2026, xác nhận tương thích và chấp nhận ADR:** bộ phận CNTT của Aurora University xác nhận tương thích hạ tầng (WBS `1.11–1.14`); ban quản lý chấp nhận ADR-005, ghi tại Decision Log `DL-02`.
 
 **Liên quan:** `FR-STU-01/BR-05`, `NFR-PERF-10`, `NFR-PERF-11`, giả định `A-11`, `A-14`, rủi ro `R-27`, WBS `1.04`, `1.05`, `1.11`, `1.14`, `1.35`
 
@@ -46,8 +49,18 @@ Baseline effort, giá và lịch (`Bang_Effort.md`, `quotation.xlsx`, `Master Pl
 
 | Bước | Vai trò quyết định | Mốc thời gian & WBS | Đầu ra bắt buộc |
 |---|---|---|---|
-| 1. Đề xuất & chọn ngăn xếp kỹ thuật (gồm phương án cache Redis hay tương đương) | `BE Dev / Senior` (chủ trì), `FE Dev / Senior`, `DevOps / Mid` | `09/09 – 11/09/2026` — WBS `1.04`, `1.05` (issue `#105`) | Đề xuất ngăn xếp gửi ban quản lý (đã thực hiện, Mô phỏng) |
+| 1. Đề xuất & chọn ngăn xếp kỹ thuật (gồm phương án cache Redis hay tương đương) | `BE Dev / Senior` (chủ trì), `FE Dev / Senior`, `DevOps / Mid` | `09/09 – 11/09/2026` — WBS `1.04`, `1.05` (issue `#105`) | Đề xuất ngăn xếp gửi ban quản lý, hạn chậm nhất 11/09/2026 (đã thực hiện, Mô phỏng) |
 | 2. Xác nhận tương thích hạ tầng với Aurora University | `PM / Senior`, `BE Dev / Senior` làm việc với bộ phận CNTT trường | `14/09 – 17/09/2026` — WBS `1.11`, `1.14` (issue `#113`, `#114`) | Xác nhận bằng văn bản tương thích Docker Compose, tài nguyên RAM/CPU (cho CSDL + cache) và SSO OIDC; ADR chuyển sang `Chấp nhận` ngày 17/09/2026, trước khi lập trình `1.20–1.23` (đã thực hiện, Mô phỏng) |
+
+## Phần setup làm trước và sau khi chốt (WBS `1.16`, 07/09–16/09/2026)
+
+WBS `1.16` (repo, CI, môi trường dev, SSO giả lập; DevOps / Mid) chạy trước ngày chấp nhận ADR. Phần việc chia theo mức phụ thuộc vào quyết định công nghệ:
+
+- **Không phụ thuộc ngăn xếp, làm từ 07/09:** tạo repo và bảo vệ nhánh `main` theo Team Charter mục 9; khung Docker Compose (cách đóng gói đã cố định ở `A-11`); SSO giả lập theo OIDC (`A-05`) chỉ bật ở dev và test ([security-design.md](../security-design.md)).
+- **Theo đề xuất ngày 11/09, làm từ 12/09:** cấu hình môi trường dev cho các thành phần trong mục Quyết định. Đây là cấu hình tạm dùng cho dev, chưa dùng cho Staging.
+- **Chờ xác nhận ngày 17/09:** phần phụ thuộc hạ tầng của trường (tài nguyên RAM/CPU cho CSDL và cache, kho tệp, Docker Compose trên server) và việc dựng Staging ở WBS `1.17–1.19` (bắt đầu 17/09). Lập trình `1.20–1.23` bắt đầu 21/09, sau khi ADR đã được chấp nhận.
+
+Nếu ngày 17/09 trường không chấp nhận một thành phần, cấu hình tạm được sửa theo mục 1 dưới đây.
 
 ## Ảnh hưởng nếu thay đổi
 

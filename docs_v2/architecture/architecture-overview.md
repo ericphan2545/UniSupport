@@ -124,7 +124,7 @@ stateDiagram-v2
 
 Ngăn xếp công nghệ đã chốt ngày 17/09/2026 (Mô phỏng) tại [ADR-005](technical-decisions/ADR-005-technology-stack-and-cache.md), trạng thái **Chấp nhận**: backend TypeScript/NestJS, frontend React và TypeScript, CSDL PostgreSQL, cache phía server Redis, kho tệp là volume Docker gắn ngoài web root, đóng gói bằng Docker Compose. Giả định công nghệ dùng để ước lượng baseline (1109 giờ / 424.721.000 VNĐ) ghi ở **`A-14`** ([assumptions.md](../project/assumptions.md)) và rủi ro liên quan ở **`R-27`** ([risk-register.md](../management/risk-register.md)).
 
-- **Vai trò quyết định và mốc chốt:** `BE Dev / Senior`, `FE Dev / Senior` và `DevOps / Mid` đề xuất ở **WBS `1.04–1.05` (`09/09–11/09/2026`, `#105`)**; `PM / Senior` và `BE Dev / Senior` xác nhận tương thích hạ tầng với Aurora University ở **WBS `1.11–1.14` (`14/09–17/09/2026`)**; ADR chuyển sang Chấp nhận ngày 17/09/2026, trước khi lập trình (`1.20–1.23`).
+- **Vai trò quyết định và mốc chốt:** `BE Dev / Senior`, `FE Dev / Senior` và `DevOps / Mid` hoàn thành đề xuất chậm nhất ngày 11/09/2026 (**WBS `1.04–1.05`**, `#105`); `PM / Senior` và `BE Dev / Senior` xác nhận tương thích hạ tầng với Aurora University ở **WBS `1.11–1.14` (`14/09–17/09/2026`)**; ADR chuyển sang Chấp nhận ngày 17/09/2026, trước khi lập trình (`1.20–1.23`).
 - **Yêu cầu bắt buộc mà ngăn xếp đã chọn phải đáp ứng** (kiểm lại nếu sau này đổi thành phần nào):
   - CSDL hỗ trợ transaction, sequence, unique constraint, khóa dòng và phân quyền theo bảng.
   - Bộ nhớ đệm phía server đáp ứng TTL 15 phút tách biệt theo từng tài khoản (`FR-STU-01/BR-05`, `NFR-PERF-10`) và cache danh mục (`NFR-PERF-11`).
