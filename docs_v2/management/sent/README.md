@@ -7,4 +7,4 @@ Khách hàng Aurora University là **Mô phỏng**; việc phát hành Proposal 
 | Phiên bản | Ngày gửi | Trạng thái | File | Gửi kèm | Thay đổi so với bản trước |
 |---|---|---|---|---|---|
 | 1.1 | 05/09/2026 | Đã thay thế (lưu lịch sử) | [proposal-v1.1-2026-09-05.pdf](proposal-v1.1-2026-09-05.pdf) | Dòng v1.1 ở sheet Phiên bản của báo giá và Change log của Master Plan | Chuẩn hóa bối cảnh Aurora University, bổ sung giả định ảnh hưởng giá và làm rõ cách quản lý giờ công và chi phí. |
-| 2.0 | 06/09/2026 | **Hiệu lực (Mô phỏng)** | [proposal-v2.0-2026-09-06.pdf](proposal-v2.0-2026-09-06.pdf) | [Báo giá](../quotation.xlsx) và [Master Plan](../UniSupport_Masterplan_nhom2.xlsx) v2.0 | Ước lượng theo khối lượng trước khởi động, 1.109 giờ và 424.721.000 đồng. Giữ 42 FR, sáu mốc và Go-live 22/12/2026. |
+| 2.0 | 06/09/2026 | **Hiệu lực (Mô phỏng)** | [proposal-v2.0-2026-09-06.pdf](proposal-v2.0-2026-09-06.pdf) | [Báo giá](../quotation.xlsx) và [Master Plan](../UniSupport_Masterplan.xlsx) v2.0 | Ước lượng theo khối lượng trước khởi động, 1.109 giờ và 424.721.000 đồng. Giữ 42 FR, sáu mốc và Go-live 22/12/2026. |

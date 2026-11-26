@@ -9,7 +9,7 @@ Nội dung không có trong mục lục này thì không phải tài liệu đan
 1. **Bài toán và phạm vi:** [Proposal](management/proposal.docx) (bản đã gửi: [sent/](management/sent/README.md)) → [Tổng quan sản phẩm](product/README.md) (vấn đề, actor, goals, non-goals, thang ưu tiên).
 2. **Yêu cầu:** PRD 5 module: [M01 Cổng Sinh viên](modules/M01-student-portal/prd.md), [M02 Cổng Nhân viên](modules/M02-staff-portal/prd.md), [M03 Cổng Admin](modules/M03-management-portal/prd.md), [M04 Xác thực và bảo mật](modules/M04-authentication-security/prd.md), [M05 Lõi hệ thống](modules/M05-core-platform/prd.md) (giới thiệu từng module: `README.md` trong thư mục module) → [Yêu cầu phi chức năng](non-functional-requirements/README.md).
 3. **Nghiệm thu:** [Kế hoạch kiểm thử](acceptance/README.md) → [Kịch bản test](acceptance/test-scenarios.md) → [Ma trận truy vết](acceptance/traceability-matrix.md).
-4. **Giá và kế hoạch:** [Báo giá](management/quotation.xlsx) → [Master Plan](management/master-plan.md) và [file Excel](management/UniSupport_Masterplan_nhom2.xlsx) → [Sổ rủi ro](management/risk-register.md) → [Giả định](project/assumptions.md), [Ràng buộc](project/constraints.md) → [Dự toán effort và giá nội bộ](management/Bang_Effort.md).
+4. **Giá và kế hoạch:** [Báo giá](management/quotation.xlsx) → [Master Plan](management/master-plan.md) và [file Excel](management/UniSupport_Masterplan.xlsx) → [Sổ rủi ro](management/risk-register.md) → [Giả định](project/assumptions.md), [Ràng buộc](project/constraints.md) → [Dự toán effort và giá nội bộ](management/Bang_Effort.md).
 5. **Cách làm việc:** [Team Charter](management/team-charter.md) → [Kế hoạch quản lý chất lượng (QMP)](management/02-qmp-quan-ly-chat-luong.md).
 6. **Sản phẩm sau bàn giao:** [Kế hoạch quản lý sản phẩm](management/01-quan-ly-san-pham.md).
 7. **Quản trị và giám sát:** [Kế hoạch quản trị và giám sát](management/03-quan-tri-giam-sat.md) → [Hồ sơ quản trị](management/records/README.md) ([Bảng theo dõi giờ](management/records/time-tracking-log.md), [Decision Log](management/records/decision-log.md), [Biên bản họp](management/records/meeting-minutes-template.md), GitHub Issues / Milestones).
@@ -21,7 +21,7 @@ Nội dung không có trong mục lục này thì không phải tài liệu đan
 |---|---|
 | Scope: làm và không làm | `management/proposal.docx` mục 2.1 và 2.2; [product/README.md](product/README.md) mục Goals và Non-goals; danh sách 42 FR trong `modules/` |
 | Giá và hạng mục báo giá | [quotation.xlsx](management/quotation.xlsx) sheet Hạng mục (`Q-xx`), Chi tiết effort, Đơn giá; tóm tắt trong Proposal mục 5 |
-| Nguồn lực | [UniSupport_Masterplan_nhom2.xlsx](management/UniSupport_Masterplan_nhom2.xlsx) sheet Resources; vai trò trong [team-charter.md](management/team-charter.md) mục 3 |
+| Nguồn lực | [UniSupport_Masterplan.xlsx](management/UniSupport_Masterplan.xlsx) sheet Resources; vai trò trong [team-charter.md](management/team-charter.md) mục 3 |
 | Milestone, phần giao, cách client kiểm tra | Master Plan sheet Milestones; giải thích cách chia ở [master-plan.md](management/master-plan.md) |
 | Việc, owner, hạn, phụ thuộc | Master Plan sheet WBS (cột Phụ thuộc là nơi gốc); parent task trên GitHub Issues |
 | Rủi ro | [risk-register.md](management/risk-register.md) |
@@ -91,6 +91,6 @@ Liên kết chỉ ghi ở một phía: phía ghi là cột "Liên kết phải g
 |---|---|
 | `management/proposal.docx` (và `sent/`) | Lê Hoàng Tùng |
 | `management/quotation.xlsx` | Lê Hoàng Tùng |
-| `management/UniSupport_Masterplan_nhom2.xlsx` | Phan Tiến Thịnh |
+| `management/UniSupport_Masterplan.xlsx` | Phan Tiến Thịnh |
 
 Người chịu trách nhiệm các tài liệu Markdown: [team-charter.md](management/team-charter.md) mục 3.1. Lịch sử phiên bản: Proposal có bảng lịch sử phiên bản; báo giá có sheet Phiên bản; Master Plan có sheet Change log; mọi thay đổi khác xem lịch sử PR.

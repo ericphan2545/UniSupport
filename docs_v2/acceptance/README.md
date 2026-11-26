@@ -1,6 +1,6 @@
 # Kế hoạch kiểm thử và nghiệm thu
 
-Tài liệu này mô tả cách kiểm thử UniSupport trong từng milestone. Mức lỗi, cách xử lý lỗi, điều kiện đóng milestone và điều kiện Go-live nằm trong QMP ([02-qmp-quan-ly-chat-luong.md](../management/02-qmp-quan-ly-chat-luong.md)), không chép lại ở đây. Lịch và giờ công của các việc kiểm thử nằm ở sheet WBS của [Master Plan](../management/UniSupport_Masterplan_nhom2.xlsx).
+Tài liệu này mô tả cách kiểm thử UniSupport trong từng milestone. Mức lỗi, cách xử lý lỗi, điều kiện đóng milestone và điều kiện Go-live nằm trong QMP ([02-qmp-quan-ly-chat-luong.md](../management/02-qmp-quan-ly-chat-luong.md)), không chép lại ở đây. Lịch và giờ công của các việc kiểm thử nằm ở sheet WBS của [Master Plan](../management/UniSupport_Masterplan.xlsx).
 
 | Tài liệu | Nội dung |
 |---|---|
