@@ -23,7 +23,7 @@ Kế hoạch có 6 milestone, chia theo luồng nghiệp vụ của một hồ s
 | `MS-03` Phân công, xử lý, chuyển phòng ban | Cần hồ sơ đã có trong hàng đợi. Sau milestone này luồng chính gửi → phân công → xử lý → chuyển phòng chạy trọn, nên đợt thanh toán 2 gắn với nghiệm thu `MS-03`. |
 | `MS-04` Trả kết quả cho sinh viên | Đóng hồ sơ và đánh giá cần hồ sơ đã được xử lý. |
 | `MS-05` Thống kê báo cáo cho Admin | Báo cáo cần dữ liệu đủ trạng thái, thời gian xử lý và đánh giá; đối chiếu bằng bộ 200 ticket mẫu. Sau `MS-05` không thêm chức năng (feature freeze). |
-| `MS-06` Triển khai, bàn giao và bảo hành | Chỉ triển khai lên server của trường khi đủ chức năng và đã chạy regression. Go-live 22/12/2026, bảo hành đến 22/01/2027. |
+| `MS-06` Triển khai, bàn giao và bảo hành | Chỉ triển khai lên server của trường khi đủ chức năng và đã chạy regression. Go-live 22/12/2026, bảo hành đến 22/01/2027. Proposal mục 3 ghi 15 tuần làm việc (07/09–18/12/2026); phần triển khai production và Go-live của `MS-06` (WBS `6.02` đến `6.05`, `6.12`, `6.13`) chạy 17–22/12/2026, bảo hành (`6.14`, `6.15`) từ 23/12/2026. |
 
 **Ưu tiên FR:** thứ tự milestone theo phụ thuộc của luồng nghiệp vụ. Trong từng milestone, FR mức `Must` làm trước; nếu thiếu giờ thì FR mức `Should` của milestone đó được đề xuất dời qua change request. Thang ưu tiên ở [product/README.md](../product/README.md#thang-ưu-tiên-fr).
 
