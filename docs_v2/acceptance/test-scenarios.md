@@ -290,7 +290,7 @@ Cột **Regression** = có: kịch bản thuộc bộ chạy lại trước mỗ
 
 - Phiên tạo lúc 08:00 → request lúc 15:59 thành công; lúc 16:01 nhận 401 và về trang đăng nhập.
 - Đăng nhập trên 2 thiết bị, đăng xuất ở thiết bị A → thiết bị B vẫn dùng bình thường; cookie cũ của thiết bị A nhận 401; giả lập lỗi lưu thu hồi phiên hoặc lỗi ghi nhật ký đăng nhập thất bại → có ghi log vận hành (`NFR-OBS-03`).
-- Đăng xuất hai lần liên tiếp, hoặc đăng xuất khi không có phiên → đều 200.
+- Đăng xuất hai lần liên tiếp, đăng xuất khi không có phiên, hoặc đăng xuất với cookie của phiên đã hết hạn → đều 200.
 - Sau khi đăng xuất bấm Back → trang chứa dữ liệu cá nhân không hiện lại từ cache (`Cache-Control: private, no-store`).
 - Kho phiên/quyền không đọc được → API trả 503, tuyệt đối không mặc định cho phép request đi tiếp (`NFR-REL-05`).
 

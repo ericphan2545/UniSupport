@@ -205,7 +205,7 @@ Người dùng đã đăng nhập (mọi vai trò).
 
 **Acceptance Criteria**
 - **AC-01 [Happy Path]:** Người dùng bấm Đăng xuất -> cookie bị xóa, người dùng về trang đăng nhập. _(Kiểm cho: luồng chính)_
-- **AC-02 [Validation]:** Gọi đăng xuất khi không có cookie phiên -> vẫn trả 200 và chuyển về trang đăng nhập. _(Kiểm cho: BR-05)_
+- **AC-02 [Validation]:** Gọi đăng xuất khi không có cookie phiên, hoặc với cookie của phiên đã hết hạn -> vẫn trả 200 và chuyển về trang đăng nhập. _(Kiểm cho: BR-05)_
 - **AC-03 [Security]:** Sau khi đăng xuất, gửi lại JWT cũ (chưa hết hạn) -> 401. _(Kiểm cho: BR-03)_
 - **AC-04 [Idempotency]:** Bấm Đăng xuất 2 lần liên tiếp -> cả hai đều thành công, không lỗi. _(Kiểm cho: BR-05)_
 - **AC-05 [Boundary]:** Người dùng đăng nhập trên 2 thiết bị, đăng xuất ở thiết bị A -> thiết bị B vẫn dùng được bình thường. _(Kiểm cho: BR-04)_
@@ -274,7 +274,7 @@ Hệ thống (áp dụng cho mọi request của mọi người dùng).
 - **AC-02 [Validation]:** Sinh viên gọi API hàng đợi của Cổng Nhân viên -> 403. Nhân viên gọi API phân quyền -> 403. _(Kiểm cho: BR-03, E-02)_
 - **AC-03 [Boundary]:** Một API mới được thêm mà quên khai báo vai trò -> mọi vai trò đều nhận 403. _(Kiểm cho: BR-01)_
 - **AC-04 [Security]:** Client tự sửa giao diện để hiện nút của vai trò khác rồi gọi API -> backend vẫn trả 403. _(Kiểm cho: BR-08)_
-- **AC-05 [Concurrency]:** Admin hạ một nhân viên về `STUDENT` trong lúc người đó đang mở Cổng Nhân viên -> request kế tiếp của họ nhận 403. _(Kiểm cho: BR-05, BR-06)_
+- **AC-05 [Concurrency]:** Admin hạ một nhân viên về `STUDENT` trong lúc người đó đang mở Cổng Nhân viên -> request kế tiếp của họ nhận 403; sau thao tác, tài khoản chỉ còn đúng một vai trò `STUDENT`, không giữ đồng thời `STAFF`. _(Kiểm cho: BR-05, BR-06)_
 - **AC-06 [Resilience & Audit]:** Cơ sở dữ liệu phân quyền không phản hồi -> 503, request không được xử lý tiếp (không mặc định cho phép). Mỗi lần thay đổi vai trò -> có bản ghi `ROLE_CHANGE` (theo FR-MGT-06). _(Kiểm cho: E-04)_
 - **AC-07 [Security]:** Request ghi dùng cookie nhưng thiếu CSRF token, hoặc `Origin` không thuộc ứng dụng -> 403, dữ liệu không đổi. Gọi API nghiệp vụ không có phiên -> 401. _(Kiểm cho: BR-02, E-01)_
 - **AC-08 [Business Logic]:** Admin vô hiệu hóa một tài khoản đang có phiên còn hạn -> request kế tiếp của tài khoản đó nhận 403 và phiên bị thu hồi. Người dùng đăng nhập SSO lần đầu -> vai trò `STUDENT`, giao diện chỉ có menu của Cổng Sinh viên. _(Kiểm cho: BR-04, BR-07, BR-08, E-03)_
