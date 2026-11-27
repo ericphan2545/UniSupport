@@ -56,6 +56,32 @@ Baseline v2.0 phản ánh tổng ước lượng theo công việc. Ngày phát 
 
 Giờ cơ sở, giờ dự phòng đã dùng và giờ bổ sung cho việc trong phạm vi baseline đều tính vào giờ thực tế và dự báo. Khi dự báo vượt baseline, chuyển chỉ số Giờ công sang Đỏ. Bên phát triển chịu chi phí vượt nội bộ. PM thông báo khách bằng văn bản nếu ngày bàn giao bị ảnh hưởng. Giờ và tiền cho phạm vi/giả định thay đổi theo CR được ước lượng và theo dõi riêng sau khi khách duyệt. Khoản dự phòng tài chính trong đơn giá không cấp thêm giờ; mọi giờ bổ sung cần được bố trí trong lịch và Resources.
 
+### 2.0e. Khi khách đề nghị giảm giá hoặc khi ước lượng lệch lớn
+
+**Khách đề nghị giảm giá (ví dụ 20%).**
+
+- Giá giữ nguyên **424.721.000 VNĐ (gồm VAT)** theo Proposal v2.0 mục 5.1 và quyết định chốt phạm vi `DL-01` ([records/decision-log.md](records/decision-log.md)). Ban quản lý không giảm giá và không cắt phạm vi để đổi lấy giảm giá.
+- Lý do: giá tính từ effort theo khối lượng (mục 2.0a–2.0b, [quotation.xlsx](quotation.xlsx)). Giảm 20% giá trước VAT là 20% × 386.109.473 = 77.221.895 VNĐ; với đơn giá bình quân phần giờ công (386.109.473 − 2.500.000 của `Q-10`) / 1109 giờ ≈ 345.906 VNĐ/giờ, mức giảm này tương đương bỏ khoảng **223 giờ** trong khi phạm vi 42 FR / 339 AC giữ nguyên, nên kế hoạch không còn đủ giờ cho chính phạm vi đã chốt.
+- Cách trả lời khách: PM / Senior gửi văn bản giải thích cơ sở giá (bảng hạng mục `Q-xx` trong báo giá và các giả định ảnh hưởng giá ở Proposal mục 1.3). Giá chỉ thay đổi khi phạm vi hoặc giả định thay đổi và được duyệt qua change request (Proposal mục 5.1, [03-quan-tri-giam-sat.md](03-quan-tri-giam-sat.md) mục 5).
+
+**Một hạng mục bị ước lượng thiếu 30%.**
+
+| Hạng mục | Giờ cơ sở | 30% giờ cơ sở | Dự phòng của hạng mục | Thiếu sau khi dùng dự phòng |
+|---|---:|---:|---:|---:|
+| `Q-01` | 266 | 80 | 24 | 56 |
+| `Q-02` | 83 | 25 | 7 | 18 |
+| `Q-03` | 216 | 65 | 19 | 46 |
+| `Q-04` | 119 | 36 | 11 | 25 |
+| `Q-05` | 56 | 17 | 5 | 12 |
+| `Q-06` | 97 | 29 | 9 | 20 |
+| `Q-07` | 99 | 30 | 9 | 21 |
+| `Q-08` | 42 | 13 | 0 | 13 |
+| `Q-09` | 43 | 13 | 4 | 9 |
+
+- Ví dụ `Q-01` (hạng mục lớn nhất): thiếu 80 giờ, dùng hết 24 giờ dự phòng `Q-01`, còn thiếu 56 giờ. Dự báo tổng giờ lên 1109 + 56 = 1165 giờ > 1109 giờ, chỉ số Giờ công chuyển **Đỏ** ([03-quan-tri-giam-sat.md](03-quan-tri-giam-sat.md) mục 3.1).
+- Xử lý theo mục 2.0d và [master-plan.md](master-plan.md) mục "Xử lý khi một milestone bị trễ": bố trí 56 giờ từ năng lực còn trống ở sheet `Resources` nếu không vượt giờ/tuần đã khai; nếu không giữ được mốc thì PM / Senior báo khách bằng văn bản và lập change request điều chỉnh lịch. Bên phát triển chịu chi phí vượt, **giá không đổi**.
+- Không lấy dự phòng của hạng mục khác để bù, vì mỗi khoản dự phòng gắn với rủi ro riêng của hạng mục đó ([risk-register.md](risk-register.md)).
+
 ### 2.1. MS-01 · 388 giờ
 
 | WBS | Công việc | Vai trò | Hạng mục | Giờ |
