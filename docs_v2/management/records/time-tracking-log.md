@@ -22,19 +22,19 @@ Chỉ số **Giờ công** trong [03-quan-tri-giam-sat.md](../03-quan-tri-giam-s
 
 ## 2. Tổng hợp đến 27/11/2026
 
-**Mô phỏng, đến 27/11/2026 (tuần 12).** `MS-01`, `MS-02`, `MS-03` đã nghiệm thu và đóng ([decision-log.md](decision-log.md) `DL-05`, `DL-06`, `DL-07`; biên bản [MS-01](nghiem-thu-MS-01.md), [MS-02](nghiem-thu-MS-02.md), [MS-03](nghiem-thu-MS-03.md)). `MS-04` đã xong phát triển, test trọn luồng (23–24/11) và sửa lỗi (25–26/11); còn kiểm lại và demo nghiệm thu ngày 27/11. Giờ thực tế lấy theo effort WBS của các dòng đã xong, cộng giờ dự phòng đã dùng; giờ dự phòng chưa dùng của milestone đã đóng không cộng vào dự báo.
+**Mô phỏng, đến 27/11/2026 (tuần 12).** `MS-01` đến `MS-04` đã nghiệm thu và đóng ([decision-log.md](decision-log.md) `DL-05` đến `DL-08`; biên bản [MS-01](nghiem-thu-MS-01.md), [MS-02](nghiem-thu-MS-02.md), [MS-03](nghiem-thu-MS-03.md), [MS-04](nghiem-thu-MS-04.md)). `MS-04`: phát triển 16–20/11, test trọn luồng 23–24/11, sửa lỗi 25–26/11, kiểm lại và demo nghiệm thu 27/11. `MS-05` bắt đầu 30/11/2026. Giờ thực tế lấy theo effort WBS của các dòng đã xong, cộng giờ dự phòng đã dùng; giờ dự phòng chưa dùng của milestone đã đóng không cộng vào dự báo.
 
 | Mốc | Kế hoạch | Thực tế lũy kế | Dự phòng đã dùng / của mốc | Còn lại (`ETC`) | Dự báo (`EAC`) | Trạng thái |
 |---|---:|---:|---:|---:|---:|---|
 | MS-01 | 388 | 380 | 23 / 31 | 0 | 380 | Đã đóng 25/09/2026 |
 | MS-02 | 245 | 239 | 13 / 19 | 0 | 239 | Đã đóng 23/10/2026 |
 | MS-03 | 138 | 136 | 9 / 11 | 0 | 136 | Đã đóng 13/11/2026 |
-| MS-04 | 67 | 61 | 2 / 5 | 6 | 67 | Đang chạy, demo nghiệm thu 27/11/2026 |
+| MS-04 | 67 | 64 | 2 / 5 | 0 | 64 | Đã đóng 27/11/2026 |
 | MS-05 | 112 | 0 | 0 / 9 | 112 | 112 | Bắt đầu 30/11/2026 |
 | MS-06 | 159 | 0 | 0 / 13 | 159 | 159 | Bắt đầu 14/12/2026 |
-| **Tổng** | **1109** | **816** | **47 / 88** | **277** | **1093** | |
+| **Tổng** | **1109** | **819** | **47 / 88** | **271** | **1090** | |
 
-Chỉ số Giờ công: `EAC` = 816 + 277 = 1093 giờ ≤ 1109 giờ và không task nào vượt quá 20% giờ kế hoạch dòng WBS → **Xanh**. Còn lại của `MS-04` gồm kiểm lại trước demo (`4.17`, 2 giờ), quản lý ngày 27/11 (`4.15`, 1 giờ) và 3 giờ dự phòng `Q-05` chưa dùng.
+Chỉ số Giờ công: `EAC` = 819 + 271 = 1090 giờ ≤ 1109 giờ và không task nào vượt quá 20% giờ kế hoạch dòng WBS → **Xanh**. `MS-04` dùng 2/5 giờ dự phòng `Q-05`; 3 giờ chưa dùng không cộng vào dự báo.
 
 ### Nhật ký mẫu tuần 6 (12/10 – 16/10/2026)
 
