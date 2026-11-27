@@ -33,7 +33,7 @@ QUY ƯỚC LIÊN KẾT ĐẶC TẢ (xem docs_v2/management/master-plan.md mục 
 
 - **Issue cha (chỉ điền với sub-issue `[BE]`/`[FE]`):** <!-- Ví dụ: #1 -->
 - **Đặc tả FR (dẫn thẳng heading anchor):** <!-- Ví dụ: [FR-STU-02 · Tạo yêu cầu hỗ trợ](https://github.com/ericphan2545/UniSupport/blob/baseline-v2.0/docs_v2/modules/M01-student-portal/prd.md#fr-stu-02-tạo-yêu-cầu-hỗ-trợ) -->
-- **Danh sách AC áp dụng:** <!-- Ví dụ: FR-STU-02/AC-01 đến AC-10 (với issue Dùng chung: liệt kê rõ từng mã AC thuộc milestone này) -->
+- **Danh sách AC áp dụng:** <!-- Ví dụ: FR-STU-02/AC-01 đến FR-STU-02/AC-10 (với issue Dùng chung: liệt kê rõ từng mã AC thuộc milestone này) -->
 
 ## Điều kiện hoàn thành
 
