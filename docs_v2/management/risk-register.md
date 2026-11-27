@@ -1,6 +1,6 @@
 # Sổ rủi ro
 
-Đây là nơi gốc của rủi ro dự án. Tài liệu khác chỉ dẫn lại mã `R-xx`: quỹ dự phòng giờ theo hạng mục ở [Bang_Effort.md](Bang_Effort.md) và sheet WBS của [UniSupport_Masterplan_nhom2.xlsx](UniSupport_Masterplan_nhom2.xlsx) (dòng "Dự phòng Q-xx"), cách giám sát và chuyển cấp ở [03-quan-tri-giam-sat.md](03-quan-tri-giam-sat.md) mục 2.4 và 3.
+Đây là nơi gốc của rủi ro dự án. Tài liệu khác chỉ dẫn lại mã `R-xx`: quỹ dự phòng giờ theo hạng mục ở [Bang_Effort.md](Bang_Effort.md) và sheet WBS của [UniSupport_Masterplan.xlsx](UniSupport_Masterplan.xlsx) (dòng "Dự phòng Q-xx"), cách giám sát và chuyển cấp ở [03-quan-tri-giam-sat.md](03-quan-tri-giam-sat.md) mục 2.4 và 3.
 
 - **Người giữ sổ:** Phan Tiến Thịnh (ban quản lý). Rà lại toàn bộ ở họp tuần (03 mục 2.2): thêm rủi ro mới, cập nhật điểm, đóng rủi ro không còn khả năng xảy ra.
 - **Owner** là vai trò trong đội thực thi (Mô phỏng) chịu trách nhiệm theo dõi dấu hiệu và thực hiện phương án.

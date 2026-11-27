@@ -1,6 +1,6 @@
 # Master Plan
 
-Trang này giải thích các quyết định của kế hoạch. Số liệu (ngày, effort, owner, nguồn lực) chỉ nằm trong [UniSupport_Masterplan_nhom2.xlsx](UniSupport_Masterplan_nhom2.xlsx):
+Trang này giải thích các quyết định của kế hoạch. Số liệu (ngày, effort, owner, nguồn lực) chỉ nằm trong [UniSupport_Masterplan.xlsx](UniSupport_Masterplan.xlsx):
 
 | Sheet | Nội dung |
 |---|---|
