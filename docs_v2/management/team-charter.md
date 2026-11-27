@@ -9,7 +9,7 @@ Ngày cập nhật: 17/11/2026
 
 ## 2. Mục tiêu chung
 
-- Bàn giao đúng phạm vi đã chốt trong 15 tuần và định mức baseline **1109 giờ công** (gồm 1021 giờ cơ sở và 88 giờ quỹ dự phòng rủi ro); thời gian chờ khách phản hồi không tính vào 15 tuần. Quy tắc phân biệt giờ baseline, năng lực dư (`Resources`), giờ CR và chịu chi phí vượt giờ theo [Bang_Effort.md](Bang_Effort.md) mục 2.0d.
+- Bàn giao đúng phạm vi đã chốt theo lịch ở Proposal mục 3 (15 tuần làm việc 07/09–18/12/2026; triển khai và Go-live 21–22/12/2026; bảo hành đến 22/01/2027) và định mức baseline **1109 giờ công** (gồm 1021 giờ cơ sở và 88 giờ quỹ dự phòng rủi ro); thời gian chờ khách phản hồi không tính vào lịch này. Quy tắc phân biệt giờ baseline, năng lực dư (`Resources`), giờ CR và chịu chi phí vượt giờ theo [Bang_Effort.md](Bang_Effort.md) mục 2.0d.
 - Chất lượng bàn giao: đạt điều kiện Go-live ở [QMP](02-qmp-quan-ly-chat-luong.md) mục 2.2, khớp điều kiện nghiệm thu với khách ở Proposal mục 6.2.
 - Phạm vi theo PRD ([product/README.md](../product/README.md) và `modules/`). Tiêu chí nghiệm thu chính thức chốt với khách bằng văn bản ở cuối tuần 2 của `MS-01`.
 
