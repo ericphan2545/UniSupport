@@ -4,7 +4,7 @@
 
 > **Tài liệu nội bộ, không gửi khách.** Khách hàng Aurora University và đội thực thi là **Mô phỏng**. Đội thực thi gồm 10 người, mỗi vị trí ở Phần 1 là 1 người; ban quản lý dự án là 4 thành viên nhóm (xem [team-charter.md](team-charter.md)).
 >
-> Nơi gốc: giá và hạng mục gửi khách ở [quotation.xlsx](quotation.xlsx) (mã `Q-xx`); lịch, việc và nguồn lực theo tuần ở [UniSupport_Masterplan_nhom2.xlsx](UniSupport_Masterplan_nhom2.xlsx) (sheet WBS, Resources); rủi ro ở [risk-register.md](risk-register.md) (mã `R-xx`). Tài liệu này giữ cơ sở chi phí và thuyết minh phân bổ giờ.
+> Nơi gốc: giá và hạng mục gửi khách ở [quotation.xlsx](quotation.xlsx) (mã `Q-xx`); lịch, việc và nguồn lực theo tuần ở [UniSupport_Masterplan.xlsx](UniSupport_Masterplan.xlsx) (sheet WBS, Resources); rủi ro ở [risk-register.md](risk-register.md) (mã `R-xx`). Tài liệu này giữ cơ sở chi phí và thuyết minh phân bổ giờ.
 
 ## PHẦN 1: BẢNG DỰ TOÁN TIỀN CÔNG LAO ĐỘNG THEO NGƯỜI THAM GIA (ĐỘI THỰC THI MÔ PHỎNG)
 

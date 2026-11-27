@@ -25,7 +25,7 @@ Mỗi thành viên chịu trách nhiệm chính một số tài liệu: giữ n�
 |---|---|---|---|
 | Lê Hoàng Tùng (trưởng nhóm) | Proposal và báo giá; Quản trị và giám sát; tham gia mọi mảng | `proposal.docx` và `sent/`, `quotation.xlsx`, `Bang_Effort.md`, `03-quan-tri-giam-sat.md`, `project/`; đầu mối với khách (Mô phỏng); duyệt cuối các thay đổi về giá, mốc, phạm vi | Phan Tiến Thịnh |
 | Ngô Tấn Đức | PRD | `product/README.md`, `modules/`, `non-functional-requirements/`, `acceptance/`, `architecture/`; giữ thang ưu tiên FR | Đào Tuấn Bảo |
-| Phan Tiến Thịnh | Kế hoạch và GitHub | `UniSupport_Masterplan_nhom2.xlsx`, `master-plan.md`, `risk-register.md`; milestone, issue, nhãn và mẫu issue trên GitHub | Lê Hoàng Tùng |
+| Phan Tiến Thịnh | Kế hoạch và GitHub | `UniSupport_Masterplan.xlsx`, `master-plan.md`, `risk-register.md`; milestone, issue, nhãn và mẫu issue trên GitHub | Lê Hoàng Tùng |
 | Đào Tuấn Bảo | Cách làm việc, chất lượng, sản phẩm | `team-charter.md`, `02-qmp-quan-ly-chat-luong.md`, `01-quan-ly-san-pham.md` | Ngô Tấn Đức |
 
 ### 3.2 Đội thực thi (Mô phỏng)

@@ -1,6 +1,6 @@
 # Ma trận truy vết
 
-Bảng **tổng hợp** theo từng AC: AC → kịch bản test → parent task → milestone → hạng mục báo giá. Đây không phải nơi gốc để sửa: sửa ở nơi gốc trước (AC trong `modules/*/prd.md`, kịch bản trong [test-scenarios.md](test-scenarios.md), issue trên GitHub, milestone trong [Master Plan](../management/UniSupport_Masterplan_nhom2.xlsx), hạng mục trong [quotation.xlsx](../management/quotation.xlsx)) rồi mới cập nhật bảng này. Ma trận dùng để đo độ phủ tiêu chí chấp nhận theo QMP mục 7.
+Bảng **tổng hợp** theo từng AC: AC → kịch bản test → parent task → milestone → hạng mục báo giá. Đây không phải nơi gốc để sửa: sửa ở nơi gốc trước (AC trong `modules/*/prd.md`, kịch bản trong [test-scenarios.md](test-scenarios.md), issue trên GitHub, milestone trong [Master Plan](../management/UniSupport_Masterplan.xlsx), hạng mục trong [quotation.xlsx](../management/quotation.xlsx)) rồi mới cập nhật bảng này. Ma trận dùng để đo độ phủ tiêu chí chấp nhận theo QMP mục 7.
 
 **Cách đọc**
 

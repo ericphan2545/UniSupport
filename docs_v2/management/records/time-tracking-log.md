@@ -6,7 +6,7 @@
 
 ## 1. Nguồn dữ liệu và công thức tính chỉ số Giờ công
 
-Chỉ số **Giờ công** trong [03-quan-tri-giam-sat.md](../03-quan-tri-giam-sat.md) mục 3.1 sử dụng trực tiếp hai nguồn gốc là **Bảng theo dõi giờ này** và **sheet `WBS`** của [UniSupport_Masterplan_nhom2.xlsx](../UniSupport_Masterplan_nhom2.xlsx) (baseline **1109 giờ** = 1021 giờ cơ sở + 88 giờ Quỹ dự phòng rủi ro):
+Chỉ số **Giờ công** trong [03-quan-tri-giam-sat.md](../03-quan-tri-giam-sat.md) mục 3.1 sử dụng trực tiếp hai nguồn gốc là **Bảng theo dõi giờ này** và **sheet `WBS`** của [UniSupport_Masterplan.xlsx](../UniSupport_Masterplan.xlsx) (baseline **1109 giờ** = 1021 giờ cơ sở + 88 giờ Quỹ dự phòng rủi ro):
 
 1. **Giờ thực tế trong tuần:** tổng cột `Số giờ (h)` của tất cả bản ghi có `Phạm vi = Baseline` (gồm cả giờ lấy thêm từ năng lực dư ở sheet `Resources` để thực hiện/kiểm thử phạm vi baseline và giờ đã giải ngân từ Quỹ dự phòng `Dự phòng Q-xx`) trong kỳ báo cáo.
 2. **Giờ thực tế lũy kế (`AC`):** tổng cột `Số giờ (h)` của tất cả bản ghi `Phạm vi = Baseline` từ Tuần 1 đến hết kỳ báo cáo.
