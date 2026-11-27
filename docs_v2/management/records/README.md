@@ -21,6 +21,8 @@ Thư mục này tập hợp các **mẫu nhật ký quản trị chuẩn trong r
 | **Sổ rủi ro (`R-01` đến `R-27`)** | [risk-register.md](../risk-register.md) | Phan Tiến Thịnh, sau họp tuần; owner từng rủi ro báo dấu hiệu | Phan Tiến Thịnh mở PR; Lê Hoàng Tùng duyệt |
 | **Báo cáo tuần / milestone / tổng kết** | Mẫu tại [03-quan-tri-giam-sat.md](../03-quan-tri-giam-sat.md) mục 6.2; bản đã gửi khách lưu thành file trong thư mục này | `PM / Senior`; bản tóm tắt gửi Aurora University qua email tối thiểu 1 lần/tuần | Lê Hoàng Tùng mở PR; Phan Tiến Thịnh duyệt |
 
+**Biên bản đã lưu (Mô phỏng):** họp đóng milestone [`MS-01`](nghiem-thu-MS-01.md), [`MS-02`](nghiem-thu-MS-02.md), [`MS-03`](nghiem-thu-MS-03.md); ví dụ họp tuần 6 ở [meeting-minutes-template.md](meeting-minutes-template.md) phần B.
+
 ## Cách cập nhật
 
 - **Đọc:** mọi người đọc trực tiếp trên repo công khai; không cần cấp quyền.
